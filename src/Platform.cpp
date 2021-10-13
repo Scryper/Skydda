@@ -7,7 +7,7 @@ Platform::Platform(){
    this->size_=s;
 }
 
-Platform::Platform(const Position position, cont Size size_){
+Platform::Platform(const Position position, const Size size_){
     this->position=position;
     this->size_=size_;
 }

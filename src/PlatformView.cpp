@@ -11,11 +11,11 @@ PlatformView::PlatformView(const PlatformView& other)
 PlatformView::~PlatformView() { }
 
 sf::Sprite PlatformView::getSprite() const {
-    return this.sprite;
+    return sprite;
 }
 
 Platform PlatformView::getPlatform() const {
-    return this.platform;
+    return platform;
 }
 
 void PlatformView::setSprite(sf::Sprite sprite) {

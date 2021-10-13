@@ -1,7 +1,7 @@
 #ifndef SIZE_H
 #define SIZE_H
 
-#inclulde "CoupleFloat.h"
+#include "CoupleFloat.h"
 
 class Size {
     private:

@@ -1598,3 +1598,23 @@
 	"Player.h"
 	<SFML/Graphics.hpp>
 
+1634147966 source:/home/damien/Documents/GitHub/Skydda/src/CoupleVectorTransformer.cpp
+	"CoupleVectorTransformer.h"
+
+1634147966 /home/damien/Documents/GitHub/Skydda/include/CoupleVectorTransformer.h
+	<SFML/Graphics.hpp>
+	"CoupleFloat.h"
+
+1634148324 source:/home/damien/Documents/GitHub/Skydda/src/Platform.cpp
+	"Platform.h"
+
+1634147729 /home/damien/Documents/GitHub/Skydda/include/Platform.h
+	"Position.h"
+	"Size.h"
+
+1634148313 /home/damien/Documents/GitHub/Skydda/include/Size.h
+	"CoupleFloat.h"
+
+1634148355 source:/home/damien/Documents/GitHub/Skydda/src/Size.cpp
+	"Size.h"
+
