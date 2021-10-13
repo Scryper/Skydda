@@ -32,6 +32,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="lib/SFML-2.5.1/include" />
 					<Add directory="include" />
 				</Compiler>
 				<Linker>
@@ -39,6 +40,7 @@
 					<Add library="sfml-graphics" />
 					<Add library="sfml-window" />
 					<Add library="sfml-system" />
+					<Add directory="lib/SFML-2.5.1/lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -47,28 +49,26 @@
 		</Compiler>
 		<Unit filename="cb.bmp" />
 		<Unit filename="include/CoupleFloat.h" />
+		<Unit filename="include/CoupleVectorTransformer.h" />
 		<Unit filename="include/Movement.h" />
 		<Unit filename="include/Platform.h" />
+		<Unit filename="include/PlatformView.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/PlayerView.h" />
 		<Unit filename="include/Position.h" />
-		<Unit filename="main.cpp" />
-
-		<Unit filename="include/CoupleVectorTransformer.h" />
-		<Unit filename="include/PlatformView.h" />
 		<Unit filename="include/Size.h" />
-
+		<Unit filename="include/TextureLoader.h" />
+		<Unit filename="main.cpp" />
 		<Unit filename="src/CoupleFloat.cpp" />
+		<Unit filename="src/CoupleVectorTransformer.cpp" />
 		<Unit filename="src/Movement.cpp" />
 		<Unit filename="src/Platform.cpp" />
+		<Unit filename="src/PlatformView.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/PlayerView.cpp" />
 		<Unit filename="src/Position.cpp" />
-
-		<Unit filename="src/CoupleVectorTransformer.cpp" />
-		<Unit filename="src/PlatformView.cpp" />
 		<Unit filename="src/Size.cpp" />
-		
+		<Unit filename="src/TextureLoader.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
