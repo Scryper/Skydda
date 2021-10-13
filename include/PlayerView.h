@@ -18,6 +18,8 @@ class PlayerView {
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
+        Player getPlayer() const;
+
         void movePlayer(sf::Vector2f vectorDirection);
 };
 

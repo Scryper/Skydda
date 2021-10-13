@@ -22,6 +22,10 @@ class Player {
         Player(const Player& other);
         virtual ~Player();
 
+        Movement getMovement() const;
+        Position getPosition() const;
+
+        void setPosition(Position position);
 };
 
 #endif // PLAYER_H

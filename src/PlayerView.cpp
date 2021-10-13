@@ -17,10 +17,14 @@ PlayerView::PlayerView(const PlayerView& other) {
     this->player = other.player;
 }
 
-PlayerView::~PlayerView() {
-    //dtor
+PlayerView::~PlayerView() { }
+
+Player PlayerView::getPlayer() const {
+    return player;
 }
 
-
 void PlayerView::movePlayer(sf::Vector2f vectorDirection) {
+    Position position(player.getPosition().getX() + vectorDirection.x, player.getPosition().getY() + vectorDirection.y);
+    player.setPosition(position);
+    sprite.setPosition(position.getX(), position.getY());
 }

@@ -20,7 +20,25 @@ Player::Player(string name, double attack, bool defense, double health, Position
     this->movement = movement;
 }
 
-Player::~Player() {
-    //dtor
+Player::Player(const Player& other) {
+    this->name = other.name;
+    this->attack = other.attack;
+    this->defense = other.defense;
+    this->health = other.health;
+    this->position = other.position;
+    this->movement = other.movement;
 }
 
+Player::~Player() { }
+
+Movement Player::getMovement() const {
+    return movement;
+}
+
+Position Player::getPosition() const {
+    return position;
+}
+
+void Player::setPosition(Position position) {
+    this->position = position;
+}
