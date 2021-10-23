@@ -29,12 +29,14 @@ CoupleFloat Movement::getAcceleration()const {
 }
 
 void Movement::setSpeed(CoupleFloat speed) {
-    this->speed=speed;
+    this->speed = speed;
 }
 void Movement::setAcceleration(CoupleFloat acceleration){
-    this->acceleration=acceleration;
+    this->acceleration = acceleration;
 }
 
-void Movement::updatePosition(Position position, float deltaTime){
-
+Position Movement::updatePosition(Position position, CoupleFloat coupleFloat){
+    position.setX(position.getX() + coupleFloat.getX());
+    position.setY(position.getY() + coupleFloat.getY());
+    return position;
 }

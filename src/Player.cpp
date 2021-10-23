@@ -5,7 +5,7 @@ Player::Player() {
     this->attack = 0.0;
     this->defense = false;
     this->health = 0.0;
-    Position p;
+    Position p = Position();
     Movement m;
     this->position = p;
     this->movement = m;

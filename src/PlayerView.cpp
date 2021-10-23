@@ -24,7 +24,12 @@ Player PlayerView::getPlayer() const {
 }
 
 void PlayerView::movePlayer(sf::Vector2f vectorDirection) {
-    Position position(player.getPosition().getX() + vectorDirection.x, player.getPosition().getY() + vectorDirection.y);
-    player.setPosition(position);
-    sprite.setPosition(position.getX(), position.getY());
+//    Position position(player.getPosition().getX() + vectorDirection.x, player.getPosition().getY() + vectorDirection.y);
+//    player.setPosition(position);
+//    sprite.setPosition(position.getX(), position.getY());
+    Position newPosition = player.getMovement().updatePosition(player.getPosition(), vectorToCouple(vectorDirection));
+    player.setPosition(newPosition);
+    sprite.setPosition(newPosition.getX(), newPosition.getY());
+    //std::cout << "     " << player.getPosition().getX() <<  " : " << player.getPosition().getY() << std::endl;
+    std::cout << "     " << sprite.getPosition().x <<  " : " << sprite.getPosition().y << std::endl;
 }

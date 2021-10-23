@@ -20,8 +20,7 @@ class Movement {
         void setSpeed(CoupleFloat speed);
         void setAcceleration(CoupleFloat acceleration);
 
-        void updatePosition(Position position, float deltaTime);
-
+        Position updatePosition(Position position, CoupleFloat coupleFloat);
 };
 
 #endif // MOVEMENT_H

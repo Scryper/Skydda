@@ -18,7 +18,6 @@ int main() {
         "Skydda",
         sf::Style::Fullscreen
     );
-
     float deltaTime;
     sf::Clock clock;
 
@@ -51,6 +50,12 @@ int main() {
     position.setX(position.getX() + 150);
     sf::Texture textureBrick;
     sf::Sprite brickSprite = loadTexture("resources/images/platform/brick.png", sizeBrickSprite, position, textureBrick);
+
+//    std::cout << player.getPosition().getX() << ":" << player.getPosition().getY() << std::endl;
+//    Position ptest(middleScreenX + 120, middleScreenY + 120);
+//    player.setPosition(ptest);
+//    playerSprite.setPosition(middleScreenX + 120, middleScreenY + 120);
+//    std::cout << player.getPosition().getX() << ":" << player.getPosition().getY() << std::endl;
 
 	// Start the game loop
     while (app.isOpen()) {

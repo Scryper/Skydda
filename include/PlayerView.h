@@ -2,7 +2,9 @@
 #define PLAYERVIEW_H
 
 #include "Player.h"
+#include "CoupleVectorTransformer.h"
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 using namespace std;
