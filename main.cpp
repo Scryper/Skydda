@@ -27,10 +27,10 @@ int main() {
     // Initialise the player's position
     Position position(middleScreenX, middleScreenY);
     // Initialize speed, velocity and movement
-    const float speed = 50.f;
-    CoupleFloat velocity(0.f, 0.f);
+    CoupleFloat velocity(.5f, .5f);
     CoupleFloat acceleration(0.f, 0.f);
-    Movement movement(velocity, acceleration);
+    CoupleFloat maxSpeed(5.f, 5.f);
+    Movement movement(velocity, acceleration, maxSpeed);
     // Load sprite of player
     CoupleFloat couplePlayerSprite(0.5f, 0.5f);
     Size sizePlayerSprite(couplePlayerSprite);
@@ -59,7 +59,7 @@ int main() {
 
 	// Start the game loop
     while (app.isOpen()) {
-        deltaTime = clock.restart().asSeconds();
+        deltaTime = clock.restart().asMilliseconds();
         // Process events
         sf::Event event;
         while (app.pollEvent(event)) {
@@ -70,28 +70,16 @@ int main() {
         // Movement
         sf::Vector2f vector2f(0.f, 0.f);
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-            vector2f.y += -speed * deltaTime;
-            playerView.movePlayer(vector2f);
-            std::cout << player.getPosition().getY() << std::endl;
-            std::cout << vector2f.y << std::endl;
+            vector2f.y += -deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-            vector2f.y += speed * deltaTime;
-            playerView.movePlayer(vector2f);
-            std::cout << player.getPosition().getY() << std::endl;
-            std::cout << vector2f.y << std::endl;
+            vector2f.y += deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            vector2f.x += -speed * deltaTime;
-            playerView.movePlayer(vector2f);
-            std::cout << player.getPosition().getX() << std::endl;
-            std::cout << vector2f.x << std::endl;
+            vector2f.x += -deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            vector2f.x += -speed * deltaTime;
-            playerView.movePlayer(vector2f);
-            std::cout << player.getPosition().getX() << std::endl;
-            std::cout << vector2f.x << std::endl;
+            vector2f.x += deltaTime;
         }
 
         playerView.movePlayer(vector2f);
@@ -101,7 +89,7 @@ int main() {
 
         // Draw the sprite
         app.draw(backgroundSprite);
-        app.draw(playerSprite);
+        app.draw(playerView.getSprite());
         app.draw(brickSprite);
 
         // Update the window
