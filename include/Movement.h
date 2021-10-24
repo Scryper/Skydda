@@ -5,8 +5,9 @@
 #include "CoupleFloat.h"
 
 #include <stdlib.h>
-#include <iostream>
+#include <iostream> // to delete when debug ok
 
+/*This class is used to recalculate the player's position when he is moving.*/
 class Movement {
     private:
         CoupleFloat speed;

@@ -2,11 +2,15 @@
 
 PlatformView::PlatformView() { }
 
-PlatformView::PlatformView(sf::Sprite sprite_, Platform platform_)
-    : sprite(sprite_), platform(platform_) { }
+PlatformView::PlatformView(sf::Sprite sprite, Platform platform) {
+    this->sprite = sprite;
+    this->platform = platform;
+}
 
-PlatformView::PlatformView(const PlatformView& other)
-    : sprite(other.sprite), platform(other.platform) { }
+PlatformView::PlatformView(const PlatformView& other) {
+    this->sprite = other.sprite;
+    this->platform = other.platform;
+}
 
 PlatformView::~PlatformView() { }
 

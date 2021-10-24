@@ -7,8 +7,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-using namespace std;
-
 class PlayerView {
     private:
         sf::Sprite sprite;

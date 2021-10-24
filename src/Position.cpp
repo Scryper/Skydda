@@ -1,21 +1,22 @@
 #include "Position.h"
 
-Position::Position(int x_, int y_):x(x_),y(y_) {
-
+Position::Position(int x, int y) {
+    this->x = x;
+    this->y = y;
 }
 
-Position::Position(const Position& other): x(other.x), y(other.y) {
-
+Position::Position(const Position& other) {
+    this->x = other.x;
+    this->y = other.y;
 }
 
-Position::~Position() {
+Position::~Position() { }
 
-}
-
-int Position::getX()const {
+int Position::getX() const {
     return x;
 }
-int Position::getY()const {
+
+int Position::getY() const {
     return y;
 }
 

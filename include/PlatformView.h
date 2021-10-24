@@ -11,7 +11,7 @@ class PlatformView {
 
     public:
         PlatformView();
-        PlatformView(sf::Sprite sprite_, Platform platform_);
+        PlatformView(sf::Sprite sprite, Platform platform);
         PlatformView(const PlatformView& other);
         virtual ~PlatformView();
 

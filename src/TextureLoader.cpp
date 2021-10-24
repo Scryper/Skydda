@@ -6,8 +6,10 @@ sf::Sprite loadTexture(std::string path, Size size_, Position position, sf::Text
     }
     sf::Sprite sprite(texture);
     sprite.setScale(size_.getFactor().getX(), size_.getFactor().getY());
+
     // set the origin of the image to its center
     sprite.setOrigin(sprite.getTexture()->getSize().x / 2, sprite.getTexture()->getSize().y / 2);
     sprite.setPosition(position.getX(), position.getY());
+
     return sprite;
 }

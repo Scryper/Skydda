@@ -1629,15 +1629,16 @@
 1635075225 source:/home/damien/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1634147946 source:/home/florian/Documents/GitHub/Skydda/src/CoupleFloat.cpp
+1635094403 source:/home/florian/Documents/GitHub/Skydda/src/CoupleFloat.cpp
 	"CoupleFloat.h"
 
-1634147946 /home/florian/Documents/GitHub/Skydda/include/CoupleFloat.h
+1635094878 /home/florian/Documents/GitHub/Skydda/include/CoupleFloat.h
+	<iostream>
 
 1634158747 source:/home/florian/Documents/GitHub/Skydda/src/CoupleVectorTransformer.cpp
 	"CoupleVectorTransformer.h"
 
-1634157143 /home/florian/Documents/GitHub/Skydda/include/CoupleVectorTransformer.h
+1635094852 /home/florian/Documents/GitHub/Skydda/include/CoupleVectorTransformer.h
 	<SFML/Graphics.hpp>
 	"CoupleFloat.h"
 
@@ -2050,46 +2051,47 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1635018525 source:/home/florian/Documents/GitHub/Skydda/src/Movement.cpp
+1635094631 source:/home/florian/Documents/GitHub/Skydda/src/Movement.cpp
 	"Movement.h"
 
-1635018730 /home/florian/Documents/GitHub/Skydda/include/Movement.h
+1635094927 /home/florian/Documents/GitHub/Skydda/include/Movement.h
 	"Position.h"
 	"CoupleFloat.h"
 	<stdlib.h>
 	<iostream>
 
-1634159245 /home/florian/Documents/GitHub/Skydda/include/Position.h
+1635094403 /home/florian/Documents/GitHub/Skydda/include/Position.h
+	<iostream>
 
-1634148388 source:/home/florian/Documents/GitHub/Skydda/src/Platform.cpp
+1635094996 source:/home/florian/Documents/GitHub/Skydda/src/Platform.cpp
 	"Platform.h"
 
-1634147946 /home/florian/Documents/GitHub/Skydda/include/Platform.h
+1635095017 /home/florian/Documents/GitHub/Skydda/include/Platform.h
 	"Position.h"
 	"Size.h"
 
 1634148388 /home/florian/Documents/GitHub/Skydda/include/Size.h
 	"CoupleFloat.h"
 
-1634148388 source:/home/florian/Documents/GitHub/Skydda/src/PlatformView.cpp
+1635095096 source:/home/florian/Documents/GitHub/Skydda/src/PlatformView.cpp
 	"PlatformView.h"
 
-1634147519 /home/florian/Documents/GitHub/Skydda/include/PlatformView.h
+1635095060 /home/florian/Documents/GitHub/Skydda/include/PlatformView.h
 	<SFML/Graphics.hpp>
 	"Platform.h"
 
-1635011793 source:/home/florian/Documents/GitHub/Skydda/src/Player.cpp
+1635095161 source:/home/florian/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1635011799 /home/florian/Documents/GitHub/Skydda/include/Player.h
+1635095229 /home/florian/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
 
-1635016129 source:/home/florian/Documents/GitHub/Skydda/src/PlayerView.cpp
+1635094766 source:/home/florian/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 
-1635015094 /home/florian/Documents/GitHub/Skydda/include/PlayerView.h
+1635095238 /home/florian/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
 	"CoupleVectorTransformer.h"
 	<iostream>
@@ -2101,7 +2103,7 @@
 1634148388 source:/home/florian/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1635018567 source:/home/florian/Documents/GitHub/Skydda/main.cpp
+1635094502 source:/home/florian/Documents/GitHub/Skydda/main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"TextureLoader.h"
@@ -2116,7 +2118,7 @@
 	"Size.h"
 	"Position.h"
 
-1634152044 source:/home/florian/Documents/GitHub/Skydda/src/TextureLoader.cpp
+1635094514 source:/home/florian/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
 1635075225 /home/damien/Documents/GitHub/Skydda/include/TextureLoader.h

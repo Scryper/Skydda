@@ -1,7 +1,9 @@
 #ifndef POSITION_H
 #define POSITION_H
+
 #include <iostream>
 
+/*This class is used to manage the position of players and their sprites.*/
 class Position {
     private:
         int x;
@@ -12,8 +14,8 @@ class Position {
         Position(const Position& other);
         virtual ~Position();
 
-        int getX()const;
-        int getY()const;
+        int getX() onst;
+        int getY() const;
 
         void setX(int x);
         void setY(int y);

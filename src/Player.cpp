@@ -5,13 +5,13 @@ Player::Player() {
     this->attack = 0.0;
     this->defense = false;
     this->health = 0.0;
-    Position p = Position();
-    Movement m;
-    this->position = p;
-    this->movement = m;
+    Position defaultPosition = Position();
+    Movement defaultMovement;
+    this->position = defaultPosition;
+    this->movement = defaultMovement;
 }
 
-Player::Player(string name, double attack, bool defense, double health, Position position, Movement movement) {
+Player::Player(std::string name, double attack, bool defense, double health, Position position, Movement movement) {
     this->name = name;
     this->attack = attack;
     this->defense = defense;

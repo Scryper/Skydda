@@ -1,7 +1,10 @@
 #ifndef COUPLEFLOAT_H
 #define COUPLEFLOAT_H
+
 #include <iostream>
 
+/*This class represents a Vector of two values.
+This class is used in model.*/
 class CoupleFloat {
     private:
         float x;

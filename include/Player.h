@@ -2,14 +2,14 @@
 #define PLAYER_H
 
 #include <string>
+
 #include "Position.h"
 #include "Movement.h"
 
-using namespace std;
-
+/*This class represents a player.*/
 class Player {
     private:
-        string name;
+        std::string name;
         double attack;
         bool defense;
         double health;
@@ -18,7 +18,7 @@ class Player {
 
     public:
         Player();
-        Player(string name, double attack, bool defense, double health, Position position, Movement movement);
+        Player(std::string name, double attack, bool defense, double health, Position position, Movement movement);
         Player(const Player& other);
         virtual ~Player();
 

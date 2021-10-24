@@ -1,14 +1,14 @@
 #include "Movement.h"
 
 Movement::Movement() {
-    CoupleFloat tmpSpeed;
-    speed = tmpSpeed;
+    CoupleFloat defaultSpeed;
+    this->speed = defaultSpeed;
 
-    CoupleFloat tmpAcceleration;
-    acceleration = tmpAcceleration;
+    CoupleFloat defaultAcceleration;
+    this->acceleration = defaultAcceleration;
 
-    CoupleFloat tmpMaxSpeed;
-    maxSpeed = tmpMaxSpeed;
+    CoupleFloat defaultMaxSpeed;
+    this->maxSpeed = defaultMaxSpeed;
 }
 
 Movement::Movement(CoupleFloat speed, CoupleFloat acceleration, CoupleFloat maxSpeed) {
@@ -20,9 +20,9 @@ Movement::Movement(CoupleFloat speed, CoupleFloat acceleration, CoupleFloat maxS
 Movement::~Movement() { }
 
 Movement::Movement(const Movement& other) {
-    speed = other.speed;
-    acceleration = other.acceleration;
-    maxSpeed = other.maxSpeed;
+    this->speed = other.speed;
+    this->acceleration = other.acceleration;
+    this->maxSpeed = other.maxSpeed;
 }
 
 CoupleFloat Movement::getSpeed()const {
@@ -40,6 +40,7 @@ void Movement::setAcceleration(CoupleFloat acceleration){
 }
 
 Position Movement::updatePosition(Position position, CoupleFloat direction) {
+    // get the info about X movement
     float speedX = speed.getX();
     float directionX = direction.getX();
     float maxSpeedX = maxSpeed.getX();
@@ -48,6 +49,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     bool left = directionX < 0;
     bool right = directionX > 0;
 
+    // get the info about Y movement
     float speedY = speed.getY();
     float directionY = direction.getY();
     float maxSpeedY = maxSpeed.getY();
@@ -66,10 +68,10 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     }
     else {
         if(left) {
-            speed.setX(speedX - accelerationX);// - accelerationX);
+            speed.setX(speedX - accelerationX);
         }
         else if(right) {
-            speed.setX(speedX + accelerationX);// + accelerationX);
+            speed.setX(speedX + accelerationX);
         }
     }
 
@@ -83,10 +85,10 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     }
     else {
         if(up) {
-            speed.setY(speedY - accelerationY);// - accelerationY);
+            speed.setY(speedY - accelerationY);
         }
         else if(down)  {
-            speed.setY(speedY + accelerationY);// + accelerationY);
+            speed.setY(speedY + accelerationY);
         }
     }
 
@@ -95,5 +97,6 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
 
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());
+
     return position;
 }

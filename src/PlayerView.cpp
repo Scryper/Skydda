@@ -1,10 +1,10 @@
 #include "PlayerView.h"
 
 PlayerView::PlayerView() {
-    sf::Sprite s;
-    this->sprite = s;
-    Player p;
-    this->player = p;
+    sf::Sprite defaultSprite;
+    this->sprite = defaultSprite;
+    Player defaultPlayer;
+    this->player = defaultPlayer;
 }
 
 PlayerView::PlayerView(sf::Sprite sprite, Player player) {
@@ -28,14 +28,13 @@ sf::Sprite PlayerView::getSprite() const {
 }
 
 bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight) {
-
-
-
-    if( (looksRight && vectorDirection.x < 0) || (!looksRight && vectorDirection.x > 0) ) {
+    // we swap the player's sprite if he is not looking the way he is going
+    if((looksRight && vectorDirection.x < 0) || (!looksRight && vectorDirection.x > 0)) {
         sprite.scale(-1.f, 1.f);
-        looksRight = !looksRight;
+        looksRight = !looksRight; // to know where he is looking
     }
     //std::cout << "test 1" << std::endl;
+    // calculating the new position of the player
     Position newPosition = player.getMovement() // probleme
                                  .updatePosition(
                                         player.getPosition(),
@@ -43,6 +42,7 @@ bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight) {
                                  );
 
     //std::cout << "test 2" << std::endl;
+    // updating the position info
     player.setPosition(newPosition);
     sprite.setPosition(newPosition.getX(), newPosition.getY());
 
