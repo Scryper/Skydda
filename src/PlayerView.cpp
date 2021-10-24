@@ -27,12 +27,24 @@ sf::Sprite PlayerView::getSprite() const {
     return sprite;
 }
 
-void PlayerView::movePlayer(sf::Vector2f vectorDirection) {
-    Position newPosition = player.getMovement()
+bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight) {
+
+
+
+    if( (looksRight && vectorDirection.x < 0) || (!looksRight && vectorDirection.x > 0) ) {
+        sprite.scale(-1.f, 1.f);
+        looksRight = !looksRight;
+    }
+    //std::cout << "test 1" << std::endl;
+    Position newPosition = player.getMovement() // probleme
                                  .updatePosition(
                                         player.getPosition(),
                                         vectorToCouple(vectorDirection)
                                  );
+
+    //std::cout << "test 2" << std::endl;
     player.setPosition(newPosition);
     sprite.setPosition(newPosition.getX(), newPosition.getY());
+
+    return looksRight;
 }

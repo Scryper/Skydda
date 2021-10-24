@@ -1,6 +1,6 @@
 #ifndef POSITION_H
 #define POSITION_H
-
+#include <iostream>
 
 class Position {
     private:

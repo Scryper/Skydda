@@ -1,7 +1,13 @@
 #include "CoupleFloat.h"
 
-CoupleFloat::CoupleFloat(float x, float y):x(x),y(y) {
+CoupleFloat::CoupleFloat() {
+    this->x = 0.;
+    this->y = 0.;
+}
 
+CoupleFloat::CoupleFloat(float x_, float y_) {
+    this->x = x_;
+    this->y = y_;
 }
 
 CoupleFloat::CoupleFloat(const CoupleFloat& other):x(other.x),y(other.y) {

@@ -23,7 +23,7 @@ class PlayerView {
         Player getPlayer() const;
         sf::Sprite getSprite() const;
 
-        void movePlayer(sf::Vector2f vectorDirection);
+        bool movePlayer(sf::Vector2f vectorDirection, bool looksRight);
 };
 
 #endif // PLAYERVIEW_H

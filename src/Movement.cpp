@@ -6,6 +6,9 @@ Movement::Movement() {
 
     CoupleFloat tmpAcceleration;
     acceleration = tmpAcceleration;
+
+    CoupleFloat tmpMaxSpeed;
+    maxSpeed = tmpMaxSpeed;
 }
 
 Movement::Movement(CoupleFloat speed, CoupleFloat acceleration, CoupleFloat maxSpeed) {
@@ -19,6 +22,7 @@ Movement::~Movement() { }
 Movement::Movement(const Movement& other) {
     speed = other.speed;
     acceleration = other.acceleration;
+    maxSpeed = other.maxSpeed;
 }
 
 CoupleFloat Movement::getSpeed()const {
@@ -39,32 +43,33 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     float speedX = speed.getX();
     float directionX = direction.getX();
     float maxSpeedX = maxSpeed.getX();
-    //float accelerationX = acceleration.getX();
-    float productX = speedX * directionX;
+    float accelerationX = acceleration.getX();
+    float productX = speedX * accelerationX;
     bool left = directionX < 0;
-    std::cout << left << std::endl;
+    bool right = directionX > 0;
 
     float speedY = speed.getY();
     float directionY = direction.getY();
     float maxSpeedY = maxSpeed.getY();
-    //float accelerationY = acceleration.getY();
-    float productY = speedY * directionY;
+    float accelerationY = acceleration.getY();
+    float productY = speedY * accelerationY;
     bool up = directionY < 0;
+    bool down = directionY > 0;
 
     if(productX >= maxSpeedX) {
         if(left) {
             speed.setX(-maxSpeedX);
         }
-        else {
+        else if(right) {
             speed.setX(maxSpeedX);
         }
     }
     else {
         if(left) {
-            speed.setX(--speedX);// - accelerationX);
+            speed.setX(speedX - accelerationX);// - accelerationX);
         }
-        else {
-            speed.setX(++speedX);// + accelerationX);
+        else if(right) {
+            speed.setX(speedX + accelerationX);// + accelerationX);
         }
     }
 
@@ -72,18 +77,21 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
         if(up) {
             speed.setY(-maxSpeedY);
         }
-        else {
+        else if(down) {
             speed.setY(maxSpeedY);
         }
     }
     else {
         if(up) {
-            speed.setY(--speedY);// - accelerationY);
+            speed.setY(speedY - accelerationY);// - accelerationY);
         }
-        else {
-            speed.setY(++speedY);// + accelerationY);
+        else if(down)  {
+            speed.setY(speedY + accelerationY);// + accelerationY);
         }
     }
+
+    //std::cout << "speedX : " << speed.getX() << std::endl;
+    //std::cout << "speedY : " << speed.getY() << std::endl;
 
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());

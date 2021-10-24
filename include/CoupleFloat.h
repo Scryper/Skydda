@@ -1,6 +1,6 @@
 #ifndef COUPLEFLOAT_H
 #define COUPLEFLOAT_H
-
+#include <iostream>
 
 class CoupleFloat {
     private:
@@ -8,7 +8,8 @@ class CoupleFloat {
         float y;
 
     public:
-        CoupleFloat(float x=0., float y=0.);
+        CoupleFloat();
+        CoupleFloat(float x, float y);
         virtual ~CoupleFloat();
         CoupleFloat(const CoupleFloat& other);
 

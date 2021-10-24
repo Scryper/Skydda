@@ -27,9 +27,10 @@ int main() {
     // Initialise the player's position
     Position position(middleScreenX, middleScreenY);
     // Initialize speed, velocity and movement
-    CoupleFloat velocity(.5f, .5f);
-    CoupleFloat acceleration(0.f, 0.f);
-    CoupleFloat maxSpeed(5.f, 5.f);
+    CoupleFloat velocity(.0f, .0f);
+    CoupleFloat acceleration(2.f, 2.f);
+    CoupleFloat maxSpeed(10.0f, 10.0f);
+
     Movement movement(velocity, acceleration, maxSpeed);
     // Load sprite of player
     CoupleFloat couplePlayerSprite(0.5f, 0.5f);
@@ -57,6 +58,7 @@ int main() {
 //    playerSprite.setPosition(middleScreenX + 120, middleScreenY + 120);
 //    std::cout << player.getPosition().getX() << ":" << player.getPosition().getY() << std::endl;
 
+    bool looksRight = true;
 	// Start the game loop
     while (app.isOpen()) {
         deltaTime = clock.restart().asMilliseconds();
@@ -81,9 +83,7 @@ int main() {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
             vector2f.x += deltaTime;
         }
-
-        playerView.movePlayer(vector2f);
-
+        looksRight = playerView.movePlayer(vector2f, looksRight);
         // Clear screen
         app.clear();
 
