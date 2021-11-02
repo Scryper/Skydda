@@ -14,7 +14,7 @@ class Position {
         Position(const Position& other);
         virtual ~Position();
 
-        int getX() onst;
+        int getX() const;
         int getY() const;
 
         void setX(int x);

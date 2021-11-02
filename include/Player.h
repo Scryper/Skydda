@@ -26,6 +26,7 @@ class Player {
         Position getPosition() const;
 
         void setPosition(Position position);
+        Position updatePosition(Position position, CoupleFloat coupleFloat);
 };
 
 #endif // PLAYER_H

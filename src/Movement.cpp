@@ -45,7 +45,6 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     float directionX = direction.getX();
     float maxSpeedX = maxSpeed.getX();
     float accelerationX = acceleration.getX();
-    float productX = speedX * accelerationX;
     bool left = directionX < 0;
     bool right = directionX > 0;
 
@@ -54,46 +53,60 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     float directionY = direction.getY();
     float maxSpeedY = maxSpeed.getY();
     float accelerationY = acceleration.getY();
-    float productY = speedY * accelerationY;
     bool up = directionY < 0;
     bool down = directionY > 0;
 
-    if(productX >= maxSpeedX) {
-        if(left) {
-            speed.setX(-maxSpeedX);
-        }
-        else if(right) {
-            speed.setX(maxSpeedX);
-        }
-    }
-    else {
-        if(left) {
+    float productX = speedX * accelerationX;
+    float productY = speedY * accelerationY;
+
+    if(directionX == 0 && directionY == 0) {
+        if(speedX > 0 && speedX - accelerationX > 0) {
             speed.setX(speedX - accelerationX);
         }
-        else if(right) {
+        if(speedX < 0 && speedX - accelerationX < 0) {
             speed.setX(speedX + accelerationX);
         }
-    }
-
-    if(productY >= maxSpeedY) {
-        if(up) {
-            speed.setY(-maxSpeedY);
-        }
-        else if(down) {
-            speed.setY(maxSpeedY);
-        }
-    }
-    else {
-        if(up) {
+        if(speedY > 0 && speedY - accelerationY > 0) {
             speed.setY(speedY - accelerationY);
         }
-        else if(down)  {
+        if(speedY < 0 && speedY - accelerationY < 0) {
             speed.setY(speedY + accelerationY);
         }
-    }
+    } else {
+        if(abs(speedX) >= maxSpeedX) {
+            if(left) {
+                speed.setX(-maxSpeedX);
+            }
+            else if(right) {
+                speed.setX(maxSpeedX);
+            }
+        }
+        else {
+            if(left) {
+                speed.setX(speedX - accelerationX);
+            }
+            else if(right) {
+                speed.setX(speedX + accelerationX);
+            }
+        }
 
-    //std::cout << "speedX : " << speed.getX() << std::endl;
-    //std::cout << "speedY : " << speed.getY() << std::endl;
+        if(abs(speedY) >= maxSpeedY) {
+            if(up) {
+                speed.setY(-maxSpeedY);
+            }
+            else if(down) {
+                speed.setY(maxSpeedY);
+            }
+        }
+        else {
+            if(up) {
+                speed.setY(speedY - accelerationY);
+            }
+            else if(down)  {
+                speed.setY(speedY + accelerationY);
+            }
+        }
+    }
 
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());

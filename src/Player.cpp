@@ -42,3 +42,7 @@ Position Player::getPosition() const {
 void Player::setPosition(Position position) {
     this->position = position;
 }
+
+Position Player::updatePosition(Position position, CoupleFloat direction) {
+    return movement.updatePosition(position, direction);
+}

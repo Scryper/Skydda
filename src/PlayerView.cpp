@@ -35,8 +35,7 @@ bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight) {
     }
     //std::cout << "test 1" << std::endl;
     // calculating the new position of the player
-    Position newPosition = player.getMovement() // probleme
-                                 .updatePosition(
+    Position newPosition = player.updatePosition(
                                         player.getPosition(),
                                         vectorToCouple(vectorDirection)
                                  );

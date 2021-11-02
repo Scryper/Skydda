@@ -28,8 +28,8 @@ int main() {
     Position position(middleScreenX, middleScreenY);
     // Initialize speed, velocity and movement
     CoupleFloat velocity(.0f, .0f);
-    CoupleFloat acceleration(2.f, 2.f);
-    CoupleFloat maxSpeed(10.0f, 10.0f);
+    CoupleFloat acceleration(.1f, .1f);
+    CoupleFloat maxSpeed(5.f, 5.f);
 
     Movement movement(velocity, acceleration, maxSpeed);
     // Load sprite of player
@@ -77,6 +77,7 @@ int main() {
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
             vector2f.x += deltaTime;
         }
+
         looksRight = playerView.movePlayer(vector2f, looksRight);
         // Clear screen
         app.clear();
