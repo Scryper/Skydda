@@ -21,6 +21,8 @@ int main() {
     float deltaTime;
     sf::Clock clock;
 
+    app.setFramerateLimit(60);
+
     int middleScreenX = app.getSize().x / 2.;
     int middleScreenY = app.getSize().y / 2.;
 
@@ -28,8 +30,8 @@ int main() {
     Position position(middleScreenX, middleScreenY);
     // Initialize speed, velocity and movement
     CoupleFloat velocity(.0f, .0f);
-    CoupleFloat acceleration(.1f, .1f);
-    CoupleFloat maxSpeed(5.f, 5.f);
+    CoupleFloat acceleration(.5f, .5f);
+    CoupleFloat maxSpeed(10.f, 10.f);
 
     Movement movement(velocity, acceleration, maxSpeed);
     // Load sprite of player

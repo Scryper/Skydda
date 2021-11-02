@@ -56,8 +56,8 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     bool up = directionY < 0;
     bool down = directionY > 0;
 
-    float productX = speedX * accelerationX;
-    float productY = speedY * accelerationY;
+//    float productX = speedX * accelerationX;
+//    float productY = speedY * accelerationY;
 
     if(directionX == 0 && directionY == 0) {
         if(speedX > 0 && speedX - accelerationX > 0) {
