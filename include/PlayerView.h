@@ -22,8 +22,6 @@ class PlayerView {
         sf::Sprite getSprite() const;
 
         bool movePlayer(sf::Vector2f vectorDirection, bool looksRight);
-
-        int directionCollision(sf::Sprite sprite);
 };
 
 #endif // PLAYERVIEW_H

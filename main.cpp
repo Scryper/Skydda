@@ -6,6 +6,11 @@
 #include "CoupleVectorTransformer.h"
 #include "Player.h"
 #include "PlayerView.h"
+#include "Platform.h"
+#include "PlatformView.h"
+#include "Collision.h"
+
+using namespace std;
 
 int main() {
     // Create the main window
@@ -50,9 +55,13 @@ int main() {
 
     CoupleFloat coupleBrickSprite(0.3f, 0.3f);
     Size sizeBrickSprite(coupleBrickSprite);
-    position.setX(position.getX() + 150);
+    Position posBrick(position.getX() + 150, position.getY());
+    position.setX(position.getX() + 350);
     sf::Texture textureBrick;
     sf::Sprite brickSprite = loadTexture("resources/images/platform/platform_default.png", sizeBrickSprite, position, textureBrick);
+
+    Platform platformBrick(posBrick, sizeBrickSprite);
+    PlatformView platformViewBrick(brickSprite, platformBrick);
 
     bool looksRight = true;
 	// Start the game loop
@@ -80,7 +89,33 @@ int main() {
             vector2f.x += deltaTime;
         }
 
-        looksRight = playerView.movePlayer(vector2f, looksRight);
+        cout << "directionCollision : " << directionCollision(playerView,platformViewBrick) << endl;
+
+        switch(directionCollision(playerView,platformViewBrick)) {
+            case 1:
+                vector2f.y += 50.;
+                looksRight = playerView.movePlayer(vector2f, looksRight);
+                break;
+            case 2:
+                vector2f.y -= 50.;
+                looksRight = playerView.movePlayer(vector2f, looksRight);
+                break;
+            case 3:
+                vector2f.x += 50.;
+                looksRight = playerView.movePlayer(vector2f, looksRight);
+                break;
+            case 4:
+                vector2f.x -= 50.;
+                looksRight = playerView.movePlayer(vector2f, looksRight);
+                break;
+            case -1:
+                looksRight = playerView.movePlayer(vector2f, looksRight);
+            default:
+                break;
+
+        }
+
+
         // Clear screen
         app.clear();
 

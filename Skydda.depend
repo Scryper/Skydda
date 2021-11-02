@@ -1154,13 +1154,16 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1635882086 source:/home/damien/Documents/GitHub/Skydda/main.cpp
+1635890824 source:/home/damien/Documents/GitHub/Skydda/main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"TextureLoader.h"
 	"CoupleVectorTransformer.h"
 	"Player.h"
 	"PlayerView.h"
+	"Platform.h"
+	"PlatformView.h"
+	"Collision.h"
 
 1635882086 /home/damien/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Graphics.hpp
 	<SFML/Window.hpp>
@@ -1600,10 +1603,10 @@
 1635882086 /home/damien/Documents/GitHub/Skydda/include/CoupleFloat.h
 	<iostream>
 
-1635882240 source:/home/damien/Documents/GitHub/Skydda/src/PlayerView.cpp
+1635885265 source:/home/damien/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 
-1635882209 /home/damien/Documents/GitHub/Skydda/include/PlayerView.h
+1635885279 /home/damien/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
 	"CoupleVectorTransformer.h"
 	<iostream>
@@ -2137,4 +2140,11 @@
 
 1635882086 source:/home/damien/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
+
+1635890677 source:/home/damien/Documents/GitHub/Skydda/src/Collision.cpp
+	"Collision.h"
+
+1635885702 /home/damien/Documents/GitHub/Skydda/include/Collision.h
+	"PlayerView.h"
+	"PlatformView.h"
 

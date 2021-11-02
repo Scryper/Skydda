@@ -27,56 +27,7 @@ sf::Sprite PlayerView::getSprite() const {
     return sprite;
 }
 
-int PlayerView::directionCollision(sf::Sprite sprite) {
 
-    sf::FloatRect playerBounds = this->getSprite().getGlobalBounds();
-    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
-
-    //1 : Haut, 2 : Bas, 3 : Gauche, 4 : Droite
-    if(playerBounds.intersects(spriteBounds)) {
-        // Haut
-        if(     playerBounds.top > spriteBounds.top
-            &&  playerBounds.top + playerBounds.height > spriteBounds.top + spriteBounds.height
-            &&  playerBounds.left < spriteBounds.left + spriteBounds.width
-            &&  playerBounds.left + playerBounds.width > spriteBounds.left
-            ) {
-
-            return 1;
-        }
-        // Bas
-        else if(    playerBounds.top < spriteBounds.top
-                &&  playerBounds.top + playerBounds.height < spriteBounds.top + spriteBounds.height
-                &&  playerBounds.left < spriteBounds.left + spriteBounds.width
-                &&  playerBounds.left + playerBounds.width > spriteBounds.left
-                ) {
-
-            return 2;
-        }
-        // Gauche
-        else if(    playerBounds.left > spriteBounds.left
-                &&  playerBounds.left + playerBounds.width > spriteBounds.left + spriteBounds.width
-                &&  playerBounds.top < spriteBounds.top + spriteBounds.height
-                &&  playerBounds.top + playerBounds.height > spriteBounds.top
-                ) {
-
-            return 3;
-        }
-        // Droite
-        else if(    playerBounds.left < spriteBounds.left
-                &&  playerBounds.left + playerBounds.width < spriteBounds.left + spriteBounds.width
-                &&  playerBounds.top < spriteBounds.top + spriteBounds.height
-                &&  playerBounds.top + playerBounds.height > spriteBounds.top
-                ) {
-
-            return 4;
-        }
-    } else {
-        return -1;
-    }
-
-    return -2;
-
-}
 
 bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight) {
     // we swap the player's sprite if he is not looking the way he is going
