@@ -48,11 +48,11 @@ int main() {
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = loadTexture("resources/images/background/mario_fond.png", sizeBackgroundSprite, position, textureBackground);
 
-    CoupleFloat coupleBrickSprite(0.2f, 0.2f);
+    CoupleFloat coupleBrickSprite(0.3f, 0.3f);
     Size sizeBrickSprite(coupleBrickSprite);
     position.setX(position.getX() + 150);
     sf::Texture textureBrick;
-    sf::Sprite brickSprite = loadTexture("resources/images/platform/brick.png", sizeBrickSprite, position, textureBrick);
+    sf::Sprite brickSprite = loadTexture("resources/images/platform/platform_default.png", sizeBrickSprite, position, textureBrick);
 
     bool looksRight = true;
 	// Start the game loop
