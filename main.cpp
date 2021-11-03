@@ -50,20 +50,10 @@ int main() {
     Position bottomPlatformPosition(position.getX() - 900, position.getY() -200);
     PlatformView bottomPlatform = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", bottomPlatformPosition, &textureBrick);
 
-    Position top(960, -35);
-    PlatformView topP = createPlatform(2.3f, .3f, "resources/images/platform/platform_default.png", top, &textureBrick);
-    Position leftPosition(-40, 540);
-    PlatformView leftP = createPlatform(.1f, 4.5f, "resources/images/platform/platform_default.png", leftPosition, &textureBrick);
-    Position rigthPosition(1960, 540);
-    PlatformView rigthP = createPlatform(.1f, 4.5f, "resources/images/platform/platform_default.png", rigthPosition, &textureBrick);
 
-
-    vector<PlatformView> platforms;
+    vector<PlatformView> platforms = createBorder("resources/images/platform/platform_default.png", &textureBrick);
     platforms.push_back(platformViewBrick);
     platforms.push_back(bottomPlatform);
-    platforms.push_back(topP);
-    platforms.push_back(leftP);
-    platforms.push_back(rigthP);
 
 
     bool looksRight = true;
