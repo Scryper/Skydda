@@ -2162,7 +2162,7 @@
 1635947414 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
-1635952125 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
+1635961472 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	<vector>
@@ -2171,6 +2171,7 @@
 	"PlatformView.h"
 	"Collision.h"
 	"ObjectInitializer.h"
+	"MapView.h"
 
 1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Graphics.hpp
 	<SFML/Window.hpp>
@@ -2601,12 +2602,12 @@
 	<SFML/Graphics.hpp>
 	"CoupleFloat.h"
 
-1635949964 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
+1635958983 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
 
-1635949964 /home/houdartf/Documents/GitHub/Skydda/include/Movement.h
+1635959057 /home/houdartf/Documents/GitHub/Skydda/include/Movement.h
 	"Position.h"
 	"CoupleFloat.h"
 	<stdlib.h>
@@ -2638,7 +2639,7 @@
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/CoupleVectorTransformer.cpp
 	"CoupleVectorTransformer.h"
 
-1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/Movement.cpp
+1635959245 source:/home/houdartf/Documents/GitHub/Skydda/src/Movement.cpp
 	"Movement.h"
 
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/Platform.cpp
@@ -2647,7 +2648,7 @@
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/PlatformView.cpp
 	"PlatformView.h"
 
-1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
+1635958989 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
@@ -2722,7 +2723,7 @@
 	"CoupleFloat.h"
 	"TextureLoader.h"
 
-1635952818 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
+1635961449 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
@@ -2759,4 +2760,12 @@
 
 1635960230 /home/damien/Documents/GitHub/Skydda/include/HealthBar.h
 	"Position.h"
+
+1635961088 source:/home/houdartf/Documents/GitHub/Skydda/src/MapView.cpp
+	"MapView.h"
+
+1635960569 /home/houdartf/Documents/GitHub/Skydda/include/MapView.h
+	<vector>
+	<PlatformView.h>
+	<ObjectInitializer.h>
 

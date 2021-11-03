@@ -9,12 +9,15 @@ Movement::Movement() {
 
     CoupleFloat defaultMaxSpeed;
     this->maxSpeed = defaultMaxSpeed;
+
+    this->jumpHeight = 25.f;
 }
 
-Movement::Movement(CoupleFloat speed, CoupleFloat acceleration, CoupleFloat maxSpeed) {
+Movement::Movement(CoupleFloat speed, CoupleFloat acceleration, CoupleFloat maxSpeed, float jumpHeight) {
     this->speed = speed;
     this->acceleration = acceleration;
     this->maxSpeed = maxSpeed;
+    this->jumpHeight = jumpHeight;
 }
 
 Movement::~Movement() { }
@@ -23,6 +26,7 @@ Movement::Movement(const Movement& other) {
     this->speed = other.speed;
     this->acceleration = other.acceleration;
     this->maxSpeed = other.maxSpeed;
+    this->jumpHeight = other.jumpHeight;
 }
 
 CoupleFloat Movement::getSpeed()const {
@@ -127,7 +131,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
         // if y speed = 0, give speed towards top
         // !! verify if there is a collision underneath
         if(speedY == 0 && zeroY==true){
-            speed.setY(-20.f);
+            speed.setY(-jumpHeight);
         }
         // if speed != 0 we can't jump again -> normal acceleration
         // if the player moves with max speed
@@ -148,7 +152,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
             break;
         case 2 :
             if(directionY != 0 && speedY == 0){
-                speed.setY(-20.f);
+                speed.setY(-jumpHeight);
             }
             else{
                 if(speed.getY() > 0)

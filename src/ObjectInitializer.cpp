@@ -36,7 +36,8 @@ PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Posi
     CoupleFloat velocity(.0f, .0f);
     CoupleFloat acceleration(.5f, 1.f);
     CoupleFloat maxSpeed(10.f, 20.f);
-    Movement movement(velocity, acceleration, maxSpeed);
+    float jumpHeight = 25.f;
+    Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
     CoupleFloat sizeCouple(sizeX, sizeY);
     Size sizeOfSprite(sizeCouple);

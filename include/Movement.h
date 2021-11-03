@@ -14,10 +14,11 @@ class Movement {
         CoupleFloat speed;
         CoupleFloat acceleration;
         CoupleFloat maxSpeed;
+        float jumpHeight;
 
     public:
         Movement();
-        Movement(CoupleFloat speed, CoupleFloat acceleration, CoupleFloat maxSpeed);
+        Movement(CoupleFloat speed, CoupleFloat acceleration, CoupleFloat maxSpeed, float jumpHeight);
         Movement(const Movement& other);
         virtual ~Movement();
 

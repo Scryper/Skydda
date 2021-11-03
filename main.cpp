@@ -7,6 +7,7 @@
 #include "PlatformView.h"
 #include "Collision.h"
 #include "ObjectInitializer.h"
+#include "MapView.h"
 
 using namespace std;
 
@@ -40,21 +41,14 @@ int main() {
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
-    position.setY(position.getY() + 350);
-    position.setX(position.getX() + 300);
+    //load texture for platforms
     sf::Texture textureBrick;
-    sf::Sprite brickSprite = initSprite(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
-    PlatformView platformViewBrick = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
+    //loading the first map
+    MapView map1(1,&textureBrick);
 
-    Position bottomPlatformPosition(position.getX() - 900, position.getY() -200);
-    PlatformView bottomPlatform = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", bottomPlatformPosition, &textureBrick);
-
-
-    vector<PlatformView> platforms = createBorder("resources/images/platform/platform_default.png", &textureBrick);
-    platforms.push_back(platformViewBrick);
-    platforms.push_back(bottomPlatform);
-
+    //get all the platforms from the map
+    vector<PlatformView> platforms = map1.getAllCollisions();
 
     bool looksRight = true;
 	// Start the game loop
@@ -90,8 +84,9 @@ int main() {
         // Draw the sprite
         app.draw(backgroundSprite);
         app.draw(playerView.getSprite());
-        app.draw(platformViewBrick.getSprite());
-        app.draw(bottomPlatform.getSprite());
+        for(auto i : map1.getPlatforms()){
+            app.draw(i.getSprite());
+        }
 
         // Update the window
         app.display();
