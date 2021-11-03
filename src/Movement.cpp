@@ -53,7 +53,7 @@ void Movement::stopY(){
     this->speed.setY(0);
 }
 
-Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<int> collisions) {
+Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<int>> collisions) {
     // get the info about X movement
     float speedX = speed.getX();
     float directionX = direction.getX();
@@ -70,6 +70,8 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
 
     bool zeroX = false;
     bool zeroY = false;
+
+    std::vector<int> coll;
 
 
     ///////////// DIRECTION X /////////////
@@ -145,18 +147,23 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     }
 
         for(auto& i : collisions){
-        switch(i){
+        switch(i[0]){
         case 1 :
-            if(speed.getY() < 0)
+            if(speed.getY() < 0){
                 zeroY=true;
+                coll=i;
+            }
+
             break;
         case 2 :
             if(directionY != 0 && speedY == 0){
                 speed.setY(-jumpHeight);
             }
             else{
-                if(speed.getY() > 0)
+                if(speed.getY() > 0){
+                    coll=i;
                     zeroY=true;
+                }
             }
 
             break;
@@ -174,10 +181,14 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
         }
     }
 
-    if(zeroX==true)
+    if(zeroX==true){
         speed.setX(0);
-    if(zeroY==true)
+    }
+
+    if(zeroY==true){
         speed.setY(0);
+        position.setY(coll[1]);
+    }
 
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());

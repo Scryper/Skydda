@@ -38,11 +38,11 @@ void PlayerView::stopY(){
     this->player.stopY();
 }
 
-Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<int> collisions){
+Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<int>> collisions){
     return player.updatePosition(player.getPosition(), vectorToCouple(vectorDirection), collisions);
 }
 
-bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<int> collisions) {
+bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<std::vector<int>> collisions) {
     // we swap the player's sprite if he is not looking the way he is going
     if((looksRight && vectorDirection.x < 0) || (!looksRight && vectorDirection.x > 0)) {
         sprite.scale(-1.f, 1.f);

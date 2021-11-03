@@ -6,7 +6,7 @@ MapView::MapView(int seed,sf::Texture *platformTexture)
     case 1:
         border=createBorder("",platformTexture);
         Position p1(900,1000);
-        PlatformView plat1 = createPlatform(.5f, .3f, "", p1, platformTexture);
+        PlatformView plat1 = createPlatform(5.5f, .3f, "", p1, platformTexture);
         Position p2(900, 200);
         PlatformView plat2 = createPlatform(1.f, .3f, "", p2, platformTexture);
         Position p3(1400, 700);
