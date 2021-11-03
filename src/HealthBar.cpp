@@ -1,4 +1,5 @@
 #include "HealthBar.h"
+using namespace std;
 
 HealthBar::HealthBar()
 {
@@ -19,4 +20,16 @@ HealthBar::~HealthBar()
 HealthBar::HealthBar(const HealthBar& other)
 {
     //copy ctor
+}
+
+float HealthBar::getLifePoint(){
+    return lifePoint;
+}
+
+float HealthBar::getLIFE_POINT_MAX() {
+    return LIFE_POINT_MAX;
+}
+
+Position HealthBar::getPosition() {
+    return position;
 }

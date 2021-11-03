@@ -15,6 +15,10 @@ class HealthBar
         virtual ~HealthBar();
         HealthBar(const HealthBar& other);
 
+        float getLifePoint();
+        float getLIFE_POINT_MAX();
+        Position getPosition();
+
 };
 
 #endif // HEALTHBAR_H

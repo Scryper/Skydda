@@ -8,6 +8,8 @@
 #include "Collision.h"
 #include "ObjectInitializer.h"
 #include "MapView.h"
+#include "HealthBar.h"
+#include "HealthBarView.h"
 
 using namespace std;
 
@@ -50,6 +52,22 @@ int main() {
     //get all the platforms from the map
     vector<PlatformView> platforms = map1.getAllCollisions();
 
+    // Create HealthBar
+    sf::RectangleShape healthBarIn;
+    sf::RectangleShape healthBarOut;
+
+    HealthBar healthBar(70.f, 100.f, 100.f);
+    HealthBarView healthBarView(&healthBar, healthBarIn, healthBarOut);
+
+    healthBarView.setPositionHealthBarIn(50.f,50.f);
+    healthBarView.setPositionHealthBarOut(50.f,50.f);
+
+    healthBarView.addColorToHealthBarIn();
+    healthBarView.addColorToHealthBarOut();
+
+    healthBarView.addSizeToHealthBarIn();
+    healthBarView.addSizeToHealthBarOut();
+
     bool looksRight = true;
 	// Start the game loop
     while (app.isOpen()) {
@@ -87,6 +105,9 @@ int main() {
         for(auto i : map1.getPlatforms()){
             app.draw(i.getSprite());
         }
+
+        app.draw(healthBarView.getHealthBarIn());
+        app.draw(healthBarView.getHealthBarOut());
 
         // Update the window
         app.display();
