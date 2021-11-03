@@ -66,12 +66,12 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     if(directionX==0){
 
          //si la vitesse est vers la droite et que (la vitesse - l'accélération) est positive
-         if(speedX > 0 && speedX - accelerationX > 0) {
+         if(speedX > 0 && speedX - accelerationX >= 0) {
             speed.setX(speedX - accelerationX);
         }
         else{
             //si la vitesse est vers la droite et que la (vitesse - l'accélération) est négative
-            if(speedX > 0 && speedX - accelerationX < 0) {
+            if(speedX > 0 && speedX - accelerationX <= 0) {
                 speed.setX(0);
             }
         }
@@ -90,16 +90,15 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
     }
     //la direction X n'est pas nulle
     else{
-         //on verifie qu'on est a la vitesse max
-        if(abs(speedX) >= maxSpeedX) {
-            if(left) {
-                speed.setX(-maxSpeedX);
-            }
-            else if(right) {
-                speed.setX(maxSpeedX);
-            }
+        //on vérifie qu'on va a gauche en étant a la vitesse max ou plus (en négatif)
+        if(left && speedX<=-maxSpeedX) {
+            speed.setX(-maxSpeedX);
         }
-        //si la vitesse max n'est pas atteinte, on incrémente la vitesse dans la direction donnée
+        //on vérifie qu'on va a droite en étant a la vitesse max ou plus (en positif
+        else if(right&&speedX>=maxSpeedX){
+            speed.setX(maxSpeedX);
+        }
+        //sinon si la vitesse max n'est pas atteinte, on incrémente la vitesse dans la direction donnée
         else {
             if(left) {
                 speed.setX(speedX - accelerationX);
@@ -151,6 +150,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
 
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());
+    std::cout<< "speed x = " << speed.getX()<<std::endl;
 
     return position;
 }

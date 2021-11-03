@@ -42,7 +42,7 @@ int main() {
     Position position(middleScreenX, middleScreenY);
     // Initialize speed, velocity and movement
     CoupleFloat velocity(.0f, .0f);
-    CoupleFloat acceleration(.5f, .5f);
+    CoupleFloat acceleration(.5f, .0f);
     CoupleFloat maxSpeed(10.f, 10.f);
 
     Movement movement(velocity, acceleration, maxSpeed);
@@ -65,7 +65,7 @@ int main() {
     sf::Texture textureBrick;
     sf::Sprite brickSprite = initSprite(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
-    Position posBrick(position.getY(), position.getY()+350);
+    Position posBrick(position.getY(), position.getY());
     Platform platformBrick(posBrick, sizeBrickSprite);
     PlatformView platformViewBrick(brickSprite, platformBrick);
 
