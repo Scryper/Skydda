@@ -44,7 +44,10 @@ int main() {
     sf::Texture textureBrick;
     sf::Sprite brickSprite = initSprite(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
-    PlatformView platformViewBrick = createPlatform(1.5f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
+    PlatformView platformViewBrick = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
+
+    Position p(position.getX() - 900,position.getY() -200);
+    PlatformView platformViewBrick2 = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", p, &textureBrick);
 
     bool looksRight = true;
 	// Start the game loop
@@ -96,6 +99,7 @@ int main() {
         app.draw(backgroundSprite);
         app.draw(playerView.getSprite());
         app.draw(platformViewBrick.getSprite());
+        app.draw(platformViewBrick2.getSprite());
 
         // Update the window
         app.display();

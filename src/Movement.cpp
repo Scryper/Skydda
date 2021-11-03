@@ -156,6 +156,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, int 
         }
     }
 
+    //on boucle sur la liste des int des collisions
     switch(collision){
     case 1 :
         if(speed.getY()<0)
