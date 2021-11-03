@@ -37,10 +37,15 @@ int main() {
 
     // Load sprite of player
     sf::Texture texturePlayer;
+    sf::Texture texturePlayer2;
     PlayerView playerView = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer,
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
                                          sf::Keyboard::Right);
+    PlayerView playerView2 = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer2,
+                                         sf::Keyboard::Z,
+                                         sf::Keyboard::Q,
+                                         sf::Keyboard::D);
 
     // Load background sprite
     sf::Texture textureBackground;
@@ -72,6 +77,7 @@ int main() {
     healthBarView.addSizeToHealthBarOut();
 
     bool looksRight = true;
+    bool looksRight2 = true;
 	// Start the game loop
     while (app.isOpen()) {
         deltaTime = clock.restart().asMilliseconds();
@@ -83,6 +89,7 @@ int main() {
         }
 
         looksRight = playerView.movePlayer(playerView.inputPlayer(deltaTime), looksRight, directionCollisions(playerView,platforms));
+        looksRight2 = playerView2.movePlayer(playerView2.inputPlayer(deltaTime), looksRight2, directionCollisions(playerView2,platforms));
 
         // Clear screen
         app.clear();
@@ -90,6 +97,7 @@ int main() {
         // Draw the sprite
         app.draw(backgroundSprite);
         app.draw(playerView.getSprite());
+        app.draw(playerView2.getSprite());
         for(auto i : map1.getPlatforms()){
             app.draw(i.getSprite());
         }
