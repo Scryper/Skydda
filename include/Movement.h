@@ -5,6 +5,7 @@
 #include "CoupleFloat.h"
 
 #include <stdlib.h>
+#include <vector>
 #include <iostream> // to delete when debug ok
 
 /*This class is used to recalculate the player's position when he is moving.*/
@@ -29,7 +30,7 @@ class Movement {
         void stopY();
 
 
-        Position updatePosition(Position position, CoupleFloat coupleFloat, int collision);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<int> collisions);
 };
 
 #endif // MOVEMENT_H

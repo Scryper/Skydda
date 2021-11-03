@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 
 #include "CoupleVectorTransformer.h"
 #include "PlayerView.h"
@@ -49,6 +50,12 @@ int main() {
     Position bottomPlatformPosition(position.getX() - 900, position.getY() -200);
     PlatformView bottomPlatform = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", bottomPlatformPosition, &textureBrick);
 
+
+    vector<PlatformView> platforms;
+    platforms.push_back(platformViewBrick);
+    platforms.push_back(bottomPlatform);
+
+
     bool looksRight = true;
 	// Start the game loop
     while (app.isOpen()) {
@@ -75,15 +82,15 @@ int main() {
             vector2f.x += deltaTime;
         }
 
-        cout << "directionCollision : " << directionCollision(playerView,platformViewBrick) << endl;
+        looksRight = playerView.movePlayer(vector2f, looksRight, directionCollisions(playerView,platforms));
 
-        looksRight = playerView.movePlayer(vector2f, looksRight,directionCollision(playerView,platformViewBrick));
+        float SIZEDEMIPLAYER = playerView.getSprite().getGlobalBounds().width/2;
 
-        if(playerView.getPlayer().getPosition().getX() < 0.f) {
+        if(playerView.getPlayer().getPosition().getX() + SIZEDEMIPLAYER < 0.f) {
             playerView.stopX();
         }
 
-        if(playerView.getPlayer().getPosition().getX() > 1920.f) {
+        if(playerView.getPlayer().getPosition().getX() + SIZEDEMIPLAYER > 1920.f ) {
             playerView.stopX();
         }
 

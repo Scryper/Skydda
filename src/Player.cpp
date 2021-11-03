@@ -43,8 +43,8 @@ void Player::setPosition(Position position) {
     this->position = position;
 }
 
-Position Player::updatePosition(Position position, CoupleFloat direction, int collision) {
-    return movement.updatePosition(position, direction, collision);
+Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<int> collisions) {
+    return movement.updatePosition(position, direction, collisions);
 }
 
 void Player::stopX(){

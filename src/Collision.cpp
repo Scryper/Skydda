@@ -45,3 +45,8 @@ int directionCollision(PlayerView player, PlatformView platform) {
     }
     return -2;
 }
+
+std::vector<int> directionCollisions(PlayerView player, std::vector<PlatformView> platform){
+    std::vector <int> test;
+    return test;
+}

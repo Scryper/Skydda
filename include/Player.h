@@ -29,7 +29,7 @@ class Player {
         void stopY();
 
         void setPosition(Position position);
-        Position updatePosition(Position position, CoupleFloat coupleFloat,int collision);
+        Position updatePosition(Position position, CoupleFloat coupleFloat,std::vector<int> collisions);
 };
 
 #endif // PLAYER_H

@@ -24,8 +24,8 @@ class PlayerView {
         void stopX();
         void stopY();
 
-        Position computeNewPosition(sf::Vector2f vectorDirection, int collision);
-        bool movePlayer(sf::Vector2f vectorDirection, bool looksRight, int collision);
+        Position computeNewPosition(sf::Vector2f vectorDirection, std::vector<int> collisions);
+        bool movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<int> collisions);
 };
 
 #endif // PLAYERVIEW_H

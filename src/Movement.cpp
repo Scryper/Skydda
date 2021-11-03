@@ -49,7 +49,7 @@ void Movement::stopY(){
     this->speed.setY(0);
 }
 
-Position Movement::updatePosition(Position position, CoupleFloat direction, int collision) {
+Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<int> collisions) {
     // get the info about X movement
     float speedX = speed.getX();
     float directionX = direction.getX();
@@ -114,7 +114,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, int 
             speed.setY(maxSpeedY);
         }
         else{
-            // if not, we incremet vertical speed
+            // if not, we increment vertical speed
             speed.setY(speedY + accelerationY);
         }
     }
@@ -122,7 +122,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, int 
     else {
         // if y speed = 0, give speed towards top
         // !! verify if there is a collision underneath
-        if(speedY == 0 && collision != -1){
+        if(speedY == 0 /*&& collisions != -1*/){
             speed.setY(-20.f);
         }
         // if speed != 0 we can't jump again -> normal acceleration
@@ -135,9 +135,9 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, int 
             speed.setY(speedY + accelerationY);
         }
     }
-
+    /*
     //on boucle sur la liste des int des collisions
-    switch(collision){
+    switch(collisions){
         case 1 :
             if(speed.getY() < 0)
                 speed.setY(0);
@@ -158,7 +158,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, int 
         default :
             break;
     }
-
+*/
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());
     std::cout<< "speed x = " << speed.getX()<<std::endl;
