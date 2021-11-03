@@ -12,11 +12,10 @@
 
 using namespace std;
 
-sf::Sprite initSprite(float value1, float value2, string pathToSprite, Position position, sf::Texture *texture) {
-    CoupleFloat couple(value1, value2);
+sf::Sprite initSprite(float sizeX, float sizeY, string pathToSprite, Position position, sf::Texture *texture) {
+    CoupleFloat couple(sizeX, sizeY);
     Size sizeOfSprite(couple);
     sf::Sprite sprite = loadTexture(pathToSprite, sizeOfSprite, position, *texture);
-
     return sprite;
 }
 
@@ -58,14 +57,15 @@ int main() {
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
+
     CoupleFloat coupleBrickSprite(.3f, .3f);
     Size sizeBrickSprite(coupleBrickSprite);
 
-    position.setX(position.getX() + 350);
+    position.setY(position.getY() + 350);
     sf::Texture textureBrick;
     sf::Sprite brickSprite = initSprite(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
-    Position posBrick(position.getX() + 150, position.getY());
+    Position posBrick(position.getY(), position.getY()+350);
     Platform platformBrick(posBrick, sizeBrickSprite);
     PlatformView platformViewBrick(brickSprite, platformBrick);
 
