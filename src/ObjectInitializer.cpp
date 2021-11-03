@@ -1,17 +1,4 @@
-#include "Initializer.h"
-
-// Initialize the sprite and creates itself the sizeCouple
-sf::Sprite initSprite(float sizeX, float sizeY, std::string pathToSprite, Position spritePosition, sf::Texture *spriteTexture) {
-    CoupleFloat sizeCouple(sizeX, sizeY);
-    Size sizeOfSprite(sizeCouple);
-    return initSprite(sizeOfSprite, pathToSprite, spritePosition, spriteTexture);
-}
-
-// Initialize the sprite with created sizeCouple
-sf::Sprite initSprite(Size sizeOfSprite, std::string pathToSprite, Position spritePosition, sf::Texture *spriteTexture) {
-    sf::Sprite sprite = loadTexture(pathToSprite, sizeOfSprite, spritePosition, *spriteTexture);
-    return sprite;
-}
+#include "ObjectInitializer.h"
 
 // creates the platform
 PlatformView createPlatform(float sizeX, float sizeY, std::string pathToPlatform, Position platformPosition, sf::Texture *platformTexture) {

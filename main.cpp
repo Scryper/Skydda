@@ -6,7 +6,7 @@
 #include "PlayerView.h"
 #include "PlatformView.h"
 #include "Collision.h"
-#include "Initializer.h"
+#include "ObjectInitializer.h"
 
 using namespace std;
 
