@@ -59,6 +59,7 @@
 		<Unit filename="include/Size.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/Collision.h" />
+		<Unit filename="include/Initializer.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/CoupleFloat.cpp" />
 		<Unit filename="src/CoupleVectorTransformer.cpp" />
@@ -71,6 +72,7 @@
 		<Unit filename="src/Size.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
 		<Unit filename="src/Collision.cpp" />
+		<Unit filename="src/Initializer.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
