@@ -12,6 +12,14 @@
 
 using namespace std;
 
+sf::Sprite initSprite(float value1, float value2, string pathToSprite, Position position, sf::Texture *texture) {
+    CoupleFloat couple(value1, value2);
+    Size sizeOfSprite(couple);
+    sf::Sprite sprite = loadTexture(pathToSprite, sizeOfSprite, position, *texture);
+
+    return sprite;
+}
+
 int main() {
     // Create the main window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
@@ -23,15 +31,15 @@ int main() {
         "Skydda",
         sf::Style::Fullscreen
     );
-    float deltaTime;
-    sf::Clock clock;
-
     app.setFramerateLimit(60);
 
     int middleScreenX = app.getSize().x / 2.;
     int middleScreenY = app.getSize().y / 2.;
 
-    // Initialise the player's position
+    float deltaTime;
+    sf::Clock clock;
+
+    // Initialize the player's position
     Position position(middleScreenX, middleScreenY);
     // Initialize speed, velocity and movement
     CoupleFloat velocity(.0f, .0f);
@@ -40,26 +48,24 @@ int main() {
 
     Movement movement(velocity, acceleration, maxSpeed);
     // Load sprite of player
-    CoupleFloat couplePlayerSprite(0.5f, 0.5f);
-    Size sizePlayerSprite(couplePlayerSprite);
     sf::Texture texturePlayer;
-    sf::Sprite playerSprite = loadTexture("resources/images/character/mario.png", sizePlayerSprite, position, texturePlayer);
+    sf::Sprite playerSprite = initSprite(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer);
     // create player and his view
     Player player("Scryper", 100, true, 100, position, movement);
     PlayerView playerView(playerSprite, player);
 
-    CoupleFloat coupleBackgroundSprite(1.f, 1.f);
-    Size sizeBackgroundSprite(coupleBackgroundSprite);
+    // Load background sprite
     sf::Texture textureBackground;
-    sf::Sprite backgroundSprite = loadTexture("resources/images/background/mario_fond.png", sizeBackgroundSprite, position, textureBackground);
+    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
-    CoupleFloat coupleBrickSprite(0.3f, 0.3f);
+    CoupleFloat coupleBrickSprite(.3f, .3f);
     Size sizeBrickSprite(coupleBrickSprite);
-    Position posBrick(position.getX() + 150, position.getY());
+
     position.setX(position.getX() + 350);
     sf::Texture textureBrick;
-    sf::Sprite brickSprite = loadTexture("resources/images/platform/platform_default.png", sizeBrickSprite, position, textureBrick);
+    sf::Sprite brickSprite = initSprite(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
+    Position posBrick(position.getX() + 150, position.getY());
     Platform platformBrick(posBrick, sizeBrickSprite);
     PlatformView platformViewBrick(brickSprite, platformBrick);
 
@@ -93,28 +99,26 @@ int main() {
 
         switch(directionCollision(playerView,platformViewBrick)) {
             case 1:
-                vector2f.y += 50.;
+                vector2f.y += 50.f;
                 looksRight = playerView.movePlayer(vector2f, looksRight);
                 break;
             case 2:
-                vector2f.y -= 50.;
+                vector2f.y -= 50.f;
                 looksRight = playerView.movePlayer(vector2f, looksRight);
                 break;
             case 3:
-                vector2f.x += 50.;
+                vector2f.x += 50.f;
                 looksRight = playerView.movePlayer(vector2f, looksRight);
                 break;
             case 4:
-                vector2f.x -= 50.;
+                vector2f.x -= 50.f;
                 looksRight = playerView.movePlayer(vector2f, looksRight);
                 break;
             case -1:
                 looksRight = playerView.movePlayer(vector2f, looksRight);
             default:
                 break;
-
         }
-
 
         // Clear screen
         app.clear();
