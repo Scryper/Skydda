@@ -7,9 +7,12 @@ PlayerView::PlayerView() {
     this->player = defaultPlayer;
 }
 
-PlayerView::PlayerView(sf::Sprite sprite, Player player) {
+PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right) {
     this->sprite = sprite;
     this->player = player;
+    this->up = up;
+    this->left = left;
+    this->right = right;
 }
 
 PlayerView::PlayerView(const PlayerView& other) {
@@ -51,4 +54,18 @@ bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::
     sprite.setPosition(newPosition.getX(), newPosition.getY());
 
     return looksRight;
+}
+
+sf::Vector2f PlayerView::inputPlayer(float deltaTime){
+     sf::Vector2f vector2f(0.f, 0.f);
+        if(sf::Keyboard::isKeyPressed(up)) {
+            vector2f.y += -deltaTime;
+        }
+        if(sf::Keyboard::isKeyPressed(left)) {
+            vector2f.x += -deltaTime;
+        }
+        if(sf::Keyboard::isKeyPressed(right)) {
+            vector2f.x += deltaTime;
+        }
+    return vector2f;
 }

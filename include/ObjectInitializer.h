@@ -16,7 +16,7 @@ PlatformView createPlatform(float sizeX, float sizeY, std::string pathToPlatform
 std::vector<PlatformView> createBorder(std::string pathToPlatform, sf::Texture *platformTexture);
 
 //creates the player
-PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture);
+PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right);
 
 
 #endif // OBJECTINITIALIZER_H

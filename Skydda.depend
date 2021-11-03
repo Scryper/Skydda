@@ -2165,7 +2165,7 @@
 1635947414 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
-1635961472 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
+1635963745 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	<vector>
@@ -2175,6 +2175,8 @@
 	"Collision.h"
 	"ObjectInitializer.h"
 	"MapView.h"
+	"HealthBar.h"
+	"HealthBarView.h"
 
 1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Graphics.hpp
 	<SFML/Window.hpp>
@@ -2617,7 +2619,7 @@
 	<vector>
 	<iostream>
 
-1635949964 /home/houdartf/Documents/GitHub/Skydda/include/PlayerView.h
+1635963761 /home/houdartf/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
 	"CoupleVectorTransformer.h"
 	<iostream>
@@ -2654,7 +2656,7 @@
 1635958989 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
+1635963778 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/Position.cpp
@@ -2711,7 +2713,7 @@
 1635947555 source:/home/florian/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
-1635952765 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
+1635963745 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
 	"SpriteInitializer.h"
 	"PlatformView.h"
 	"Platform.h"
@@ -2726,7 +2728,7 @@
 	"CoupleFloat.h"
 	"TextureLoader.h"
 
-1635961449 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
+1635963745 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
@@ -2781,4 +2783,17 @@
 
 1635965489 source:/home/damien/Documents/GitHub/Skydda/src/MapView.cpp
 	"MapView.h"
+
+1635962377 /home/houdartf/Documents/GitHub/Skydda/include/HealthBar.h
+	"Position.h"
+
+1635962377 /home/houdartf/Documents/GitHub/Skydda/include/HealthBarView.h
+	<SFML/Graphics.hpp>
+	"HealthBar.h"
+
+1635962377 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBar.cpp
+	"HealthBar.h"
+
+1635962377 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBarView.cpp
+	"HealthBarView.h"
 
