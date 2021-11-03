@@ -46,8 +46,8 @@ int main() {
 
     PlatformView platformViewBrick = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
-    Position p(position.getX() - 900,position.getY() -200);
-    PlatformView platformViewBrick2 = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", p, &textureBrick);
+    Position bottomPlatformPosition(position.getX() - 900, position.getY() -200);
+    PlatformView bottomPlatform = createPlatform(1.f, .3f, "resources/images/platform/platform_default.png", bottomPlatformPosition, &textureBrick);
 
     bool looksRight = true;
 	// Start the game loop
@@ -77,7 +77,6 @@ int main() {
 
         cout << "directionCollision : " << directionCollision(playerView,platformViewBrick) << endl;
 
-
         looksRight = playerView.movePlayer(vector2f, looksRight,directionCollision(playerView,platformViewBrick));
 
         if(playerView.getPlayer().getPosition().getX() < 0.f) {
@@ -99,7 +98,7 @@ int main() {
         app.draw(backgroundSprite);
         app.draw(playerView.getSprite());
         app.draw(platformViewBrick.getSprite());
-        app.draw(platformViewBrick2.getSprite());
+        app.draw(bottomPlatform.getSprite());
 
         // Update the window
         app.display();

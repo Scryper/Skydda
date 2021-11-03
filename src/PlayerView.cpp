@@ -39,13 +39,13 @@ Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, int collis
     return player.updatePosition(player.getPosition(), vectorToCouple(vectorDirection), collision);
 }
 
-
 bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, int collision) {
     // we swap the player's sprite if he is not looking the way he is going
     if((looksRight && vectorDirection.x < 0) || (!looksRight && vectorDirection.x > 0)) {
         sprite.scale(-1.f, 1.f);
         looksRight = !looksRight; // to know where he is looking
     }
+
     Position newPosition = computeNewPosition(vectorDirection, collision);
     player.setPosition(newPosition);
     sprite.setPosition(newPosition.getX(), newPosition.getY());

@@ -1,4 +1,3 @@
-
 #include "Movement.h"
 
 Movement::Movement() {
@@ -38,8 +37,8 @@ void Movement::setSpeed(CoupleFloat speed) {
 }
 void Movement::setAcceleration(CoupleFloat acceleration){
     //vertical acceleration is constant
-    CoupleFloat cf(acceleration.getX(),5.f);
-    this->acceleration = cf;
+    CoupleFloat couple(acceleration.getX(), 5.f);
+    this->acceleration = couple;
 }
 
 void Movement::stopX(){
@@ -51,7 +50,6 @@ void Movement::stopY(){
 }
 
 Position Movement::updatePosition(Position position, CoupleFloat direction, int collision) {
-
     // get the info about X movement
     float speedX = speed.getX();
     float directionX = direction.getX();
@@ -66,117 +64,99 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, int 
     float maxSpeedY = maxSpeed.getY();
     float accelerationY = acceleration.getY();
 
-
-    ///////////////////////////////////////
     ///////////// DIRECTION X /////////////
-    ///////////////////////////////////////
 
-    //si la direction X est nulle -> ralentir
-    if(directionX==0){
-
-         //si la vitesse est vers la droite et que (la vitesse - l'accélération) est positive
-         if(speedX > 0 && speedX - accelerationX >= 0) {
+    // if X direction = 0 -> slow down
+    if(directionX == 0){
+        // if speed goes towards right and (speed - acceleration) > 0
+        if(speedX > 0 && speedX - accelerationX >= 0) {
             speed.setX(speedX - accelerationX);
         }
-        else{
-            //si la vitesse est vers la droite et que la (vitesse - l'accélération) est négative
-            if(speedX > 0 && speedX - accelerationX <= 0) {
-                speed.setX(0);
-            }
+        // if speed goes towards right and (speed - acceleration) < 0
+        else if(speedX > 0 && speedX - accelerationX <= 0) {
+            speed.setX(0);
         }
 
-        //si la vitesse est vers la gauche et que (la vitesse - l'accélération) est négative
+        // if speed goes towards left and (speed - acceleration) < 0
         if(speedX < 0 && speedX - accelerationX < 0) {
             speed.setX(speedX + accelerationX);
         }
-        else{
-            //si la vitesse est vers la gauche et que la (vitesse - l'accélération) est positive
-            if(speedX < 0 && speedX - accelerationX > 0) {
-                speed.setX(0);
-            }
+        // if speed goes towards left and (speed - acceleration) > 0
+        else if(speedX < 0 && speedX - accelerationX > 0) {
+            speed.setX(0);
         }
-
     }
-    //la direction X n'est pas nulle
-    else{
-        //on vérifie qu'on va a gauche en étant a la vitesse max ou plus (en négatif)
+    // x direction != 0
+    else {
+        // we verify we go toxards left with negative max speed or more
         if(left && speedX<=-maxSpeedX) {
-            speed.setX(-maxSpeedX);
+            speed.setX(-maxSpeedX); // we can't have speed > maxSpeed
         }
-        //on vérifie qu'on va a droite en étant a la vitesse max ou plus (en positif
-        else if(right&&speedX>=maxSpeedX){
-            speed.setX(maxSpeedX);
+        // we verify we go towards right with positive maxSpeed or more
+        else if(right && speedX >= maxSpeedX){
+            speed.setX(maxSpeedX); // we can't have speed > maxSpeed
         }
-        //sinon si la vitesse max n'est pas atteinte, on incrémente la vitesse dans la direction donnée
-        else {
-            if(left) {
-                speed.setX(speedX - accelerationX);
-            }
-            else if(right) {
-                speed.setX(speedX + accelerationX);
-            }
+        // if the player is not moving at max speed, we increment the speed in the correct direction
+        else if(left) {
+            speed.setX(speedX - accelerationX);
+        }
+        else if(right) {
+            speed.setX(speedX + accelerationX);
         }
     }
 
-    ///////////////////////////////////////
     ///////////// DIRECTION Y /////////////
-    ///////////////////////////////////////
 
-
-    //si la direction Y est nulle -> gravité qui donne une vitesse verticale
-    if(directionY==0){
-        //si la vitesse est maximale
-        if(speedY>=maxSpeedY){
+    // if y direction = 0 -> gravity gives vertical speed
+    if(directionY == 0){
+        // if the player moves at max speed
+        if(speedY >= maxSpeedY){
             speed.setY(maxSpeedY);
         }
         else{
-            //si la vitesse n'est pas maximale on accélère vers le bas
+            // if not, we incremet vertical speed
             speed.setY(speedY + accelerationY);
         }
     }
-
-    else{
-        //la direction n'est pas nulle
-
-        //si la vitesseY = 0 , on lui donne une vitesse vers le haut de XXXX
-        //attention de bien vérifier qu'il y a une collision en dessous
-        if(speedY==0 && collision!=-1){
+    // y direction != 0
+    else {
+        // if y speed = 0, give speed towards top
+        // !! verify if there is a collision underneath
+        if(speedY == 0 && collision != -1){
             speed.setY(-20.f);
         }
-        else{
-            //si la vitesse est != 0 on ne peut pas re-sauter!!!!  il y a donc juste l'accélération normale
-            //si la vitesse est maximale
-            if(speedY>=maxSpeedY){
-                speed.setY(maxSpeedY);
-            }
-            else{
-                //si la vitesse n'est pas maximale on accélère vers le bas
-                speed.setY(speedY + accelerationY);
-            }
+        // if speed != 0 we can't jump again -> normal acceleration
+        // if the player moves with max speed
+        else if(speedY>=maxSpeedY){
+            speed.setY(maxSpeedY);
+        }
+        // if speed < max speed, we increment vertical speed towards bottom
+        else {
+            speed.setY(speedY + accelerationY);
         }
     }
 
     //on boucle sur la liste des int des collisions
     switch(collision){
-    case 1 :
-        if(speed.getY()<0)
-            speed.setY(0);
-        break;
-    case 2 :
-        if(speed.getY()>0)
-            speed.setY(0);
-        break;
+        case 1 :
+            if(speed.getY() < 0)
+                speed.setY(0);
+            break;
+        case 2 :
+            if(speed.getY() > 0)
+                speed.setY(0);
+            break;
 
-    case 3 :
-        if(speed.getX()<0)
-            speed.setX(0);
-        break;
-    case 4 :
-        if(speed.getX()>0)
-            speed.setX(0);
-        break;
-    default :
-        break;
+        case 3 :
+            if(speed.getX() < 0)
+                speed.setX(0);
+            break;
+        case 4 :
+            if(speed.getX() > 0)
+                speed.setX(0);
+            break;
+        default :
+            break;
     }
 
     position.setX(position.getX() + speed.getX());

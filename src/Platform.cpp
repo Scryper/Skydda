@@ -3,6 +3,7 @@
 Platform::Platform() {
    Position defaultPlatform;
    this->position = defaultPlatform;
+
    Size defaultSize;
    this->size_ = defaultSize;
 }
