@@ -50,7 +50,7 @@ int main() {
     sf::Texture textureBrick;
 
     //loading the first map
-    MapView map1(1,&textureBrick);
+    MapView map1(2,&textureBrick);
 
     //get all the platforms from the map
     vector<PlatformView> platforms = map1.getAllCollisions();

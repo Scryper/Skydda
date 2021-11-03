@@ -2,8 +2,7 @@
 
 MapView::MapView(int seed,sf::Texture *platformTexture)
 {
-    switch(seed){
-    case 1:
+    if(seed==1){
         border=createBorder("",platformTexture);
         Position p1(900,1000);
         PlatformView plat1 = createPlatform(5.5f, .3f, "", p1, platformTexture);
@@ -17,9 +16,21 @@ MapView::MapView(int seed,sf::Texture *platformTexture)
         platforms.push_back(plat2);
         platforms.push_back(plat3);
         platforms.push_back(plat4);
-        break;
+    }
+    if(seed==2){
+      border=createBorder("",platformTexture);
+        Position p1(900,1000);
+        PlatformView plat1 = createPlatform(5.5f, .3f, "", p1, platformTexture);
+        Position p2(400, 700);
+        PlatformView plat2 = createPlatform(.3f, .3f, "", p2, platformTexture);
+        Position p3(1400, 700);
+        PlatformView plat3 = createPlatform(.3f, .3f, "", p3, platformTexture);
+        platforms.push_back(plat1);
+        platforms.push_back(plat2);
+        platforms.push_back(plat3);
     }
 }
+
 
 MapView::~MapView()
 {
