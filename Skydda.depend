@@ -2054,7 +2054,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1635852275 source:/home/florian/Documents/GitHub/Skydda/src/Movement.cpp
+1635937684 source:/home/florian/Documents/GitHub/Skydda/src/Movement.cpp
 	"Movement.h"
 
 1635848956 /home/florian/Documents/GitHub/Skydda/include/Movement.h
@@ -2106,7 +2106,7 @@
 1634148388 source:/home/florian/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1635930144 source:/home/florian/Documents/GitHub/Skydda/main.cpp
+1635937171 source:/home/florian/Documents/GitHub/Skydda/main.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"TextureLoader.h"
@@ -2662,4 +2662,15 @@
 
 1635930198 shed changes
 	"Collision.h"
+
+1635937689 source:/home/florian/Documents/GitHub/Skydda/src/Initializer.cpp
+	"Initializer.h"
+
+1635937689 /home/florian/Documents/GitHub/Skydda/include/Initializer.h
+	<SFML/Graphics.hpp>
+	"TextureLoader.h"
+	"Player.h"
+	"PlayerView.h"
+	"Platform.h"
+	"PlatformView.h"
 

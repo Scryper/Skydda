@@ -1,23 +1,13 @@
 #include <SFML/Graphics.hpp>
-
 #include <iostream>
 
-#include "TextureLoader.h"
 #include "CoupleVectorTransformer.h"
-#include "Player.h"
 #include "PlayerView.h"
-#include "Platform.h"
 #include "PlatformView.h"
 #include "Collision.h"
+#include "Initializer.h"
 
 using namespace std;
-
-sf::Sprite initSprite(float sizeX, float sizeY, string pathToSprite, Position position, sf::Texture *texture) {
-    CoupleFloat couple(sizeX, sizeY);
-    Size sizeOfSprite(couple);
-    sf::Sprite sprite = loadTexture(pathToSprite, sizeOfSprite, position, *texture);
-    return sprite;
-}
 
 int main() {
     // Create the main window
@@ -40,34 +30,20 @@ int main() {
 
     // Initialize the player's position
     Position position(middleScreenX, middleScreenY);
-    // Initialize speed, velocity and movement
-    CoupleFloat velocity(.0f, .0f);
-    CoupleFloat acceleration(.5f, .0f);
-    CoupleFloat maxSpeed(10.f, 10.f);
 
-    Movement movement(velocity, acceleration, maxSpeed);
     // Load sprite of player
     sf::Texture texturePlayer;
-    sf::Sprite playerSprite = initSprite(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer);
-    // create player and his view
-    Player player("Scryper", 100, true, 100, position, movement);
-    PlayerView playerView(playerSprite, player);
+    PlayerView playerView = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer);
 
     // Load background sprite
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
-
-    CoupleFloat coupleBrickSprite(.3f, .3f);
-    Size sizeBrickSprite(coupleBrickSprite);
-
     position.setY(position.getY() + 350);
     sf::Texture textureBrick;
     sf::Sprite brickSprite = initSprite(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
-    Position posBrick(position.getY(), position.getY());
-    Platform platformBrick(posBrick, sizeBrickSprite);
-    PlatformView platformViewBrick(brickSprite, platformBrick);
+    PlatformView platformViewBrick = createPlatform(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
     bool looksRight = true;
 	// Start the game loop
@@ -126,7 +102,7 @@ int main() {
         // Draw the sprite
         app.draw(backgroundSprite);
         app.draw(playerView.getSprite());
-        app.draw(brickSprite);
+        app.draw(platformViewBrick.getSprite());
 
         // Update the window
         app.display();
