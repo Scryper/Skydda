@@ -50,7 +50,7 @@ void Movement::stopY(){
     this->speed.setY(0);
 }
 
-Position Movement::updatePosition(Position position, CoupleFloat direction) {
+Position Movement::updatePosition(Position position, CoupleFloat direction, int collision) {
 
     // get the info about X movement
     float speedX = speed.getX();
@@ -140,8 +140,8 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
 
         //si la vitesseY = 0 , on lui donne une vitesse vers le haut de XXXX
         //attention de bien vérifier qu'il y a une collision en dessous
-        if(speedY==0){
-            speed.setY(-10.f);
+        if(speedY==0 && collision!=-1){
+            speed.setY(-20.f);
         }
         else{
             //si la vitesse est != 0 on ne peut pas re-sauter!!!!  il y a donc juste l'accélération normale
@@ -156,6 +156,27 @@ Position Movement::updatePosition(Position position, CoupleFloat direction) {
         }
     }
 
+    switch(collision){
+    case 1 :
+        if(speed.getY()<0)
+            speed.setY(0);
+        break;
+    case 2 :
+        if(speed.getY()>0)
+            speed.setY(0);
+        break;
+
+    case 3 :
+        if(speed.getX()<0)
+            speed.setX(0);
+        break;
+    case 4 :
+        if(speed.getX()>0)
+            speed.setX(0);
+        break;
+    default :
+        break;
+    }
 
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());

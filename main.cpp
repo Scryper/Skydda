@@ -44,7 +44,7 @@ int main() {
     sf::Texture textureBrick;
     sf::Sprite brickSprite = initSprite(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
-    PlatformView platformViewBrick = createPlatform(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
+    PlatformView platformViewBrick = createPlatform(1.5f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
     bool looksRight = true;
 	// Start the game loop
@@ -74,28 +74,8 @@ int main() {
 
         cout << "directionCollision : " << directionCollision(playerView,platformViewBrick) << endl;
 
-        switch(directionCollision(playerView,platformViewBrick)) {
-            case 1:
-                //vector2f.y += 50.f;
-                //looksRight = playerView.movePlayer(vector2f, looksRight);
-                break;
-            case 2:
-                //vector2f.y -= 50.f;
-                //looksRight = playerView.movePlayer(vector2f, looksRight);
-                break;
-            case 3:
-                //vector2f.x += 50.f;
-                //looksRight = playerView.movePlayer(vector2f, looksRight);
-                break;
-            case 4:
-                //vector2f.x -= 50.f;
-                //looksRight = playerView.movePlayer(vector2f, looksRight);
-                break;
-            case -1:
-                looksRight = playerView.movePlayer(vector2f, looksRight);
-            default:
-                break;
-        }
+
+        looksRight = playerView.movePlayer(vector2f, looksRight,directionCollision(playerView,platformViewBrick));
 
         if(playerView.getPlayer().getPosition().getX() < 0.f) {
             playerView.stopX();

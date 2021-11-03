@@ -29,7 +29,7 @@ class Movement {
         void stopY();
 
 
-        Position updatePosition(Position position, CoupleFloat coupleFloat);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, int collision);
 };
 
 #endif // MOVEMENT_H

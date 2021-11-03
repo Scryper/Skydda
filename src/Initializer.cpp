@@ -27,8 +27,8 @@ PlatformView createPlatform(float sizeX, float sizeY, std::string pathToPlatform
 
 PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture) {
     CoupleFloat velocity(.0f, .0f);
-    CoupleFloat acceleration(.5f, .5f);
-    CoupleFloat maxSpeed(10.f, 10.f);
+    CoupleFloat acceleration(.5f, 1.f);
+    CoupleFloat maxSpeed(10.f, 20.f);
     Movement movement(velocity, acceleration, maxSpeed);
 
     CoupleFloat sizeCouple(sizeX, sizeY);

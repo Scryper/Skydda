@@ -29,7 +29,7 @@ class Player {
         void stopY();
 
         void setPosition(Position position);
-        Position updatePosition(Position position, CoupleFloat coupleFloat);
+        Position updatePosition(Position position, CoupleFloat coupleFloat,int collision);
 };
 
 #endif // PLAYER_H
