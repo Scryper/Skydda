@@ -10,6 +10,9 @@
 // creates the platform
 PlatformView createPlatform(float sizeX, float sizeY, std::string pathToPlatform, Position platformPosition, sf::Texture *platformTexture);
 
+// creates the top, left and right plateform
+PlatformView createBorder(float sizeX, float sizeY, std::string pathToPlatform, Position platformPosition, sf::Texture *platformTexture);
+
 //creates the player
 PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture);
 
