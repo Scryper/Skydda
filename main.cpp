@@ -61,20 +61,13 @@ int main() {
     vector<PlatformView> platforms = map1.getAllCollisions();
 
     // Create HealthBar
-    sf::RectangleShape healthBarIn;
-    sf::RectangleShape healthBarOut;
+    Position posHealthBar(50.f,50.f);
+    HealthBarView healthBarView = createHealthBar(playerView.getPlayer(),posHealthBar);
 
-    HealthBar healthBar(70.f, 100.f, 100.f);
-    HealthBarView healthBarView(&healthBar, healthBarIn, healthBarOut);
-
-    healthBarView.setPositionHealthBarIn(50.f,50.f);
-    healthBarView.setPositionHealthBarOut(50.f,50.f);
-
-    healthBarView.addColorToHealthBarIn();
-    healthBarView.addColorToHealthBarOut();
-
-    healthBarView.addSizeToHealthBarIn();
-    healthBarView.addSizeToHealthBarOut();
+    sf::Text namePlayer = healthBarView.createNamePlayer(playerView.getPlayer(),posHealthBar);
+    sf::Font font;
+    font.loadFromFile("resources/fonts/arial.ttf");
+    namePlayer.setFont(font);
 
     bool looksRight = true;
     bool looksRight2 = true;
@@ -104,6 +97,8 @@ int main() {
 
         app.draw(healthBarView.getHealthBarIn());
         app.draw(healthBarView.getHealthBarOut());
+
+        app.draw(namePlayer);
 
         // Update the window
         app.display();

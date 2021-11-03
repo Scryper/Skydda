@@ -6,6 +6,8 @@
 #include "Position.h"
 #include "Movement.h"
 
+using namespace std;
+
 /*This class represents a player.*/
 class Player {
     private:
@@ -24,6 +26,10 @@ class Player {
 
         Movement getMovement() const;
         Position getPosition() const;
+
+        double getHealth()const;
+        string getName()const;
+        void setHealth(double health);
 
         void stopX();
         void stopY();

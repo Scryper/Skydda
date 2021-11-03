@@ -31,10 +31,12 @@ sf::RectangleShape HealthBarView::getHealthBarOut() {
     return healthBarOut;
 }
 
-void HealthBarView::setPositionHealthBarIn(float x, float y) {
+void HealthBarView::setPositionHealthBarIn() {
+    float x=healthBar.getPosition().getX(), y=healthBar.getPosition().getY();
     healthBarIn.setPosition(x,y);
 }
-void HealthBarView::setPositionHealthBarOut(float x, float y) {
+void HealthBarView::setPositionHealthBarOut() {
+    float x=healthBar.getPosition().getX(), y=healthBar.getPosition().getY();
     healthBarOut.setPosition(x,y);
 }
 
@@ -54,4 +56,23 @@ void HealthBarView::addSizeToHealthBarIn(){
 
 void HealthBarView::addSizeToHealthBarOut(){
     healthBarOut.setSize(sf::Vector2f(healthBar.getLIFE_POINT_MAX()*3,20));
+}
+
+sf::Text HealthBarView::createNamePlayer(Player player, Position posHealthBar) {
+
+    sf::Text namePlayer;
+
+    Position posTextBar(posHealthBar.getX(),posHealthBar.getY()+30);
+//    loadFont(namePlayer, "resources/fonts/arial.ttf");
+//    sf::Font font;
+//    font.loadFromFile("resources/fonts/arial.ttf");
+//    namePlayer.setFont(font);
+    namePlayer.setString(player.getName());
+    namePlayer.setCharacterSize(24);
+    namePlayer.setFillColor(sf::Color::Black);
+    namePlayer.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    namePlayer.setPosition(posTextBar.getX(),posTextBar.getY());
+
+    return namePlayer;
+
 }

@@ -43,6 +43,18 @@ void Player::setPosition(Position position) {
     this->position = position;
 }
 
+void Player::setHealth(double health) {
+    this->health = health;
+}
+
+string Player::getName()const {
+    return name;
+}
+
+double Player::getHealth()const {
+    return health;
+}
+
 Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<int>> collisions) {
     return movement.updatePosition(position, direction, collisions);
 }

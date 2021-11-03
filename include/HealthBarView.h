@@ -2,6 +2,8 @@
 #define HEALTHBARVIEW_H
 #include <SFML/Graphics.hpp>
 #include "HealthBar.h"
+#include "Player.h"
+
 
 class HealthBarView {
     private:
@@ -20,14 +22,17 @@ class HealthBarView {
         sf::RectangleShape getHealthBarIn();
         sf::RectangleShape getHealthBarOut();
 
-        void setPositionHealthBarIn(float x, float y);
-        void setPositionHealthBarOut(float x, float y);
+
+        void setPositionHealthBarIn();
+        void setPositionHealthBarOut();
 
         void addColorToHealthBarIn();
         void addColorToHealthBarOut();
 
         void addSizeToHealthBarIn();
         void addSizeToHealthBarOut();
+
+        sf::Text createNamePlayer(Player player, Position posHealthBar);
 
 
 };

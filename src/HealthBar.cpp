@@ -10,6 +10,12 @@ HealthBar::HealthBar(float lifePoint, float posX, float posY)
 {
     this->lifePoint = lifePoint;
     Position position(posX, posY);
+    this->position = position;
+}
+
+HealthBar::HealthBar(float lifePoint, Position position){
+    this->lifePoint = lifePoint;
+    this->position = position;
 }
 
 HealthBar::~HealthBar()

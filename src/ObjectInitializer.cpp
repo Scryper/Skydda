@@ -49,3 +49,24 @@ PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Posi
 
     return playerView;
 }
+
+//Creates the healthBar
+HealthBarView createHealthBar(Player player, Position posHealthBar) {
+    sf::RectangleShape healthBarIn;
+    sf::RectangleShape healthBarOut;
+
+    HealthBar healthBar(player.getHealth(), posHealthBar);
+    HealthBarView healthBarView(&healthBar, healthBarIn, healthBarOut);
+
+    healthBarView.setPositionHealthBarIn();
+    healthBarView.setPositionHealthBarOut();
+
+    healthBarView.addColorToHealthBarIn();
+    healthBarView.addColorToHealthBarOut();
+
+    healthBarView.addSizeToHealthBarIn();
+    healthBarView.addSizeToHealthBarOut();
+
+    return healthBarView;
+
+}

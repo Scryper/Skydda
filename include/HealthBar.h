@@ -12,6 +12,7 @@ class HealthBar
     public:
         HealthBar();
         HealthBar(float lifePoint, float posX, float posY);
+        HealthBar(float lifePoint, Position position);
         virtual ~HealthBar();
         HealthBar(const HealthBar& other);
 
