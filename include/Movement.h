@@ -25,6 +25,9 @@ class Movement {
 
         void setSpeed(CoupleFloat speed);
         void setAcceleration(CoupleFloat acceleration);
+        void stopX();
+        void stopY();
+
 
         Position updatePosition(Position position, CoupleFloat coupleFloat);
 };

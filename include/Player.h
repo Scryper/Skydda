@@ -25,6 +25,9 @@ class Player {
         Movement getMovement() const;
         Position getPosition() const;
 
+        void stopX();
+        void stopY();
+
         void setPosition(Position position);
         Position updatePosition(Position position, CoupleFloat coupleFloat);
 };

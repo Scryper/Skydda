@@ -27,7 +27,13 @@ sf::Sprite PlayerView::getSprite() const {
     return sprite;
 }
 
+void PlayerView::stopX(){
+    this->player.stopX();
+}
 
+void PlayerView::stopY(){
+    this->player.stopY();
+}
 
 bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight) {
     // we swap the player's sprite if he is not looking the way he is going

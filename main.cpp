@@ -40,6 +40,7 @@ int main() {
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
     position.setY(position.getY() + 350);
+    position.setX(position.getX() + 300);
     sf::Texture textureBrick;
     sf::Sprite brickSprite = initSprite(.3f, .3f, "resources/images/platform/platform_default.png", position, &textureBrick);
 
@@ -75,25 +76,37 @@ int main() {
 
         switch(directionCollision(playerView,platformViewBrick)) {
             case 1:
-                vector2f.y += 50.f;
-                looksRight = playerView.movePlayer(vector2f, looksRight);
+                //vector2f.y += 50.f;
+                //looksRight = playerView.movePlayer(vector2f, looksRight);
                 break;
             case 2:
-                vector2f.y -= 50.f;
-                looksRight = playerView.movePlayer(vector2f, looksRight);
+                //vector2f.y -= 50.f;
+                //looksRight = playerView.movePlayer(vector2f, looksRight);
                 break;
             case 3:
-                vector2f.x += 50.f;
-                looksRight = playerView.movePlayer(vector2f, looksRight);
+                //vector2f.x += 50.f;
+                //looksRight = playerView.movePlayer(vector2f, looksRight);
                 break;
             case 4:
-                vector2f.x -= 50.f;
-                looksRight = playerView.movePlayer(vector2f, looksRight);
+                //vector2f.x -= 50.f;
+                //looksRight = playerView.movePlayer(vector2f, looksRight);
                 break;
             case -1:
                 looksRight = playerView.movePlayer(vector2f, looksRight);
             default:
                 break;
+        }
+
+        if(playerView.getPlayer().getPosition().getX() < 0.f) {
+            playerView.stopX();
+        }
+
+        if(playerView.getPlayer().getPosition().getX() > 1920.f) {
+            playerView.stopX();
+        }
+
+        if(playerView.getPlayer().getPosition().getY() > 1080.f) {
+            playerView.stopY();
         }
 
         // Clear screen

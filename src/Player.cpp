@@ -46,3 +46,11 @@ void Player::setPosition(Position position) {
 Position Player::updatePosition(Position position, CoupleFloat direction) {
     return movement.updatePosition(position, direction);
 }
+
+void Player::stopX(){
+    this->movement.stopX();
+}
+
+void Player::stopY(){
+    this->movement.stopY();
+}

@@ -42,6 +42,14 @@ void Movement::setAcceleration(CoupleFloat acceleration){
     this->acceleration = cf;
 }
 
+void Movement::stopX(){
+    this->speed.setX(0);
+}
+
+void Movement::stopY(){
+    this->speed.setY(0);
+}
+
 Position Movement::updatePosition(Position position, CoupleFloat direction) {
 
     // get the info about X movement

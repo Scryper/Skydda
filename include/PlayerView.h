@@ -21,6 +21,9 @@ class PlayerView {
         Player getPlayer() const;
         sf::Sprite getSprite() const;
 
+        void stopX();
+        void stopY();
+
         bool movePlayer(sf::Vector2f vectorDirection, bool looksRight);
 };
 
