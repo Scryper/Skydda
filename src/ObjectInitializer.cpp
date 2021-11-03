@@ -34,8 +34,8 @@ std::vector<PlatformView> createBorder(std::string pathToPlatform, sf::Texture *
 //creates the player
 PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right) {
     CoupleFloat velocity(.0f, .0f);
-    CoupleFloat acceleration(.5f, 1.f);
-    CoupleFloat maxSpeed(10.f, 20.f);
+    CoupleFloat acceleration(.8f, 1.f);
+    CoupleFloat maxSpeed(14.f, 20.f);
     float jumpHeight = 25.f;
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
