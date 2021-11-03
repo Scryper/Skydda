@@ -86,7 +86,7 @@ int main() {
 
         float SIZEDEMIPLAYER = playerView.getSprite().getGlobalBounds().width/2;
 
-        if(playerView.getPlayer().getPosition().getX() + SIZEDEMIPLAYER < 0.f) {
+        if(playerView.getPlayer().getPosition().getX() - SIZEDEMIPLAYER < 0.f) {
             playerView.stopX();
         }
 

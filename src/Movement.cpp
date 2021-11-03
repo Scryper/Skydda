@@ -64,6 +64,10 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     float maxSpeedY = maxSpeed.getY();
     float accelerationY = acceleration.getY();
 
+    bool zeroX = false;
+    bool zeroY = false;
+
+
     ///////////// DIRECTION X /////////////
 
     // if X direction = 0 -> slow down
@@ -122,7 +126,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     else {
         // if y speed = 0, give speed towards top
         // !! verify if there is a collision underneath
-        if(speedY == 0 /*&& collisions != -1*/){
+        if(speedY == 0 && zeroY==true){
             speed.setY(-20.f);
         }
         // if speed != 0 we can't jump again -> normal acceleration
@@ -135,33 +139,43 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
             speed.setY(speedY + accelerationY);
         }
     }
-    /*
-    //on boucle sur la liste des int des collisions
-    switch(collisions){
+
+        for(auto& i : collisions){
+        switch(i){
         case 1 :
             if(speed.getY() < 0)
-                speed.setY(0);
+                zeroY=true;
             break;
         case 2 :
-            if(speed.getY() > 0)
-                speed.setY(0);
+            if(directionY != 0 && speedY == 0){
+                speed.setY(-20.f);
+            }
+            else{
+                if(speed.getY() > 0)
+                    zeroY=true;
+            }
+
             break;
 
         case 3 :
             if(speed.getX() < 0)
-                speed.setX(0);
+                zeroX=true;
             break;
         case 4 :
             if(speed.getX() > 0)
-                speed.setX(0);
+                zeroX=true;
             break;
         default :
             break;
+        }
     }
-*/
+
+    if(zeroX==true)
+        speed.setX(0);
+    if(zeroY==true)
+        speed.setY(0);
+
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());
-    std::cout<< "speed x = " << speed.getX()<<std::endl;
-
     return position;
 }
