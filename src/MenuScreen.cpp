@@ -7,6 +7,8 @@ int MenuScreen::run(sf::RenderWindow &app) {
     int middleScreenY = app.getSize().y / 2.;
 
     Position position(middleScreenX, middleScreenY);
+    Position positionText(middleScreenX-75, middleScreenY-12);
+
 
     /// Load background image
     sf::Texture textureBackground;
@@ -17,19 +19,21 @@ int MenuScreen::run(sf::RenderWindow &app) {
     sf::Texture textureButton; // Button texture
     sf::Sprite buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/button/button.png", position, &textureButton);
     // Text of buttonChooseCharacters
-    sf::Text textChooseCharacters = TextInitializer::createText("Play", position);
+    sf::Text textChooseCharacters = TextInitializer::createText("Play", positionText);
 
     /// OptionScreen button
     position.setY(position.getY() + 100);
+    positionText.setY(positionText.getY() + 100);
     sf::Sprite buttonOptions = initSprite(1.f, 1.f, position, &textureButton);
     // Text of buttonOptions
-    sf::Text textOptions = TextInitializer::createText("Options", position);
+    sf::Text textOptions = TextInitializer::createText("Options", positionText);
 
     /// Quit button
     position.setY(position.getY() + 100);
+    positionText.setY(positionText.getY() + 100);
     sf::Sprite buttonQuit = initSprite(1.f, 1.f, position, &textureButton);
     // Text of buttonQuit
-    sf::Text textQuit = TextInitializer::createText("Quit", position);
+    sf::Text textQuit = TextInitializer::createText("Quit", positionText);
     textQuit.setFillColor(TextInitializer::betterRed);
 
     /// Font of texts
