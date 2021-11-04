@@ -1,7 +1,5 @@
 #include "PlayerView.h"
 #include "Collision.h"
-#include "Animate.h"
-#include "TextureManager.h"
 
 PlayerView::PlayerView() {
     sf::Sprite defaultSprite;
