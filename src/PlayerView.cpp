@@ -101,7 +101,7 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
             //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
             //la direction de l'attaque n'est pas encore gérée
             std::vector<std::vector<int>> collision = directionCollisionPlayers(*this,p2);
-            if(collision[0][0]>0){
+            if(collision.size()>0 && collision[0][0]>0){
                 std::cout<<"attaké  "<< collision[0][0] <<endl;
                 attack(p2);
 
