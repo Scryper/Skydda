@@ -20,18 +20,18 @@ Platform::Platform(const Platform& other) {
     this->size_=other.size_;
 }
 
-Position Platform::getPosition() const{
+Position Platform::getPosition() const {
     return position;
 }
 
-Size Platform::getSize() const{
+Size Platform::getSize() const {
     return size_;
 }
 
-void Platform::setPosition(Position position){
+void Platform::setPosition(Position position) {
     this->position = position;
 }
 
-void Platform::setSize(Size size_){
+void Platform::setSize(Size size_) {
     this->size_ = size_;
 }

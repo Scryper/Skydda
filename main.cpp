@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
 
@@ -25,6 +25,12 @@ int main() {
         sf::Style::Fullscreen
     );
     app.setFramerateLimit(60);
+
+    sf::Music music;
+    if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
+        cout << "Music was not found" << endl;
+    }
+    music.play();
 
     int middleScreenX = app.getSize().x / 2.;
     int middleScreenY = app.getSize().y / 2.;
@@ -55,19 +61,24 @@ int main() {
     sf::Texture textureBrick;
 
     //loading the first map
-    MapView map1(2,&textureBrick);
+    MapView map1(2, &textureBrick);
 
     //get all the platforms from the map
     vector<PlatformView> platforms = map1.getAllCollisions();
 
     // Create HealthBar
-    Position posHealthBar(50.f,50.f);
-    HealthBarView healthBarView = createHealthBar(playerView.getPlayer(),posHealthBar);
+    Position posHealthBar(50.f, 50.f);
+    HealthBarView healthBarView = createHealthBar(playerView.getPlayer(), posHealthBar);
 
-    sf::Text namePlayer = healthBarView.createNamePlayer(playerView.getPlayer(),posHealthBar);
+    sf::Text namePlayer = healthBarView.createNamePlayer(playerView.getPlayer(), posHealthBar);
     sf::Font font;
     font.loadFromFile("resources/fonts/arial.ttf");
     namePlayer.setFont(font);
+
+    vector<PlatformView> platforms;
+    platforms.push_back(platformViewBrick);
+    platforms.push_back(bottomPlatform);
+
 
     bool looksRight = true;
     bool looksRight2 = true;
@@ -81,8 +92,16 @@ int main() {
             if (event.type == sf::Event::Closed) app.close();
         }
 
-        looksRight = playerView.movePlayer(playerView.inputPlayer(deltaTime), looksRight, directionCollisions(playerView,platforms));
-        looksRight2 = playerView2.movePlayer(playerView2.inputPlayer(deltaTime), looksRight2, directionCollisions(playerView2,platforms));
+        looksRight = playerView.movePlayer(
+                                    playerView.inputPlayer(deltaTime),
+                                    looksRight,
+                                    directionCollisions(playerView,platforms)
+                                );
+        looksRight2 = playerView2.movePlayer(
+                                    playerView2.inputPlayer(deltaTime),
+                                    looksRight2,
+                                    directionCollisions(playerView2,platforms)
+                                );
 
         // Clear screen
         app.clear();
@@ -91,6 +110,7 @@ int main() {
         app.draw(backgroundSprite);
         app.draw(playerView.getSprite());
         app.draw(playerView2.getSprite());
+
         for(auto i : map1.getPlatforms()){
             app.draw(i.getSprite());
         }

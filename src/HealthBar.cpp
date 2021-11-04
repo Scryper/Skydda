@@ -1,13 +1,9 @@
 #include "HealthBar.h"
 using namespace std;
 
-HealthBar::HealthBar()
-{
-    //ctor
-}
+HealthBar::HealthBar() { }
 
-HealthBar::HealthBar(float lifePoint, float posX, float posY)
-{
+HealthBar::HealthBar(float lifePoint, float posX, float posY) {
     this->lifePoint = lifePoint;
     Position position(posX, posY);
     this->position = position;
@@ -18,15 +14,9 @@ HealthBar::HealthBar(float lifePoint, Position position){
     this->position = position;
 }
 
-HealthBar::~HealthBar()
-{
-    //dtor
-}
+HealthBar::~HealthBar() { }
 
-HealthBar::HealthBar(const HealthBar& other)
-{
-    //copy ctor
-}
+HealthBar::HealthBar(const HealthBar& other) { }
 
 float HealthBar::getLifePoint(){
     return lifePoint;

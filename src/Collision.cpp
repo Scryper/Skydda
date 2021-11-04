@@ -61,7 +61,7 @@ std::vector<std::vector<int>> directionCollisions(PlayerView player, std::vector
 
     std::vector <std::vector<int>> test;
     for(auto i : platforms){
-        test.push_back(directionCollision(player,i));
+        test.push_back(directionCollision(player, i));
     }
     return test;
 }

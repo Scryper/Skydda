@@ -132,12 +132,12 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     else {
         // if y speed = 0, give speed towards top
         // !! verify if there is a collision underneath
-        if(speedY == 0 && zeroY==true){
+        if(speedY == 0 && zeroY == true){
             speed.setY(-jumpHeight);
         }
         // if speed != 0 we can't jump again -> normal acceleration
         // if the player moves with max speed
-        else if(speedY>=maxSpeedY){
+        else if(speedY >= maxSpeedY){
             speed.setY(maxSpeedY);
         }
         // if speed < max speed, we increment vertical speed towards bottom
@@ -146,46 +146,42 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
         }
     }
 
-        for(auto& i : collisions){
+    for(auto& i : collisions){
         switch(i[0]){
-        case 1 :
-            if(speed.getY() < 0){
-                zeroY=true;
-                coll=i;
-            }
-
-            break;
-        case 2 :
-            if(directionY != 0 && speedY == 0){
-                speed.setY(-jumpHeight);
-            }
-            else{
-                if(speed.getY() > 0){
-                    coll=i;
-                    zeroY=true;
+            case 1 :
+                if(speed.getY() < 0){
+                    zeroY = true;
+                    coll = i;
                 }
-            }
-
-            break;
-
-        case 3 :
-            if(speed.getX() < 0)
-                zeroX=true;
-            break;
-        case 4 :
-            if(speed.getX() > 0)
-                zeroX=true;
-            break;
-        default :
-            break;
+                break;
+            case 2 :
+                if(directionY != 0 && speedY == 0){
+                    speed.setY(-jumpHeight);
+                }
+                else if(speed.getY() > 0){
+                        coll = i;
+                        zeroY = true;
+                    }
+                }
+                break;
+            case 3 :
+                if(speed.getX() < 0)
+                    zeroX = true;
+                break;
+            case 4 :
+                if(speed.getX() > 0)
+                    zeroX = true;
+                break;
+            default :
+                break;
         }
     }
 
-    if(zeroX==true){
+    if(zeroX == true){
         speed.setX(0);
     }
 
-    if(zeroY==true){
+    if(zeroY == true){
         speed.setY(0);
         position.setY(coll[1]);
     }

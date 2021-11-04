@@ -2,9 +2,7 @@
 
 using namespace std;
 
-HealthBarView::HealthBarView() {
-    //ctor
-}
+HealthBarView::HealthBarView() { }
 
 HealthBarView::HealthBarView(HealthBar *healthBar, sf::RectangleShape healthBarIn, sf::RectangleShape healthBarOut) {
     this->healthBar = *healthBar;
@@ -12,13 +10,9 @@ HealthBarView::HealthBarView(HealthBar *healthBar, sf::RectangleShape healthBarI
     this->healthBarOut = healthBarOut;
 }
 
-HealthBarView::~HealthBarView() {
-    //dtor
-}
+HealthBarView::~HealthBarView() { }
 
-HealthBarView::HealthBarView(const HealthBarView& other) {
-    //copy ctor
-}
+HealthBarView::HealthBarView(const HealthBarView& other) { }
 
 HealthBar HealthBarView::getHealthBar() {
     return healthBar;
@@ -32,12 +26,14 @@ sf::RectangleShape HealthBarView::getHealthBarOut() {
 }
 
 void HealthBarView::setPositionHealthBarIn() {
-    float x=healthBar.getPosition().getX(), y=healthBar.getPosition().getY();
-    healthBarIn.setPosition(x,y);
+    float x = healthBar.getPosition().getX()
+    float y = healthBar.getPosition().getY();
+    healthBarIn.setPosition(x, y);
 }
 void HealthBarView::setPositionHealthBarOut() {
-    float x=healthBar.getPosition().getX(), y=healthBar.getPosition().getY();
-    healthBarOut.setPosition(x,y);
+    float x = healthBar.getPosition().getX()
+    float y = healthBar.getPosition().getY();
+    healthBarOut.setPosition(x, y);
 }
 
 void HealthBarView::addColorToHealthBarIn() {
@@ -51,18 +47,17 @@ void HealthBarView::addColorToHealthBarOut() {
 }
 
 void HealthBarView::addSizeToHealthBarIn(){
-    healthBarIn.setSize(sf::Vector2f(healthBar.getLifePoint()*3,19));
+    healthBarIn.setSize(sf::Vector2f(healthBar.getLifePoint() * 3,19));
 }
 
 void HealthBarView::addSizeToHealthBarOut(){
-    healthBarOut.setSize(sf::Vector2f(healthBar.getLIFE_POINT_MAX()*3,20));
+    healthBarOut.setSize(sf::Vector2f(healthBar.getLIFE_POINT_MAX() * 3,20));
 }
 
 sf::Text HealthBarView::createNamePlayer(Player player, Position posHealthBar) {
-
     sf::Text namePlayer;
 
-    Position posTextBar(posHealthBar.getX(),posHealthBar.getY()+30);
+    Position posTextBar(posHealthBar.getX(),posHealthBar.getY() + 30);
 //    loadFont(namePlayer, "resources/fonts/arial.ttf");
 //    sf::Font font;
 //    font.loadFromFile("resources/fonts/arial.ttf");
@@ -74,5 +69,4 @@ sf::Text HealthBarView::createNamePlayer(Player player, Position posHealthBar) {
     namePlayer.setPosition(posTextBar.getX(),posTextBar.getY());
 
     return namePlayer;
-
 }

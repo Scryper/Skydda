@@ -16,19 +16,21 @@ PlatformView createPlatform(float sizeX, float sizeY, std::string pathToPlatform
 
 //creates the border
 std::vector<PlatformView> createBorder(std::string pathToPlatform, sf::Texture *platformTexture){
-    Position top(960, -35);
-    PlatformView topP = createPlatform(2.3f, .3f, "resources/images/platform/platform_default.png", top, platformTexture);
+    Position topPosition(960, -35);
+    PlatformView topPlatform = createPlatform(2.3f, .3f, "resources/images/platform/platform_default.png", topPosition, platformTexture);
+
     Position leftPosition(-40, 540);
-    PlatformView leftP = createPlatform(.1f, 4.5f, "resources/images/platform/platform_default.png", leftPosition, platformTexture);
+    PlatformView leftPlatform = createPlatform(.1f, 4.5f, "resources/images/platform/platform_default.png", leftPosition, platformTexture);
+
     Position rigthPosition(1960, 540);
-    PlatformView rigthP = createPlatform(.1f, 4.5f, "resources/images/platform/platform_default.png", rigthPosition, platformTexture);
+    PlatformView rigthPlatform = createPlatform(.1f, 4.5f, "resources/images/platform/platform_default.png", rigthPosition, platformTexture);
 
-    std::vector<PlatformView> vect;
-    vect.push_back(topP);
-    vect.push_back(leftP);
-    vect.push_back(rigthP);
+    std::vector<PlatformView> platformViews;
+    platformViews.push_back(topPlatform);
+    platformViews.push_back(leftPlatform);
+    platformViews.push_back(rigthPlatform);
 
-    return vect;
+    return platformViews;
 }
 
 //creates the player
@@ -68,5 +70,4 @@ HealthBarView createHealthBar(Player player, Position posHealthBar) {
     healthBarView.addSizeToHealthBarOut();
 
     return healthBarView;
-
 }
