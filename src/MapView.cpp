@@ -1,20 +1,20 @@
 #include "MapView.h"
 
-MapView::MapView(int seed, sf::Texture *platformTexture) {
+MapView::MapView(int seed, sf::Texture *platformTexture, string path) {
     if(seed == 1) {
-        border = createBorder("", platformTexture);
+        border = createBorder(path, platformTexture);
 
         Position firstPosition(900, 1000);
-        PlatformView firstPlatform = createPlatform(5.5f, .3f, "", firstPosition, platformTexture);
+        PlatformView firstPlatform = createPlatform(5.5f, .3f, path, firstPosition, platformTexture);
 
         Position secondPosition(900, 200);
-        PlatformView secondPlatform = createPlatform(1.f, .3f, "", secondPosition, platformTexture);
+        PlatformView secondPlatform = createPlatform(1.f, .3f, path, secondPosition, platformTexture);
 
         Position thirdPosition(1400, 700);
-        PlatformView thirdPlatform = createPlatform(.3f, .3f, "", thirdPosition, platformTexture);
+        PlatformView thirdPlatform = createPlatform(.3f, .3f, path, thirdPosition, platformTexture);
 
         Position fourthPosition(1800, 500);
-        PlatformView fourthPlatform = createPlatform(.2f, .3f, "", fourthPosition, platformTexture);
+        PlatformView fourthPlatform = createPlatform(.2f, .3f, path, fourthPosition, platformTexture);
 
         platforms.push_back(firstPlatform);
         platforms.push_back(secondPlatform);
@@ -22,16 +22,16 @@ MapView::MapView(int seed, sf::Texture *platformTexture) {
         platforms.push_back(fourthPlatform);
     }
     if(seed == 2) {
-        border = createBorder("", platformTexture);
+        border = createBorder(path, platformTexture);
 
         Position firstPosition(900,1000);
-        PlatformView firstPlatform = createPlatform(5.5f, .3f, "", firstPosition, platformTexture);
+        PlatformView firstPlatform = createPlatform(5.5f, .3f, path, firstPosition, platformTexture);
 
         Position secondPosition(400, 700);
-        PlatformView secondPlatform = createPlatform(.3f, .3f, "", secondPosition, platformTexture);
+        PlatformView secondPlatform = createPlatform(.3f, .3f, path, secondPosition, platformTexture);
 
         Position thirdPosition(1400, 700);
-        PlatformView thirdPlatform = createPlatform(.3f, .3f, "", thirdPosition, platformTexture);
+        PlatformView thirdPlatform = createPlatform(.3f, .3f, path, thirdPosition, platformTexture);
 
         platforms.push_back(firstPlatform);
         platforms.push_back(secondPlatform);

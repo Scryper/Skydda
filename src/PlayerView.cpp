@@ -62,8 +62,6 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
             vector2f.x += deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(attackKey)){
-
-
             //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
             //la direction de l'attaque n'est pas encore gérée
             std::vector<int> collision = directionCollisionPlayers(*this,p2);
@@ -94,8 +92,6 @@ void PlayerView::attack(PlayerView &playerAttacked){
     else{
         playerAttacked.player.setHealth(0.f);
     }
-
-
 
     //delai????
 }
