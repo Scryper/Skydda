@@ -5,5 +5,6 @@
 
 #include "MenuScreen.h"
 #include "GameScreen.h"
+#include "OptionScreen.h"
 
 #endif // SCREENINCLUDER_H

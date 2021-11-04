@@ -12,9 +12,6 @@
 
 class GameScreen : public Screen {
     public:
-        GameScreen();
-        virtual ~GameScreen();
-
         virtual int run(sf::RenderWindow &app);
 };
 

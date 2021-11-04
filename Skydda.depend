@@ -2112,20 +2112,16 @@
 1634148388 source:/home/florian/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1636028770 source:/home/florian/Documents/GitHub/Skydda/main.cpp
-	<SFML/Audio.hpp>
-	<iostream>
+1636035774 source:/home/florian/Documents/GitHub/Skydda/main.cpp
 	<vector>
 	"ScreenIncluder.h"
 
-1634152047 /home/florian/Documents/GitHub/Skydda/include/TextureLoader.h
+1636039082 /home/florian/Documents/GitHub/Skydda/include/TextureLoader.h
 	<SFML/Graphics.hpp>
 	<string>
 	<iostream>
-	"Size.h"
-	"Position.h"
 
-1635094514 source:/home/florian/Documents/GitHub/Skydda/src/TextureLoader.cpp
+1636039075 source:/home/florian/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
 1636023190 /home/damien/Documents/GitHub/Skydda/include/TextureLoader.h
@@ -2704,7 +2700,7 @@
 	"HealthBarView.h"
 	<vector>
 
-1635947977 /home/florian/Documents/GitHub/Skydda/include/SpriteInitializer.h
+1636039158 /home/florian/Documents/GitHub/Skydda/include/SpriteInitializer.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 	"Size.h"
@@ -2804,7 +2800,7 @@
 
 1635962377 View.h"
 
-1635947989 source:/home/florian/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
+1636039272 source:/home/florian/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
 	"SpriteInitializer.h"
 
 1635948147 source:/home/florian/Documents/GitHub/Skydda/src/MusicInitializer.cpp
@@ -3175,10 +3171,10 @@
 	<vector>
 	<iostream>
 
-1636028064 source:/home/florian/Documents/GitHub/Skydda/src/GameScreen.cpp
+1636041492 source:/home/florian/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
-1636026815 /home/florian/Documents/GitHub/Skydda/include/GameScreen.h
+1636037586 /home/florian/Documents/GitHub/Skydda/include/GameScreen.h
 	"Screen.h"
 	"PlayerView.h"
 	"PlatformView.h"
@@ -3188,15 +3184,16 @@
 	"HealthBar.h"
 	"HealthBarView.h"
 
-1636025743 /home/florian/Documents/GitHub/Skydda/include/Screen.h
+1636039703 /home/florian/Documents/GitHub/Skydda/include/Screen.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 	"SpriteInitializer.h"
+	"TextInitializer.h"
 
-1636026345 source:/home/florian/Documents/GitHub/Skydda/src/MenuScreen.cpp
+1636041114 source:/home/florian/Documents/GitHub/Skydda/src/MenuScreen.cpp
 	"MenuScreen.h"
 
-1636026377 /home/florian/Documents/GitHub/Skydda/include/MenuScreen.h
+1636037488 /home/florian/Documents/GitHub/Skydda/include/MenuScreen.h
 	"Screen.h"
 
 1636024753 source:/home/florian/Documents/GitHub/Skydda/src/Screen.cpp
@@ -3209,4 +3206,17 @@
 	"Screen.h"
 	"MenuScreen.h"
 	"GameScreen.h"
+
+1636037848 source:/home/florian/Documents/GitHub/Skydda/src/OptionScreen.cpp
+	"OptionScreen.h"
+
+1636037553 /home/florian/Documents/GitHub/Skydda/include/OptionScreen.h
+	"Screen.h"
+
+1636040078 /home/florian/Documents/GitHub/Skydda/include/TextInitializer.h
+	<SFML/Graphics.hpp>
+	"Position.h"
+
+1636041164 source:/home/florian/Documents/GitHub/Skydda/src/TextInitializer.cpp
+	"TextInitializer.h"
 

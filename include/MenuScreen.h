@@ -5,9 +5,6 @@
 
 class MenuScreen : public Screen {
     public:
-        MenuScreen();
-        virtual ~MenuScreen();
-
         virtual int run(sf::RenderWindow &app);
 };
 

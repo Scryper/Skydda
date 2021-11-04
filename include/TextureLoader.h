@@ -5,9 +5,6 @@
 #include <string>
 #include <iostream>
 
-#include "Size.h"
-#include "Position.h"
-
-sf::Sprite loadTexture(std::string path, Size size_, Position position, sf::Texture& texture);
+sf::Sprite loadTexture(std::string path, sf::Texture& texture);
 
 #endif // TEXTURELOADER_H

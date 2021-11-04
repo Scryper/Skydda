@@ -1,5 +1,4 @@
-#include <SFML/Audio.hpp>
-#include <iostream>
+//#include <SFML/Audio.hpp>
 #include <vector>
 
 #include "ScreenIncluder.h"
@@ -27,11 +26,15 @@ int main() {
     std::vector<Screen*> screens;
 	int screen = 0;
 
-	//Screens preparations
+	/// Screens preparations
 	MenuScreen menuScreen;
 	screens.push_back(&menuScreen);
+
 	GameScreen gameScreen;
 	screens.push_back(&gameScreen);
+
+	OptionScreen optionScreen;
+	screens.push_back(&optionScreen);
 
 	//Main loop
 	while (screen >= 0) {

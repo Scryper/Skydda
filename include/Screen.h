@@ -5,6 +5,7 @@
 
 #include "Position.h"
 #include "SpriteInitializer.h"
+#include "TextInitializer.h"
 
 class Screen {
     public:

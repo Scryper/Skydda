@@ -8,10 +8,15 @@
 #include "CoupleFloat.h"
 #include "TextureLoader.h"
 
+sf::Sprite setSpriteOptions(sf::Sprite *sprite, Size size_, Position position);
+
 // Initialize the sprite with created sizeCouple
 sf::Sprite initSprite(Size sizeOfSprite, std::string pathToSprite, Position spritePosition, sf::Texture *spriteTexture);
 
 // Initialize the sprite and creates itself the sizeCouple
 sf::Sprite initSprite(float sizeX, float sizeY, std::string pathToSprite, Position spritePosition, sf::Texture *spriteTexture);
+
+// Initialize a sprite which has a texture already loaded
+sf::Sprite initSprite(float sizeX, float sizeY, Position spritePosition, sf::Texture *spriteTexture);
 
 #endif // SPRITEINITIALIZER_H

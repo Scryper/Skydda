@@ -1,8 +1,19 @@
 #include "SpriteInitializer.h"
 
+sf::Sprite setSpriteOptions(sf::Sprite *sprite, Size size_, Position position) {
+    sprite->setScale(size_.getFactor().getX(), size_.getFactor().getY());
+
+    // set the origin of the image to its center
+    sprite->setOrigin(sprite->getTexture()->getSize().x / 2, sprite->getTexture()->getSize().y / 2);
+    sprite->setPosition(position.getX(), position.getY());
+
+    return *sprite;
+}
+
 // Initialize the sprite with created sizeCouple
 sf::Sprite initSprite(Size sizeOfSprite, std::string pathToSprite, Position spritePosition, sf::Texture *spriteTexture) {
-    sf::Sprite sprite = loadTexture(pathToSprite, sizeOfSprite, spritePosition, *spriteTexture);
+    sf::Sprite sprite = loadTexture(pathToSprite, *spriteTexture);
+    sprite = setSpriteOptions(&sprite, sizeOfSprite, spritePosition);
     return sprite;
 }
 
@@ -11,5 +22,14 @@ sf::Sprite initSprite(float sizeX, float sizeY, std::string pathToSprite, Positi
     CoupleFloat sizeCouple(sizeX, sizeY);
     Size sizeOfSprite(sizeCouple);
     sf::Sprite sprite = initSprite(sizeOfSprite, pathToSprite, spritePosition, spriteTexture);
+    return sprite;
+}
+
+// Initialize a sprite which has a texture already loaded
+sf::Sprite initSprite(float sizeX, float sizeY, Position spritePosition, sf::Texture *spriteTexture) {
+    CoupleFloat sizeCouple(sizeX, sizeY);
+    Size sizeOfSprite(sizeCouple);
+    sf::Sprite sprite(*spriteTexture);
+    sprite = setSpriteOptions(&sprite, sizeOfSprite, spritePosition);
     return sprite;
 }

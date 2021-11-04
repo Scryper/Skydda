@@ -1,9 +1,5 @@
 #include "GameScreen.h"
 
-GameScreen::GameScreen() { }
-
-GameScreen::~GameScreen() { }
-
 int GameScreen::run(sf::RenderWindow &app) {
     sf::Event event;
 
@@ -20,12 +16,13 @@ int GameScreen::run(sf::RenderWindow &app) {
 
     // Load sprite of player
     sf::Texture texturePlayerP1;
-    sf::Texture texturePlayerP2;
     PlayerView playerViewP1 = createPlayer(4.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP1,
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
                                          sf::Keyboard::Right,
                                          sf::Keyboard::Down);
+
+    sf::Texture texturePlayerP2;
     PlayerView playerViewP2 = createPlayer(3.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP2,
                                          sf::Keyboard::Z,
                                          sf::Keyboard::Q,
@@ -85,6 +82,7 @@ int GameScreen::run(sf::RenderWindow &app) {
 
         app.clear();
 
+        // Draw elements
         app.draw(backgroundSprite);
         app.draw(playerViewP1.getSprite());
         app.draw(playerViewP2.getSprite());
