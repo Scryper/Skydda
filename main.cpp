@@ -30,6 +30,7 @@ int main() {
     if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
         cout << "Music was not found" << endl;
     }
+    music.setVolume(10.f);
     music.play();
 
     int middleScreenX = app.getSize().x / 2.;

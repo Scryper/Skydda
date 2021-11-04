@@ -69,3 +69,15 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime){
         }
     return vector2f;
 }
+
+//void PlayerView::attack(PlayerView playerAttacked){
+    //vérif que le player ne bloque pas l'attaque
+
+    //vérif que les pv sont supérieur a 0
+
+    //faire l'animation d'attaque
+    //retirer les PV
+
+    //delai????
+//}
+
