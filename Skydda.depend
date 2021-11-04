@@ -2165,8 +2165,8 @@
 1635984118 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
-1635966843 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
-	<SFML/Graphics.hpp>
+1636016424 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
+	<SFML/Audio.hpp>
 	<iostream>
 	<vector>
 	"CoupleVectorTransformer.h"
@@ -2607,7 +2607,7 @@
 	<SFML/Graphics.hpp>
 	"CoupleFloat.h"
 
-1635965552 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
+1635978914 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
@@ -2644,16 +2644,16 @@
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/CoupleVectorTransformer.cpp
 	"CoupleVectorTransformer.h"
 
-1635966185 source:/home/houdartf/Documents/GitHub/Skydda/src/Movement.cpp
+1636016406 source:/home/houdartf/Documents/GitHub/Skydda/src/Movement.cpp
 	"Movement.h"
 
-1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/Platform.cpp
+1636016319 source:/home/houdartf/Documents/GitHub/Skydda/src/Platform.cpp
 	"Platform.h"
 
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/PlatformView.cpp
 	"PlatformView.h"
 
-1635965552 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
+1635978914 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
 1635965495 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
@@ -2668,7 +2668,7 @@
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
-1635966446 source:/home/houdartf/Documents/GitHub/Skydda/src/Collision.cpp
+1636016319 source:/home/houdartf/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
 1635949999 shed changes
@@ -2715,12 +2715,13 @@
 1635984118 source:/home/florian/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
-1635963745 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
+1635978914 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
 	"SpriteInitializer.h"
 	"PlatformView.h"
 	"Platform.h"
 	"Player.h"
 	"PlayerView.h"
+	"HealthBarView.h"
 	<vector>
 
 1635949964 /home/houdartf/Documents/GitHub/Skydda/include/SpriteInitializer.h
@@ -2730,7 +2731,7 @@
 	"CoupleFloat.h"
 	"TextureLoader.h"
 
-1635967212 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
+1636016319 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
 1635949965 source:/home/houdartf/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
@@ -2772,7 +2773,7 @@
 1635981657 /home/damien/Documents/GitHub/Skydda/include/HealthBar.h
 	"Position.h"
 
-1635967016 source:/home/houdartf/Documents/GitHub/Skydda/src/MapView.cpp
+1636016319 source:/home/houdartf/Documents/GitHub/Skydda/src/MapView.cpp
 	"MapView.h"
 
 1635960569 /home/houdartf/Documents/GitHub/Skydda/include/MapView.h
@@ -2788,17 +2789,18 @@
 1635981464 source:/home/damien/Documents/GitHub/Skydda/src/MapView.cpp
 	"MapView.h"
 
-1635962377 /home/houdartf/Documents/GitHub/Skydda/include/HealthBar.h
+1635978914 /home/houdartf/Documents/GitHub/Skydda/include/HealthBar.h
 	"Position.h"
 
-1635962377 /home/houdartf/Documents/GitHub/Skydda/include/HealthBarView.h
+1635978914 /home/houdartf/Documents/GitHub/Skydda/include/HealthBarView.h
 	<SFML/Graphics.hpp>
 	"HealthBar.h"
+	"Player.h"
 
-1635962377 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBar.cpp
+1636016319 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBar.cpp
 	"HealthBar.h"
 
-1635962377 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBarView.cpp
+1636016429 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBarView.cpp
 	"HealthBarView.h"
 
 1635962377 View.h"
@@ -2943,4 +2945,108 @@
 	<vector>
 	<PlatformView.h>
 	<ObjectInitializer.h>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/InputSoundFile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<algorithm>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/Export.hpp
+	<SFML/Config.hpp>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/Listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/Music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundStream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundSource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/AlResource.hpp
+	<SFML/Audio/Export.hpp>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/OutputSoundFile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/Sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundBuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundBufferRecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundRecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundFileFactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundFileFactory.inl
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundFileReader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1635949964 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Audio/SoundFileWriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
 

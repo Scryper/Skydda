@@ -162,7 +162,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
                         coll = i;
                         zeroY = true;
                     }
-                }
+
                 break;
             case 3 :
                 if(speed.getX() < 0)

@@ -75,11 +75,6 @@ int main() {
     font.loadFromFile("resources/fonts/arial.ttf");
     namePlayer.setFont(font);
 
-    vector<PlatformView> platforms;
-    platforms.push_back(platformViewBrick);
-    platforms.push_back(bottomPlatform);
-
-
     bool looksRight = true;
     bool looksRight2 = true;
 	// Start the game loop
