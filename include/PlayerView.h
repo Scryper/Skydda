@@ -3,7 +3,6 @@
 
 #include "Player.h"
 #include "CoupleVectorTransformer.h"
-#include "Animate.h"
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
