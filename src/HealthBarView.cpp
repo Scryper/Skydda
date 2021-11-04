@@ -26,12 +26,12 @@ sf::RectangleShape HealthBarView::getHealthBarOut() {
 }
 
 void HealthBarView::setPositionHealthBarIn() {
-    float x = healthBar.getPosition().getX()
+    float x = healthBar.getPosition().getX();
     float y = healthBar.getPosition().getY();
     healthBarIn.setPosition(x, y);
 }
 void HealthBarView::setPositionHealthBarOut() {
-    float x = healthBar.getPosition().getX()
+    float x = healthBar.getPosition().getX();
     float y = healthBar.getPosition().getY();
     healthBarOut.setPosition(x, y);
 }
