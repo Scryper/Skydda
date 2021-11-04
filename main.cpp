@@ -48,11 +48,13 @@ int main() {
     PlayerView playerView = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer,
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
-                                         sf::Keyboard::Right);
+                                         sf::Keyboard::Right,
+                                         sf::Keyboard::Down);
     PlayerView playerView2 = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer2,
                                          sf::Keyboard::Z,
                                          sf::Keyboard::Q,
-                                         sf::Keyboard::D);
+                                         sf::Keyboard::D,
+                                         sf::Keyboard::S);
 
     // Load background sprite
     sf::Texture textureBackground;
@@ -89,12 +91,12 @@ int main() {
         }
 
         looksRight = playerView.movePlayer(
-                                    playerView.inputPlayer(deltaTime),
+                                    playerView.inputPlayer(deltaTime,playerView2),
                                     looksRight,
                                     directionCollisions(playerView,platforms)
                                 );
         looksRight2 = playerView2.movePlayer(
-                                    playerView2.inputPlayer(deltaTime),
+                                    playerView2.inputPlayer(deltaTime,playerView),
                                     looksRight2,
                                     directionCollisions(playerView2,platforms)
                                 );

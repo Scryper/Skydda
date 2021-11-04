@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "CoupleVectorTransformer.h"
 
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
@@ -14,20 +15,21 @@ class PlayerView {
         sf::Keyboard::Key up;
         sf::Keyboard::Key left;
         sf::Keyboard::Key right;
+        sf::Keyboard::Key attackKey;
 
     public:
         PlayerView();
-        PlayerView(sf::Sprite sprite, Player player, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right);
+        PlayerView(sf::Sprite sprite, Player player, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key attackKey);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
         Player getPlayer() const;
         sf::Sprite getSprite() const;
 
-        void stopX();
-        void stopY();
+        void attack(PlayerView &playerAttacked);
 
-        sf::Vector2f inputPlayer(float deltaTime);
+
+        sf::Vector2f inputPlayer(float deltaTime, PlayerView &player2);
 
         Position computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<int>> collisions);
         bool movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<std::vector<int>> collisions);

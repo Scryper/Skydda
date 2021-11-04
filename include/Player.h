@@ -13,6 +13,7 @@ class Player {
     private:
         std::string name;
         double attack;
+        double timeLastAttack;
         bool defense;
         double health;
         Position position;
@@ -30,6 +31,8 @@ class Player {
         double getHealth()const;
         string getName()const;
         void setHealth(double health);
+        bool getDefense()const;
+        double getAttack()const;
 
         void stopX();
         void stopY();

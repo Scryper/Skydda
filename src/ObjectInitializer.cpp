@@ -34,7 +34,11 @@ std::vector<PlatformView> createBorder(std::string pathToPlatform, sf::Texture *
 }
 
 //creates the player
-PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right) {
+PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture,
+                        sf::Keyboard::Key up,
+                        sf::Keyboard::Key left,
+                        sf::Keyboard::Key right,
+                        sf::Keyboard::Key attack) {
     CoupleFloat velocity(.0f, .0f);
     CoupleFloat acceleration(.8f, 1.f);
     CoupleFloat maxSpeed(14.f, 20.f);
@@ -46,8 +50,8 @@ PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Posi
 
     sf::Sprite playerSprite = initSprite(sizeCouple, pathToPlayer, playerPosition, playerTexture);
 
-    Player player("Scryper", 100, true, 100, playerPosition, movement);
-    PlayerView playerView(playerSprite, player,up,left,right);
+    Player player("Scryper", 2, false, 100, playerPosition, movement);
+    PlayerView playerView(playerSprite, player,up,left,right,attack);
 
     return playerView;
 }

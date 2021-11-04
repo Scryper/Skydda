@@ -17,7 +17,7 @@ PlatformView createPlatform(float sizeX, float sizeY, std::string pathToPlatform
 std::vector<PlatformView> createBorder(std::string pathToPlatform, sf::Texture *platformTexture);
 
 //creates the player
-PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right);
+PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key attack);
 
 //Creates the healthBar
 HealthBarView createHealthBar(Player player, Position posHealthBar);

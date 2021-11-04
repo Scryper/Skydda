@@ -2165,7 +2165,7 @@
 1635984118 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
-1636017314 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
+1636021562 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
 	<SFML/Audio.hpp>
 	<iostream>
 	<vector>
@@ -2607,7 +2607,7 @@
 	<SFML/Graphics.hpp>
 	"CoupleFloat.h"
 
-1636017054 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
+1636018549 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
@@ -2619,7 +2619,7 @@
 	<vector>
 	<iostream>
 
-1636017054 /home/houdartf/Documents/GitHub/Skydda/include/PlayerView.h
+1636021577 /home/houdartf/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
 	"CoupleVectorTransformer.h"
 	<iostream>
@@ -2633,7 +2633,7 @@
 	<SFML/Graphics.hpp>
 	"Platform.h"
 
-1636017054 /home/houdartf/Documents/GitHub/Skydda/include/Collision.h
+1636020360 /home/houdartf/Documents/GitHub/Skydda/include/Collision.h
 	"PlayerView.h"
 	"PlatformView.h"
 	<vector>
@@ -2653,11 +2653,12 @@
 1636017054 source:/home/houdartf/Documents/GitHub/Skydda/src/PlatformView.cpp
 	"PlatformView.h"
 
-1636017054 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
+1636018549 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1636017054 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
+1636021590 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
+	"Collision.h"
 
 1636017054 source:/home/houdartf/Documents/GitHub/Skydda/src/Position.cpp
 	"Position.h"
@@ -2668,7 +2669,7 @@
 1636017054 source:/home/houdartf/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
-1636017054 source:/home/houdartf/Documents/GitHub/Skydda/src/Collision.cpp
+1636020360 source:/home/houdartf/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
 1635949999 shed changes
@@ -2715,7 +2716,7 @@
 1635984118 source:/home/florian/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
-1636017054 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
+1636018878 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
 	"SpriteInitializer.h"
 	"PlatformView.h"
 	"Platform.h"
@@ -2731,7 +2732,7 @@
 	"CoupleFloat.h"
 	"TextureLoader.h"
 
-1636017054 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
+1636021153 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
 1636017054 source:/home/houdartf/Documents/GitHub/Skydda/src/SpriteInitializer.cpp

@@ -55,6 +55,14 @@ double Player::getHealth()const {
     return health;
 }
 
+bool Player::getDefense()const{
+    return defense;
+}
+
+double Player::getAttack()const{
+    return attack;
+}
+
 Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<int>> collisions) {
     return movement.updatePosition(position, direction, collisions);
 }
