@@ -4,11 +4,11 @@
 #include "PlayerView.h"
 #include "PlatformView.h"
 #include <vector>
+#include <math.h>
+std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView platform);
 
-std::vector<int> directionCollision(PlayerView player, PlatformView platform);
+std::vector<std::vector<int>> directionCollisionPlayers(PlayerView player, PlayerView platform);
 
-std::vector<int> directionCollisionPlayers(PlayerView player, PlayerView platform);
-
-std::vector<std::vector<int>> directionCollisions(PlayerView player, std::vector<PlatformView> platform);
+std::vector<std::vector<std::vector<int>>> directionCollisions(PlayerView player, std::vector<PlatformView> platform);
 
 #endif // COLLISION_H

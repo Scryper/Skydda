@@ -33,8 +33,8 @@ class PlayerView {
 
         sf::Vector2f inputPlayer(float deltaTime, PlayerView &player2);
 
-        Position computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<int>> collisions);
-        bool movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<std::vector<int>> collisions);
+        Position computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
+        bool movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<std::vector<std::vector<int>>> collisions);
 };
 
 #endif // PLAYERVIEW_H

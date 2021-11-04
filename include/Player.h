@@ -41,7 +41,7 @@ class Player {
         void stopY();
 
         void setPosition(Position position);
-        Position updatePosition(Position position, CoupleFloat coupleFloat,std::vector<std::vector<int>> collisions);
+        Position updatePosition(Position position, CoupleFloat coupleFloat,std::vector<std::vector<std::vector<int>>> collisions);
 };
 
 #endif // PLAYER_H

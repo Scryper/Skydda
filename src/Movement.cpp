@@ -53,7 +53,7 @@ void Movement::stopY(){
     this->speed.setY(0);
 }
 
-Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<int>> collisions) {
+Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
     // get the info about X movement
     float speedX = speed.getX();
     float directionX = direction.getX();
@@ -68,10 +68,9 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     float maxSpeedY = maxSpeed.getY();
     float accelerationY = acceleration.getY();
 
-    bool zeroX = false;
     bool zeroY = false;
 
-    std::vector<int> coll;
+    std::vector<std::vector<int>> coll;
 
 
     ///////////// DIRECTION X /////////////
@@ -147,11 +146,11 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     }
 
     for(auto& i : collisions){
-        switch(i[0]){
+         for(auto& j : i){
+            switch(j[0]){
             case 1 :
                 if(speed.getY() < 0){
-                    zeroY = true;
-                    coll = i;
+                    coll.push_back(j);
                 }
                 break;
             case 2 :
@@ -159,31 +158,35 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
                     speed.setY(-jumpHeight);
                 }
                 else if(speed.getY() > 0){
-                        coll = i;
-                        zeroY = true;
+                        coll.push_back(j);
                     }
-
                 break;
             case 3 :
-                if(speed.getX() < 0)
-                    zeroX = true;
+                if(speed.getX() < 0){
+                    coll.push_back(j);
+                }
+
                 break;
             case 4 :
-                if(speed.getX() > 0)
-                    zeroX = true;
+                if(speed.getX() > 0){
+                    coll.push_back(j);
+                }
                 break;
             default :
                 break;
+            }
         }
     }
 
-    if(zeroX == true){
-        speed.setX(0);
-    }
-
-    if(zeroY == true){
-        speed.setY(0);
-        position.setY(coll[1]);
+    for(auto i : coll){
+        if(i[0]==1||i[0]==2){
+            speed.setY(0);
+            position.setY(i[1]);
+        }
+        if(i[0]==3||i[0]==4){
+            speed.setX(0);
+            position.setX(i[1]);
+        }
     }
 
     position.setX(position.getX() + speed.getX());

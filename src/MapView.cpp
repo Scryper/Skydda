@@ -4,7 +4,7 @@ MapView::MapView(int seed, sf::Texture *platformTexture, string path) {
     if(seed == 1) {
         border = createBorder(path, platformTexture);
 
-        Position firstPosition(900, 1000);
+        Position firstPosition(900, 1200);
         PlatformView firstPlatform = createPlatform(5.5f, .3f, path, firstPosition, platformTexture);
 
         Position secondPosition(900, 200);
@@ -27,8 +27,8 @@ MapView::MapView(int seed, sf::Texture *platformTexture, string path) {
         Position firstPosition(900,1000);
         PlatformView firstPlatform = createPlatform(5.5f, .3f, path, firstPosition, platformTexture);
 
-        Position secondPosition(400, 700);
-        PlatformView secondPlatform = createPlatform(.3f, .3f, path, secondPosition, platformTexture);
+        Position secondPosition(400, 850);
+        PlatformView secondPlatform = createPlatform(.3f, 1.3f, path, secondPosition, platformTexture);
 
         Position thirdPosition(1400, 700);
         PlatformView thirdPlatform = createPlatform(.3f, .3f, path, thirdPosition, platformTexture);

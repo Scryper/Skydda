@@ -63,7 +63,7 @@ float Player::getAttack()const{
     return attack;
 }
 
-Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<int>> collisions) {
+Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
     return movement.updatePosition(position, direction, collisions);
 }
 

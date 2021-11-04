@@ -32,11 +32,11 @@ sf::Sprite PlayerView::getSprite() const {
     return sprite;
 }
 
-Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<int>> collisions){
+Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){
     return player.updatePosition(player.getPosition(), vectorToCouple(vectorDirection), collisions);
 }
 
-bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<std::vector<int>> collisions) {
+bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<std::vector<std::vector<int>>> collisions) {
     // we swap the player's sprite if he is not looking the way he is going
     if((looksRight && vectorDirection.x < 0) || (!looksRight && vectorDirection.x > 0)) {
         sprite.scale(-1.f, 1.f);
@@ -64,9 +64,9 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
         if(sf::Keyboard::isKeyPressed(attackKey)){
             //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
             //la direction de l'attaque n'est pas encore gérée
-            std::vector<int> collision = directionCollisionPlayers(*this,p2);
-            if(collision[0]>0){
-                std::cout<<"attaké  "<< collision[0] <<endl;
+            std::vector<std::vector<int>> collision = directionCollisionPlayers(*this,p2);
+            if(collision[0][0]>0){
+                std::cout<<"attaké  "<< collision[0][0] <<endl;
                 attack(p2);
 
              }
