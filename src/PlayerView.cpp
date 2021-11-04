@@ -77,6 +77,7 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
 }
 
 void PlayerView::attack(PlayerView &playerAttacked){
+    cout<<playerAttacked.player.getHealth()<<endl;
     //vérif que le player ne bloque pas l'attaque
     if(playerAttacked.getPlayer().getDefense()==true)
         return;
@@ -94,7 +95,7 @@ void PlayerView::attack(PlayerView &playerAttacked){
         playerAttacked.player.setHealth(0.f);
     }
 
-    cout<<playerAttacked.player.getHealth()<<endl;
+
 
     //delai????
 }

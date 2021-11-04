@@ -16,6 +16,8 @@ class HealthBar
         virtual ~HealthBar();
         HealthBar(const HealthBar& other);
 
+        void setLifePoint(float lifePoint);
+
         float getLifePoint();
         float getLIFE_POINT_MAX();
         Position getPosition();

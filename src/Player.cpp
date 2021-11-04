@@ -11,7 +11,7 @@ Player::Player() {
     this->movement = defaultMovement;
 }
 
-Player::Player(std::string name, double attack, bool defense, double health, Position position, Movement movement) {
+Player::Player(std::string name, float attack, bool defense, float health, Position position, Movement movement) {
     this->name = name;
     this->attack = attack;
     this->defense = defense;
@@ -43,7 +43,7 @@ void Player::setPosition(Position position) {
     this->position = position;
 }
 
-void Player::setHealth(double health) {
+void Player::setHealth(float health) {
     this->health = health;
 }
 
@@ -51,7 +51,7 @@ string Player::getName()const {
     return name;
 }
 
-double Player::getHealth()const {
+float Player::getHealth()const {
     return health;
 }
 
@@ -59,7 +59,7 @@ bool Player::getDefense()const{
     return defense;
 }
 
-double Player::getAttack()const{
+float Player::getAttack()const{
     return attack;
 }
 

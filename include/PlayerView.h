@@ -28,6 +28,8 @@ class PlayerView {
 
         void attack(PlayerView &playerAttacked);
 
+        void setHealth(float health);
+
 
         sf::Vector2f inputPlayer(float deltaTime, PlayerView &player2);
 

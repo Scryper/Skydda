@@ -36,21 +36,21 @@ void HealthBarView::setPositionHealthBarOut() {
     healthBarOut.setPosition(x, y);
 }
 
-void HealthBarView::addColorToHealthBarIn() {
+void HealthBarView::actualiseColorHealthBarIn() {
     healthBarIn.setFillColor(sf::Color::Green);
 }
 
-void HealthBarView::addColorToHealthBarOut() {
+void HealthBarView::actualiseColorHealthBarOut() {
     healthBarOut.setFillColor(sf::Color::Transparent);
     healthBarOut.setOutlineThickness(2);
     healthBarOut.setOutlineColor(sf::Color::Black);
 }
 
-void HealthBarView::addSizeToHealthBarIn(){
-    healthBarIn.setSize(sf::Vector2f(healthBar.getLifePoint() * 3,19));
+void HealthBarView::actualiseSizeHealthBarIn(float hpPlayer){
+    healthBarIn.setSize(sf::Vector2f(hpPlayer * 3,19));
 }
 
-void HealthBarView::addSizeToHealthBarOut(){
+void HealthBarView::actualiseSizeHealthBarOut(){
     healthBarOut.setSize(sf::Vector2f(healthBar.getLIFE_POINT_MAX() * 3,20));
 }
 

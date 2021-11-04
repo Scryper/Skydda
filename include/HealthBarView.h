@@ -22,15 +22,16 @@ class HealthBarView {
         sf::RectangleShape getHealthBarIn();
         sf::RectangleShape getHealthBarOut();
 
+        void setLifePoint(float lifePoint);
 
         void setPositionHealthBarIn();
         void setPositionHealthBarOut();
 
-        void addColorToHealthBarIn();
-        void addColorToHealthBarOut();
+        void actualiseColorHealthBarIn();
+        void actualiseColorHealthBarOut();
 
-        void addSizeToHealthBarIn();
-        void addSizeToHealthBarOut();
+        void actualiseSizeHealthBarIn(float hpPlayer);
+        void actualiseSizeHealthBarOut();
 
         sf::Text createNamePlayer(Player player, Position posHealthBar);
 

@@ -43,14 +43,14 @@ int main() {
     Position position(middleScreenX, middleScreenY);
 
     // Load sprite of player
-    sf::Texture texturePlayer;
-    sf::Texture texturePlayer2;
-    PlayerView playerView = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer,
+    sf::Texture texturePlayerP1;
+    sf::Texture texturePlayerP2;
+    PlayerView playerViewP1 = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayerP1,
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
                                          sf::Keyboard::Right,
                                          sf::Keyboard::Down);
-    PlayerView playerView2 = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayer2,
+    PlayerView playerViewP2 = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayerP2,
                                          sf::Keyboard::Z,
                                          sf::Keyboard::Q,
                                          sf::Keyboard::D,
@@ -70,16 +70,22 @@ int main() {
     vector<PlatformView> platforms = map1.getAllCollisions();
 
     // Create HealthBar
-    Position posHealthBar(50.f, 50.f);
-    HealthBarView healthBarView = createHealthBar(playerView.getPlayer(), posHealthBar);
+    Position posHealthBarP1(50.f, 50.f);
+    Position posHealthBarP2(1550.f, 50.f);
 
-    sf::Text namePlayer = healthBarView.createNamePlayer(playerView.getPlayer(), posHealthBar);
+    HealthBarView healthBarViewP1 = createHealthBar(playerViewP1.getPlayer(), posHealthBarP1);
+    HealthBarView healthBarViewP2 = createHealthBar(playerViewP2.getPlayer(), posHealthBarP2);
+
+    sf::Text namePlayerP1 = healthBarViewP1.createNamePlayer(playerViewP1.getPlayer(), posHealthBarP1);
+    sf::Text namePlayerP2 = healthBarViewP2.createNamePlayer(playerViewP2.getPlayer(), posHealthBarP2);
+
     sf::Font font;
     font.loadFromFile("resources/fonts/arial.ttf");
-    namePlayer.setFont(font);
+    namePlayerP1.setFont(font);
+    namePlayerP2.setFont(font);
 
-    bool looksRight = true;
-    bool looksRight2 = true;
+    bool looksRightP1 = true;
+    bool looksRightP2 = true;
 	// Start the game loop
     while (app.isOpen()) {
         deltaTime = clock.restart().asMilliseconds();
@@ -90,33 +96,40 @@ int main() {
             if (event.type == sf::Event::Closed) app.close();
         }
 
-        looksRight = playerView.movePlayer(
-                                    playerView.inputPlayer(deltaTime,playerView2),
-                                    looksRight,
-                                    directionCollisions(playerView,platforms)
+        looksRightP1 = playerViewP1.movePlayer(
+                                    playerViewP1.inputPlayer(deltaTime,playerViewP2),
+                                    looksRightP1,
+                                    directionCollisions(playerViewP1,platforms)
                                 );
-        looksRight2 = playerView2.movePlayer(
-                                    playerView2.inputPlayer(deltaTime,playerView),
-                                    looksRight2,
-                                    directionCollisions(playerView2,platforms)
+        looksRightP2 = playerViewP2.movePlayer(
+                                    playerViewP2.inputPlayer(deltaTime,playerViewP1),
+                                    looksRightP2,
+                                    directionCollisions(playerViewP2,platforms)
                                 );
+
+        healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
+        healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
         // Clear screen
         app.clear();
 
         // Draw the sprite
         app.draw(backgroundSprite);
-        app.draw(playerView.getSprite());
-        app.draw(playerView2.getSprite());
+        app.draw(playerViewP1.getSprite());
+        app.draw(playerViewP2.getSprite());
 
         for(auto i : map1.getPlatforms()){
             app.draw(i.getSprite());
         }
 
-        app.draw(healthBarView.getHealthBarIn());
-        app.draw(healthBarView.getHealthBarOut());
+        app.draw(healthBarViewP1.getHealthBarIn());
+        app.draw(healthBarViewP1.getHealthBarOut());
 
-        app.draw(namePlayer);
+        app.draw(healthBarViewP2.getHealthBarIn());
+        app.draw(healthBarViewP2.getHealthBarOut());
+
+        app.draw(namePlayerP1);
+        app.draw(namePlayerP2);
 
         // Update the window
         app.display();

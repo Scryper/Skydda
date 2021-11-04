@@ -67,11 +67,11 @@ HealthBarView createHealthBar(Player player, Position posHealthBar) {
     healthBarView.setPositionHealthBarIn();
     healthBarView.setPositionHealthBarOut();
 
-    healthBarView.addColorToHealthBarIn();
-    healthBarView.addColorToHealthBarOut();
+    healthBarView.actualiseColorHealthBarIn();
+    healthBarView.actualiseColorHealthBarOut();
 
-    healthBarView.addSizeToHealthBarIn();
-    healthBarView.addSizeToHealthBarOut();
+    healthBarView.actualiseSizeHealthBarIn(player.getHealth());
+    healthBarView.actualiseSizeHealthBarOut();
 
     return healthBarView;
 }

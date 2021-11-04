@@ -12,27 +12,30 @@ using namespace std;
 class Player {
     private:
         std::string name;
-        double attack;
-        double timeLastAttack;
+        float attack;
+        float timeLastAttack;
         bool defense;
-        double health;
+        float health;
         Position position;
         Movement movement;
 
     public:
         Player();
-        Player(std::string name, double attack, bool defense, double health, Position position, Movement movement);
+        Player(std::string name, float attack, bool defense, float health, Position position, Movement movement);
+
         Player(const Player& other);
         virtual ~Player();
 
         Movement getMovement() const;
         Position getPosition() const;
 
-        double getHealth()const;
+        float getHealth()const;
         string getName()const;
-        void setHealth(double health);
+
+        void setHealth(float health);
+
         bool getDefense()const;
-        double getAttack()const;
+        float getAttack()const;
 
         void stopX();
         void stopY();
