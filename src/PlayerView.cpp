@@ -1,11 +1,18 @@
 #include "PlayerView.h"
 #include "Collision.h"
+#include "Animate.h"
+#include "TextureManager.h"
 
 PlayerView::PlayerView() {
     sf::Sprite defaultSprite;
     this->sprite = defaultSprite;
     Player defaultPlayer;
     this->player = defaultPlayer;
+    this->texture.loadFromFile("resources/images/character/link.png");
+    this->sprite.setTexture(texture);
+    sf::IntRect rectSourceSprite(72.8f, 0, 72.8f, 78.375f);
+    this->sprite.setTextureRect(rectSourceSprite);
+    tour = 0;
 }
 
 PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack) {
@@ -15,11 +22,23 @@ PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf
     this->left = left;
     this->right = right;
     this->attackKey = attack;
+    this->texture.loadFromFile("resources/images/character/link.png");
+    this->sprite.setTexture(texture);
+    sf::IntRect rectSourceSprite(72.8f, 0, 72.8f, 78.375f);
+    this->sprite.setTextureRect(rectSourceSprite);
+        tour = 0;
+
 }
 
 PlayerView::PlayerView(const PlayerView& other) {
     this->sprite = other.sprite;
     this->player = other.player;
+    this->texture.loadFromFile("resources/images/character/link.png");
+    this->sprite.setTexture(texture);
+    sf::IntRect rectSourceSprite(72.8f, 0, 72.8f, 78.375f);
+    this->sprite.setTextureRect(rectSourceSprite);
+        tour = 0;
+
 }
 
 PlayerView::~PlayerView() { }
@@ -51,6 +70,19 @@ bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::
 }
 
 sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
+    std::cout<<"timer : "<< this->clock.getElapsedTime().asSeconds()<<endl;
+    if (this->clock.getElapsedTime().asSeconds() >= 2.0f){
+
+        if (this->tour == 2){
+            this->tour = 0;
+        }
+        else{
+            this->tour += 1;
+        }
+        this->sprite.setTextureRect(sf::IntRect(tour*72.8f, 0, 72.8f, 78.375f));
+        this->clock.restart();
+    }
+
      sf::Vector2f vector2f(0.f, 0.f);
         if(sf::Keyboard::isKeyPressed(up)) {
             vector2f.y += -deltaTime;
@@ -95,4 +127,5 @@ void PlayerView::attack(PlayerView &playerAttacked){
 
     //delai????
 }
+
 

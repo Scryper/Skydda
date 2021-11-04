@@ -3,7 +3,7 @@
 
 #include "Player.h"
 #include "CoupleVectorTransformer.h"
-
+#include "Animate.h"
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -16,6 +16,12 @@ class PlayerView {
         sf::Keyboard::Key left;
         sf::Keyboard::Key right;
         sf::Keyboard::Key attackKey;
+        sf::Texture texture;
+        sf::IntRect rectSourceSprite;
+        sf::Clock clock;
+        int tour;
+
+
 
     public:
         PlayerView();
@@ -25,6 +31,7 @@ class PlayerView {
 
         Player getPlayer() const;
         sf::Sprite getSprite() const;
+
 
         void attack(PlayerView &playerAttacked);
 
