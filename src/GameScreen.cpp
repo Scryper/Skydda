@@ -46,8 +46,11 @@ int GameScreen::run(sf::RenderWindow &app) {
     HealthBarView healthBarViewP1 = createHealthBar(playerViewP1.getPlayer(), posHealthBarP1);
     HealthBarView healthBarViewP2 = createHealthBar(playerViewP2.getPlayer(), posHealthBarP2);
 
-    sf::Text namePlayerP1 = healthBarViewP1.createNamePlayer(playerViewP1.getPlayer(), posHealthBarP1);
-    sf::Text namePlayerP2 = healthBarViewP2.createNamePlayer(playerViewP2.getPlayer(), posHealthBarP2);
+    // Create posNamePlayer
+    Position posNamePlayerP1(50.f, 80.f);
+    Position posNamePlayerP2(1550.f, 80.f);
+    sf::Text namePlayerP1 = healthBarViewP1.createNamePlayer(playerViewP1.getPlayer(), posNamePlayerP1);
+    sf::Text namePlayerP2 = healthBarViewP2.createNamePlayer(playerViewP2.getPlayer(), posNamePlayerP2);
 
     sf::Font font;
     font.loadFromFile("resources/fonts/arial.ttf");
@@ -85,19 +88,16 @@ int GameScreen::run(sf::RenderWindow &app) {
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-        if(match.getPlayerWin()==0) {
+         if(match.getPlayerWin()==0) {
             if(playerViewP1.getPlayer().getHealth() == 0) {
                 match.incrementRoundWinP2();
-                playerViewP1.setHealth(100.f);
+                if(match.getPlayerWin()==0)playerViewP1.setHealth(100.f);
             }
-
             if(playerViewP2.getPlayer().getHealth() == 0) {
                 match.incrementRoundWinP1();
-                playerViewP2.setHealth(100.f);
+                if(match.getPlayerWin()==0)playerViewP2.setHealth(100.f);
             }
-
         } else {
-
             match.win();
         }
 
