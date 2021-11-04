@@ -49,6 +49,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/Animate.h" />
 		<Unit filename="include/Collision.h" />
 		<Unit filename="include/CoupleFloat.h" />
 		<Unit filename="include/CoupleVectorTransformer.h" />
@@ -66,6 +67,7 @@
 		<Unit filename="include/SpriteInitializer.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Animate.cpp" />
 		<Unit filename="src/Collision.cpp" />
 		<Unit filename="src/CoupleFloat.cpp" />
 		<Unit filename="src/CoupleVectorTransformer.cpp" />

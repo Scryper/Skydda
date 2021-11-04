@@ -45,12 +45,12 @@ int main() {
     // Load sprite of player
     sf::Texture texturePlayerP1;
     sf::Texture texturePlayerP2;
-    PlayerView playerViewP1 = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayerP1,
+    PlayerView playerViewP1 = createPlayer(4.0f, 4.0f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP1,
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
                                          sf::Keyboard::Right,
                                          sf::Keyboard::Down);
-    PlayerView playerViewP2 = createPlayer(.5f, .5f, "resources/images/character/mario.png", position, &texturePlayerP2,
+    PlayerView playerViewP2 = createPlayer(4.0f, 4.0f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP2,
                                          sf::Keyboard::Z,
                                          sf::Keyboard::Q,
                                          sf::Keyboard::D,
