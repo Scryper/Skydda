@@ -28,7 +28,8 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
             // la haut du joueur doit etre plus petit que le bas de la plateforme
         if(playerLeft < platformRigth
            &&  playerRigth > platformRigth
-           &&  playerTop < platformBottom - 10
+           &&  playerTop < platformBottom - 30
+           &&  playerBottom > platformTop + 10
            ) {
             std::cout<<"droite ";
             std::vector <int> temp;
@@ -42,7 +43,8 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
             //le left du player doit etre plus petit que le lefts de la plateforme
         if(playerRigth > platformLeft
            &&  playerLeft < platformLeft
-           &&  playerTop < platformBottom - 10
+           &&  playerTop < platformBottom - 30
+           && playerBottom > platformTop + 10
            ){
             std::cout<<"gauche ";
             std::vector <int> temp;
