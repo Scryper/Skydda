@@ -58,6 +58,8 @@
 		<Unit filename="include/HealthBarView.h" />
 		<Unit filename="include/Map.h" />
 		<Unit filename="include/MapView.h" />
+		<Unit filename="include/Match.h" />
+		<Unit filename="include/MatchView.h" />
 		<Unit filename="include/MenuScreen.h" />
 		<Unit filename="include/Movement.h" />
 		<Unit filename="include/ObjectInitializer.h" />
@@ -83,6 +85,8 @@
 		<Unit filename="src/HealthBarView.cpp" />
 		<Unit filename="src/Map.cpp" />
 		<Unit filename="src/MapView.cpp" />
+		<Unit filename="src/Match.cpp" />
+		<Unit filename="src/MatchView.cpp" />
 		<Unit filename="src/MenuScreen.cpp" />
 		<Unit filename="src/Movement.cpp" />
 		<Unit filename="src/ObjectInitializer.cpp" />

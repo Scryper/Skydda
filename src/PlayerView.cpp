@@ -41,12 +41,16 @@ PlayerView::PlayerView(const PlayerView& other) {
 
 PlayerView::~PlayerView() { }
 
-Player PlayerView::getPlayer() const {
+Player& PlayerView::getPlayer() {
     return player;
 }
 
 sf::Sprite PlayerView::getSprite() const {
     return sprite;
+}
+
+void PlayerView::setAlive(bool alive) {
+    player.setAlive(alive);
 }
 
 Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){
@@ -81,6 +85,9 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
     }*/
 
      sf::Vector2f vector2f(0.f, 0.f);
+
+     if(player.isAlive()) {
+
         if(sf::Keyboard::isKeyPressed(up)) {
             vector2f.y += -deltaTime;
         }
@@ -100,6 +107,7 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
 
              }
         }
+    }
     return vector2f;
 }
 
@@ -115,7 +123,7 @@ void PlayerView::attack(PlayerView &playerAttacked){
 
     //retirer les PV
     double health = playerAttacked.player.getHealth();
-    if(health-player.getAttack()>=0){
+    if(health-player.getAttack()>0){
         playerAttacked.player.setHealth(health-player.getAttack());
     }
     else{
@@ -125,4 +133,7 @@ void PlayerView::attack(PlayerView &playerAttacked){
     //delai????
 }
 
+void PlayerView::setHealth(float health) {
+    player.setHealth(health);
+}
 

@@ -9,6 +9,7 @@ Player::Player() {
     Movement defaultMovement;
     this->position = defaultPosition;
     this->movement = defaultMovement;
+    alive = true;
 }
 
 Player::Player(std::string name, float attack, bool defense, float health, Position position, Movement movement) {
@@ -18,6 +19,7 @@ Player::Player(std::string name, float attack, bool defense, float health, Posit
     this->health = health;
     this->position = position;
     this->movement = movement;
+    alive = true;
 }
 
 Player::Player(const Player& other) {
@@ -27,6 +29,7 @@ Player::Player(const Player& other) {
     this->health = other.health;
     this->position = other.position;
     this->movement = other.movement;
+    this->alive = other.alive;
 }
 
 Player::~Player() { }
@@ -61,6 +64,14 @@ bool Player::getDefense()const{
 
 float Player::getAttack()const{
     return attack;
+}
+
+bool Player::isAlive()const {
+    return alive;
+}
+
+void Player::setAlive(bool alive){
+    this->alive = alive;
 }
 
 Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {

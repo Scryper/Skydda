@@ -1,4 +1,5 @@
 #include "GameScreen.h"
+#include "Match.h"
 
 int GameScreen::run(sf::RenderWindow &app) {
     sf::Event event;
@@ -23,7 +24,7 @@ int GameScreen::run(sf::RenderWindow &app) {
                                          sf::Keyboard::Down);
 
     sf::Texture texturePlayerP2;
-    PlayerView playerViewP2 = createPlayer(3.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP2,
+    PlayerView playerViewP2 = createPlayer(4.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP2,
                                          sf::Keyboard::Z,
                                          sf::Keyboard::Q,
                                          sf::Keyboard::D,
@@ -56,7 +57,16 @@ int GameScreen::run(sf::RenderWindow &app) {
     bool looksRightP1 = true;
     bool looksRightP2 = true;
 
+    Match match(playerViewP1.getPlayer(), playerViewP2.getPlayer());
+
+
+
     while(app.isOpen()) {
+        cout << "isAlive1 : " << playerViewP1.getPlayer().isAlive() << endl;
+        cout << "isAlive2 : " << playerViewP2.getPlayer().isAlive() << endl;
+        //playerViewP2.getPlayer().setAlive(false);
+        //match.getPlayer1().setAlive(false);
+
         deltaTime = clock.restart().asMilliseconds();
 
         while(app.pollEvent(event)) {
@@ -79,6 +89,25 @@ int GameScreen::run(sf::RenderWindow &app) {
 
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
+
+        if(match.getPlayerWin()==0) {
+            if(playerViewP1.getPlayer().getHealth() == 0) {
+                match.incrementRoundWinP2();
+                playerViewP1.setHealth(100.f);
+            }
+
+            if(playerViewP2.getPlayer().getHealth() == 0) {
+                match.incrementRoundWinP1();
+                playerViewP2.setHealth(100.f);
+            }
+
+        } else {
+
+            match.win();
+        }
+
+        cout << "P1 victoire : " << match.getRoundWinP1() << endl;
+        cout << "P2 victoire : " << match.getRoundWinP2() << endl;
 
         app.clear();
 

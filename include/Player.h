@@ -15,6 +15,7 @@ class Player {
         float attack;
         float timeLastAttack;
         bool defense;
+        bool alive;
         float health;
         Position position;
         Movement movement;
@@ -39,6 +40,9 @@ class Player {
 
         void stopX();
         void stopY();
+
+        bool isAlive()const;
+        void setAlive(bool alive);
 
         void setPosition(Position position);
         Position updatePosition(Position position, CoupleFloat coupleFloat,std::vector<std::vector<std::vector<int>>> collisions);

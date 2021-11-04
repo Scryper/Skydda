@@ -20,22 +20,20 @@ class PlayerView {
         sf::Clock clock;
         int tour;
 
-
-
     public:
         PlayerView();
         PlayerView(sf::Sprite sprite, Player player, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key attackKey);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
-        Player getPlayer() const;
+        Player& getPlayer();
         sf::Sprite getSprite() const;
-
 
         void attack(PlayerView &playerAttacked);
 
         void setHealth(float health);
 
+        void setAlive(bool alive);
 
         sf::Vector2f inputPlayer(float deltaTime, PlayerView &player2);
 
