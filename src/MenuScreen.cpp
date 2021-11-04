@@ -3,10 +3,6 @@
 int MenuScreen::run(sf::RenderWindow &app) {
     sf::Event event;
 
-    sf::Color betterWhite = {253, 240, 213};
-    sf::Color betterRed = {193, 18, 31};
-    sf::Color darkerBetterRed = {120, 0, 0};
-
     int middleScreenX = app.getSize().x / 2.;
     int middleScreenY = app.getSize().y / 2.;
 
@@ -21,25 +17,24 @@ int MenuScreen::run(sf::RenderWindow &app) {
     sf::Texture textureButton; // Button texture
     sf::Sprite buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/button/button.png", position, &textureButton);
     // Text of buttonChooseCharacters
-    sf::Text textChooseCharacters = createText("Play", position);
-
+    sf::Text textChooseCharacters = TextInitializer::createText("Play", position);
 
     /// OptionScreen button
     position.setY(position.getY() + 100);
     sf::Sprite buttonOptions = initSprite(1.f, 1.f, position, &textureButton);
     // Text of buttonOptions
-    sf::Text textOptions = createText("Options", position);
+    sf::Text textOptions = TextInitializer::createText("Options", position);
 
     /// Quit button
     position.setY(position.getY() + 100);
     sf::Sprite buttonQuit = initSprite(1.f, 1.f, position, &textureButton);
     // Text of buttonQuit
-    sf::Text textQuit = createText("Quit", position);
-    textQuit.setFillColor(betterRed);
+    sf::Text textQuit = TextInitializer::createText("Quit", position);
+    textQuit.setFillColor(TextInitializer::betterRed);
 
     /// Font of texts
     sf::Font font;
-    font.loadFromFile("resources/fonts/arial.ttf");
+    font.loadFromFile("resources/fonts/glitch.otf");
     textChooseCharacters.setFont(font);
     textOptions.setFont(font);
     textQuit.setFont(font);
@@ -65,7 +60,7 @@ int MenuScreen::run(sf::RenderWindow &app) {
             }
         }
         else { // The text stays white if the user doesn't go over it, or come back to white if the user is no longer over it
-            textChooseCharacters.setFillColor(betterWhite);
+            textChooseCharacters.setFillColor(TextInitializer::betterWhite);
         }
 
         /// Button options
@@ -78,7 +73,7 @@ int MenuScreen::run(sf::RenderWindow &app) {
             }
         }
         else {
-            textOptions.setFillColor(betterWhite);
+            textOptions.setFillColor(TextInitializer::betterWhite);
         }
 
         /// Button quit
@@ -87,11 +82,11 @@ int MenuScreen::run(sf::RenderWindow &app) {
                 return -1;
             }
             else {
-                textQuit.setFillColor(darkerBetterRed);
+                textQuit.setFillColor(TextInitializer::darkerBetterRed);
             }
         }
         else {
-            textQuit.setFillColor(betterRed);
+            textQuit.setFillColor(TextInitializer::betterRed);
         }
 
         app.clear();

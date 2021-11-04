@@ -1,8 +1,11 @@
 #ifndef HEALTHBARVIEW_H
 #define HEALTHBARVIEW_H
+
 #include <SFML/Graphics.hpp>
+
 #include "HealthBar.h"
 #include "Player.h"
+#include "TextInitializer.h"
 
 
 class HealthBarView {

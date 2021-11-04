@@ -1,6 +1,6 @@
 #include "TextInitializer.h"
 
-sf::Text createText(std::string textContent, Position position) {
+sf::Text TextInitializer::createText(std::string textContent, Position position) {
     sf::Text text;
     text.setString(textContent);
     text.setCharacterSize(24);

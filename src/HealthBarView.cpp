@@ -55,18 +55,10 @@ void HealthBarView::actualiseSizeHealthBarOut(){
 }
 
 sf::Text HealthBarView::createNamePlayer(Player player, Position posHealthBar) {
-    sf::Text namePlayer;
+    sf::Text namePlayer = TextInitializer::createText(player.getName(), posHealthBar);
 
-    Position posTextBar(posHealthBar.getX(),posHealthBar.getY() + 30);
-//    loadFont(namePlayer, "resources/fonts/arial.ttf");
-//    sf::Font font;
-//    font.loadFromFile("resources/fonts/arial.ttf");
-//    namePlayer.setFont(font);
-    namePlayer.setString(player.getName());
-    namePlayer.setCharacterSize(24);
     namePlayer.setFillColor(sf::Color::Black);
     namePlayer.setStyle(sf::Text::Bold | sf::Text::Underlined);
-    namePlayer.setPosition(posTextBar.getX(),posTextBar.getY());
 
     return namePlayer;
 }
