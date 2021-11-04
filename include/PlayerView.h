@@ -19,6 +19,7 @@ class PlayerView {
         sf::IntRect rectSourceSprite;
         sf::Clock clock;
         int tour;
+        bool looksRight;
 
     public:
         PlayerView();
@@ -30,15 +31,15 @@ class PlayerView {
         sf::Sprite getSprite() const;
 
         void attack(PlayerView &playerAttacked);
-
         void setHealth(float health);
-
         void setAlive(bool alive);
+
+        bool isLooksRigth()const;
 
         sf::Vector2f inputPlayer(float deltaTime, PlayerView &player2);
 
         Position computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
-        bool movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<std::vector<std::vector<int>>> collisions);
+        void movePlayer(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
 };
 
 #endif // PLAYERVIEW_H

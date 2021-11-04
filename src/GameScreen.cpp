@@ -54,9 +54,6 @@ int GameScreen::run(sf::RenderWindow &app) {
     namePlayerP1.setFont(font);
     namePlayerP2.setFont(font);
 
-    bool looksRightP1 = true;
-    bool looksRightP2 = true;
-
     Match match(playerViewP1.getPlayer(), playerViewP2.getPlayer());
 
 
@@ -75,15 +72,13 @@ int GameScreen::run(sf::RenderWindow &app) {
             }
         }
 
-        looksRightP1 = playerViewP1.movePlayer(
+        playerViewP1.movePlayer(
                                     playerViewP1.inputPlayer(deltaTime, playerViewP2),
-                                    looksRightP1,
                                     directionCollisions(playerViewP1, platforms)
                                 );
 
-        looksRightP2 = playerViewP2.movePlayer(
+        playerViewP2.movePlayer(
                                     playerViewP2.inputPlayer(deltaTime, playerViewP1),
-                                    looksRightP2,
                                     directionCollisions(playerViewP2, platforms)
                                 );
 

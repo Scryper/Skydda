@@ -20,6 +20,7 @@ PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf
     this->left = left;
     this->right = right;
     this->attackKey = attack;
+    this->looksRight = true;
     /*this->texture.loadFromFile("resources/images/character/test.png");
     this->sprite.setTexture(texture);
     sf::IntRect rectSourceSprite(0, 0, 80, 40);
@@ -53,11 +54,15 @@ void PlayerView::setAlive(bool alive) {
     player.setAlive(alive);
 }
 
+bool PlayerView::isLooksRigth()const{
+    return looksRight;
+}
+
 Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){
     return player.updatePosition(player.getPosition(), vectorToCouple(vectorDirection), collisions);
 }
 
-bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::vector<std::vector<std::vector<int>>> collisions) {
+void PlayerView::movePlayer(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions) {
     // we swap the player's sprite if he is not looking the way he is going
     if((looksRight && vectorDirection.x < 0) || (!looksRight && vectorDirection.x > 0)) {
         sprite.scale(-1.f, 1.f);
@@ -68,7 +73,6 @@ bool PlayerView::movePlayer(sf::Vector2f vectorDirection, bool looksRight, std::
     player.setPosition(newPosition);
     sprite.setPosition(newPosition.getX(), newPosition.getY());
 
-    return looksRight;
 }
 
 sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
