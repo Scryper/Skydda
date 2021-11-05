@@ -2079,19 +2079,19 @@
 	<SFML/Graphics.hpp>
 	"Platform.h"
 
-1636042399 source:/home/florian/Documents/GitHub/Skydda/src/Player.cpp
+1636069133 source:/home/florian/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1636042399 /home/florian/Documents/GitHub/Skydda/include/Player.h
+1636069133 /home/florian/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
 
-1636044466 source:/home/florian/Documents/GitHub/Skydda/src/PlayerView.cpp
+1636069133 source:/home/florian/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 	"Collision.h"
 
-1636044208 /home/florian/Documents/GitHub/Skydda/include/PlayerView.h
+1636069133 /home/florian/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
 	"CoupleVectorTransformer.h"
 	<iostream>
@@ -2103,7 +2103,7 @@
 1634148388 source:/home/florian/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1636045704 source:/home/florian/Documents/GitHub/Skydda/main.cpp
+1636069376 source:/home/florian/Documents/GitHub/Skydda/main.cpp
 	<vector>
 	"ScreenIncluder.h"
 
@@ -2147,7 +2147,7 @@
 	<vector>
 	<math.h>
 
-1636046107 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
+1636050433 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
 1636043588 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
@@ -2909,10 +2909,10 @@
 1636023758 /home/florian/Documents/GitHub/Skydda/include/HealthBar.h
 	"Position.h"
 
-1636049419 source:/home/florian/Documents/GitHub/Skydda/src/HealthBarView.cpp
+1636050443 source:/home/florian/Documents/GitHub/Skydda/src/HealthBarView.cpp
 	"HealthBarView.h"
 
-1636049471 /home/florian/Documents/GitHub/Skydda/include/HealthBarView.h
+1636050443 /home/florian/Documents/GitHub/Skydda/include/HealthBarView.h
 	<SFML/Graphics.hpp>
 	"HealthBar.h"
 	"Player.h"
@@ -3156,8 +3156,9 @@
 	<vector>
 	<iostream>
 
-1636041492 source:/home/florian/Documents/GitHub/Skydda/src/GameScreen.cpp
+1636069276 source:/home/florian/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
+	"Match.h"
 
 1636037586 /home/florian/Documents/GitHub/Skydda/include/GameScreen.h
 	"Screen.h"
@@ -3169,41 +3170,42 @@
 	"HealthBar.h"
 	"HealthBarView.h"
 
-1636039703 /home/florian/Documents/GitHub/Skydda/include/Screen.h
+1636070308 /home/florian/Documents/GitHub/Skydda/include/Screen.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 	"SpriteInitializer.h"
 	"TextInitializer.h"
 
-1636050054 source:/home/florian/Documents/GitHub/Skydda/src/MenuScreen.cpp
+1636070420 source:/home/florian/Documents/GitHub/Skydda/src/MenuScreen.cpp
 	"MenuScreen.h"
 
 1636037488 /home/florian/Documents/GitHub/Skydda/include/MenuScreen.h
 	"Screen.h"
 
-1636024753 source:/home/florian/Documents/GitHub/Skydda/src/Screen.cpp
+1636070376 source:/home/florian/Documents/GitHub/Skydda/src/Screen.cpp
 	"Screen.h"
 
 1636024753 source:/home/florian/Documents/GitHub/Skydda/src/ScreenIncluder.cpp
 	"ScreenIncluder.h"
 
-1636041746 /home/florian/Documents/GitHub/Skydda/include/ScreenIncluder.h
+1636069651 /home/florian/Documents/GitHub/Skydda/include/ScreenIncluder.h
 	"Screen.h"
 	"MenuScreen.h"
 	"GameScreen.h"
 	"OptionScreen.h"
+	"ChooseCharacterScreen.h"
 
-1636047621 source:/home/florian/Documents/GitHub/Skydda/src/OptionScreen.cpp
+1636070813 source:/home/florian/Documents/GitHub/Skydda/src/OptionScreen.cpp
 	"OptionScreen.h"
 
 1636037553 /home/florian/Documents/GitHub/Skydda/include/OptionScreen.h
 	"Screen.h"
 
-1636049441 /home/florian/Documents/GitHub/Skydda/include/TextInitializer.h
+1636050443 /home/florian/Documents/GitHub/Skydda/include/TextInitializer.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 
-1636049481 source:/home/florian/Documents/GitHub/Skydda/src/TextInitializer.cpp
+1636050443 source:/home/florian/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
 1636043454 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreen.cpp
@@ -3266,10 +3268,10 @@
 
 1635984118 /home/florian/Documents/GitHub/Skydda/include/Map.h
 
-1636050255 source:/home/florian/Documents/GitHub/Skydda/src/ChooseCharacterScreen.cpp
+1636071057 source:/home/florian/Documents/GitHub/Skydda/src/ChooseCharacterScreen.cpp
 	"ChooseCharacterScreen.h"
 
-1636050235 /home/florian/Documents/GitHub/Skydda/include/ChooseCharacterScreen.h
+1636050443 /home/florian/Documents/GitHub/Skydda/include/ChooseCharacterScreen.h
 	"Screen.h"
 
 1636049309 /home/damien/Documents/GitHub/Skydda/include/ScreenIncluder.h
@@ -3345,4 +3347,16 @@
 1636063248 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 	"Match.h"
+
+1636069133 source:/home/florian/Documents/GitHub/Skydda/src/Match.cpp
+	"Match.h"
+	<iostream>
+
+1636069133 /home/florian/Documents/GitHub/Skydda/include/Match.h
+	"Player.h"
+
+1636069133 source:/home/florian/Documents/GitHub/Skydda/src/MatchView.cpp
+	"MatchView.h"
+
+1636069133 /home/florian/Documents/GitHub/Skydda/include/MatchView.h
 

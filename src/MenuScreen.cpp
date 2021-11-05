@@ -3,19 +3,19 @@
 int MenuScreen::run(sf::RenderWindow &app) {
     sf::Event event;
 
+    sf::Vector2f mousePosition;
+
     int middleScreenX = app.getSize().x / 2.;
     int middleScreenY = app.getSize().y / 2.;
 
     Position position(middleScreenX, middleScreenY);
-    Position positionText(middleScreenX-75, middleScreenY-12);
-
+    Position positionText(middleScreenX - 75, middleScreenY - 12);
 
     /// Load background image
     sf::Texture textureBackground;
     sf::Sprite background = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
     /// Load buttons (clickable sprites)
-    /// GameScreen Button !!!!TMP -> need intermediate GUI
     sf::Texture textureButton; // Button texture
     sf::Sprite buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/button/button.png", position, &textureButton);
     // Text of buttonChooseCharacters
@@ -51,13 +51,12 @@ int MenuScreen::run(sf::RenderWindow &app) {
         }
 
         // Get the mouse position to verify if the user is over a sprite and/or click a sprite
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(app);
-        sf::Vector2f adaptedPosition = app.mapPixelToCoords(mousePosition);
+        mousePosition = getMousePosition(&app);
 
         /// Button play
-        if(buttonChooseCharacters.getGlobalBounds().contains(adaptedPosition)) {
+        if(buttonChooseCharacters.getGlobalBounds().contains(mousePosition)) {
             if(event.type == sf::Event::MouseButtonPressed) {
-                return 1; // GameScreen is in position 1 in screens (see main.cpp)
+                return 1; // ChooseCharacterScreen is in position 1 in screens (see main.cpp)
             }
             else { // The user sees that he is over a text
                 textChooseCharacters.setFillColor(sf::Color::Green);
@@ -68,9 +67,9 @@ int MenuScreen::run(sf::RenderWindow &app) {
         }
 
         /// Button options
-        if(buttonOptions.getGlobalBounds().contains(adaptedPosition)) {
+        if(buttonOptions.getGlobalBounds().contains(mousePosition)) {
             if(event.type == sf::Event::MouseButtonPressed) {
-                return 2;
+                return 3;
             }
             else {
                 textOptions.setFillColor(sf::Color::Green);
@@ -81,7 +80,7 @@ int MenuScreen::run(sf::RenderWindow &app) {
         }
 
         /// Button quit
-        if(buttonQuit.getGlobalBounds().contains(adaptedPosition)) {
+        if(buttonQuit.getGlobalBounds().contains(mousePosition)) {
             if(event.type == sf::Event::MouseButtonPressed) {
                 return -1;
             }

@@ -27,13 +27,16 @@ int main() {
 	int screen = 0;
 
 	/// Screens preparations
-	MenuScreen menuScreen;
+	MenuScreen menuScreen; // 0
 	screens.push_back(&menuScreen);
 
-	GameScreen gameScreen;
+	ChooseCharacterScreen chooseCharacterScreen; // 1
+	screens.push_back(&chooseCharacterScreen);
+
+	GameScreen gameScreen; // 2
 	screens.push_back(&gameScreen);
 
-	OptionScreen optionScreen;
+	OptionScreen optionScreen; // 3
 	screens.push_back(&optionScreen);
 
 	//Main loop

@@ -10,6 +10,8 @@
 class Screen {
     public:
         virtual int run(sf::RenderWindow &app) = 0;
+
+        sf::Vector2f getMousePosition(sf::RenderWindow *app) const;
 };
 
 #endif // SCREEN_H

@@ -53,7 +53,7 @@ int GameScreen::run(sf::RenderWindow &app) {
     sf::Text namePlayerP2 = healthBarViewP2.createNamePlayer(playerViewP2.getPlayer(), posNamePlayerP2);
 
     sf::Font font;
-    font.loadFromFile("resources/fonts/arial.ttf");
+    font.loadFromFile("resources/fonts/glitch.otf");
     namePlayerP1.setFont(font);
     namePlayerP2.setFont(font);
 
