@@ -39,7 +39,7 @@ int main() {
 	OptionScreen optionScreen; // 3
 	screens.push_back(&optionScreen);
 
-	std::vector<string> data;
+	std::vector<std::string> data;
 	//Main loop
 	while (screen >= 0) {
 		if(screen != 2) screen = screens[screen]->run(app, data, 0);

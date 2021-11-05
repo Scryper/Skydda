@@ -19,7 +19,6 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     game = Game(playerViewP1.getPlayer(), playerViewP2.getPlayer());
 
     while(app.isOpen()) {
-
         deltaTime = clock.restart().asMilliseconds();
 
         while(app.pollEvent(event)) {
@@ -42,8 +41,8 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
         if(game.getPlayerWin() == 0) {
             if(game.getPlayer1().getHealth() == 0) {
                 game.incrementRoundWinP2();
-                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
-                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
+                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY() - 500);
+                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY() - 500);
                 if(game.getPlayerWin() == 0) {
                     game.getPlayer1().setHealth(100.f);
                     game.getPlayer2().setHealth(100.f);
@@ -51,9 +50,9 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
             }
             if(game.getPlayer2().getHealth() == 0) {
                 game.incrementRoundWinP1();
-                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
-                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
-                if(game.getPlayerWin() == 0){
+                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY() - 500);
+                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY() - 500);
+                if(game.getPlayerWin() == 0) {
                     game.getPlayer1().setHealth(100.f);
                     game.getPlayer2().setHealth(100.f);
                 }
@@ -99,8 +98,8 @@ Game& GameScreen::getGame() {
 }
 
 void GameScreen::createRoundCircles() {
-    Position posP1(60.f,135.f);
-    Position posP2(1360.f,135.f);
+    Position posP1(60.f, 135.f);
+    Position posP2(1360.f, 135.f);
 
     sf::CircleShape roundCircle(10);
     roundCircle.setFillColor(sf::Color::Transparent);
@@ -108,23 +107,23 @@ void GameScreen::createRoundCircles() {
     roundCircle.setOutlineColor(sf::Color::Black);
 
     // P1
-    roundCircle.setPosition(posP1.getX(),posP1.getY());
+    roundCircle.setPosition(posP1.getX(), posP1.getY());
     roundCirclesP1.push_back(roundCircle);
 
-    roundCircle.setPosition(posP1.getX()+50,posP1.getY());
+    roundCircle.setPosition(posP1.getX() + 50, posP1.getY());
     roundCirclesP1.push_back(roundCircle);
 
-    roundCircle.setPosition(posP1.getX()+100,posP1.getY());
+    roundCircle.setPosition(posP1.getX() + 100, posP1.getY());
     roundCirclesP1.push_back(roundCircle);
 
     // P2
-    roundCircle.setPosition(posP2.getX()+200,posP2.getY());
+    roundCircle.setPosition(posP2.getX() + 200, posP2.getY());
     roundCirclesP2.push_back(roundCircle);
 
-    roundCircle.setPosition(posP2.getX()+250,posP2.getY());
+    roundCircle.setPosition(posP2.getX() + 250, posP2.getY());
     roundCirclesP2.push_back(roundCircle);
 
-    roundCircle.setPosition(posP2.getX()+300,posP2.getY());
+    roundCircle.setPosition(posP2.getX() + 300, posP2.getY());
     roundCirclesP2.push_back(roundCircle);
 
 }
@@ -204,7 +203,7 @@ void GameScreen::initPlayers(){
 }
 
 void GameScreen::initMap(){
-    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background1.png", position, &textureBackground);
+    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_battle.png", position, &textureBackground);
     //loading the first map
     map_ = MapView(mapSeed, &textureBrick, "resources/images/platform/platform_default.png");
     //get all the platforms from the map

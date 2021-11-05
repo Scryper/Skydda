@@ -76,7 +76,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     ///////////// DIRECTION X /////////////
 
     // if X direction = 0 -> slow down
-    if(directionX == 0){
+    if(directionX == 0) {
         // if speed goes towards right and (speed - acceleration) > 0
         if(speedX > 0 && speedX - accelerationX >= 0) {
             speed.setX(speedX - accelerationX);
@@ -98,11 +98,11 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     // x direction != 0
     else {
         // we verify we go toxards left with negative max speed or more
-        if(left && speedX<=-maxSpeedX) {
+        if(left && speedX <= -maxSpeedX) {
             speed.setX(-maxSpeedX); // we can't have speed > maxSpeed
         }
         // we verify we go towards right with positive maxSpeed or more
-        else if(right && speedX >= maxSpeedX){
+        else if(right && speedX >= maxSpeedX) {
             speed.setX(maxSpeedX); // we can't have speed > maxSpeed
         }
         // if the player is not moving at max speed, we increment the speed in the correct direction
@@ -119,7 +119,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     // if y direction = 0 -> gravity gives vertical speed
     if(directionY == 0){
         // if the player moves at max speed
-        if(speedY >= maxSpeedY){
+        if(speedY >= maxSpeedY) {
             speed.setY(maxSpeedY);
         }
         else{
@@ -179,11 +179,11 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     }
 
     for(auto i : coll){
-        if(i[0]==1||i[0]==2){
+        if(i[0] == 1 || i[0] == 2){
             speed.setY(0);
             position.setY(i[1]);
         }
-        if(i[0]==3||i[0]==4){
+        if(i[0] == 3 || i[0] == 4){
             speed.setX(0);
             position.setX(i[1]);
         }

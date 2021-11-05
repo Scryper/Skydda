@@ -7,7 +7,6 @@
 #include "Player.h"
 #include "TextInitializer.h"
 
-
 class HealthBarView {
     private:
         HealthBar healthBar;
@@ -37,8 +36,6 @@ class HealthBarView {
         void actualiseSizeHealthBarOut();
 
         sf::Text createNamePlayer(Player player, Position posHealthBar);
-
-
 };
 
 #endif // HEALTHBARVIEW_H

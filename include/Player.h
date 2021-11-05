@@ -6,8 +6,6 @@
 #include "Position.h"
 #include "Movement.h"
 
-using namespace std;
-
 /*This class represents a player.*/
 class Player {
     private:
@@ -32,7 +30,7 @@ class Player {
         Position getPosition() const;
 
         float getHealth()const;
-        string getName()const;
+        std::string getName()const;
 
         void setHealth(float health);
 
@@ -50,7 +48,7 @@ class Player {
 
         void setPosition(Position position);
         void setPosition(float x, float y);
-        Position updatePosition(Position position, CoupleFloat coupleFloat,std::vector<std::vector<std::vector<int>>> collisions);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
 };
 
 #endif // PLAYER_H

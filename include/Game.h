@@ -3,15 +3,13 @@
 
 #include "Player.h"
 
-
-class Game
-{
+class Game {
     private:
         Player* player1;
         Player* player2;
         int roundWinP1;
         int roundWinP2;
-        int MAX_ROUND=3; //const static
+        int MAX_ROUND = 3; //const static
 
     public:
         Game();
@@ -31,7 +29,6 @@ class Game
         int getPlayerWin();
 
         void win();
-
 };
 
 #endif // GAME_H

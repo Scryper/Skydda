@@ -6,15 +6,14 @@
 #include<PlatformView.h>
 #include<ObjectInitializer.h>
 
-class MapView
-{
+class MapView {
     private:
         std::vector<PlatformView> platforms;
         std::vector<PlatformView> border;
 
     public:
         MapView();
-        MapView(int seed, sf::Texture *platformTexture, string path);
+        MapView(int seed, sf::Texture *platformTexture, std::string path);
         virtual ~MapView();
         std::vector<PlatformView> getBorders()const;
         std::vector<PlatformView> getPlatforms()const;

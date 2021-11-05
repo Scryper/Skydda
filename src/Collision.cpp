@@ -3,7 +3,7 @@
 std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView platform) {
     sf::FloatRect playerBounds = player.getSprite().getGlobalBounds();
     sf::FloatRect platformBounds = platform.getSprite().getGlobalBounds();
-    std::vector<std::vector<int>> v;
+    std::vector<std::vector<int>> collisions;
 
     //1 : Bottom, 2 : Top, 3 : Right, 4 : Left
     if(playerBounds.intersects(platformBounds)) {
@@ -21,174 +21,173 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
         float platformLeft = platformBounds.left;
         float platformRigth = platformLeft + platformHSize;
 
-        // Right platform
-            // le left du player doit etre plus petit que le rigth de la plateforme
-            //le rigth du player doit etre plus grand que le rigth de la plateforme
-            //le bas du joueur doit etre plus grand que le haut de la plateforme ET
-            // la haut du joueur doit etre plus petit que le bas de la plateforme
+        /// Right platform
+        // player's left should be < than platform's right
+        // player's right should be > than platform's right
+        // player's bottom should be > than platform's top
+        // player's top should be < than platform's bottom
         if(playerLeft < platformRigth
            &&  playerRigth > platformRigth
            &&  playerTop < platformBottom - 30
            &&  playerBottom > platformTop + 30
            ) {
-            std::vector <int> temp;
-            temp.push_back(3);
-            temp.push_back(platformRigth + std::floor(playerHSize/2) +1);
-            v.push_back(temp);
+            std::vector <int> tmp;
+            tmp.push_back(3);
+            tmp.push_back(platformRigth + std::floor(playerHSize / 2) + 1);
+            collisions.push_back(tmp);
         }
 
-        // Left platform
-            //le rigth du player doit etre plus grand que le left de la plateforme
-            //le left du player doit etre plus petit que le lefts de la plateforme
+        /// Left platform
+        // player's right should be > than platform's left
+        // player's left should be < than platform's left
         if(playerRigth > platformLeft
            &&  playerLeft < platformLeft
            &&  playerTop < platformBottom - 30
            && playerBottom > platformTop + 30
            ){
-            std::vector <int> temp;
-            temp.push_back(4);
-            temp.push_back(platformLeft - std::floor(playerHSize/2) -1);
-            v.push_back(temp);
+            std::vector <int> tmp;
+            tmp.push_back(4);
+            tmp.push_back(platformLeft - std::floor(playerHSize / 2) - 1);
+            collisions.push_back(tmp);
         }
 
-
-        //Bottom platform
-            //le top du player doit etre plu petit que le bottom de la plateforme
-            //le bottom du player doit etre plus grand que le bottom de la plateforme
+        /// Bottom platform
+        // player's top should be < than platform's bottom
+        // player's bottom should be > than platform's bottom
         if(playerTop < platformBottom
             && playerBottom > platformBottom
             && (playerLeft < platformRigth - 10)
             && (playerRigth > platformLeft + 10)
            ) {
-            std::vector <int> temp;
-            temp.push_back(1);
-            temp.push_back(platformBottom + std::floor(playerVSize/2) - 1);
-            v.push_back(temp);
+            std::vector <int> tmp;
+            tmp.push_back(1);
+            tmp.push_back(platformBottom + std::floor(playerVSize / 2) - 1);
+            collisions.push_back(tmp);
         }
-        // Top platform
-            //le bottom du player doit etre plus grand que le top de la plateforme
-            //le top du player doit etre plus petit que le top de la plateforme
-            //la gauche du player ne doit pas etre en contact avec la paroi => doit etre plus grande que la droite de la plateforme
+
+        /// Top platform
+        // player's bottom shouuld be > than platform's bottom
+        // player's top shouuld be < than platform's top
+        // player's left should not touch border -> should be > than platform's right
         if(playerBottom > platformTop
            &&  playerTop < platformTop
            && (playerLeft < platformRigth - 10)
            && (playerRigth > platformLeft + 10)
            ) {
-            std::vector <int> temp;
-            temp.push_back(2);
-            temp.push_back(platformTop - std::floor(playerVSize/2) + 1 );
-            v.push_back(temp);
+            std::vector <int> tmp;
+            tmp.push_back(2);
+            tmp.push_back(platformTop - std::floor(playerVSize / 2) + 1);
+            collisions.push_back(tmp);
         }
-        return v;
+        return collisions;
 
     } else {
-        std::vector <int> temp;
-        temp.push_back(-1);
-        temp.push_back(0);
-        v.push_back(temp);
-        return v;
+        std::vector <int> tmp;
+        tmp.push_back(-1);
+        tmp.push_back(0);
+        collisions.push_back(tmp);
+        return collisions;
     }
-    std::vector <int> temp;
-    temp.push_back(-2);
-    temp.push_back(0);
-    v.push_back(temp);
-    return v;
+    std::vector <int> tmp;
+    tmp.push_back(-2);
+    tmp.push_back(0);
+    collisions.push_back(tmp);
+    return collisions;
 }
 
-std::vector<std::vector<int>> directionCollisionPlayers(PlayerView player, PlayerView platform) {
-    sf::FloatRect playerBounds = player.getSprite().getGlobalBounds();
-    sf::FloatRect platformBounds = platform.getSprite().getGlobalBounds();
-    std::vector<std::vector<int>> v;
+std::vector<std::vector<int>> directionCollisionPlayers(PlayerView playerview1, PlayerView playerview2) {
+    sf::FloatRect player1Bounds = playerview1.getSprite().getGlobalBounds();
+    sf::FloatRect player2Bounds = playerview2.getSprite().getGlobalBounds();
+    std::vector<std::vector<int>> collisions;
 
     //1 : Bottom, 2 : Top, 3 : Right, 4 : Left
-    if(playerBounds.intersects(platformBounds)) {
-        float playerVSize = playerBounds.height;
-        float playerHSize = playerBounds.width;
-        float playerTop = playerBounds.top;
+    if(player1Bounds.intersects(player2Bounds)) {
+        float playerVSize = player1Bounds.height;
+        float playerHSize = player1Bounds.width;
+        float playerTop = player1Bounds.top;
         float playerBottom = playerTop + playerVSize;
-        float playerLeft = playerBounds.left;
+        float playerLeft = player1Bounds.left;
         float playerRigth = playerLeft + playerHSize;
 
-        float platformVSize = platformBounds.height;
-        float platformHSize = platformBounds.width;
-        float platformTop = platformBounds.top;
+        float platformVSize = player2Bounds.height;
+        float platformHSize = player2Bounds.width;
+        float platformTop = player2Bounds.top;
         float platformBottom = platformTop + platformVSize;
-        float platformLeft = platformBounds.left;
+        float platformLeft = player2Bounds.left;
         float platformRigth = platformLeft + platformHSize;
 
-        // Right platform
-            // le left du player doit etre plus petit que le rigth de la plateforme
-            //le rigth du player doit etre plus grand que le rigth de la plateforme
-            //le bas du joueur doit etre plus grand que le haut de la plateforme ET
-            // la haut du joueur doit etre plus petit que le bas de la plateforme
+        /// Right
+        // player 1's left should be < than player 2's right
+        // player 1's right should be > than player 2's right
+        // player 1's bottom should be > than player 2's top
+        // player 1's top should be < than player 2's bottom
         if(playerLeft < platformRigth
            &&  playerRigth > platformRigth
            &&  playerTop < platformBottom
            &&  playerBottom > platformTop
            ) {
-            std::vector <int> temp;
-            temp.push_back(3);
-            v.push_back(temp);
+            std::vector <int> tmp;
+            tmp.push_back(3);
+            collisions.push_back(tmp);
         }
 
-        // Left platform
-            //le rigth du player doit etre plus grand que le left de la plateforme
-            //le left du player doit etre plus petit que le lefts de la plateforme
+        /// Left
+        // player 1's right should be > than player 2's left
+        // player 1's left should be < than player 2's left
         if(playerRigth > platformLeft
            &&  playerLeft < platformLeft
            &&  playerTop < platformBottom
            && playerBottom > platformTop
            ){
-            std::vector <int> temp;
-            temp.push_back(4);
-            v.push_back(temp);
+            std::vector <int> tmp;
+            tmp.push_back(4);
+            collisions.push_back(tmp);
         }
 
-
-        //Bottom platform
-            //le top du player doit etre plu petit que le bottom de la plateforme
-            //le bottom du player doit etre plus grand que le bottom de la plateforme
+        /// Bottom
+        // player 1's top should be < than player 2's bottom
+        // player 1's bottom should be > than player 2's bottom
         if(playerTop < platformBottom
             && playerBottom > platformBottom
             && (playerLeft < platformRigth )
             && (playerRigth > platformLeft)
            ) {
-            std::vector <int> temp;
-            temp.push_back(1);
-            v.push_back(temp);
+            std::vector <int> tmp;
+            tmp.push_back(1);
+            collisions.push_back(tmp);
         }
-        // Top platform
-            //le bottom du player doit etre plus grand que le top de la plateforme
-            //le top du player doit etre plus petit que le top de la plateforme
-            //la gauche du player ne doit pas etre en contact avec la paroi => doit etre plus grande que la droite de la plateforme
+
+        /// Top
+        // player 1's bottom shouuld be > than player 2's bottom
+        // player 1's top shouuld be < than player 2's top
+        // player 1's left should not touch border -> should be > than player 2's right
         if(playerBottom > platformTop
            &&  playerTop < platformTop
            && (playerLeft < platformRigth)
            && (playerRigth > platformLeft)
            ) {
-            std::vector <int> temp;
-            temp.push_back(2);
-            v.push_back(temp);
+            std::vector <int> tmp;
+            tmp.push_back(2);
+            collisions.push_back(tmp);
         }
-        return v;
+        return collisions;
 
     } else {
-        std::vector <int> temp;
-        temp.push_back(-1);
-        v.push_back(temp);
-        return v;
+        std::vector <int> tmp;
+        tmp.push_back(-1);
+        collisions.push_back(tmp);
+        return collisions;
     }
-    std::vector <int> temp;
-    temp.push_back(-2);
-    v.push_back(temp);
-    return v;
+    std::vector <int> tmp;
+    tmp.push_back(-2);
+    collisions.push_back(tmp);
+    return collisions;
 }
 
 std::vector<std::vector<std::vector<int>>> directionCollisions(PlayerView player, std::vector<PlatformView> platforms){
-
-    std::vector<std::vector <std::vector<int>>> test;
-    for(auto i : platforms){
-        test.push_back(directionCollision(player, i));
+    std::vector<std::vector<std::vector<int>>> collisions;
+    for(PlatformView platformView : platforms){
+        collisions.push_back(directionCollision(player, platformView));
     }
-    return test;
+    return collisions;
 }

@@ -38,7 +38,7 @@ PlayerView createPlayer(float sizeX,
                         float sizeY,
                         float width,
                         float height,
-                        string pathToPlayer,
+                        std::string pathToPlayer,
                         Position playerPosition,
                         sf::Texture *playerTexture,
                         sf::Keyboard::Key up,
@@ -72,7 +72,7 @@ PlayerView createPlayer(float sizeX,
     float atk = 50.f;
 
     Player player(namePlayerStr, atk, false, 100, playerPosition, movement);
-    PlayerView playerView(playerSprite, player,keys,looksRight, sizeCouple);
+    PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple);
     return playerView;
 }
 
