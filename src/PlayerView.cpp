@@ -6,11 +6,7 @@ PlayerView::PlayerView() {
     this->sprite = defaultSprite;
     Player defaultPlayer;
     this->player = defaultPlayer;
-    /*this->texture.loadFromFile("resources/images/character/test.png");
-    this->sprite.setTexture(texture);
-    sf::IntRect rectSourceSprite(0, 0, 80, 40);
-    this->sprite.setTextureRect(rectSourceSprite);
-    tour = 0;*/
+    //createAnimation();
 }
 
 PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack) {
@@ -21,23 +17,15 @@ PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf
     this->right = right;
     this->attackKey = attack;
     this->looksRight = true;
-    /*this->texture.loadFromFile("resources/images/character/test.png");
-    this->sprite.setTexture(texture);
-    sf::IntRect rectSourceSprite(0, 0, 80, 40);
-    this->sprite.setTextureRect(rectSourceSprite);
-        tour = 0;
-*/
+    //createAnimation();
+
 }
 
 PlayerView::PlayerView(const PlayerView& other) {
     this->sprite = other.sprite;
     this->player = other.player;
-    /*this->texture.loadFromFile("resources/images/character/test.png");
-    this->sprite.setTexture(texture);
-    sf::IntRect rectSourceSprite(0, 0, 80, 40);
-    this->sprite.setTextureRect(rectSourceSprite);
-        tour = 0;
-*/
+    //createAnimation();
+
 }
 
 PlayerView::~PlayerView() { }
@@ -76,18 +64,8 @@ void PlayerView::movePlayer(sf::Vector2f vectorDirection, std::vector<std::vecto
 }
 
 sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
-    /*if (this->clock.getElapsedTime().asSeconds() >= 2.0f){
-
-        if (this->tour == 3){
-            this->tour = 0;
-        }
-        else{
-            this->tour += 1;
-        }
-        this->sprite.setTextureRect(sf::IntRect(tour*80, 0, 80, 40));
-        this->clock.restart();
-    }*/
-
+    //int state = 0;
+    //int maxFrame = 2;
      sf::Vector2f vector2f(0.f, 0.f);
 
      if(player.isAlive()) {
@@ -96,9 +74,13 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
             vector2f.y += -deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(left)) {
+      //      state = 7;
+        //    maxFrame = 10;
             vector2f.x += -deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(right)) {
+          //  state = 7;
+            //maxFrame = 10;
             vector2f.x += deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(attackKey)){
@@ -112,6 +94,7 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
              }
         }
     }
+    //animate(state,maxFrame);
     return vector2f;
 }
 
@@ -141,3 +124,28 @@ void PlayerView::setHealth(float health) {
     player.setHealth(health);
 }
 
+void PlayerView::animate(int state, int maxFrame)
+{
+    maxFrame -= 1;
+    if (this->clock.getElapsedTime().asSeconds() >= 2.0f){
+
+        if (this->tour == maxFrame || state != lastState){
+            this->tour = 0;
+        }
+        else{
+            this->tour += 1;
+        }
+        lastState = state;
+        this->sprite.setTextureRect(sf::IntRect(tour*72.8f, state*78.375f, 72.8f, 78.375f));
+        this->clock.restart();
+    }
+}
+
+void PlayerView::createAnimation()
+{
+    this->texture.loadFromFile("resources/images/character/link.png");
+    this->sprite.setTexture(texture);
+    sf::IntRect rectSourceSprite(0, 0, 72.8f, 78.375f);
+    this->sprite.setTextureRect(rectSourceSprite);
+    tour = 0;
+}
