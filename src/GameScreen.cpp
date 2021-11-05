@@ -1,6 +1,5 @@
 #include "GameScreen.h"
-#include "Match.h"
-#include "MatchView.h"
+
 
 int GameScreen::run(sf::RenderWindow &app) {
     sf::Event event;
@@ -8,87 +7,13 @@ int GameScreen::run(sf::RenderWindow &app) {
     float deltaTime;
     sf::Clock clock;
 
-    Position position = getScreenCenter(&app);
-    Position positionP1(position.getX() - 500, position.getY());
-    Position positionP2(position.getX() + 500, position.getY());
+    position = getScreenCenter(&app);
 
-    CoupleFloat scaleP1(2.f, 2.f);
-    CoupleFloat scaleP2(2.f, 2.f);
-    CoupleFloat textureLink(72.8f, 78.375f);
+    initMap();
+    initPlayers();
+    initHealthBars();
 
-    sf::Texture textureBackground;
-    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background1.png", position, &textureBackground);
-
-    // Load sprite of player
-    sf::Texture texturePlayerP1;
-    PlayerView playerViewP1 = createPlayer(scaleP1.getX(),
-                                           scaleP1.getY(),
-                                           textureLink.getX(),
-                                           textureLink.getY(),
-                                           "resources/images/character/link.png",
-                                           positionP1,
-                                           &texturePlayerP1,
-                                           sf::Keyboard::Z,
-                                           sf::Keyboard::Q,
-                                           sf::Keyboard::D,
-                                           sf::Keyboard::S,
-                                           sf::Keyboard::LShift,
-                                           true,
-                                           "Scryper");
-
-    sf::Texture texturePlayerP2;
-    PlayerView playerViewP2 = createPlayer(scaleP2.getX(),
-                                            scaleP2.getY(),
-                                            textureLink.getX(),
-                                            textureLink.getY(),
-                                            "resources/images/character/link.png",
-                                            positionP2,
-                                            &texturePlayerP2,
-                                            sf::Keyboard::Up,
-                                            sf::Keyboard::Left,
-                                            sf::Keyboard::Right,
-                                            sf::Keyboard::Down,
-                                            sf::Keyboard::RShift,
-                                            false,
-                                            "Damien");
-    playerViewP2.flipSprite();
-
-    //load texture for platforms
-    sf::Texture textureBrick;
-
-    //loading the first map
-    MapView map1(1, &textureBrick, "resources/images/platform/platform_default.png");
-
-    //get all the platforms from the map
-    vector<PlatformView> platforms = map1.getAllCollisions();
-
-    // Create HealthBar
-    Position posHealthBarP1(50.f, 50.f);
-    Position posHealthBarP2(1550.f, 50.f);
-
-    HealthBarView healthBarViewP1 = createHealthBar(playerViewP1.getPlayer(), posHealthBarP1);
-    HealthBarView healthBarViewP2 = createHealthBar(playerViewP2.getPlayer(), posHealthBarP2);
-
-    // Create posNamePlayer
-    Position posNamePlayerP1(50.f, 80.f);
-    Position posNamePlayerP2(1550.f, 80.f);
-    sf::Text namePlayerP1 = healthBarViewP1.createNamePlayer(playerViewP1.getPlayer(), posNamePlayerP1);
-    sf::Text namePlayerP2 = healthBarViewP2.createNamePlayer(playerViewP2.getPlayer(), posNamePlayerP2);
-
-    sf::Font font;
-    font.loadFromFile("resources/fonts/glitch.otf");
-    namePlayerP1.setFont(font);
-    namePlayerP2.setFont(font);
-
-
-    Match match(playerViewP1.getPlayer(), playerViewP2.getPlayer());
-
-    MatchView matchView(match);
-
-    Position posRoundCirclesP1(60.f,135.f);
-    Position posRoundCirclesP2(1360.f,135.f);
-
-    matchView.createRoundCircles(posRoundCirclesP1,posRoundCirclesP2);
+    game = Game(playerViewP1.getPlayer(), playerViewP2.getPlayer());
 
     while(app.isOpen()) {
 
@@ -99,48 +24,40 @@ int GameScreen::run(sf::RenderWindow &app) {
                 return -1;
             }
         }
+        //verif l'input
+        //attaquer si poss
+        //vérif et update les manches la vie et le reste -> va update la position SI MORT
+        //update la position en fonction de cette nouvelle position
 
-        playerViewP1.movePlayer(
-                                    playerViewP1.inputPlayer(deltaTime, playerViewP2),
-                                    directionCollisions(playerViewP1, platforms)
-                                );
-
-        playerViewP2.movePlayer(
-                                    playerViewP2.inputPlayer(deltaTime, playerViewP1),
-                                    directionCollisions(playerViewP2, platforms)
-                                );
+        playerUpdate();
 
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-         if(matchView.getMatch().getPlayerWin() == 0) {
-            if(playerViewP1.getPlayer().getHealth() == 0) {
-                matchView.getMatch().incrementRoundWinP2();
-
-//                cout << "pos : " << positionP1.getX() << ", " << positionP1.getY() << endl;
-                matchView.getMatch().getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
-                matchView.getMatch().getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
-
-                if(matchView.getMatch().getPlayerWin() == 0) {
-                        playerViewP1.setHealth(100.f);
-                        playerViewP2.setHealth(100.f);
+        if(game.getPlayerWin() == 0) {
+            if(game.getPlayer1().getHealth() == 0) {
+                game.incrementRoundWinP2();
+                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
+                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
+                if(game.getPlayerWin() == 0) {
+                        game.getPlayer1().setHealth(100.f);
+                        game.getPlayer2().setHealth(100.f);
                 }
             }
-            if(playerViewP2.getPlayer().getHealth() == 0) {
-                matchView.getMatch().incrementRoundWinP1();
-
-//                cout << "pos : " << positionP1.getX() << ", " << positionP1.getY() << endl;
-                matchView.getMatch().getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
-                matchView.getMatch().getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
-
-                if(matchView.getMatch().getPlayerWin() == 0){
-                        playerViewP1.setHealth(100.f);
-                        playerViewP2.setHealth(100.f);
+            if(game.getPlayer2().getHealth() == 0) {
+                game.incrementRoundWinP1();
+                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
+                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
+                if(game.getPlayerWin() == 0){
+                        game.getPlayer1().setHealth(100.f);
+                        game.getPlayer2().setHealth(100.f);
                 }
             }
         } else {
-            matchView.getMatch().win();
+            game.win();
         }
+
+        movePlayers(deltaTime);
 
         app.clear();
 
@@ -155,15 +72,15 @@ int GameScreen::run(sf::RenderWindow &app) {
 
 
 
-        for(auto i : matchView.getRoundCirclesP1()){
+        for(auto i : getRoundCirclesP1()){
             app.draw(i);
         }
 
-        for(auto i : matchView.getRoundCirclesP2()){
+        for(auto i : getRoundCirclesP2()){
             app.draw(i);
         }
 
-       matchView.actualiseRoundCircles();
+        actualiseRoundCircles();
 
         app.draw(healthBarViewP1.getHealthBarIn());
         app.draw(healthBarViewP1.getHealthBarOut());
@@ -178,4 +95,159 @@ int GameScreen::run(sf::RenderWindow &app) {
     }
 
     return -1;
+}
+
+Game& GameScreen::getGame() {
+    return game;
+}
+
+void GameScreen::createRoundCircles() {
+    Position posP1(60.f,135.f);
+    Position posP2(1360.f,135.f);
+
+    sf::CircleShape roundCircle(10);
+    roundCircle.setFillColor(sf::Color::Transparent);
+    roundCircle.setOutlineThickness(3);
+    roundCircle.setOutlineColor(sf::Color::Black);
+
+    // P1
+    roundCircle.setPosition(posP1.getX(),posP1.getY());
+    roundCirclesP1.push_back(roundCircle);
+
+    roundCircle.setPosition(posP1.getX()+50,posP1.getY());
+    roundCirclesP1.push_back(roundCircle);
+
+    roundCircle.setPosition(posP1.getX()+100,posP1.getY());
+    roundCirclesP1.push_back(roundCircle);
+
+    // P2
+    roundCircle.setPosition(posP2.getX()+200,posP2.getY());
+    roundCirclesP2.push_back(roundCircle);
+
+    roundCircle.setPosition(posP2.getX()+250,posP2.getY());
+    roundCirclesP2.push_back(roundCircle);
+
+    roundCircle.setPosition(posP2.getX()+300,posP2.getY());
+    roundCirclesP2.push_back(roundCircle);
+
+}
+
+void GameScreen::actualiseRoundCircles() {
+
+    switch(game.getRoundWinP1()) {
+        case 1:
+            roundCirclesP1[0].setFillColor(sf::Color::White);
+            break;
+        case 2:
+            roundCirclesP1[1].setFillColor(sf::Color::White);
+            break;
+        case 3:
+            roundCirclesP1[2].setFillColor(sf::Color::White);
+            break;
+    }
+    switch(game.getRoundWinP2()) {
+        case 1:
+            roundCirclesP2[0].setFillColor(sf::Color::White);
+            break;
+        case 2:
+            roundCirclesP2[1].setFillColor(sf::Color::White);
+            break;
+        case 3:
+            roundCirclesP2[2].setFillColor(sf::Color::White);
+            break;
+    }
+}
+
+std::vector<sf::CircleShape> GameScreen::getRoundCirclesP1() {
+    return roundCirclesP1;
+}
+
+std::vector<sf::CircleShape> GameScreen::getRoundCirclesP2() {
+    return roundCirclesP2;
+}
+
+void GameScreen::initPlayers(){
+    positionP1= Position(position.getX() - 500, position.getY());
+    positionP2= Position(position.getX() + 500, position.getY());
+
+    CoupleFloat scaleP1(2.f, 2.f);
+    CoupleFloat scaleP2(2.f, 2.f);
+    CoupleFloat textureLink(72.8f, 78.375f);
+
+    // Load sprite of player
+    playerViewP1 = createPlayer(scaleP1.getX(),
+                                           scaleP1.getY(),
+                                           textureLink.getX(),
+                                           textureLink.getY(),
+                                           "resources/images/character/link.png",
+                                           positionP1,
+                                           &texturePlayerP1,
+                                           sf::Keyboard::Z,
+                                           sf::Keyboard::Q,
+                                           sf::Keyboard::D,
+                                           sf::Keyboard::S,
+                                           sf::Keyboard::LShift,
+                                           true,
+                                           "Scryper");
+
+    playerViewP2 = createPlayer(scaleP2.getX(),
+                                            scaleP2.getY(),
+                                            textureLink.getX(),
+                                            textureLink.getY(),
+                                            "resources/images/character/link.png",
+                                            positionP2,
+                                            &texturePlayerP2,
+                                            sf::Keyboard::Up,
+                                            sf::Keyboard::Left,
+                                            sf::Keyboard::Right,
+                                            sf::Keyboard::Down,
+                                            sf::Keyboard::RShift,
+                                            false,
+                                            "Damien");
+    playerViewP2.flipSprite();
+}
+
+
+void GameScreen::initMap(){
+
+    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background1.png", position, &textureBackground);
+    //loading the first map
+    map1 = MapView(1, &textureBrick, "resources/images/platform/platform_default.png");
+    //get all the platforms from the map
+    platforms = map1.getAllCollisions();
+}
+
+void GameScreen::initHealthBars(){
+        // Create HealthBar
+    Position posHealthBarP1(50.f, 50.f);
+    Position posHealthBarP2(1550.f, 50.f);
+
+    healthBarViewP1 = createHealthBar(playerViewP1.getPlayer(), posHealthBarP1);
+    healthBarViewP2 = createHealthBar(playerViewP2.getPlayer(), posHealthBarP2);
+
+    // Create posNamePlayer
+    Position posNamePlayerP1(50.f, 80.f);
+    Position posNamePlayerP2(1550.f, 80.f);
+    namePlayerP1 = healthBarViewP1.createNamePlayer(playerViewP1.getPlayer(), posNamePlayerP1);
+    namePlayerP2 = healthBarViewP2.createNamePlayer(playerViewP2.getPlayer(), posNamePlayerP2);
+
+
+    font.loadFromFile("resources/fonts/glitch.otf");
+    namePlayerP1.setFont(font);
+    namePlayerP2.setFont(font);
+
+    createRoundCircles();
+}
+
+void GameScreen::movePlayers(float deltaTime){
+    playerViewP1.movePlayer(playerViewP1.computeCoupleMovement(),
+                                directionCollisions(playerViewP1, platforms));
+
+    playerViewP2.movePlayer(playerViewP2.computeCoupleMovement(),
+                                directionCollisions(playerViewP2, platforms));
+}
+
+void GameScreen::playerUpdate(){
+    playerViewP1.updateState(playerViewP2);
+    playerViewP2.updateState(playerViewP1);
 }

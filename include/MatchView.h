@@ -2,17 +2,17 @@
 #define MATCHVIEW_H
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "Match.h"
+#include "Game.h"
 
 class MatchView {
     private:
-        Match match;
+        Game game;
         std::vector<sf::CircleShape> roundCirclesP1;
         std::vector<sf::CircleShape> roundCirclesP2;
 
     public:
         MatchView();
-        MatchView(Match& match);
+        MatchView(Game& game);
         virtual ~MatchView();
         MatchView(const MatchView& other);
 
@@ -21,7 +21,7 @@ class MatchView {
         std::vector<sf::CircleShape> getRoundCirclesP1();
         std::vector<sf::CircleShape> getRoundCirclesP2();
 
-        Match& getMatch();
+        Game& getGame();
 };
 
 #endif // MATCHVIEW_H

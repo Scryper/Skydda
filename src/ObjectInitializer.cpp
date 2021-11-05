@@ -55,6 +55,12 @@ PlayerView createPlayer(float sizeX,
     float jumpHeight = 25.f;
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
+    std::vector<sf::Keyboard::Key> keys;
+    keys.push_back(up);
+    keys.push_back(left);
+    keys.push_back(right);
+    keys.push_back(attack);
+    keys.push_back(protect);
     CoupleFloat sizeCouple(sizeX, sizeY);
     Size sizeOfSprite(sizeCouple);
 
@@ -66,7 +72,7 @@ PlayerView createPlayer(float sizeX,
     float atk = 50.f;
 
     Player player(namePlayerStr, atk, false, 100, playerPosition, movement);
-    PlayerView playerView(playerSprite, player,up,left,right,attack, protect,looksRight, sizeCouple);
+    PlayerView playerView(playerSprite, player,keys,looksRight, sizeCouple);
     return playerView;
 }
 

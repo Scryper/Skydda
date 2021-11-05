@@ -13,6 +13,7 @@ class MapView
         std::vector<PlatformView> border;
 
     public:
+        MapView();
         MapView(int seed, sf::Texture *platformTexture, string path);
         virtual ~MapView();
         std::vector<PlatformView> getBorders()const;

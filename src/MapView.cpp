@@ -1,5 +1,7 @@
 #include "MapView.h"
 
+MapView::MapView(){}
+
 MapView::MapView(int seed, sf::Texture *platformTexture, string path) {
     if(seed == 1) {
         border = createBorder(path, platformTexture);
