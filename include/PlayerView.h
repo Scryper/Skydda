@@ -43,7 +43,6 @@ class PlayerView {
         Position computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
         void movePlayer(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
 
-        void createAnimation();
         void animate(int state, int maxFrame);
 };
 

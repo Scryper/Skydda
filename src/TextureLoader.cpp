@@ -5,6 +5,5 @@ sf::Sprite loadTexture(std::string path, sf::Texture& texture) {
         std::cout << "Texture was not found at " << path << std::endl;
     }
     sf::Sprite sprite(texture);
-
     return sprite;
 }

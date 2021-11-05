@@ -17,7 +17,7 @@ int GameScreen::run(sf::RenderWindow &app) {
 
     // Load sprite of player
     sf::Texture texturePlayerP1;
-    PlayerView playerViewP1 = createPlayer(4.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP1,
+    PlayerView playerViewP1 = createPlayer(2.f, 2.f, 72.8f, 78.375f, "resources/images/character/link.png", position, &texturePlayerP1,
                                          "dotni",
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
@@ -26,7 +26,7 @@ int GameScreen::run(sf::RenderWindow &app) {
                                          sf::Keyboard::RShift);
 
     sf::Texture texturePlayerP2;
-    PlayerView playerViewP2 = createPlayer(4.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP2,
+    PlayerView playerViewP2 = createPlayer(2.f, 2.f,  72.8f, 78.375f, "resources/images/character/link.png", position, &texturePlayerP2,
                                          "Scryper",
                                          sf::Keyboard::Z,
                                          sf::Keyboard::Q,
