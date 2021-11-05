@@ -9,7 +9,7 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
 
     /// Load background image
     sf::Texture textureBackground;
-    sf::Sprite background = initSprite(1.f, 1.f, "resources/images/background/background.jpg", position, &textureBackground);
+    sf::Sprite background = initSprite(1.f, 1.f, "resources/images/background/background_menu.jpg", position, &textureBackground);
 
     /// Load buttons (clickable sprites)
     position.setY(position.getY() - 150);
