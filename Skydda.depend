@@ -1627,7 +1627,7 @@
 1636049309 source:/home/damien/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1635849813 source:/home/florian/Documents/GitHub/Skydda/src/CoupleFloat.cpp
+1636144915 source:/home/florian/Documents/GitHub/Skydda/src/CoupleFloat.cpp
 	"CoupleFloat.h"
 
 1635094878 /home/florian/Documents/GitHub/Skydda/include/CoupleFloat.h
@@ -2049,7 +2049,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1636042399 source:/home/florian/Documents/GitHub/Skydda/src/Movement.cpp
+1636145118 source:/home/florian/Documents/GitHub/Skydda/src/Movement.cpp
 	"Movement.h"
 
 1636042399 /home/florian/Documents/GitHub/Skydda/include/Movement.h
@@ -2065,7 +2065,7 @@
 1635985628 source:/home/florian/Documents/GitHub/Skydda/src/Platform.cpp
 	"Platform.h"
 
-1635095017 /home/florian/Documents/GitHub/Skydda/include/Platform.h
+1636145858 /home/florian/Documents/GitHub/Skydda/include/Platform.h
 	"Position.h"
 	"Size.h"
 
@@ -2079,22 +2079,21 @@
 	<SFML/Graphics.hpp>
 	"Platform.h"
 
-1636131071 source:/home/florian/Documents/GitHub/Skydda/src/Player.cpp
+1636145961 source:/home/florian/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1636131071 /home/florian/Documents/GitHub/Skydda/include/Player.h
+1636145877 /home/florian/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
 
-1636135566 source:/home/florian/Documents/GitHub/Skydda/src/PlayerView.cpp
+1636145615 source:/home/florian/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 	"Collision.h"
 
-1636135566 /home/florian/Documents/GitHub/Skydda/include/PlayerView.h
+1636145918 /home/florian/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
 	"CoupleVectorTransformer.h"
-	<iostream>
 	<SFML/Graphics.hpp>
 
 1635095301 source:/home/florian/Documents/GitHub/Skydda/src/Position.cpp
@@ -2141,13 +2140,13 @@
 
 1636058387 ated upstream
 
-1636042399 /home/florian/Documents/GitHub/Skydda/include/Collision.h
-	"PlayerView.h"
-	"PlatformView.h"
+1636145668 /home/florian/Documents/GitHub/Skydda/include/Collision.h
 	<vector>
 	<math.h>
+	"PlayerView.h"
+	"PlatformView.h"
 
-1636131071 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
+1636144902 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
 1636102785 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
@@ -2679,7 +2678,7 @@
 1635948356 source:/home/houdartf/Documents/GitHub/Skydda/src/Initializer.cpp
 	"Initializer.h"
 
-1636131071 /home/florian/Documents/GitHub/Skydda/include/ObjectInitializer.h
+1636145975 /home/florian/Documents/GitHub/Skydda/include/ObjectInitializer.h
 	"SpriteInitializer.h"
 	"PlatformView.h"
 	"Platform.h"
@@ -2695,7 +2694,7 @@
 	"CoupleFloat.h"
 	"TextureLoader.h"
 
-1636135566 source:/home/florian/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
+1636145994 source:/home/florian/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
 1636124503 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
@@ -2912,22 +2911,22 @@
 1635985163 source:/home/florian/Documents/GitHub/Skydda/src/HealthBar.cpp
 	"HealthBar.h"
 
-1636023758 /home/florian/Documents/GitHub/Skydda/include/HealthBar.h
+1636145791 /home/florian/Documents/GitHub/Skydda/include/HealthBar.h
 	"Position.h"
 
-1636135566 source:/home/florian/Documents/GitHub/Skydda/src/HealthBarView.cpp
+1636144996 source:/home/florian/Documents/GitHub/Skydda/src/HealthBarView.cpp
 	"HealthBarView.h"
 
-1636050443 /home/florian/Documents/GitHub/Skydda/include/HealthBarView.h
+1636145804 /home/florian/Documents/GitHub/Skydda/include/HealthBarView.h
 	<SFML/Graphics.hpp>
 	"HealthBar.h"
 	"Player.h"
 	"TextInitializer.h"
 
-1636135566 source:/home/florian/Documents/GitHub/Skydda/src/MapView.cpp
+1636145988 source:/home/florian/Documents/GitHub/Skydda/src/MapView.cpp
 	"MapView.h"
 
-1636135566 /home/florian/Documents/GitHub/Skydda/include/MapView.h
+1636145981 /home/florian/Documents/GitHub/Skydda/include/MapView.h
 	<vector>
 	<PlatformView.h>
 	<ObjectInitializer.h>
@@ -3162,10 +3161,10 @@
 	<vector>
 	<iostream>
 
-1636136967 source:/home/florian/Documents/GitHub/Skydda/src/GameScreen.cpp
+1636143807 source:/home/florian/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
-1636136958 /home/florian/Documents/GitHub/Skydda/include/GameScreen.h
+1636146002 /home/florian/Documents/GitHub/Skydda/include/GameScreen.h
 	"Screen.h"
 	"PlayerView.h"
 	"PlatformView.h"
@@ -3271,12 +3270,12 @@
 
 1636058387 /home/houdartf/Documents/GitHub/Skydda/include/Map.h
 
-1635984118 source:/home/florian/Documents/GitHub/Skydda/src/Map.cpp
+1636145014 source:/home/florian/Documents/GitHub/Skydda/src/Map.cpp
 	"Map.h"
 
-1635984118 /home/florian/Documents/GitHub/Skydda/include/Map.h
+1636145815 /home/florian/Documents/GitHub/Skydda/include/Map.h
 
-1636137173 source:/home/florian/Documents/GitHub/Skydda/src/ChooseCharacterScreen.cpp
+1636143387 source:/home/florian/Documents/GitHub/Skydda/src/ChooseCharacterScreen.cpp
 	"ChooseCharacterScreen.h"
 
 1636136785 /home/florian/Documents/GitHub/Skydda/include/ChooseCharacterScreen.h
@@ -3401,10 +3400,9 @@
 1636128299 /home/houdartf/Documents/GitHub/Skydda/include/Game.h
 	"Player.h"
 
-1636135566 /home/florian/Documents/GitHub/Skydda/include/Game.h
+1636145766 /home/florian/Documents/GitHub/Skydda/include/Game.h
 	"Player.h"
 
-1636135566 source:/home/florian/Documents/GitHub/Skydda/src/Game.cpp
+1636144970 source:/home/florian/Documents/GitHub/Skydda/src/Game.cpp
 	"Game.h"
-	<iostream>
 

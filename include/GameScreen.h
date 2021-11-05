@@ -23,7 +23,7 @@ class GameScreen : public Screen {
         PlayerView playerViewP1;
         PlayerView playerViewP2;
 
-        vector<PlatformView> platforms;
+        std::vector<PlatformView> platforms;
 
         sf::Sprite backgroundSprite;
         sf::Texture textureBackground;

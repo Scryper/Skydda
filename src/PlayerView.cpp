@@ -57,19 +57,18 @@ void PlayerView::movePlayer(CoupleFloat vectorDirection, std::vector<std::vector
     Position newPosition = computeNewPosition(vectorDirection, collisions);
     player.setPosition(newPosition);
     sprite.setPosition(newPosition.getX(), newPosition.getY());
-
 }
 
 //actualise la liste des touches pressées
 void PlayerView::inputPlayer(){
-    std::vector<sf::Keyboard::Key> temp;
+    std::vector<sf::Keyboard::Key> tmp;
     if(player.isAlive()){
-        for (auto i : keys){
-            if(sf::Keyboard::isKeyPressed(i))
-                temp.push_back(i);
+        for (sf::Keyboard::Key key : keys){
+            if(sf::Keyboard::isKeyPressed(key))
+                tmp.push_back(key);
         }
     }
-    keysPressed = temp;
+    keysPressed = tmp;
 }
 
 CoupleFloat PlayerView::computeCoupleMovement(){
@@ -77,47 +76,47 @@ CoupleFloat PlayerView::computeCoupleMovement(){
     int maxFrame = 3;
 
     inputPlayer();
-    CoupleFloat cf(0.f,0.f);
+    CoupleFloat couple(0.f, 0.f);
     int deltaTime = 1;
-    for (auto i : keysPressed){
+    for (sf::Keyboard::Key key : keysPressed) {
         //up
-        if(i==keys[0]) {
-            cf.setY(cf.getY()-deltaTime);
+        if(key == keys[0]) {
+            couple.setY(couple.getY() - deltaTime);
         }
         //left
-        if(i==keys[1]) {
+        if(key == keys[1]) {
             state = 7;
             maxFrame = 10;
-            cf.setX(cf.getX()-deltaTime);
+            couple.setX(couple.getX() - deltaTime);
         }
         //rigth
-        if(i==keys[2]) {
+        if(key == keys[2]) {
             state = 7;
             maxFrame = 10;
-            cf.setX(cf.getX()+deltaTime);
+            couple.setX(couple.getX() + deltaTime);
         }
     }
-    animate(state,maxFrame);
-    return cf;
+    animate(state, maxFrame);
+    return couple;
 }
 
-void PlayerView::updateState(PlayerView &p2){
+void PlayerView::updateState(PlayerView &playerView){
     inputPlayer();
     //protect
     if(sf::Keyboard::isKeyPressed(keys[4])){
         player.setDefense(true);
-    }else{
+    } else {
         player.setDefense(false);
     }
     //attack
     if(sf::Keyboard::isKeyPressed(keys[3])){
         //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
         //la direction de l'attaque n'est gérée
-        std::vector<std::vector<int>> collision = directionCollisionPlayers(*this,p2);
-        if(collision.size()>0 && collision[0][0]>0){
+        std::vector<std::vector<int>> collision = directionCollisionPlayers(*this, playerView);
+        if(collision.size() > 0 && collision[0][0] > 0){
             for(auto i : collision){
-                if((i[0]==3 && !looksRight) || (i[0]==4 && looksRight)){
-                    attack(p2);
+                if((i[0] == 3 && !looksRight) || (i[0] == 4 && looksRight)) {
+                    attack(playerView);
                 }
             }
         }

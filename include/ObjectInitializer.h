@@ -21,7 +21,7 @@ PlayerView createPlayer(float sizeX,
                         float sizeY,
                         float width,
                         float height,
-                        string pathToPlayer,
+                        std::string pathToPlayer,
                         Position playerPosition,
                         sf::Texture *playerTexture,
                         sf::Keyboard::Key up,
@@ -30,7 +30,7 @@ PlayerView createPlayer(float sizeX,
                         sf::Keyboard::Key attack,
                         sf::Keyboard::Key protect,
                         bool looksRight,
-                        string namePlayerStr);
+                        std::string namePlayerStr);
 
 //Creates the healthBar
 HealthBarView createHealthBar(Player player, Position posHealthBar);

@@ -2,11 +2,10 @@
 #define HEALTHBAR_H
 #include "Position.h"
 
-class HealthBar
-{
+class HealthBar {
     private:
         float lifePoint;
-        float LIFE_POINT_MAX=100.f;
+        float LIFE_POINT_MAX = 100.f;
         Position position;
 
     public:
@@ -21,7 +20,6 @@ class HealthBar
         float getLifePoint();
         float getLIFE_POINT_MAX();
         Position getPosition();
-
 };
 
 #endif // HEALTHBAR_H

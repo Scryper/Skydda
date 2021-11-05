@@ -4,7 +4,6 @@
 #include "Player.h"
 #include "CoupleVectorTransformer.h"
 
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 class PlayerView {
@@ -49,8 +48,7 @@ class PlayerView {
 
         Position computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
         void movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
-        void updateState(PlayerView &p2);
-
+        void updateState(PlayerView &playerView);
 
         void animate(int state, int maxFrame);
         void flipSprite();

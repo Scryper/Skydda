@@ -1,7 +1,5 @@
 #include "HealthBarView.h"
 
-using namespace std;
-
 HealthBarView::HealthBarView() { }
 
 HealthBarView::HealthBarView(HealthBar *healthBar, sf::RectangleShape healthBarIn, sf::RectangleShape healthBarOut) {
