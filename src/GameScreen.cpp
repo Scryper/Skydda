@@ -13,6 +13,7 @@ int GameScreen::run(sf::RenderWindow &app) {
 
     CoupleFloat scaleP1(2.f, 2.f);
     CoupleFloat scaleP2(2.f, 2.f);
+    CoupleFloat textureLink(72.8f, 78.375f);
 
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
@@ -21,8 +22,8 @@ int GameScreen::run(sf::RenderWindow &app) {
     sf::Texture texturePlayerP1;
     PlayerView playerViewP1 = createPlayer(scaleP1.getX(),
                                            scaleP1.getY(),
-                                           72.8f,
-                                           78.375f,
+                                           textureLink.getX(),
+                                           textureLink.getY(),
                                            "resources/images/character/link.png",
                                            positionP1,
                                            &texturePlayerP1,
@@ -35,14 +36,20 @@ int GameScreen::run(sf::RenderWindow &app) {
                                            "Scryper");
 
     sf::Texture texturePlayerP2;
-    PlayerView playerViewP2 = createPlayer(scaleP2.getX(), scaleP2.getY(), 72.8f, 78.375f, "resources/images/character/link.png", positionP2, &texturePlayerP2,
-                                         sf::Keyboard::Up,
-                                         sf::Keyboard::Left,
-                                         sf::Keyboard::Right,
-                                         sf::Keyboard::Down,
-                                         sf::Keyboard::RShift,
-                                         false,
-                                         "Damien");
+    PlayerView playerViewP2 = createPlayer(scaleP2.getX(),
+                                            scaleP2.getY(),
+                                            textureLink.getX(),
+                                            textureLink.getY(),
+                                            "resources/images/character/link.png",
+                                            positionP2,
+                                            &texturePlayerP2,
+                                            sf::Keyboard::Up,
+                                            sf::Keyboard::Left,
+                                            sf::Keyboard::Right,
+                                            sf::Keyboard::Down,
+                                            sf::Keyboard::RShift,
+                                            false,
+                                            "Damien");
     playerViewP2.flipSprite();
 
     //load texture for platforms
