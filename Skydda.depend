@@ -1154,7 +1154,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1636105953 source:/home/damien/Documents/GitHub/Skydda/main.cpp
+1636127306 source:/home/damien/Documents/GitHub/Skydda/main.cpp
 	<vector>
 	"ScreenIncluder.h"
 
@@ -1583,10 +1583,10 @@
 	<vector>
 	<iostream>
 
-1636121070 source:/home/damien/Documents/GitHub/Skydda/src/Player.cpp
+1636128414 source:/home/damien/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1636121070 /home/damien/Documents/GitHub/Skydda/include/Player.h
+1636128414 /home/damien/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
@@ -1597,11 +1597,11 @@
 1636049309 /home/damien/Documents/GitHub/Skydda/include/CoupleFloat.h
 	<iostream>
 
-1636121070 source:/home/damien/Documents/GitHub/Skydda/src/PlayerView.cpp
+1636127953 source:/home/damien/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 	"Collision.h"
 
-1636110309 /home/damien/Documents/GitHub/Skydda/include/PlayerView.h
+1636127953 /home/damien/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
 	"CoupleVectorTransformer.h"
 	<iostream>
@@ -2127,10 +2127,10 @@
 	<SFML/Graphics.hpp>
 	"Platform.h"
 
-1636049309 source:/home/damien/Documents/GitHub/Skydda/src/TextureLoader.cpp
+1636127953 source:/home/damien/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
-1636109832 source:/home/damien/Documents/GitHub/Skydda/src/Collision.cpp
+1636128414 source:/home/damien/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
 1636049309 /home/damien/Documents/GitHub/Skydda/include/Collision.h
@@ -2720,7 +2720,7 @@
 1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
 	"SpriteInitializer.h"
 
-1636110766 /home/damien/Documents/GitHub/Skydda/include/ObjectInitializer.h
+1636127953 /home/damien/Documents/GitHub/Skydda/include/ObjectInitializer.h
 	"SpriteInitializer.h"
 	"PlatformView.h"
 	"Platform.h"
@@ -2729,17 +2729,17 @@
 	"HealthBarView.h"
 	<vector>
 
-1636049309 /home/damien/Documents/GitHub/Skydda/include/SpriteInitializer.h
+1636127953 /home/damien/Documents/GitHub/Skydda/include/SpriteInitializer.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 	"Size.h"
 	"CoupleFloat.h"
 	"TextureLoader.h"
 
-1636121070 source:/home/damien/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
+1636128414 source:/home/damien/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
-1636049309 source:/home/damien/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
+1636127953 source:/home/damien/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
 	"SpriteInitializer.h"
 
 1636061844 source:/home/damien/Documents/GitHub/Skydda/src/HealthBarView.cpp
@@ -3326,19 +3326,20 @@
 
 1636049309 /home/damien/Documents/GitHub/Skydda/include/Map.h
 
-1636061907 source:/home/damien/Documents/GitHub/Skydda/src/Match.cpp
+1636128414 source:/home/damien/Documents/GitHub/Skydda/src/Match.cpp
 	"Match.h"
 	<iostream>
 
-1636061907 /home/damien/Documents/GitHub/Skydda/include/Match.h
+1636128414 /home/damien/Documents/GitHub/Skydda/include/Match.h
 	"Player.h"
 
-1636121123 source:/home/damien/Documents/GitHub/Skydda/src/MatchView.cpp
+1636128414 source:/home/damien/Documents/GitHub/Skydda/src/MatchView.cpp
 	"MatchView.h"
 
-1636121156 /home/damien/Documents/GitHub/Skydda/include/MatchView.h
+1636128414 /home/damien/Documents/GitHub/Skydda/include/MatchView.h
 	<SFML/Graphics.hpp>
 	<vector>
+	"Match.h"
 
 1636121070 source:/home/damien/Documents/GitHub/Skydda/src/MenuScreen.cpp
 	"MenuScreen.h"
@@ -3346,7 +3347,7 @@
 1636121070 source:/home/damien/Documents/GitHub/Skydda/src/OptionScreen.cpp
 	"OptionScreen.h"
 
-1636121070 source:/home/damien/Documents/GitHub/Skydda/src/Screen.cpp
+1636128414 source:/home/damien/Documents/GitHub/Skydda/src/Screen.cpp
 	"Screen.h"
 
 1636049309 source:/home/damien/Documents/GitHub/Skydda/src/ScreenIncluder.cpp
@@ -3355,9 +3356,10 @@
 1636121070 source:/home/damien/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
-1636121070 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
+1636128414 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 	"Match.h"
+	"MatchView.h"
 
 1636069133 source:/home/florian/Documents/GitHub/Skydda/src/Match.cpp
 	"Match.h"

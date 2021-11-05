@@ -53,6 +53,11 @@ void Player::setPosition(Position position) {
     this->position = position;
 }
 
+void Player::setPosition(float x, float y) {
+    Position position(x,y);
+    this->position = position;
+}
+
 void Player::setHealth(float health) {
     this->health = health;
 }
@@ -70,10 +75,7 @@ void Player::attackPlayer(Player &p, float clock) {
         return;
     //faire l'animation d'attaque
 
-    cout<<clock <<" "<< timeLastAttack << "  "<< durationBetweenAttacks <<endl;
-
     if(clock - timeLastAttack >= durationBetweenAttacks){
-        std::cout<<"ATTACK"<<endl;
         //retirer les PV
         double health = p.getHealth();
         if(health-attack>0){

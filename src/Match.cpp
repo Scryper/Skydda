@@ -3,12 +3,16 @@
 
 using namespace std;
 
+Match::Match() {
+    this->roundWinP1 = 0;
+    this->roundWinP2 = 0;
+}
+
 Match::Match(Player& player1, Player& player2) {
     this->player1 = &player1;
     this->player2 = &player2;
-    //this->player1.setAlive(false);
-    roundWinP1 = 0;
-    roundWinP2 = 0;
+    this->roundWinP1 = 0;
+    this->roundWinP2 = 0;
 }
 
 Match::~Match() {

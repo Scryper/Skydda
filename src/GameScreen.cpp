@@ -1,5 +1,6 @@
 #include "GameScreen.h"
 #include "Match.h"
+#include "MatchView.h"
 
 int GameScreen::run(sf::RenderWindow &app) {
     sf::Event event;
@@ -43,7 +44,7 @@ int GameScreen::run(sf::RenderWindow &app) {
     sf::Texture textureBrick;
 
     //loading the first map
-    MapView map1(2, &textureBrick, "resources/images/platform/platform_default.png");
+    MapView map1(1, &textureBrick, "resources/images/platform/platform_default.png");
 
     //get all the platforms from the map
     vector<PlatformView> platforms = map1.getAllCollisions();
@@ -66,13 +67,17 @@ int GameScreen::run(sf::RenderWindow &app) {
     namePlayerP1.setFont(font);
     namePlayerP2.setFont(font);
 
+
     Match match(playerViewP1.getPlayer(), playerViewP2.getPlayer());
 
+    MatchView matchView(match);
+
+    Position posRoundCirclesP1(60.f,135.f);
+    Position posRoundCirclesP2(1360.f,135.f);
+
+    matchView.createRoundCircles(posRoundCirclesP1,posRoundCirclesP2);
+
     while(app.isOpen()) {
-        cout << "isAlive1 : " << playerViewP1.getPlayer().isAlive() << endl;
-        cout << "isAlive2 : " << playerViewP2.getPlayer().isAlive() << endl;
-        //playerViewP2.getPlayer().setAlive(false);
-        //match.getPlayer1().setAlive(false);
 
         deltaTime = clock.restart().asMilliseconds();
 
@@ -95,21 +100,28 @@ int GameScreen::run(sf::RenderWindow &app) {
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-         if(match.getPlayerWin() == 0) {
+         if(matchView.getMatch().getPlayerWin() == 0) {
             if(playerViewP1.getPlayer().getHealth() == 0) {
-                match.incrementRoundWinP2();
-                if(match.getPlayerWin() == 0)playerViewP1.setHealth(100.f);
+                matchView.getMatch().incrementRoundWinP2();
+
+//                cout << "pos : " << positionP1.getX() << ", " << positionP1.getY() << endl;
+                matchView.getMatch().getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
+                matchView.getMatch().getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
+
+                if(matchView.getMatch().getPlayerWin() == 0)playerViewP1.setHealth(100.f);
             }
             if(playerViewP2.getPlayer().getHealth() == 0) {
-                match.incrementRoundWinP1();
-                if(match.getPlayerWin() == 0)playerViewP2.setHealth(100.f);
+                matchView.getMatch().incrementRoundWinP1();
+
+//                cout << "pos : " << positionP1.getX() << ", " << positionP1.getY() << endl;
+                matchView.getMatch().getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
+                matchView.getMatch().getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
+
+                if(matchView.getMatch().getPlayerWin() == 0)playerViewP2.setHealth(100.f);
             }
         } else {
-            match.win();
+            matchView.getMatch().win();
         }
-
-        cout << "P1 victoire : " << match.getRoundWinP1() << endl;
-        cout << "P2 victoire : " << match.getRoundWinP2() << endl;
 
         app.clear();
 
@@ -121,6 +133,18 @@ int GameScreen::run(sf::RenderWindow &app) {
         for(auto i : map1.getPlatforms()){
             app.draw(i.getSprite());
         }
+
+
+
+        for(auto i : matchView.getRoundCirclesP1()){
+            app.draw(i);
+        }
+
+        for(auto i : matchView.getRoundCirclesP2()){
+            app.draw(i);
+        }
+
+       matchView.actualiseRoundCircles();
 
         app.draw(healthBarViewP1.getHealthBarIn());
         app.draw(healthBarViewP1.getHealthBarOut());
