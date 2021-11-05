@@ -11,25 +11,31 @@ int GameScreen::run(sf::RenderWindow &app) {
     Position positionP1(position.getX() - 500, position.getY());
     Position positionP2(position.getX() + 500, position.getY());
 
-    CoupleFloat scaleP1(4.f, 4.f);
-    CoupleFloat scaleP2(4.f, 4.f);
+    CoupleFloat scaleP1(2.f, 2.f);
+    CoupleFloat scaleP2(2.f, 2.f);
 
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
     // Load sprite of player
     sf::Texture texturePlayerP1;
-    PlayerView playerViewP1 = createPlayer(scaleP1.getX(), scaleP1.getY(), 72.8f, 78.375f, "resources/images/character/link.png", positionP1, &texturePlayerP1,
-                                          sf::Keyboard::Z,
-                                          sf::Keyboard::Q,
-                                          sf::Keyboard::D,
-                                          sf::Keyboard::S,
-                                          sf::Keyboard::LShift,
-                                          true,
-                                          "Scryper");
+    PlayerView playerViewP1 = createPlayer(scaleP1.getX(),
+                                           scaleP1.getY(),
+                                           72.8f,
+                                           78.375f,
+                                           "resources/images/character/link.png",
+                                           positionP1,
+                                           &texturePlayerP1,
+                                           sf::Keyboard::Z,
+                                           sf::Keyboard::Q,
+                                           sf::Keyboard::D,
+                                           sf::Keyboard::S,
+                                           sf::Keyboard::LShift,
+                                           true,
+                                           "Scryper");
 
     sf::Texture texturePlayerP2;
-    PlayerView playerViewP2 = createPlayer(scaleP2.getX(), scaleP2.getY(), 72.8f, 78.375f, "resources/images/character/walk/mario_1_1.png", positionP2, &texturePlayerP2,
+    PlayerView playerViewP2 = createPlayer(scaleP2.getX(), scaleP2.getY(), 72.8f, 78.375f, "resources/images/character/link.png", positionP2, &texturePlayerP2,
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
                                          sf::Keyboard::Right,

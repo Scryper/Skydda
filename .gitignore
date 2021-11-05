@@ -32,3 +32,4 @@ obj/Debug/src/TextInitializer.o
 obj/Debug/src/TextureLoader.o
 *.o
 obj/Debug/src/MatchView.o
+*.o

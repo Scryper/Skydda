@@ -34,7 +34,13 @@ std::vector<PlatformView> createBorder(std::string pathToPlatform, sf::Texture *
 }
 
 //creates the player
-PlayerView createPlayer(float sizeX, float sizeY, float width, float height, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture,
+PlayerView createPlayer(float sizeX,
+                        float sizeY,
+                        float width,
+                        float height,
+                        string pathToPlayer,
+                        Position playerPosition,
+                        sf::Texture *playerTexture,
                         sf::Keyboard::Key up,
                         sf::Keyboard::Key left,
                         sf::Keyboard::Key right,
@@ -42,6 +48,7 @@ PlayerView createPlayer(float sizeX, float sizeY, float width, float height, std
                         sf::Keyboard::Key protect,
                         bool looksRight,
                         std::string namePlayerStr) {
+
     CoupleFloat velocity(.0f, .0f);
     CoupleFloat acceleration(.8f, 1.f);
     CoupleFloat maxSpeed(14.f, 20.f);
