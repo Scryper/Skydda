@@ -2785,7 +2785,7 @@
 1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBar.cpp
 	"HealthBar.h"
 
-1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBarView.cpp
+1636134668 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBarView.cpp
 	"HealthBarView.h"
 
 1635962377 View.h"
@@ -3214,7 +3214,7 @@
 1636114391 source:/home/florian/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
-1636134097 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreen.cpp
+1636134485 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
 1636133872 /home/houdartf/Documents/GitHub/Skydda/include/GameScreen.h

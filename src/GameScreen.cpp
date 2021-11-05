@@ -81,12 +81,12 @@ int GameScreen::run(sf::RenderWindow &app) {
         }
 
         actualiseRoundCircles();
-
-        app.draw(healthBarViewP1.getHealthBarIn());
         app.draw(healthBarViewP1.getHealthBarOut());
+        app.draw(healthBarViewP1.getHealthBarIn());
 
-        app.draw(healthBarViewP2.getHealthBarIn());
         app.draw(healthBarViewP2.getHealthBarOut());
+        app.draw(healthBarViewP2.getHealthBarIn());
+
 
         app.draw(namePlayerP1);
         app.draw(namePlayerP2);
