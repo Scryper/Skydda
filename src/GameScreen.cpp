@@ -121,7 +121,10 @@ int GameScreen::run(sf::RenderWindow &app) {
                 matchView.getMatch().getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
                 matchView.getMatch().getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
 
-                if(matchView.getMatch().getPlayerWin() == 0)playerViewP1.setHealth(100.f);
+                if(matchView.getMatch().getPlayerWin() == 0) {
+                        playerViewP1.setHealth(100.f);
+                        playerViewP2.setHealth(100.f);
+                }
             }
             if(playerViewP2.getPlayer().getHealth() == 0) {
                 matchView.getMatch().incrementRoundWinP1();
@@ -130,7 +133,10 @@ int GameScreen::run(sf::RenderWindow &app) {
                 matchView.getMatch().getPlayer1().setPosition(positionP1.getX(), positionP1.getY()-500);
                 matchView.getMatch().getPlayer2().setPosition(positionP2.getX(), positionP2.getY()-500);
 
-                if(matchView.getMatch().getPlayerWin() == 0)playerViewP2.setHealth(100.f);
+                if(matchView.getMatch().getPlayerWin() == 0){
+                        playerViewP1.setHealth(100.f);
+                        playerViewP2.setHealth(100.f);
+                }
             }
         } else {
             matchView.getMatch().win();
