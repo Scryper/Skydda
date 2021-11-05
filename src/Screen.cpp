@@ -7,10 +7,8 @@ sf::Vector2f Screen::getMousePosition(sf::RenderWindow *app) const {
 // Calculates the ce ter of the screen if it has not been done, then return a position
 // with the calculated coordinates
 Position Screen::getScreenCenter(sf::RenderWindow *app) {
-//    if(middleScreenX == 0 || middleScreenY == 0) {
-        middleScreenX = app->getSize().x / 2.;
-        middleScreenY = app->getSize().y / 2.;
-        center = {middleScreenX, middleScreenY};
-//    }
+    middleScreenX = app->getSize().x / 2.;
+    middleScreenY = app->getSize().y / 2.;
+    center = {middleScreenX, middleScreenY};
     return center;
 }

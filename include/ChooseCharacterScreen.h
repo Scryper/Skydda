@@ -3,9 +3,13 @@
 
 #include "Screen.h"
 
-class ChooseCharacterScreen : public Screen{
+class ChooseCharacterScreen : public Screen {
     public:
-        virtual int run(sf::RenderWindow &app);
+        std::string strFirstPlayerName;
+        std::string strSecondPlayerName;
+        int map_; // Because map is keyword
+
+        virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
 };
 
 #endif // CHOOSECHARACTERSCREEN_H

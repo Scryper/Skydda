@@ -39,9 +39,15 @@ int main() {
 	OptionScreen optionScreen; // 3
 	screens.push_back(&optionScreen);
 
+	std::vector<string> data;
 	//Main loop
 	while (screen >= 0) {
-		screen = screens[screen]->run(app);
+		if(screen != 2) screen = screens[screen]->run(app, data, 0);
+		else {
+            data.push_back(chooseCharacterScreen.strFirstPlayerName);
+            data.push_back(chooseCharacterScreen.strSecondPlayerName);
+            screen = screens[screen]->run(app, data, chooseCharacterScreen.map_);
+		}
 	}
 
     return EXIT_SUCCESS;

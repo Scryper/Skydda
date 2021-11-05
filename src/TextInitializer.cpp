@@ -13,3 +13,10 @@ sf::Text TextInitializer::createText(std::string textContent, Position position)
 
     return text;
 }
+
+void TextInitializer::initFont(std::vector<sf::Text*> texts, sf::Font* font) {
+    for(sf::Text* text : texts) {
+        text->setFont(*font);
+    }
+}
+

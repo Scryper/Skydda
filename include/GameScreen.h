@@ -12,7 +12,6 @@
 #include "Game.h"
 
 class GameScreen : public Screen {
-
     private:
         Position position;
         Position positionP1;
@@ -36,23 +35,30 @@ class GameScreen : public Screen {
         sf::Text namePlayerP2;
 
         Game game;
-        MapView map1;
+        MapView map_;
 
         std::vector<sf::CircleShape> roundCirclesP1;
         std::vector<sf::CircleShape> roundCirclesP2;
 
+        std::string playerName1;
+        std::string playerName2;
+
+        int mapSeed;
 
     public:
-        virtual int run(sf::RenderWindow &app);
-        void createRoundCircles();
-        void actualiseRoundCircles();
+        virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
+
         std::vector<sf::CircleShape> getRoundCirclesP1();
         std::vector<sf::CircleShape> getRoundCirclesP2();
+
+        void createRoundCircles();
+        void actualiseRoundCircles();
         void initPlayers();
         void initMap();
         void initHealthBars();
         void movePlayers(float deltaTime);
         void playerUpdate();
+
         Game& getGame();
 };
 

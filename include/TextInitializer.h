@@ -13,6 +13,8 @@ class TextInitializer {
         static inline sf::Color BetterGrey = {108, 117, 125};
 
         static sf::Text createText(std::string textContent, Position position);
+
+        static void initFont(std::vector<sf::Text*> texts, sf::Font* font);
 };
 
 #endif // TEXTINITIALIZER_H
