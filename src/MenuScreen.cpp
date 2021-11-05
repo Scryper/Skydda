@@ -6,13 +6,14 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     sf::Vector2f mousePosition;
 
     Position position = getScreenCenter(&app);
-    Position positionText(position.getX() - 75, position.getY() - 12);
 
     /// Load background image
     sf::Texture textureBackground;
-    sf::Sprite background = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
+    sf::Sprite background = initSprite(.45f, .45f, "resources/images/background/background.png", position, &textureBackground);
 
     /// Load buttons (clickable sprites)
+    position.setY(position.getY() - 150);
+    Position positionText(position.getX() - 75, position.getY() - 12);
     sf::Texture textureButton; // Button texture
     sf::Sprite buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/button/button.png", position, &textureButton);
     // Text of buttonChooseCharacters
