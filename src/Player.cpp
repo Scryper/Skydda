@@ -10,6 +10,8 @@ Player::Player() {
     this->position = defaultPosition;
     this->movement = defaultMovement;
     alive = true;
+    timeLastAttack = 0;
+    durationBetweenAttacks = 1000;
 }
 
 Player::Player(std::string name, float attack, bool defense, float health, Position position, Movement movement) {
@@ -22,6 +24,7 @@ Player::Player(std::string name, float attack, bool defense, float health, Posit
     timeLastAttack = 0;
     alive = true;
     timeLastAttack = 0;
+    durationBetweenAttacks = 1000;
 }
 
 Player::Player(const Player& other) {
@@ -32,6 +35,8 @@ Player::Player(const Player& other) {
     this->position = other.position;
     this->movement = other.movement;
     this->alive = other.alive;
+    timeLastAttack = 0;
+    durationBetweenAttacks = 1000;
 }
 
 Player::~Player() { }
@@ -56,7 +61,7 @@ void Player::setDefense(bool def) {
     this->defense = def;
 }
 
-void Player::attackPlayer(Player &p) {
+void Player::attackPlayer(Player &p, float clock) {
     //vérif que le player ne bloque pas l'attaque
     if(p.getDefense()==true)
         return;
@@ -65,16 +70,21 @@ void Player::attackPlayer(Player &p) {
         return;
     //faire l'animation d'attaque
 
-    //retirer les PV
-    double health = p.getHealth();
-    if(health-attack>0){
-        p.setHealth(health-attack);
-    }
-    else{
-        p.setHealth(0.f);
+    cout<<clock <<" "<< timeLastAttack << "  "<< durationBetweenAttacks <<endl;
+
+    if(clock - timeLastAttack >= durationBetweenAttacks){
+        std::cout<<"ATTACK"<<endl;
+        //retirer les PV
+        double health = p.getHealth();
+        if(health-attack>0){
+            p.setHealth(health-attack);
+        }
+        else{
+            p.setHealth(0.f);
+        }
+        timeLastAttack = clock;
     }
 
-    //delai????
 }
 
 string Player::getName()const {
@@ -113,24 +123,4 @@ void Player::stopY(){
     this->movement.stopY();
 }
 
-void Player::attackPlayer(Player &p) {
-    //vérif que le player ne bloque pas l'attaque
-    if(p.getDefense()==true)
-        return;
-    //vérif que les pv sont supérieur a 0
-    if(p.getHealth()<=0)
-        return;
-    //faire l'animation d'attaque
-
-    //retirer les PV
-    double health = p.getHealth();
-    if(health-attack>0){
-        p.setHealth(health-attack);
-    }
-    else{
-        p.setHealth(0.f);
-    }
-
-    //delai????
-}
 

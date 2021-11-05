@@ -112,7 +112,7 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
 }
 
 void PlayerView::attack(PlayerView &playerAttacked){
-    player.attackPlayer(playerAttacked.getPlayer());
+    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
 }
 
 void PlayerView::setHealth(float health) {
