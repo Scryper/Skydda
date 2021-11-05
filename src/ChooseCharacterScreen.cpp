@@ -136,12 +136,12 @@ int ChooseCharacterScreen::run(sf::RenderWindow &app, std::vector<std::string> d
 
         /// Button play
         if(buttonPlay.getGlobalBounds().contains(mousePosition)) {
-            if(event.type == sf::Event::MouseButtonPressed) {
-                map_ = indexMap + 1;
-                return 2;
-            }
-            else if(firstPlayerOk && secondPlayerOk) {
+            if(firstPlayerOk && secondPlayerOk) {
                 textPlay.setFillColor(sf::Color::Green);
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    map_ = indexMap + 1;
+                    return 2;
+                }
             }
         }
         else if(!firstPlayerOk || !secondPlayerOk) {
