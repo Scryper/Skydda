@@ -79,7 +79,6 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
             temp.push_back(platformTop - std::floor(playerVSize/2) + 1 );
             v.push_back(temp);
         }
-        std::cout<<std::endl;
         return v;
 
     } else {
@@ -171,7 +170,6 @@ std::vector<std::vector<int>> directionCollisionPlayers(PlayerView player, Playe
             temp.push_back(2);
             v.push_back(temp);
         }
-        std::cout<<std::endl;
         return v;
 
     } else {

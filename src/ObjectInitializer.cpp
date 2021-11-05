@@ -63,7 +63,9 @@ PlayerView createPlayer(float sizeX,
     sf::Sprite playerSprite = initSpritePlayer(sizeCouple, centerOfSprite, pathToPlayer, playerPosition, playerTexture);
     playerSprite.setTextureRect(sf::IntRect(0, 0, width, height));
 
-    Player player(namePlayerStr, 10, false, 100, playerPosition, movement);
+    float atk = 50.f;
+
+    Player player(namePlayerStr, atk, false, 100, playerPosition, movement);
     PlayerView playerView(playerSprite, player,up,left,right,attack, protect,looksRight, sizeCouple);
     return playerView;
 }

@@ -12,6 +12,7 @@ class Match
         int MAX_ROUND=3;
 
     public:
+        Match();
         Match(Player& player1, Player& player2);
         virtual ~Match();
         Match(const Match& other);
