@@ -112,24 +112,7 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
 }
 
 void PlayerView::attack(PlayerView &playerAttacked){
-    //vérif que le player ne bloque pas l'attaque
-    if(playerAttacked.getPlayer().getDefense()==true)
-        return;
-    //vérif que les pv sont supérieur a 0
-    if(playerAttacked.getPlayer().getHealth()<=0)
-        return;
-    //faire l'animation d'attaque
-
-    //retirer les PV
-    double health = playerAttacked.player.getHealth();
-    if(health-player.getAttack()>0){
-        playerAttacked.player.setHealth(health-player.getAttack());
-    }
-    else{
-        playerAttacked.player.setHealth(0.f);
-    }
-
-    //delai????
+    player.attackPlayer(playerAttacked.getPlayer());
 }
 
 void PlayerView::setHealth(float health) {

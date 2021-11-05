@@ -39,6 +39,8 @@ class Player {
         void setDefense(bool def);
         float getAttack()const;
 
+        void attackPlayer(Player& p);
+
         void stopX();
         void stopY();
 

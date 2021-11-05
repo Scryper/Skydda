@@ -20,6 +20,7 @@ Player::Player(std::string name, float attack, bool defense, float health, Posit
     this->position = position;
     this->movement = movement;
     alive = true;
+    timeLastAttack = 0;
 }
 
 Player::Player(const Player& other) {
@@ -89,3 +90,25 @@ void Player::stopX(){
 void Player::stopY(){
     this->movement.stopY();
 }
+
+void Player::attackPlayer(Player &p) {
+    //vérif que le player ne bloque pas l'attaque
+    if(p.getDefense()==true)
+        return;
+    //vérif que les pv sont supérieur a 0
+    if(p.getHealth()<=0)
+        return;
+    //faire l'animation d'attaque
+
+    //retirer les PV
+    double health = p.getHealth();
+    if(health-attack>0){
+        p.setHealth(health-attack);
+    }
+    else{
+        p.setHealth(0.f);
+    }
+
+    //delai????
+}
+
