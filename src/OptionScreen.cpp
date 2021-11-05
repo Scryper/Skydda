@@ -5,20 +5,19 @@ int OptionScreen::run(sf::RenderWindow &app) {
 
     sf::Vector2f mousePosition;
 
-    int middleScreenX = app.getSize().x / 2.;
-    int middleScreenY = app.getSize().y / 2.;
-
-    Position position(middleScreenX, middleScreenY);
-    Position positionText(middleScreenX - 75, middleScreenY - 12);
+    Position position = getScreenCenter(&app);
+    Position positionText(position.getX() - 75, position.getY() - 12);
 
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
+    /// Load Button
     sf::Texture textureButton;
-    sf::Sprite buttonBack = initSprite(1.f, 1.f, "resources/images/button/button.png", position, &textureButton);
+    sf::Sprite buttonBack = initSprite(.5f, 1.f, "resources/images/button/button.png", position, &textureButton);
     // Text of buttonQuit
+    positionText.setX(positionText.getX() + 35);
     sf::Text textBack = TextInitializer::createText("Back", position);
-    textBack.setFillColor(TextInitializer::betterRed);
+    textBack.setFillColor(TextInitializer::BetterRed);
 
     sf::Font font;
     font.loadFromFile("resources/fonts/glitch.otf");
@@ -40,11 +39,11 @@ int OptionScreen::run(sf::RenderWindow &app) {
                 return 0;
             }
             else {
-                textBack.setFillColor(TextInitializer::darkerBetterRed);
+                textBack.setFillColor(TextInitializer::DarkerBetterRed);
             }
         }
         else {
-            textBack.setFillColor(TextInitializer::betterRed);
+            textBack.setFillColor(TextInitializer::BetterRed);
         }
 
         app.clear();

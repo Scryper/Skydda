@@ -4,15 +4,12 @@
 int GameScreen::run(sf::RenderWindow &app) {
     sf::Event event;
 
-    int middleScreenX = app.getSize().x / 2.;
-    int middleScreenY = app.getSize().y / 2.;
-
     float deltaTime;
     sf::Clock clock;
 
-    Position position(middleScreenX, middleScreenY);
-    Position positionP1(middleScreenX-500, middleScreenY);
-    Position positionP2(middleScreenX+500, middleScreenY);
+    Position position = getScreenCenter(&app);
+    Position positionP1(position.getX() - 500, position.getY());
+    Position positionP2(position.getX() + 500, position.getY());
 
     CoupleFloat scaleP1(4.f, 4.f);
     CoupleFloat scaleP2(4.f, 4.f);
@@ -28,7 +25,8 @@ int GameScreen::run(sf::RenderWindow &app) {
                                           sf::Keyboard::D,
                                           sf::Keyboard::S,
                                           sf::Keyboard::LShift,
-                                          true, "Scryper");
+                                          true,
+                                          "Scryper");
 
     sf::Texture texturePlayerP2;
     PlayerView playerViewP2 = createPlayer(scaleP2.getX(), scaleP2.getY(), "resources/images/character/walk/mario_1_1.png", positionP2, &texturePlayerP2,
@@ -37,7 +35,8 @@ int GameScreen::run(sf::RenderWindow &app) {
                                          sf::Keyboard::Right,
                                          sf::Keyboard::Down,
                                          sf::Keyboard::RShift,
-                                         false, "Damien");
+                                         false,
+                                         "Damien");
     playerViewP2.flipSprite();
 
     //load texture for platforms
@@ -69,8 +68,6 @@ int GameScreen::run(sf::RenderWindow &app) {
 
     Match match(playerViewP1.getPlayer(), playerViewP2.getPlayer());
 
-
-
     while(app.isOpen()) {
         cout << "isAlive1 : " << playerViewP1.getPlayer().isAlive() << endl;
         cout << "isAlive2 : " << playerViewP2.getPlayer().isAlive() << endl;
@@ -98,14 +95,14 @@ int GameScreen::run(sf::RenderWindow &app) {
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-         if(match.getPlayerWin()==0) {
+         if(match.getPlayerWin() == 0) {
             if(playerViewP1.getPlayer().getHealth() == 0) {
                 match.incrementRoundWinP2();
-                if(match.getPlayerWin()==0)playerViewP1.setHealth(100.f);
+                if(match.getPlayerWin() == 0)playerViewP1.setHealth(100.f);
             }
             if(playerViewP2.getPlayer().getHealth() == 0) {
                 match.incrementRoundWinP1();
-                if(match.getPlayerWin()==0)playerViewP2.setHealth(100.f);
+                if(match.getPlayerWin() == 0)playerViewP2.setHealth(100.f);
             }
         } else {
             match.win();
