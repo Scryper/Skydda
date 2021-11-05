@@ -9,7 +9,7 @@ PlayerView::PlayerView() {
     //createAnimation();
 }
 
-PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack, sf::Keyboard::Key protect) {
+PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack, sf::Keyboard::Key protect,bool looksRight, CoupleFloat scalePlayer) {
     this->sprite = sprite;
     this->player = player;
     this->up = up;
@@ -17,7 +17,8 @@ PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf
     this->right = right;
     this->attackKey = attack;
     this->protectKey = protect;
-    this->looksRight = true;
+    this->looksRight = looksRight;
+    this->scalePlayer = scalePlayer;
     //createAnimation();
 
 }
@@ -45,6 +46,10 @@ void PlayerView::setAlive(bool alive) {
 
 bool PlayerView::isLooksRigth()const{
     return looksRight;
+}
+
+void PlayerView::flipSprite() {
+    sprite.setScale(-scalePlayer.getX(), scalePlayer.getY());
 }
 
 Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){

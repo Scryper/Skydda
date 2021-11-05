@@ -11,28 +11,34 @@ int GameScreen::run(sf::RenderWindow &app) {
     sf::Clock clock;
 
     Position position(middleScreenX, middleScreenY);
+    Position positionP1(middleScreenX-500, middleScreenY);
+    Position positionP2(middleScreenX+500, middleScreenY);
+
+    CoupleFloat scaleP1(4.f, 4.f);
+    CoupleFloat scaleP2(4.f, 4.f);
 
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
     // Load sprite of player
     sf::Texture texturePlayerP1;
-    PlayerView playerViewP1 = createPlayer(4.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP1,
-                                         "dotni",
+    PlayerView playerViewP1 = createPlayer(scaleP1.getX(), scaleP1.getY(), "resources/images/character/walk/mario_1_1.png", positionP1, &texturePlayerP1,
+                                          sf::Keyboard::Z,
+                                          sf::Keyboard::Q,
+                                          sf::Keyboard::D,
+                                          sf::Keyboard::S,
+                                          sf::Keyboard::LShift,
+                                          true, "Scryper");
+
+    sf::Texture texturePlayerP2;
+    PlayerView playerViewP2 = createPlayer(scaleP2.getX(), scaleP2.getY(), "resources/images/character/walk/mario_1_1.png", positionP2, &texturePlayerP2,
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
                                          sf::Keyboard::Right,
                                          sf::Keyboard::Down,
-                                         sf::Keyboard::RShift);
-
-    sf::Texture texturePlayerP2;
-    PlayerView playerViewP2 = createPlayer(4.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP2,
-                                         "Scryper",
-                                         sf::Keyboard::Z,
-                                         sf::Keyboard::Q,
-                                         sf::Keyboard::D,
-                                         sf::Keyboard::S,
-                                         sf::Keyboard::LShift);
+                                         sf::Keyboard::RShift,
+                                         false, "Damien");
+    playerViewP2.flipSprite();
 
     //load texture for platforms
     sf::Texture textureBrick;

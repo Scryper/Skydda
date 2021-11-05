@@ -22,10 +22,11 @@ class PlayerView {
         int tour;
         int lastState;
         bool looksRight;
+        CoupleFloat scalePlayer;
 
     public:
         PlayerView();
-        PlayerView(sf::Sprite sprite, Player player, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key attackKey, sf::Keyboard::Key protectKey);
+        PlayerView(sf::Sprite sprite, Player player, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key attackKey,sf::Keyboard::Key protect, bool looksRight, CoupleFloat scalePlayer);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
@@ -45,6 +46,7 @@ class PlayerView {
 
         void createAnimation();
         void animate(int state, int maxFrame);
+        void flipSprite();
 };
 
 #endif // PLAYERVIEW_H
