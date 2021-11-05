@@ -16,7 +16,7 @@ int GameScreen::run(sf::RenderWindow &app) {
     CoupleFloat textureLink(72.8f, 78.375f);
 
     sf::Texture textureBackground;
-    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
+    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background1.png", position, &textureBackground);
 
     // Load sprite of player
     sf::Texture texturePlayerP1;
