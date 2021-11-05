@@ -8,7 +8,7 @@ PlayerView::PlayerView() {
     this->player = defaultPlayer;
 }
 
-PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack, sf::Keyboard::Key protect) {
+PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack, sf::Keyboard::Key protect,bool looksRight, CoupleFloat scalePlayer) {
     this->sprite = sprite;
     this->player = player;
     this->up = up;
@@ -16,7 +16,9 @@ PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf
     this->right = right;
     this->attackKey = attack;
     this->protectKey = protect;
-    this->looksRight = true;
+    this->looksRight = looksRight;
+    this->scalePlayer = scalePlayer;
+
 }
 
 PlayerView::PlayerView(const PlayerView& other) {
@@ -40,6 +42,10 @@ void PlayerView::setAlive(bool alive) {
 
 bool PlayerView::isLooksRigth()const{
     return looksRight;
+}
+
+void PlayerView::flipSprite() {
+    sprite.setScale(-scalePlayer.getX(), scalePlayer.getY());
 }
 
 Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){
@@ -102,24 +108,7 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
 }
 
 void PlayerView::attack(PlayerView &playerAttacked){
-    //vérif que le player ne bloque pas l'attaque
-    if(playerAttacked.getPlayer().getDefense()==true)
-        return;
-    //vérif que les pv sont supérieur a 0
-    if(playerAttacked.getPlayer().getHealth()<=0)
-        return;
-    //faire l'animation d'attaque
-
-    //retirer les PV
-    double health = playerAttacked.player.getHealth();
-    if(health-player.getAttack()>0){
-        playerAttacked.player.setHealth(health-player.getAttack());
-    }
-    else{
-        playerAttacked.player.setHealth(0.f);
-    }
-
-    //delai????
+    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
 }
 
 void PlayerView::setHealth(float health) {

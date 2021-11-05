@@ -4,7 +4,7 @@ sf::Text TextInitializer::createText(std::string textContent, Position position)
     sf::Text text;
     text.setString(textContent);
     text.setCharacterSize(24);
-    text.setFillColor({253, 240, 213});
+    text.setFillColor(TextInitializer::BetterWhite);
     text.setStyle(sf::Text::Bold);
 
     auto positionX = position.getX();

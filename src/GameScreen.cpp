@@ -4,35 +4,40 @@
 int GameScreen::run(sf::RenderWindow &app) {
     sf::Event event;
 
-    int middleScreenX = app.getSize().x / 2.;
-    int middleScreenY = app.getSize().y / 2.;
-
     float deltaTime;
     sf::Clock clock;
 
-    Position position(middleScreenX, middleScreenY);
+    Position position = getScreenCenter(&app);
+    Position positionP1(position.getX() - 500, position.getY());
+    Position positionP2(position.getX() + 500, position.getY());
+
+    CoupleFloat scaleP1(4.f, 4.f);
+    CoupleFloat scaleP2(4.f, 4.f);
 
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
     // Load sprite of player
     sf::Texture texturePlayerP1;
-    PlayerView playerViewP1 = createPlayer(2.f, 2.f, 72.8f, 78.375f, "resources/images/character/link.png", position, &texturePlayerP1,
-                                         "dotni",
+    PlayerView playerViewP1 = createPlayer(scaleP1.getX(), scaleP1.getY(), 72.8f, 78.375f, "resources/images/character/link.png", positionP1, &texturePlayerP1,
+                                          sf::Keyboard::Z,
+                                          sf::Keyboard::Q,
+                                          sf::Keyboard::D,
+                                          sf::Keyboard::S,
+                                          sf::Keyboard::LShift,
+                                          true,
+                                          "Scryper");
+
+    sf::Texture texturePlayerP2;
+    PlayerView playerViewP2 = createPlayer(scaleP2.getX(), scaleP2.getY(), 72.8f, 78.375f, "resources/images/character/walk/mario_1_1.png", positionP2, &texturePlayerP2,
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
                                          sf::Keyboard::Right,
                                          sf::Keyboard::Down,
-                                         sf::Keyboard::RShift);
-
-    sf::Texture texturePlayerP2;
-    PlayerView playerViewP2 = createPlayer(2.f, 2.f,  72.8f, 78.375f, "resources/images/character/link.png", position, &texturePlayerP2,
-                                         "Scryper",
-                                         sf::Keyboard::Z,
-                                         sf::Keyboard::Q,
-                                         sf::Keyboard::D,
-                                         sf::Keyboard::S,
-                                         sf::Keyboard::LShift);
+                                         sf::Keyboard::RShift,
+                                         false,
+                                         "Damien");
+    playerViewP2.flipSprite();
 
     //load texture for platforms
     sf::Texture textureBrick;
@@ -63,8 +68,6 @@ int GameScreen::run(sf::RenderWindow &app) {
 
     Match match(playerViewP1.getPlayer(), playerViewP2.getPlayer());
 
-
-
     while(app.isOpen()) {
         cout << "isAlive1 : " << playerViewP1.getPlayer().isAlive() << endl;
         cout << "isAlive2 : " << playerViewP2.getPlayer().isAlive() << endl;
@@ -92,14 +95,14 @@ int GameScreen::run(sf::RenderWindow &app) {
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-         if(match.getPlayerWin()==0) {
+         if(match.getPlayerWin() == 0) {
             if(playerViewP1.getPlayer().getHealth() == 0) {
                 match.incrementRoundWinP2();
-                if(match.getPlayerWin()==0)playerViewP1.setHealth(100.f);
+                if(match.getPlayerWin() == 0)playerViewP1.setHealth(100.f);
             }
             if(playerViewP2.getPlayer().getHealth() == 0) {
                 match.incrementRoundWinP1();
-                if(match.getPlayerWin()==0)playerViewP2.setHealth(100.f);
+                if(match.getPlayerWin() == 0)playerViewP2.setHealth(100.f);
             }
         } else {
             match.win();

@@ -13,7 +13,8 @@ class Player {
     private:
         std::string name;
         float attack;
-        float timeLastAttack;
+        int timeLastAttack;
+        int durationBetweenAttacks;
         bool defense;
         bool alive;
         float health;
@@ -38,6 +39,8 @@ class Player {
         bool getDefense()const;
         void setDefense(bool def);
         float getAttack()const;
+
+        void attackPlayer(Player& p, float clock);
 
         void stopX();
         void stopY();
