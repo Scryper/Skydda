@@ -30,3 +30,5 @@ obj/Debug/src/Size.o
 obj/Debug/src/SpriteInitializer.o
 obj/Debug/src/TextInitializer.o
 obj/Debug/src/TextureLoader.o
+*.o
+obj/Debug/src/MatchView.o
