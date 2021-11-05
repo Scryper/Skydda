@@ -13,7 +13,7 @@ int ChooseCharacterScreen::run(sf::RenderWindow &app, std::vector<std::string> d
     Position position = getScreenCenter(&app);
 
     sf::Texture textureBackground;
-    sf::Sprite backgroundSprite = initSprite(.45f, .45f, "resources/images/background/background_choose.png", position, &textureBackground);
+    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_choose.jpg", position, &textureBackground);
 
     sf::String input;
     sf::Texture textureButton; // Button texture
