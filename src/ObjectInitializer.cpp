@@ -34,7 +34,7 @@ std::vector<PlatformView> createBorder(std::string pathToPlatform, sf::Texture *
 }
 
 //creates the player
-PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture,
+PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Position playerPosition, sf::Texture *playerTexture, string name,
                         sf::Keyboard::Key up,
                         sf::Keyboard::Key left,
                         sf::Keyboard::Key right,
@@ -50,7 +50,7 @@ PlayerView createPlayer(float sizeX, float sizeY, std::string pathToPlayer, Posi
 
     sf::Sprite playerSprite = initSprite(sizeCouple, pathToPlayer, playerPosition, playerTexture);
 
-    Player player("Scryper", 2, false, 100, playerPosition, movement);
+    Player player(name, 2, false, 100, playerPosition, movement);
     PlayerView playerView(playerSprite, player,up,left,right,attack);
 
     return playerView;
