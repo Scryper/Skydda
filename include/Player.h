@@ -36,6 +36,7 @@ class Player {
         void setHealth(float health);
 
         bool getDefense()const;
+        void setDefense(bool def);
         float getAttack()const;
 
         void stopX();

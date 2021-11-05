@@ -50,6 +50,10 @@ void Player::setHealth(float health) {
     this->health = health;
 }
 
+void Player::setDefense(bool def) {
+    this->defense = def;
+}
+
 string Player::getName()const {
     return name;
 }

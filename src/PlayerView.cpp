@@ -9,13 +9,14 @@ PlayerView::PlayerView() {
     //createAnimation();
 }
 
-PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack) {
+PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack, sf::Keyboard::Key protect) {
     this->sprite = sprite;
     this->player = player;
     this->up = up;
     this->left = left;
     this->right = right;
     this->attackKey = attack;
+    this->protectKey = protect;
     this->looksRight = true;
     //createAnimation();
 
@@ -83,15 +84,22 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
             //maxFrame = 10;
             vector2f.x += deltaTime;
         }
+        if(sf::Keyboard::isKeyPressed(protectKey)){
+            player.setDefense(true);
+        }else{
+            player.setDefense(false);
+        }
         if(sf::Keyboard::isKeyPressed(attackKey)){
             //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
-            //la direction de l'attaque n'est pas encore gérée
+            //la direction de l'attaque n'est gérée
             std::vector<std::vector<int>> collision = directionCollisionPlayers(*this,p2);
             if(collision.size()>0 && collision[0][0]>0){
-                std::cout<<"attaké  "<< collision[0][0] <<endl;
-                attack(p2);
-
-             }
+                for(auto i : collision){
+                    if((i[0]==3 && !looksRight) || (i[0]==4 && looksRight)){
+                        attack(p2);
+                    }
+                }
+            }
         }
     }
     //animate(state,maxFrame);
@@ -99,7 +107,6 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
 }
 
 void PlayerView::attack(PlayerView &playerAttacked){
-    cout<<playerAttacked.player.getHealth()<<endl;
     //vérif que le player ne bloque pas l'attaque
     if(playerAttacked.getPlayer().getDefense()==true)
         return;

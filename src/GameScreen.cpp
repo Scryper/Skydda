@@ -22,7 +22,8 @@ int GameScreen::run(sf::RenderWindow &app) {
                                          sf::Keyboard::Up,
                                          sf::Keyboard::Left,
                                          sf::Keyboard::Right,
-                                         sf::Keyboard::Down);
+                                         sf::Keyboard::Down,
+                                         sf::Keyboard::RShift);
 
     sf::Texture texturePlayerP2;
     PlayerView playerViewP2 = createPlayer(4.f, 4.f, "resources/images/character/walk/mario_1_1.png", position, &texturePlayerP2,
@@ -30,7 +31,8 @@ int GameScreen::run(sf::RenderWindow &app) {
                                          sf::Keyboard::Z,
                                          sf::Keyboard::Q,
                                          sf::Keyboard::D,
-                                         sf::Keyboard::S);
+                                         sf::Keyboard::S,
+                                         sf::Keyboard::LShift);
 
     //load texture for platforms
     sf::Texture textureBrick;

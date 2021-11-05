@@ -15,6 +15,7 @@ class PlayerView {
         sf::Keyboard::Key left;
         sf::Keyboard::Key right;
         sf::Keyboard::Key attackKey;
+        sf::Keyboard::Key protectKey;
         sf::Texture texture;
         sf::IntRect rectSourceSprite;
         sf::Clock clock;
@@ -24,7 +25,7 @@ class PlayerView {
 
     public:
         PlayerView();
-        PlayerView(sf::Sprite sprite, Player player, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key attackKey);
+        PlayerView(sf::Sprite sprite, Player player, sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right, sf::Keyboard::Key attackKey, sf::Keyboard::Key protectKey);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
