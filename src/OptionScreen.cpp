@@ -9,7 +9,7 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
     Position positionText(position.getX() - 75, position.getY() - 12);
 
     sf::Texture textureBackground;
-    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
+    sf::Sprite backgroundSprite = initSprite(.45f, .45f, "resources/images/background/background.png", position, &textureBackground);
 
     /// Load Button
     sf::Texture textureButton;

@@ -3,8 +3,8 @@
 int ChooseCharacterScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     int indexMap = 0;
     std::vector<std::string> maps;
-    maps.push_back("resources/images/maps/map1_visual.png");
-    maps.push_back("resources/images/maps/map2_visual.png");
+    maps.push_back("resources/images/visuals/map1_visual.png");
+    maps.push_back("resources/images/visuals/map2_visual.png");
 
     sf::Event event;
 
@@ -13,7 +13,7 @@ int ChooseCharacterScreen::run(sf::RenderWindow &app, std::vector<std::string> d
     Position position = getScreenCenter(&app);
 
     sf::Texture textureBackground;
-    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
+    sf::Sprite backgroundSprite = initSprite(.45f, .45f, "resources/images/background/background_choose.png", position, &textureBackground);
 
     sf::String input;
     sf::Texture textureButton; // Button texture
