@@ -67,12 +67,19 @@ void Player::setDefense(bool def) {
 }
 
 void Player::attackPlayer(Player &p, float clock) {
+
     //vérif que le player ne bloque pas l'attaque
-    if(p.getDefense()==true)
+    if(p.getDefense()==true){
+        timeLastAttack = clock;
         return;
+    }
+
     //vérif que les pv sont supérieur a 0
-    if(p.getHealth()<=0)
+    if(p.getHealth()<=0){
+        timeLastAttack = clock;
         return;
+    }
+
     //faire l'animation d'attaque
 
     if(clock - timeLastAttack >= durationBetweenAttacks){
