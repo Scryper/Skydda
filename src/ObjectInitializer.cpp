@@ -1,11 +1,11 @@
 #include "ObjectInitializer.h"
 
 // creates the platform
-PlatformView createPlatform(float sizeX, float sizeY, std::string pathToPlatform, Position platformPosition, sf::Texture *platformTexture) {
+PlatformView createPlatform(float sizeX, float sizeY, Position platformPosition, sf::Texture *platformTexture) {
     CoupleFloat sizeCouple(sizeX, sizeY);
     Size sizeOfSprite(sizeCouple);
 
-    sf::Sprite platformSprite = initSprite(sizeOfSprite, pathToPlatform, platformPosition, platformTexture);
+    sf::Sprite platformSprite = initSprite(sizeOfSprite, platformPosition, platformTexture);
 
     Position viewPosition(platformPosition.getY(), platformPosition.getY() + 350);
     Platform platform(viewPosition, sizeOfSprite);
@@ -15,15 +15,15 @@ PlatformView createPlatform(float sizeX, float sizeY, std::string pathToPlatform
 }
 
 //creates the border
-std::vector<PlatformView> createBorder(std::string pathToPlatform, sf::Texture *platformTexture){
-    Position topPosition(960, -35);
-    PlatformView topPlatform = createPlatform(2.3f, .3f, "resources/images/platform/platform_default.png", topPosition, platformTexture);
+std::vector<PlatformView> createBorders(sf::Texture *platformTexture){
+    Position topPosition(960, -50);
+    PlatformView topPlatform = createPlatform(2.3f, .3f, topPosition, platformTexture);
 
-    Position leftPosition(-40, 540);
-    PlatformView leftPlatform = createPlatform(.1f, 4.5f, "resources/images/platform/platform_default.png", leftPosition, platformTexture);
+    Position leftPosition(-100, 540);
+    PlatformView leftPlatform = createPlatform(.1f, 4.5f, leftPosition, platformTexture);
 
-    Position rigthPosition(1960, 540);
-    PlatformView rigthPlatform = createPlatform(.1f, 4.5f, "resources/images/platform/platform_default.png", rigthPosition, platformTexture);
+    Position rigthPosition(2021, 540);
+    PlatformView rigthPlatform = createPlatform(.1f, 4.5f, rigthPosition, platformTexture);
 
     std::vector<PlatformView> platformViews;
     platformViews.push_back(topPlatform);

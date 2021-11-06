@@ -1,62 +1,37 @@
 #include "PrematchScreen.h"
 
 int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
-    int indexMap = 0;
-    std::vector<std::string> maps;
-    maps.push_back("resources/images/visuals/maps/map1_visual.png");
-    maps.push_back("resources/images/visuals/maps/map2_visual.png");
+    position = getScreenCenter(&app);
 
-    int indexPlayer1 = 0;
-    std::vector<std::string> player1characters;
-    player1characters.push_back("resources/images/visuals/characters/player_1_golem.png");
-    player1characters.push_back("resources/images/visuals/characters/player_1_groot.png");
-    player1characters.push_back("resources/images/visuals/characters/player_1_minotaur.png");
-
-    int indexPlayer2 = 0;
-    std::vector<std::string> player2characters;
-    player2characters.push_back("resources/images/visuals/characters/player_2_golem.png");
-    player2characters.push_back("resources/images/visuals/characters/player_2_groot.png");
-    player2characters.push_back("resources/images/visuals/characters/player_2_minotaur.png");
-
-    sf::Event event;
-
-    sf::Vector2f mousePosition;
-
-    Position position = getScreenCenter(&app);
-
-    sf::Texture textureBackground;
-    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_other.jpg", position, &textureBackground);
-
-    sf::String input;
-    sf::Texture textureButton; // Button texture
+    initVectors();
+    initBackground();
 
     /// First player elements
-    Position positionPlayerElements(350, 200);
     // Name
-    sf::Text firstPlayerName = TextInitializer::createText("Player 1", positionPlayerElements);
+    firstPlayerName = TextInitializer::createText("Dark Golem", positionPlayerElements);
 
     // Show selected character
     positionPlayerElements.setX(positionPlayerElements.getX() + 100);
     positionPlayerElements.setY(positionPlayerElements.getY() + 300);
-    sf::Texture textureCharacter1;
-    sf::Sprite spriteCharacter1 = initSprite(1.f, 1.f, player1characters[indexPlayer1], positionPlayerElements, &textureCharacter1);
+    spriteCharacter1 = initSprite(1.f, 1.f, characters[indexCharacter], positionPlayerElements, &textureCharacter1);
 
     // Buttons to choose the charater
     // Previous
     positionPlayerElements.setX(positionPlayerElements.getX() - 150);
     positionPlayerElements.setY(positionPlayerElements.getY() + 200);
-    sf::Sprite buttonFirstPlayerPrevious = initSprite(.7f, 1.f, "resources/images/buttons/button.png", positionPlayerElements, &textureButton);
+    buttonFirstPlayerPrevious = initSprite(.7f, 1.f, "resources/images/buttons/button.png", positionPlayerElements, &textureButton);
+
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
     positionPlayerElements.setX(positionPlayerElements.getX() - 70);
-    sf::Text textFirstPlayerPrevious = TextInitializer::createText("Previous", positionPlayerElements);
+    textFirstPlayerPrevious = TextInitializer::createText("Previous", positionPlayerElements);
 
     // Next
     positionPlayerElements.setY(positionPlayerElements.getY() + 12);
     positionPlayerElements.setX(positionPlayerElements.getX() + 270);
-    sf::Sprite buttonFirstPlayerNext = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
+    buttonFirstPlayerNext = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
     positionPlayerElements.setX(positionPlayerElements.getX() - 40);
-    sf::Text textFirstPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
+    textFirstPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
 
     // Validate
     positionPlayerElements.setX(positionPlayerElements.getX() - 60);
@@ -65,7 +40,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     positionPlayerElements.setX(positionPlayerElements.getX() - 60);
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
-    sf::Text textValidateFirstPlayer = TextInitializer::createText("Validate", positionPlayerElements);
+    textValidateFirstPlayer = TextInitializer::createText("Validate", positionPlayerElements);
 
     /// Second player elements
     //Reset
@@ -76,48 +51,48 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     // Name
     positionPlayerElements.setX(positionPlayerElements.getX() + 50);
-    sf::Text secondPlayerName = TextInitializer::createText("Player 2", positionPlayerElements);
+    secondPlayerName = TextInitializer::createText("Light Golem", positionPlayerElements);
 
     // Show selected character
     positionPlayerElements.setX(positionPlayerElements.getX() + 100);
     positionPlayerElements.setY(positionPlayerElements.getY() + 300);
-    sf::Texture textureCharacter2;
-    sf::Sprite spriteCharacter2 = initSprite(1.f, 1.f, player2characters[indexPlayer2], positionPlayerElements, &textureCharacter2);
+    spriteCharacter2 = initSprite(1.f, 1.f, characters[indexCharacter + 3], positionPlayerElements, &textureCharacter2);
 
     // Buttons to choose the charater
     // Previous
     positionPlayerElements.setX(positionPlayerElements.getX() - 100);
     positionPlayerElements.setY(positionPlayerElements.getY() + 200);
-    sf::Sprite buttonSecondPlayerPrevious = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
+    buttonSecondPlayerPrevious = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
+
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
     positionPlayerElements.setX(positionPlayerElements.getX() - 70);
-    sf::Text textSecondPlayerPrevious = TextInitializer::createText("Previous", positionPlayerElements);
+    textSecondPlayerPrevious = TextInitializer::createText("Previous", positionPlayerElements);
     textSecondPlayerPrevious.setFillColor(TextInitializer::BetterGrey);
 
     // Next
     positionPlayerElements.setY(positionPlayerElements.getY() + 12);
     positionPlayerElements.setX(positionPlayerElements.getX() + 270);
-    sf::Sprite buttonSecondPlayerNext = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
+    buttonSecondPlayerNext = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
+
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
     positionPlayerElements.setX(positionPlayerElements.getX() - 40);
-    sf::Text textSecondPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
+    textSecondPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
     textSecondPlayerNext.setFillColor(TextInitializer::BetterGrey);
 
     // Validate
     positionPlayerElements.setX(positionPlayerElements.getX() - 60);
     positionPlayerElements.setY(positionPlayerElements.getY() + 212);
-    sf::Sprite buttonValidateSecondPlayer = initSprite(1.f, 1.f, positionPlayerElements, &textureButton);
+    buttonValidateSecondPlayer = initSprite(1.f, 1.f, positionPlayerElements, &textureButton);
 
     positionPlayerElements.setX(positionPlayerElements.getX() - 60);
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
-    sf::Text textValidateSecondPlayer = TextInitializer::createText("Validate", positionPlayerElements);
+    textValidateSecondPlayer = TextInitializer::createText("Validate", positionPlayerElements);
     textValidateSecondPlayer.setFillColor(TextInitializer::BetterGrey);
 
     /// Map elements
     Position positionMap(position.getX(), 500);
 
-    sf::Texture textureMap;
-    sf::Sprite spriteMap = initSprite(.2f, .2f, maps[indexMap], positionMap, &textureMap);
+    spriteMap = initSprite(.2f, .2f, maps[indexMap], positionMap, &textureMap);
 
     auto scaledWidth = textureMap.getSize().x * spriteMap.getScale().x;
     auto scaledHeight = textureMap.getSize().y * spriteMap.getScale().y;
@@ -125,37 +100,33 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     sf::RectangleShape outlineMap(sf::Vector2f(scaledWidth + 10, scaledHeight + 10));
     outlineMap.setPosition(positionMap.getX() - (scaledWidth / 2) - 5, positionMap.getY() - (scaledHeight / 2) - 5);
 
-    Position positionButtonsMap(860, 700);
-    Position positionTextMap(positionButtonsMap.getX() - 75, positionButtonsMap.getY() - 13);
-
-    sf::Sprite buttonPreviousMap = initSprite(.7f, 1.f, positionButtonsMap, &textureButton);
-    sf::Text textPreviousMap = TextInitializer::createText("Previous", positionTextMap);
+    buttonPreviousMap = initSprite(.7f, 1.f, positionButtonsMap, &textureButton);
+    textPreviousMap = TextInitializer::createText("Previous", positionTextMap);
 
     positionButtonsMap.setX(positionButtonsMap.getX() + 200);
     positionTextMap.setX(positionTextMap.getX() + 240);
-    sf::Sprite buttonNextMap = initSprite(.7f, 1.f, positionButtonsMap, &textureButton);
-    sf::Text textNextMap = TextInitializer::createText("Next", positionTextMap);
+    buttonNextMap = initSprite(.7f, 1.f, positionButtonsMap, &textureButton);
+    textNextMap = TextInitializer::createText("Next", positionTextMap);
 
     /// Load buttons (clickable sprites)
     position.setY(position.getY() + 300);
     Position positionButtonText(position.getX() - 75, position.getY() - 12);
 
-    sf::Sprite buttonPlay = initSprite(1.f, 1.f, position, &textureButton);
+    buttonPlay = initSprite(1.f, 1.f, position, &textureButton);
     // Text of buttonChooseCharacters
     positionButtonText.setX(positionButtonText.getX() + 40);
-    sf::Text textPlay = TextInitializer::createText("Play", positionButtonText);
+    textPlay = TextInitializer::createText("Play", positionButtonText);
     textPlay.setFillColor(TextInitializer::BetterGrey);
 
     /// Back button
     position.setY(position.getY() + 100);
-    sf::Sprite buttonBack = initSprite(.5f, 1.f, position, &textureButton);
+    buttonBack = initSprite(.5f, 1.f, position, &textureButton);
     // Text of buttonQuit
     positionButtonText.setY(positionButtonText.getY() + 100);
-    sf::Text textBack = TextInitializer::createText("Back", positionButtonText);
+    textBack = TextInitializer::createText("Back", positionButtonText);
     textBack.setFillColor(TextInitializer::BetterRed);
 
     /// Font of texts
-    sf::Font font;
     font.loadFromFile("resources/fonts/glitch.otf");
 
     std::vector<sf::Text*> texts;
@@ -174,31 +145,12 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     TextInitializer::initFont(texts, &font);
 
-    bool firstPlayerOk = false;
-    bool secondPlayerOk = false;
     while(app.isOpen()) {
         while(app.pollEvent(event)) {
-            if(event.type == sf::Event::Closed) {
-                return -1;
-            }
+            if(event.type == sf::Event::Closed) return -1;
 
             if(event.type == sf::Event::KeyPressed) {
                 if(event.key.code == sf::Keyboard::Escape) return 0;
-            }
-
-            if(event.type == sf::Event::TextEntered) {
-                if(!firstPlayerOk) { // change first player name
-                    if(input.getSize() < 10) {
-                        input += event.text.unicode;
-                        firstPlayerName.setString(input);
-                    }
-                }
-                else { // change second player name
-                    if(input.getSize() < 10) {
-                        input += event.text.unicode;
-                        secondPlayerName.setString(input);
-                    }
-                }
             }
 
             /// Next map
@@ -239,10 +191,11 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 // Previous character
                 if(buttonFirstPlayerPrevious.getGlobalBounds().contains(mousePosition)) {
                     if(event.type == sf::Event::MouseButtonPressed) {
-                        if(indexPlayer1 > 0) {
-                            indexPlayer1--;
-                            textureCharacter1.loadFromFile(player1characters[indexPlayer1]);
+                        if(indexCharacter > 0) {
+                            indexCharacter--;
+                            textureCharacter1.loadFromFile(characters[indexCharacter]);
                             spriteCharacter1.setTexture(textureCharacter1, true);
+                            firstPlayerName.setString(names[indexCharacter]);
                         }
                     }
                     else {
@@ -256,10 +209,11 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 // Next character
                 if(buttonFirstPlayerNext.getGlobalBounds().contains(mousePosition)) {
                     if(event.type == sf::Event::MouseButtonPressed) {
-                        if(indexPlayer1 < (int)(player1characters.size() - 1)) {
-                            indexPlayer1++;
-                            textureCharacter1.loadFromFile(player1characters[indexPlayer1]);
+                        if(indexCharacter < (int)(characters.size() - 4)) {
+                            indexCharacter++;
+                            textureCharacter1.loadFromFile(characters[indexCharacter]);
                             spriteCharacter1.setTexture(textureCharacter1, true);
+                            firstPlayerName.setString(names[indexCharacter]);
                         }
                     }
                     else {
@@ -275,10 +229,11 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 // Previous character
                 if(buttonSecondPlayerPrevious.getGlobalBounds().contains(mousePosition)) {
                     if(event.type == sf::Event::MouseButtonPressed) {
-                        if(indexPlayer2 > 0) {
-                            indexPlayer2--;
-                            textureCharacter2.loadFromFile(player2characters[indexPlayer2]);
+                        if(indexCharacter + 3 > 3) {
+                            indexCharacter--;
+                            textureCharacter2.loadFromFile(characters[indexCharacter + 3]);
                             spriteCharacter2.setTexture(textureCharacter2, true);
+                            secondPlayerName.setString(names[indexCharacter + 3]);
                         }
                     }
                     else {
@@ -292,10 +247,11 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 // Next character
                 if(buttonSecondPlayerNext.getGlobalBounds().contains(mousePosition)) {
                     if(event.type == sf::Event::MouseButtonPressed) {
-                        if(indexPlayer2 < (int)(player2characters.size() - 1)) {
-                            indexPlayer2++;
-                            textureCharacter2.loadFromFile(player2characters[indexPlayer2]);
+                        if(indexCharacter + 3 < (int)(characters.size() - 1)) {
+                            indexCharacter++;
+                            textureCharacter2.loadFromFile(characters[indexCharacter + 3]);
                             spriteCharacter2.setTexture(textureCharacter2, true);
+                            secondPlayerName.setString(names[indexCharacter + 3]);
                         }
                     }
                     else {
@@ -329,9 +285,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
         /// Button back
         if(buttonBack.getGlobalBounds().contains(mousePosition)) {
-            if(event.type == sf::Event::MouseButtonPressed) {
-                return 0;
-            }
+            if(event.type == sf::Event::MouseButtonPressed) return 0;
             else {
                 textBack.setFillColor(TextInitializer::DarkerBetterRed);
             }
@@ -348,10 +302,10 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                     textValidateFirstPlayer.setString("Validated");
                     textValidateFirstPlayer.setPosition(textValidateFirstPlayer.getPosition().x - 10, textValidateFirstPlayer.getPosition().y);
                     strFirstPlayerName = firstPlayerName.getString().toAnsiString();
+                    pathSpriteFirstPlayer = spriteSheets[indexCharacter];
 
                     // Preparing for second player
                     textValidateSecondPlayer.setFillColor(TextInitializer::BetterWhite);
-                    input = "";
                 }
                 else {
                     textValidateFirstPlayer.setFillColor(sf::Color::Green);
@@ -370,6 +324,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                     textValidateSecondPlayer.setString("Validated");
                     textValidateSecondPlayer.setPosition(textValidateSecondPlayer.getPosition().x - 10, textValidateSecondPlayer.getPosition().y);
                     strSecondPlayerName = secondPlayerName.getString().toAnsiString();
+                    pathSpriteSecondPlayer = spriteSheets[indexCharacter + 3];
                 }
                 else {
                     textValidateSecondPlayer.setFillColor(sf::Color::Green);
@@ -433,4 +388,34 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     }
 
     return -1;
+}
+
+void PrematchScreen::initVectors() {
+    maps.push_back("resources/images/previews/maps/map1_visual.png");
+    maps.push_back("resources/images/previews/maps/map2_visual.png");
+
+    names.push_back("Dark Golem");
+    names.push_back("Dark Groot");
+    names.push_back("Dark Minotaur");
+    names.push_back("Light Golem");
+    names.push_back("Light Groot");
+    names.push_back("Light Minotaur");
+
+    characters.push_back("resources/images/previews/characters/golem_dark.png");
+    characters.push_back("resources/images/previews/characters/groot_dark.png");
+    characters.push_back("resources/images/previews/characters/minotaur_dark.png");
+    characters.push_back("resources/images/previews/characters/golem_light.png");
+    characters.push_back("resources/images/previews/characters/groot_light.png");
+    characters.push_back("resources/images/previews/characters/minotaur_light.png");
+
+    spriteSheets.push_back("resources/images/characters/golem_dark.png");
+    spriteSheets.push_back("resources/images/characters/groot_dark.png");
+    spriteSheets.push_back("resources/images/characters/minotaur_dark.png");
+    spriteSheets.push_back("resources/images/characters/golem_light.png");
+    spriteSheets.push_back("resources/images/characters/groot_light.png");
+    spriteSheets.push_back("resources/images/characters/minotaur_light.png");
+}
+
+void PrematchScreen::initBackground() {
+    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_other.jpg", position, &textureBackground);
 }

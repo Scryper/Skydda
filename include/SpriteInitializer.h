@@ -20,6 +20,8 @@ sf::Sprite initSpritePlayer(Size sizeOfSprite, Size centerOfSprite, std::string 
 // Initialize the sprite and creates itself the sizeCouple
 sf::Sprite initSprite(float sizeX, float sizeY, std::string pathToSprite, Position spritePosition, sf::Texture *spriteTexture);
 
+sf::Sprite initSprite(Size sizeOfSprite, Position spritePosition, sf::Texture *spriteTexture);
+
 // Initialize a sprite which has a texture already loaded
 sf::Sprite initSprite(float sizeX, float sizeY, Position spritePosition, sf::Texture *spriteTexture);
 

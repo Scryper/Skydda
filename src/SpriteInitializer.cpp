@@ -40,11 +40,17 @@ sf::Sprite initSprite(float sizeX, float sizeY, std::string pathToSprite, Positi
     return sprite;
 }
 
+sf::Sprite initSprite(Size sizeOfSprite, Position spritePosition, sf::Texture *spriteTexture) {
+    sf::Sprite sprite(*spriteTexture);
+    sprite = setSpriteOptions(&sprite, sizeOfSprite, spritePosition);
+
+    return sprite;
+}
+
 // Initialize a sprite which has a texture already loaded
 sf::Sprite initSprite(float sizeX, float sizeY, Position spritePosition, sf::Texture *spriteTexture) {
     CoupleFloat sizeCouple(sizeX, sizeY);
     Size sizeOfSprite(sizeCouple);
-    sf::Sprite sprite(*spriteTexture);
-    sprite = setSpriteOptions(&sprite, sizeOfSprite, spritePosition);
+    sf::Sprite sprite = initSprite(sizeOfSprite, spritePosition, spriteTexture);
     return sprite;
 }

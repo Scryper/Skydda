@@ -9,15 +9,17 @@
 class MapView {
     private:
         std::vector<PlatformView> platforms;
-        std::vector<PlatformView> border;
+        std::vector<PlatformView> borders;
 
     public:
         MapView();
-        MapView(int seed, sf::Texture *platformTexture, std::string path);
+        MapView(int seed, std::vector<sf::Texture*> textures);
         virtual ~MapView();
-        std::vector<PlatformView> getBorders()const;
-        std::vector<PlatformView> getPlatforms()const;
-        std::vector<PlatformView> getAllCollisions()const;
+
+        std::vector<PlatformView> getBorders() const;
+        std::vector<PlatformView> getPlatforms() const;
+        std::vector<PlatformView> getAllCollisions() const;
+
         void drawPlatforms(sf::RenderWindow app);
 };
 

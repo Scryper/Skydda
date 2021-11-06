@@ -45,7 +45,9 @@ int main() {
 		if(screen != 2) screen = screens[screen]->run(app, data, 0);
 		else {
             data.push_back(prematchScreen.strFirstPlayerName);
+            data.push_back(prematchScreen.pathSpriteFirstPlayer);
             data.push_back(prematchScreen.strSecondPlayerName);
+            data.push_back(prematchScreen.pathSpriteSecondPlayer);
             screen = screens[screen]->run(app, data, prematchScreen.map_);
 		}
 	}

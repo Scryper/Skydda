@@ -2,7 +2,9 @@
 
 int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     playerName1 = data[0];
-    playerName2 = data[1];
+    spriteSheet1 = data[1];
+    playerName2 = data[2];
+    spriteSheet2 = data[3];
     mapSeed = seed;
 
     sf::Event event;
@@ -12,6 +14,9 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
 
     position = getScreenCenter(&app);
 
+    initSprites();
+    initTextures();
+    initVectors();
     initMap();
     initPlayers();
     initHealthBars();
@@ -83,9 +88,11 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
         app.draw(healthBarViewP2.getHealthBarOut());
         app.draw(healthBarViewP2.getHealthBarIn());
 
-
         app.draw(namePlayerP1);
         app.draw(namePlayerP2);
+
+        //for borders' debug
+//        for(PlatformView border : map_.getBorders()) app.draw(border.getSprite());
 
         app.display();
     }
@@ -161,7 +168,7 @@ std::vector<sf::CircleShape> GameScreen::getRoundCirclesP2() {
     return roundCirclesP2;
 }
 
-void GameScreen::initPlayers(){
+void GameScreen::initPlayers() {
     positionP1 = Position(position.getX() - 500, position.getY());
     positionP2 = Position(position.getX() + 500, position.getY());
 
@@ -174,7 +181,7 @@ void GameScreen::initPlayers(){
                                 scaleP1.getY(),
                                 textureCharacter.getX(),
                                 textureCharacter.getY(),
-                                "resources/images/character/Personnage_01.png",
+                                spriteSheet1,
                                 positionP1,
                                 &texturePlayerP1,
                                 sf::Keyboard::Z,
@@ -189,7 +196,7 @@ void GameScreen::initPlayers(){
                                 scaleP2.getY(),
                                 textureCharacter.getX(),
                                 textureCharacter.getY(),
-                                "resources/images/character/Personnage_03.png",
+                                spriteSheet2,
                                 positionP2,
                                 &texturePlayerP2,
                                 sf::Keyboard::Up,
@@ -202,15 +209,32 @@ void GameScreen::initPlayers(){
     playerViewP2.flipSprite();
 }
 
-void GameScreen::initMap(){
-    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_battle.png", position, &textureBackground);
-    //loading the first map
-    map_ = MapView(mapSeed, &textureBrick, "resources/images/platform/platform_default.png");
+void GameScreen::initMap() {
+    //loading the map
+    map_ = MapView(mapSeed, textures);
     //get all the platforms from the map
     platforms = map_.getAllCollisions();
 }
 
-void GameScreen::initHealthBars(){
+void GameScreen::initSprites() {
+    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_battle.png", position, &textureBackground);
+}
+
+void GameScreen::initTextures() {
+    texturePlatformGround.loadFromFile("resources/images/platforms/platform_ground.png");
+    texturePlatformLong.loadFromFile("resources/images/platforms/platform_long.png");
+    texturePlatformSmall.loadFromFile("resources/images/platforms/platform_small.png");
+    texturePlatformTiny.loadFromFile("resources/images/platforms/platform_tiny.png");
+}
+
+void GameScreen::initVectors() {
+    textures.push_back(&texturePlatformGround);
+    textures.push_back(&texturePlatformLong);
+    textures.push_back(&texturePlatformSmall);
+    textures.push_back(&texturePlatformTiny);
+}
+
+void GameScreen::initHealthBars() {
     // Create HealthBar
     Position posHealthBarP1(50.f, 50.f);
     Position posHealthBarP2(1550.f, 50.f);

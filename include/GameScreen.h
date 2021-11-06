@@ -23,14 +23,19 @@ class GameScreen : public Screen {
         PlayerView playerViewP1;
         PlayerView playerViewP2;
 
-        std::vector<PlatformView> platforms;
-
         sf::Sprite backgroundSprite;
+
         sf::Texture textureBackground;
         sf::Texture textureBrick;
         sf::Texture texturePlayerP1;
         sf::Texture texturePlayerP2;
+        sf::Texture texturePlatformGround;
+        sf::Texture texturePlatformLong;
+        sf::Texture texturePlatformSmall;
+        sf::Texture texturePlatformTiny;
+
         sf::Font font;
+
         sf::Text namePlayerP1;
         sf::Text namePlayerP2;
 
@@ -39,9 +44,13 @@ class GameScreen : public Screen {
 
         std::vector<sf::CircleShape> roundCirclesP1;
         std::vector<sf::CircleShape> roundCirclesP2;
+        std::vector<sf::Texture*> textures;
+        std::vector<PlatformView> platforms;
 
         std::string playerName1;
+        std::string spriteSheet1;
         std::string playerName2;
+        std::string spriteSheet2;
 
         int mapSeed;
 
@@ -54,6 +63,9 @@ class GameScreen : public Screen {
         void createRoundCircles();
         void actualiseRoundCircles();
         void initPlayers();
+        void initSprites();
+        void initTextures();
+        void initVectors();
         void initMap();
         void initHealthBars();
         void movePlayers(float deltaTime);

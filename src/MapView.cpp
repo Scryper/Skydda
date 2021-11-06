@@ -1,22 +1,23 @@
 #include "MapView.h"
 
-MapView::MapView(){}
+MapView::MapView() { }
 
-MapView::MapView(int seed, sf::Texture *platformTexture, std::string path) {
+/// !!! -> 0 : ground, 1 : long, 2 : small, 3 : tiny
+MapView::MapView(int seed, std::vector<sf::Texture*> textures) {
     if(seed == 1) {
-        border = createBorder(path, platformTexture);
+        borders = createBorders(textures[0]);
 
-        Position firstPosition(900, 1000);
-        PlatformView firstPlatform = createPlatform(5.5f, .3f, path, firstPosition, platformTexture);
+        Position firstPosition(950, 1050);
+        PlatformView firstPlatform = createPlatform(1.1f, .5f, firstPosition, textures[0]);
 
         Position secondPosition(900, 200);
-        PlatformView secondPlatform = createPlatform(1.f, .3f, path, secondPosition, platformTexture);
+        PlatformView secondPlatform = createPlatform(1.f, 1.f, secondPosition, textures[1]);
 
         Position thirdPosition(1400, 700);
-        PlatformView thirdPlatform = createPlatform(.3f, .3f, path, thirdPosition, platformTexture);
+        PlatformView thirdPlatform = createPlatform(1.f, 1.f, thirdPosition, textures[2]);
 
         Position fourthPosition(1800, 500);
-        PlatformView fourthPlatform = createPlatform(.2f, .3f, path, fourthPosition, platformTexture);
+        PlatformView fourthPlatform = createPlatform(1.f, 1.f, fourthPosition, textures[3]);
 
         platforms.push_back(firstPlatform);
         platforms.push_back(secondPlatform);
@@ -24,16 +25,16 @@ MapView::MapView(int seed, sf::Texture *platformTexture, std::string path) {
         platforms.push_back(fourthPlatform);
     }
     if(seed == 2) {
-        border = createBorder(path, platformTexture);
+        borders = createBorders(textures[0]);
 
-        Position firstPosition(900,1000);
-        PlatformView firstPlatform = createPlatform(5.5f, .3f, path, firstPosition, platformTexture);
+        Position firstPosition(950, 1050);
+        PlatformView firstPlatform = createPlatform(1.1f, .5f, firstPosition, textures[0]);
 
         Position secondPosition(400, 700);
-        PlatformView secondPlatform = createPlatform(.3f, .3f, path, secondPosition, platformTexture);
+        PlatformView secondPlatform = createPlatform(1.f, 1.f, secondPosition, textures[2]);
 
         Position thirdPosition(1400, 700);
-        PlatformView thirdPlatform = createPlatform(.3f, .3f, path, thirdPosition, platformTexture);
+        PlatformView thirdPlatform = createPlatform(1.f, 1.f, thirdPosition, textures[2]);
 
         platforms.push_back(firstPlatform);
         platforms.push_back(secondPlatform);
@@ -44,7 +45,7 @@ MapView::MapView(int seed, sf::Texture *platformTexture, std::string path) {
 MapView::~MapView() { }
 
 std::vector<PlatformView> MapView::getBorders() const {
-    return border;
+    return borders;
 }
 
 std::vector<PlatformView> MapView::getPlatforms() const {
@@ -53,8 +54,8 @@ std::vector<PlatformView> MapView::getPlatforms() const {
 
 std::vector<PlatformView> MapView::getAllCollisions() const {
     std::vector<PlatformView> temp = platforms;
-    for(auto i : border){
-        temp.push_back(i);
+    for(PlatformView border : borders){
+        temp.push_back(border);
     }
     return temp;
 }
