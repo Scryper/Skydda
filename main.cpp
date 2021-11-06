@@ -30,8 +30,8 @@ int main() {
 	MenuScreen menuScreen; // 0
 	screens.push_back(&menuScreen);
 
-	ChooseCharacterScreen chooseCharacterScreen; // 1
-	screens.push_back(&chooseCharacterScreen);
+	PrematchScreen prematchScreen; // 1
+	screens.push_back(&prematchScreen);
 
 	GameScreen gameScreen; // 2
 	screens.push_back(&gameScreen);
@@ -44,9 +44,9 @@ int main() {
 	while (screen >= 0) {
 		if(screen != 2) screen = screens[screen]->run(app, data, 0);
 		else {
-            data.push_back(chooseCharacterScreen.strFirstPlayerName);
-            data.push_back(chooseCharacterScreen.strSecondPlayerName);
-            screen = screens[screen]->run(app, data, chooseCharacterScreen.map_);
+            data.push_back(prematchScreen.strFirstPlayerName);
+            data.push_back(prematchScreen.strSecondPlayerName);
+            screen = screens[screen]->run(app, data, prematchScreen.map_);
 		}
 	}
 

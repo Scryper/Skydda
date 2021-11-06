@@ -6,6 +6,6 @@
 #include "MenuScreen.h"
 #include "GameScreen.h"
 #include "OptionScreen.h"
-#include "ChooseCharacterScreen.h"
+#include "PrematchScreen.h"
 
 #endif // SCREENINCLUDER_H

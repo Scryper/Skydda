@@ -1,9 +1,9 @@
-#ifndef CHOOSECHARACTERSCREEN_H
-#define CHOOSECHARACTERSCREEN_H
+#ifndef PREMATCHSCREEN_H
+#define PREMATCHSCREEN_H
 
 #include "Screen.h"
 
-class ChooseCharacterScreen : public Screen {
+class PrematchScreen : public Screen {
     public:
         std::string strFirstPlayerName;
         std::string strSecondPlayerName;
@@ -12,4 +12,4 @@ class ChooseCharacterScreen : public Screen {
         virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
 };
 
-#endif // CHOOSECHARACTERSCREEN_H
+#endif // PREMATCHSCREEN_H

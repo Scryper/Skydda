@@ -1,10 +1,10 @@
-#include "ChooseCharacterScreen.h"
+#include "PrematchScreen.h"
 
-int ChooseCharacterScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
+int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     int indexMap = 0;
     std::vector<std::string> maps;
-    maps.push_back("resources/images/visuals/map1_visual.png");
-    maps.push_back("resources/images/visuals/map2_visual.png");
+    maps.push_back("resources/images/visuals/maps/map1_visual.png");
+    maps.push_back("resources/images/visuals/maps/map2_visual.png");
 
     sf::Event event;
 

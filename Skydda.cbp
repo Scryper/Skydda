@@ -49,7 +49,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="include/ChooseCharacterScreen.h" />
 		<Unit filename="include/Collision.h" />
 		<Unit filename="include/CoupleFloat.h" />
 		<Unit filename="include/CoupleVectorTransformer.h" />
@@ -68,6 +67,7 @@
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/PlayerView.h" />
 		<Unit filename="include/Position.h" />
+		<Unit filename="include/PrematchScreen.h" />
 		<Unit filename="include/Screen.h" />
 		<Unit filename="include/ScreenIncluder.h" />
 		<Unit filename="include/Size.h" />
@@ -75,7 +75,6 @@
 		<Unit filename="include/TextInitializer.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/ChooseCharacterScreen.cpp" />
 		<Unit filename="src/Collision.cpp" />
 		<Unit filename="src/CoupleFloat.cpp" />
 		<Unit filename="src/CoupleVectorTransformer.cpp" />
@@ -94,6 +93,7 @@
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/PlayerView.cpp" />
 		<Unit filename="src/Position.cpp" />
+		<Unit filename="src/PrematchScreen.cpp" />
 		<Unit filename="src/Screen.cpp" />
 		<Unit filename="src/ScreenIncluder.cpp" />
 		<Unit filename="src/Size.cpp" />
