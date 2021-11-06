@@ -72,7 +72,7 @@ void PlayerView::inputPlayer(){
 }
 
 CoupleFloat PlayerView::computeCoupleMovement(){
-    state = 3;
+    state = 4;
     maxFrame = 12;
 
     inputPlayer();
@@ -81,19 +81,19 @@ CoupleFloat PlayerView::computeCoupleMovement(){
     for (sf::Keyboard::Key key : keysPressed) {
         //up
         if(key == keys[0]) {
-            state = 4;
+            state = 5;
             maxFrame = 6;
             couple.setY(couple.getY() - deltaTime);
         }
         //left
         if(key == keys[1]) {
-            state = 5;
+            state = 6;
             maxFrame = 12;
             couple.setX(couple.getX() - deltaTime);
         }
         //rigth
         if(key == keys[2]) {
-            state = 5;
+            state = 6;
             maxFrame = 12;
             couple.setX(couple.getX() + deltaTime);
         }
@@ -111,7 +111,7 @@ void PlayerView::updateState(PlayerView &playerView){
     }
     //attack
     if(sf::Keyboard::isKeyPressed(keys[3])){
-        state = 0;
+        state = 1;
         maxFrame = 12;
         //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
         //la direction de l'attaque n'est gérée
@@ -128,10 +128,26 @@ void PlayerView::updateState(PlayerView &playerView){
 
 void PlayerView::attack(PlayerView &playerAttacked){
     player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
+
+    playerAttacked.setMaxFrame(12);
+    if(playerAttacked.getPlayer().getHealth() != 0.f){
+        playerAttacked.setState(3);
+    }
+    else{
+        playerAttacked.setState(2);
+    }
 }
 
 void PlayerView::setHealth(float health) {
     player.setHealth(health);
+}
+
+void PlayerView::setMaxFrame(int maxFrame) {
+    this->maxFrame = maxFrame;
+}
+
+void PlayerView::setState(int state) {
+    this->state = state;
 }
 
 void PlayerView::animate()
@@ -142,16 +158,19 @@ void PlayerView::animate()
     this->maxFrame -= 1;
     if (this->clock.getElapsedTime().asMilliseconds() % 3 == 0){
 
-        if (this->tour == this->maxFrame || this->lastState != this->state){
+        if (this->tour == this->maxFrame || (this->lastState != this->state && (this->lastState != 1 && this->lastState != 3))){
             this->tour = 0;
         }
         else{
             this->tour += 1;
         }
 
+        if((this->lastState != 3 && this->lastState != 1) || (tour == 0 && (lastState == 1 || lastState == 3)))
+        {
         this->lastState = this->state;
-        this->sprite.setTextureRect(sf::IntRect(this->tour * x, this->lastState * y, x, y));
-        //this->clock.restart();
+        }
+
+        this->sprite.setTextureRect(sf::IntRect(this->tour * x, (this->lastState-1) * y, x, y));
 
     }
 }

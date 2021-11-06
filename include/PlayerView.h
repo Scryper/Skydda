@@ -41,6 +41,8 @@ class PlayerView {
         void attack(PlayerView &playerAttacked);
         void setHealth(float health);
         void setAlive(bool alive);
+        void setState(int state);
+        void setMaxFrame(int maxFrame);
 
 
         bool isLooksRigth()const;
