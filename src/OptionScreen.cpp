@@ -13,7 +13,7 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
 
     /// Load Button
     sf::Texture textureButton;
-    sf::Sprite buttonBack = initSprite(.5f, 1.f, "resources/images/button/button.png", position, &textureButton);
+    sf::Sprite buttonBack = initSprite(.5f, 1.f, "resources/images/buttons/button.png", position, &textureButton);
     // Text of buttonQuit
     positionText.setX(positionText.getX() + 35);
     sf::Text textBack = TextInitializer::createText("Back", positionText);
