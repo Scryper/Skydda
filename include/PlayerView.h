@@ -37,6 +37,7 @@ class PlayerView {
         void setHealth(float health);
         void setAlive(bool alive);
 
+
         bool isLooksRigth()const;
 
         sf::Vector2f inputPlayer(float deltaTime, PlayerView &player2);

@@ -11,10 +11,10 @@ int GameScreen::run(sf::RenderWindow &app) {
     Position positionP1(position.getX() - 500, position.getY());
     Position positionP2(position.getX() + 500, position.getY());
 
-    CoupleFloat scaleP1(2.f, 2.f);
-    CoupleFloat scaleP2(2.f, 2.f);
+    CoupleFloat scaleP1(.5f, .5f);
+    CoupleFloat scaleP2(.5f, .5f);
     CoupleFloat textureLink(72.8f, 78.375f);
-
+    CoupleFloat textureCharacter(327.f, 273.f);
     sf::Texture textureBackground;
     sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
 
@@ -22,9 +22,9 @@ int GameScreen::run(sf::RenderWindow &app) {
     sf::Texture texturePlayerP1;
     PlayerView playerViewP1 = createPlayer(scaleP1.getX(),
                                            scaleP1.getY(),
-                                           textureLink.getX(),
-                                           textureLink.getY(),
-                                           "resources/images/character/link.png",
+                                           textureCharacter.getX(),
+                                           textureCharacter.getY(),
+                                           "resources/images/character/Personnage_01.png",
                                            positionP1,
                                            &texturePlayerP1,
                                            sf::Keyboard::Z,
@@ -38,9 +38,9 @@ int GameScreen::run(sf::RenderWindow &app) {
     sf::Texture texturePlayerP2;
     PlayerView playerViewP2 = createPlayer(scaleP2.getX(),
                                             scaleP2.getY(),
-                                            textureLink.getX(),
-                                            textureLink.getY(),
-                                            "resources/images/character/link.png",
+                                            textureCharacter.getX(),
+                                            textureCharacter.getY(),
+                                            "resources/images/character/Personnage_01.png",
                                             positionP2,
                                             &texturePlayerP2,
                                             sf::Keyboard::Up,

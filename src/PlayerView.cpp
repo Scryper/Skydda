@@ -67,7 +67,7 @@ void PlayerView::movePlayer(sf::Vector2f vectorDirection, std::vector<std::vecto
 
 sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
     int state = 3;
-    int maxFrame = 3;
+    int maxFrame = 12;
      sf::Vector2f vector2f(0.f, 0.f);
 
      if(player.isAlive()) {
@@ -76,13 +76,13 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
             vector2f.y += -deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(left)) {
-            state = 7;
-            maxFrame = 10;
+            state = 5;
+            maxFrame = 12;
             vector2f.x += -deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(right)) {
-            state = 7;
-            maxFrame = 10;
+            state = 5;
+            maxFrame = 12;
             vector2f.x += deltaTime;
         }
         if(sf::Keyboard::isKeyPressed(protectKey)){
@@ -91,6 +91,8 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
             player.setDefense(false);
         }
         if(sf::Keyboard::isKeyPressed(attackKey)){
+            state = 0;
+            maxFrame = 12;
             //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
             //la direction de l'attaque n'est gérée
             std::vector<std::vector<int>> collision = directionCollisionPlayers(*this,p2);
@@ -109,6 +111,7 @@ sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
 
 void PlayerView::attack(PlayerView &playerAttacked){
     player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
+    playerAttacked.animate(2, 12);
 }
 
 void PlayerView::setHealth(float health) {
@@ -121,16 +124,17 @@ void PlayerView::animate(int state, int maxFrame)
     float y = this->sprite.getOrigin().y * 2;
 
     maxFrame -= 1;
-    if (this->clock.getElapsedTime().asMilliseconds() % 10 == 0){
+    if (this->clock.getElapsedTime().asMilliseconds() % 5 == 0){
 
-        if (this->tour == maxFrame || state != lastState){
+        if (this->tour == maxFrame || lastState != state){
             this->tour = 0;
         }
         else{
             this->tour += 1;
         }
+
         lastState = state;
-        this->sprite.setTextureRect(sf::IntRect(tour * x, state * y, x, y));
+        this->sprite.setTextureRect(sf::IntRect(tour * x, lastState * y, x, y));
         //this->clock.restart();
 
     }
