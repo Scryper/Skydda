@@ -200,6 +200,112 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                     }
                 }
             }
+
+            /// Next map
+            if(buttonNextMap.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    if(indexMap < (int)(maps.size() - 1)) {
+                        indexMap++;
+                        textureMap.loadFromFile(maps[indexMap]);
+                        spriteMap.setTexture(textureMap, true);
+                    }
+                }
+                else {
+                    textNextMap.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textNextMap.setFillColor(TextInitializer::BetterWhite);
+            }
+
+            /// Previous map
+            if(buttonPreviousMap.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    if(indexMap > 0) {
+                        indexMap--;
+                        textureMap.loadFromFile(maps[indexMap]);
+                        spriteMap.setTexture(textureMap, true);
+                    }
+                }
+                else {
+                    textPreviousMap.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textPreviousMap.setFillColor(TextInitializer::BetterWhite);
+            }
+
+            if(!firstPlayerOk) {
+                // Previous character
+                if(buttonFirstPlayerPrevious.getGlobalBounds().contains(mousePosition)) {
+                    if(event.type == sf::Event::MouseButtonPressed) {
+                        if(indexPlayer1 > 0) {
+                            indexPlayer1--;
+                            textureCharacter1.loadFromFile(player1characters[indexPlayer1]);
+                            spriteCharacter1.setTexture(textureCharacter1, true);
+                        }
+                    }
+                    else {
+                        textFirstPlayerPrevious.setFillColor(sf::Color::Green);
+                    }
+                }
+                else {
+                    textFirstPlayerPrevious.setFillColor(TextInitializer::BetterWhite);
+                }
+
+                // Next character
+                if(buttonFirstPlayerNext.getGlobalBounds().contains(mousePosition)) {
+                    if(event.type == sf::Event::MouseButtonPressed) {
+                        if(indexPlayer1 < (int)(player1characters.size() - 1)) {
+                            indexPlayer1++;
+                            textureCharacter1.loadFromFile(player1characters[indexPlayer1]);
+                            spriteCharacter1.setTexture(textureCharacter1, true);
+                        }
+                    }
+                    else {
+                        textFirstPlayerNext.setFillColor(sf::Color::Green);
+                    }
+                }
+                else {
+                    textFirstPlayerNext.setFillColor(TextInitializer::BetterWhite);
+                }
+            }
+
+            if(firstPlayerOk && !secondPlayerOk) {
+                // Previous character
+                if(buttonSecondPlayerPrevious.getGlobalBounds().contains(mousePosition)) {
+                    if(event.type == sf::Event::MouseButtonPressed) {
+                        if(indexPlayer2 > 0) {
+                            indexPlayer2--;
+                            textureCharacter2.loadFromFile(player2characters[indexPlayer2]);
+                            spriteCharacter2.setTexture(textureCharacter2, true);
+                        }
+                    }
+                    else {
+                        textSecondPlayerPrevious.setFillColor(sf::Color::Green);
+                    }
+                }
+                else {
+                    textSecondPlayerPrevious.setFillColor(TextInitializer::BetterWhite);
+                }
+
+                // Next character
+                if(buttonSecondPlayerNext.getGlobalBounds().contains(mousePosition)) {
+                    if(event.type == sf::Event::MouseButtonPressed) {
+                        if(indexPlayer2 < (int)(player2characters.size() - 1)) {
+                            indexPlayer2++;
+                            textureCharacter2.loadFromFile(player2characters[indexPlayer2]);
+                            spriteCharacter2.setTexture(textureCharacter2, true);
+                        }
+                    }
+                    else {
+                        textSecondPlayerNext.setFillColor(sf::Color::Green);
+                    }
+                }
+                else {
+                    textSecondPlayerNext.setFillColor(TextInitializer::BetterWhite);
+                }
+            }
         }
 
         mousePosition = getMousePosition(&app);
@@ -234,40 +340,6 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             textBack.setFillColor(TextInitializer::BetterRed);
         }
 
-        /// Next map
-        if(buttonNextMap.getGlobalBounds().contains(mousePosition)) {
-            if(event.type == sf::Event::MouseButtonPressed) {
-                if(indexMap < (int)(maps.size() - 1)) {
-                    indexMap++;
-                    textureMap.loadFromFile(maps[indexMap]);
-                    spriteMap.setTexture(textureMap, true);
-                }
-            }
-            else {
-                textNextMap.setFillColor(sf::Color::Green);
-            }
-        }
-        else {
-            textNextMap.setFillColor(TextInitializer::BetterWhite);
-        }
-
-        /// Previous map
-        if(buttonPreviousMap.getGlobalBounds().contains(mousePosition)) {
-            if(event.type == sf::Event::MouseButtonPressed) {
-                if(indexMap > 0) {
-                    indexMap--;
-                    textureMap.loadFromFile(maps[indexMap]);
-                    spriteMap.setTexture(textureMap, true);
-                }
-            }
-            else {
-                textPreviousMap.setFillColor(sf::Color::Green);
-            }
-        }
-        else {
-            textPreviousMap.setFillColor(TextInitializer::BetterWhite);
-        }
-
         /// First player
         if(!firstPlayerOk) {
             if(buttonValidateFirstPlayer.getGlobalBounds().contains(mousePosition)) {
@@ -288,40 +360,6 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             else {
                 textValidateFirstPlayer.setFillColor(TextInitializer::BetterWhite);
             }
-
-            // Previous character
-            if(buttonFirstPlayerPrevious.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) {
-                    if(indexPlayer1 > 0) {
-                        indexPlayer1--;
-                        textureCharacter1.loadFromFile(player1characters[indexPlayer1]);
-                        spriteCharacter1.setTexture(textureCharacter1, true);
-                    }
-                }
-                else {
-                    textFirstPlayerPrevious.setFillColor(sf::Color::Green);
-                }
-            }
-            else {
-                textFirstPlayerPrevious.setFillColor(TextInitializer::BetterWhite);
-            }
-
-            // Next character
-            if(buttonFirstPlayerNext.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) {
-                    if(indexPlayer1 < (int)(player1characters.size() - 1)) {
-                        indexPlayer1++;
-                        textureCharacter1.loadFromFile(player1characters[indexPlayer1]);
-                        spriteCharacter1.setTexture(textureCharacter1, true);
-                    }
-                }
-                else {
-                    textFirstPlayerNext.setFillColor(sf::Color::Green);
-                }
-            }
-            else {
-                textFirstPlayerNext.setFillColor(TextInitializer::BetterWhite);
-            }
         }
 
         /// Second Player
@@ -339,40 +377,6 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             }
             else {
                 textValidateSecondPlayer.setFillColor(TextInitializer::BetterWhite);
-            }
-
-            // Previous character
-            if(buttonSecondPlayerPrevious.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) {
-                    if(indexPlayer2 > 0) {
-                        indexPlayer2--;
-                        textureCharacter2.loadFromFile(player2characters[indexPlayer2]);
-                        spriteCharacter2.setTexture(textureCharacter2, true);
-                    }
-                }
-                else {
-                    textSecondPlayerPrevious.setFillColor(sf::Color::Green);
-                }
-            }
-            else {
-                textSecondPlayerPrevious.setFillColor(TextInitializer::BetterWhite);
-            }
-
-            // Next character
-            if(buttonSecondPlayerNext.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) {
-                    if(indexPlayer2 < (int)(player2characters.size() - 1)) {
-                        indexPlayer2++;
-                        textureCharacter2.loadFromFile(player2characters[indexPlayer2]);
-                        spriteCharacter2.setTexture(textureCharacter2, true);
-                    }
-                }
-                else {
-                    textSecondPlayerNext.setFillColor(sf::Color::Green);
-                }
-            }
-            else {
-                textSecondPlayerNext.setFillColor(TextInitializer::BetterWhite);
             }
         }
 
