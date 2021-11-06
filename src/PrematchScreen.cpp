@@ -6,6 +6,18 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     maps.push_back("resources/images/visuals/maps/map1_visual.png");
     maps.push_back("resources/images/visuals/maps/map2_visual.png");
 
+    int indexPlayer1 = 0;
+    std::vector<std::string> player1characters;
+    player1characters.push_back("resources/images/visuals/characters/player_1_golem.png");
+    player1characters.push_back("resources/images/visuals/characters/player_1_groot.png");
+    player1characters.push_back("resources/images/visuals/characters/player_1_minotaur.png");
+
+    int indexPlayer2 = 0;
+    std::vector<std::string> player2characters;
+    player2characters.push_back("resources/images/visuals/characters/player_2_golem.png");
+    player2characters.push_back("resources/images/visuals/characters/player_2_groot.png");
+    player2characters.push_back("resources/images/visuals/characters/player_2_minotaur.png");
+
     sf::Event event;
 
     sf::Vector2f mousePosition;
@@ -17,34 +29,88 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     sf::String input;
     sf::Texture textureButton; // Button texture
+
     /// First player elements
-    Position playerElements(250, 200);
-    sf::Text firstPlayerName = TextInitializer::createText("Player 1", playerElements);
+    Position positionPlayerElements(350, 200);
+    // Name
+    sf::Text firstPlayerName = TextInitializer::createText("Player 1", positionPlayerElements);
 
-    playerElements.setX(playerElements.getX() + 100);
-    playerElements.setY(playerElements.getY() + 700);
-    sf::Sprite buttonValidateFirstPlayer = initSprite(1.f, 1.f, "resources/images/button/button.png", playerElements, &textureButton);
+    // Show selected character
+    positionPlayerElements.setX(positionPlayerElements.getX() + 100);
+    positionPlayerElements.setY(positionPlayerElements.getY() + 300);
+    sf::Texture textureCharacter1;
+    sf::Sprite spriteCharacter1 = initSprite(1.f, 1.f, player1characters[indexPlayer1], positionPlayerElements, &textureCharacter1);
 
-    playerElements.setX(playerElements.getX() - 60);
-    playerElements.setY(playerElements.getY() - 12);
-    sf::Text textValidateFirstPlayer = TextInitializer::createText("Validate", playerElements);
+    // Buttons to choose the charater
+    // Previous
+    positionPlayerElements.setX(positionPlayerElements.getX() - 150);
+    positionPlayerElements.setY(positionPlayerElements.getY() + 200);
+    sf::Sprite buttonFirstPlayerPrevious = initSprite(.7f, 1.f, "resources/images/buttons/button.png", positionPlayerElements, &textureButton);
+    positionPlayerElements.setY(positionPlayerElements.getY() - 12);
+    positionPlayerElements.setX(positionPlayerElements.getX() - 70);
+    sf::Text textFirstPlayerPrevious = TextInitializer::createText("Previous", positionPlayerElements);
+
+    // Next
+    positionPlayerElements.setY(positionPlayerElements.getY() + 12);
+    positionPlayerElements.setX(positionPlayerElements.getX() + 270);
+    sf::Sprite buttonFirstPlayerNext = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
+    positionPlayerElements.setY(positionPlayerElements.getY() - 12);
+    positionPlayerElements.setX(positionPlayerElements.getX() - 40);
+    sf::Text textFirstPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
+
+    // Validate
+    positionPlayerElements.setX(positionPlayerElements.getX() - 60);
+    positionPlayerElements.setY(positionPlayerElements.getY() + 212);
+    sf::Sprite buttonValidateFirstPlayer = initSprite(1.f, 1.f, positionPlayerElements, &textureButton);
+
+    positionPlayerElements.setX(positionPlayerElements.getX() - 60);
+    positionPlayerElements.setY(positionPlayerElements.getY() - 12);
+    sf::Text textValidateFirstPlayer = TextInitializer::createText("Validate", positionPlayerElements);
 
     /// Second player elements
     //Reset
-    playerElements.setX(playerElements.getX() + 60);
-    playerElements.setY(playerElements.getY() + 12);
-    playerElements.setX(position.getX() * 2 - 350);
-    playerElements.setY(playerElements.getY() - 700);
+    positionPlayerElements.setX(positionPlayerElements.getX() + 60);
+    positionPlayerElements.setY(positionPlayerElements.getY() + 12);
+    positionPlayerElements.setX(position.getX() * 2 - 500);
+    positionPlayerElements.setY(positionPlayerElements.getY() - 700);
 
-    sf::Text secondPlayerName = TextInitializer::createText("Player 2", playerElements);
+    // Name
+    positionPlayerElements.setX(positionPlayerElements.getX() + 50);
+    sf::Text secondPlayerName = TextInitializer::createText("Player 2", positionPlayerElements);
 
-    playerElements.setX(playerElements.getX() + 50);
-    playerElements.setY(playerElements.getY() + 700);
-    sf::Sprite buttonValidateSecondPlayer = initSprite(1.f, 1.f, playerElements, &textureButton);
+    // Show selected character
+    positionPlayerElements.setX(positionPlayerElements.getX() + 100);
+    positionPlayerElements.setY(positionPlayerElements.getY() + 300);
+    sf::Texture textureCharacter2;
+    sf::Sprite spriteCharacter2 = initSprite(1.f, 1.f, player2characters[indexPlayer2], positionPlayerElements, &textureCharacter2);
 
-    playerElements.setX(playerElements.getX() - 60);
-    playerElements.setY(playerElements.getY() - 12);
-    sf::Text textValidateSecondPlayer = TextInitializer::createText("Validate", playerElements);
+    // Buttons to choose the charater
+    // Previous
+    positionPlayerElements.setX(positionPlayerElements.getX() - 100);
+    positionPlayerElements.setY(positionPlayerElements.getY() + 200);
+    sf::Sprite buttonSecondPlayerPrevious = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
+    positionPlayerElements.setY(positionPlayerElements.getY() - 12);
+    positionPlayerElements.setX(positionPlayerElements.getX() - 70);
+    sf::Text textSecondPlayerPrevious = TextInitializer::createText("Previous", positionPlayerElements);
+    textSecondPlayerPrevious.setFillColor(TextInitializer::BetterGrey);
+
+    // Next
+    positionPlayerElements.setY(positionPlayerElements.getY() + 12);
+    positionPlayerElements.setX(positionPlayerElements.getX() + 270);
+    sf::Sprite buttonSecondPlayerNext = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
+    positionPlayerElements.setY(positionPlayerElements.getY() - 12);
+    positionPlayerElements.setX(positionPlayerElements.getX() - 40);
+    sf::Text textSecondPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
+    textSecondPlayerNext.setFillColor(TextInitializer::BetterGrey);
+
+    // Validate
+    positionPlayerElements.setX(positionPlayerElements.getX() - 60);
+    positionPlayerElements.setY(positionPlayerElements.getY() + 212);
+    sf::Sprite buttonValidateSecondPlayer = initSprite(1.f, 1.f, positionPlayerElements, &textureButton);
+
+    positionPlayerElements.setX(positionPlayerElements.getX() - 60);
+    positionPlayerElements.setY(positionPlayerElements.getY() - 12);
+    sf::Text textValidateSecondPlayer = TextInitializer::createText("Validate", positionPlayerElements);
     textValidateSecondPlayer.setFillColor(TextInitializer::BetterGrey);
 
     /// Map elements
@@ -101,6 +167,10 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     texts.push_back(&textValidateSecondPlayer);
     texts.push_back(&textNextMap);
     texts.push_back(&textPreviousMap);
+    texts.push_back(&textFirstPlayerNext);
+    texts.push_back(&textFirstPlayerPrevious);
+    texts.push_back(&textSecondPlayerNext);
+    texts.push_back(&textSecondPlayerPrevious);
 
     TextInitializer::initFont(texts, &font);
 
@@ -218,6 +288,40 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             else {
                 textValidateFirstPlayer.setFillColor(TextInitializer::BetterWhite);
             }
+
+            // Previous character
+            if(buttonFirstPlayerPrevious.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    if(indexPlayer1 > 0) {
+                        indexPlayer1--;
+                        textureCharacter1.loadFromFile(player1characters[indexPlayer1]);
+                        spriteCharacter1.setTexture(textureCharacter1, true);
+                    }
+                }
+                else {
+                    textFirstPlayerPrevious.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textFirstPlayerPrevious.setFillColor(TextInitializer::BetterWhite);
+            }
+
+            // Next character
+            if(buttonFirstPlayerNext.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    if(indexPlayer1 < (int)(player1characters.size() - 1)) {
+                        indexPlayer1++;
+                        textureCharacter1.loadFromFile(player1characters[indexPlayer1]);
+                        spriteCharacter1.setTexture(textureCharacter1, true);
+                    }
+                }
+                else {
+                    textFirstPlayerNext.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textFirstPlayerNext.setFillColor(TextInitializer::BetterWhite);
+            }
         }
 
         /// Second Player
@@ -235,6 +339,40 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             }
             else {
                 textValidateSecondPlayer.setFillColor(TextInitializer::BetterWhite);
+            }
+
+            // Previous character
+            if(buttonSecondPlayerPrevious.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    if(indexPlayer2 > 0) {
+                        indexPlayer2--;
+                        textureCharacter2.loadFromFile(player2characters[indexPlayer2]);
+                        spriteCharacter2.setTexture(textureCharacter2, true);
+                    }
+                }
+                else {
+                    textSecondPlayerPrevious.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textSecondPlayerPrevious.setFillColor(TextInitializer::BetterWhite);
+            }
+
+            // Next character
+            if(buttonSecondPlayerNext.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    if(indexPlayer2 < (int)(player2characters.size() - 1)) {
+                        indexPlayer2++;
+                        textureCharacter2.loadFromFile(player2characters[indexPlayer2]);
+                        spriteCharacter2.setTexture(textureCharacter2, true);
+                    }
+                }
+                else {
+                    textSecondPlayerNext.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textSecondPlayerNext.setFillColor(TextInitializer::BetterWhite);
             }
         }
 
@@ -261,11 +399,29 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
         // First player elements
         app.draw(firstPlayerName);
+
+        app.draw(spriteCharacter1);
+
+        app.draw(buttonFirstPlayerPrevious);
+        app.draw(textFirstPlayerPrevious);
+
+        app.draw(buttonFirstPlayerNext);
+        app.draw(textFirstPlayerNext);
+
         app.draw(buttonValidateFirstPlayer);
         app.draw(textValidateFirstPlayer);
 
         // Second player elements
         app.draw(secondPlayerName);
+
+        app.draw(spriteCharacter2);
+
+        app.draw(buttonSecondPlayerPrevious);
+        app.draw(textSecondPlayerPrevious);
+
+        app.draw(buttonSecondPlayerNext);
+        app.draw(textSecondPlayerNext);
+
         app.draw(buttonValidateSecondPlayer);
         app.draw(textValidateSecondPlayer);
 

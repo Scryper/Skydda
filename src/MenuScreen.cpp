@@ -15,7 +15,7 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     position.setY(position.getY() - 150);
     Position positionText(position.getX() - 75, position.getY() - 12);
     sf::Texture textureButton; // Button texture
-    sf::Sprite buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/button/button.png", position, &textureButton);
+    sf::Sprite buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/buttons/button.png", position, &textureButton);
     // Text of buttonChooseCharacters
     positionText.setX(positionText.getX() + 40);
     sf::Text textChooseCharacters = TextInitializer::createText("Play", positionText);
