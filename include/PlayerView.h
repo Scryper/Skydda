@@ -24,6 +24,8 @@ class PlayerView {
         sf::Clock clock;
         int tour;
         int lastState;
+        int state;
+        int maxFrame;
         bool looksRight;
         CoupleFloat scalePlayer;
 
@@ -51,7 +53,7 @@ class PlayerView {
         void movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
         void updateState(PlayerView &playerView);
 
-        void animate(int state, int maxFrame);
+        void animate();
         void flipSprite();
 };
 

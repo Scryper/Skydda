@@ -189,7 +189,7 @@ void GameScreen::initPlayers(){
                                 scaleP2.getY(),
                                 textureCharacter.getX(),
                                 textureCharacter.getY(),
-                                "resources/images/character/Personnage_01.png",
+                                "resources/images/character/Personnage_03.png",
                                 positionP2,
                                 &texturePlayerP2,
                                 sf::Keyboard::Up,
@@ -246,4 +246,6 @@ void GameScreen::movePlayers(float deltaTime) {
 void GameScreen::playerUpdate(){
     playerViewP1.updateState(playerViewP2);
     playerViewP2.updateState(playerViewP1);
+    playerViewP1.animate();
+    playerViewP2.animate();
 }
