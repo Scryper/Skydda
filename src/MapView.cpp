@@ -2,7 +2,7 @@
 
 MapView::MapView() { }
 
-/// !!! -> 0 : ground, 1 : long, 2 : small, 3 : tiny
+/// !!! textures -> 0 : ground, 1 : long, 2 : small, 3 : tiny
 MapView::MapView(int seed, std::vector<sf::Texture*> textures) {
     if(seed == 1) {
         borders = createBorders(textures[0]);
