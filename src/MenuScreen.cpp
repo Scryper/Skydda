@@ -1,18 +1,19 @@
 #include "MenuScreen.h"
 
-int MenuScreen::run(sf::RenderWindow &app) {
+int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     sf::Event event;
 
     sf::Vector2f mousePosition;
 
     Position position = getScreenCenter(&app);
-    Position positionText(position.getX() - 75, position.getY() - 12);
 
     /// Load background image
     sf::Texture textureBackground;
-    sf::Sprite background = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
+    sf::Sprite background = initSprite(1.f, 1.f, "resources/images/background/background_menu.jpg", position, &textureBackground);
 
     /// Load buttons (clickable sprites)
+    position.setY(position.getY() - 150);
+    Position positionText(position.getX() - 75, position.getY() - 12);
     sf::Texture textureButton; // Button texture
     sf::Sprite buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/button/button.png", position, &textureButton);
     // Text of buttonChooseCharacters
@@ -39,15 +40,17 @@ int MenuScreen::run(sf::RenderWindow &app) {
     /// Font of texts
     sf::Font font;
     font.loadFromFile("resources/fonts/glitch.otf");
-    textChooseCharacters.setFont(font);
-    textOptions.setFont(font);
-    textQuit.setFont(font);
+
+    std::vector<sf::Text*> texts;
+    texts.push_back(&textChooseCharacters);
+    texts.push_back(&textOptions);
+    texts.push_back(&textQuit);
+
+    TextInitializer::initFont(texts, &font);
 
     while(app.isOpen()) {
         while(app.pollEvent(event)) {
-            if(event.type == sf::Event::Closed) {
-                return -1;
-            }
+            if(event.type == sf::Event::Closed) return -1;
         }
 
         // Get the mouse position to verify if the user is over a sprite and/or click a sprite
@@ -55,9 +58,7 @@ int MenuScreen::run(sf::RenderWindow &app) {
 
         /// Button play
         if(buttonChooseCharacters.getGlobalBounds().contains(mousePosition)) {
-            if(event.type == sf::Event::MouseButtonPressed) {
-                return 1; // ChooseCharacterScreen is in position 1 in screens (see main.cpp)
-            }
+            if(event.type == sf::Event::MouseButtonPressed) return 1; // ChooseCharacterScreen is in position 1 in screens (see main.cpp)
             else { // The user sees that he is over a text
                 textChooseCharacters.setFillColor(sf::Color::Green);
             }
@@ -68,9 +69,7 @@ int MenuScreen::run(sf::RenderWindow &app) {
 
         /// Button options
         if(buttonOptions.getGlobalBounds().contains(mousePosition)) {
-            if(event.type == sf::Event::MouseButtonPressed) {
-                return 3;
-            }
+            if(event.type == sf::Event::MouseButtonPressed) return 3;
             else {
                 textOptions.setFillColor(sf::Color::Green);
             }
@@ -81,9 +80,7 @@ int MenuScreen::run(sf::RenderWindow &app) {
 
         /// Button quit
         if(buttonQuit.getGlobalBounds().contains(mousePosition)) {
-            if(event.type == sf::Event::MouseButtonPressed) {
-                return -1;
-            }
+            if(event.type == sf::Event::MouseButtonPressed) return -1;
             else {
                 textQuit.setFillColor(TextInitializer::DarkerBetterRed);
             }

@@ -8,17 +8,12 @@ PlayerView::PlayerView() {
     this->player = defaultPlayer;
 }
 
-PlayerView::PlayerView(sf::Sprite sprite, Player player,sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key right,sf::Keyboard::Key attack, sf::Keyboard::Key protect,bool looksRight, CoupleFloat scalePlayer) {
+PlayerView::PlayerView(sf::Sprite sprite, Player player,std::vector<sf::Keyboard::Key> keys,bool looksRight, CoupleFloat scalePlayer) {
     this->sprite = sprite;
     this->player = player;
-    this->up = up;
-    this->left = left;
-    this->right = right;
-    this->attackKey = attack;
-    this->protectKey = protect;
+    this->keys = keys;
     this->looksRight = looksRight;
     this->scalePlayer = scalePlayer;
-
 }
 
 PlayerView::PlayerView(const PlayerView& other) {
@@ -48,13 +43,13 @@ void PlayerView::flipSprite() {
     sprite.setScale(-scalePlayer.getX(), scalePlayer.getY());
 }
 
-Position PlayerView::computeNewPosition(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){
-    return player.updatePosition(player.getPosition(), vectorToCouple(vectorDirection), collisions);
+Position PlayerView::computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){
+    return player.updatePosition(player.getPosition(), vectorDirection, collisions);
 }
 
-void PlayerView::movePlayer(sf::Vector2f vectorDirection, std::vector<std::vector<std::vector<int>>> collisions) {
+void PlayerView::movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions) {
     // we swap the player's sprite if he is not looking the way he is going
-    if((looksRight && vectorDirection.x < 0) || (!looksRight && vectorDirection.x > 0)) {
+    if((looksRight && vectorDirection.getX() < 0) || (!looksRight && vectorDirection.getX() > 0)) {
         sprite.scale(-1.f, 1.f);
         looksRight = !looksRight; // to know where he is looking
     }
@@ -62,51 +57,70 @@ void PlayerView::movePlayer(sf::Vector2f vectorDirection, std::vector<std::vecto
     Position newPosition = computeNewPosition(vectorDirection, collisions);
     player.setPosition(newPosition);
     sprite.setPosition(newPosition.getX(), newPosition.getY());
-
 }
 
-sf::Vector2f PlayerView::inputPlayer(float deltaTime, PlayerView &p2){
+//actualise la liste des touches pressées
+void PlayerView::inputPlayer(){
+    std::vector<sf::Keyboard::Key> tmp;
+    if(player.isAlive()){
+        for (sf::Keyboard::Key key : keys){
+            if(sf::Keyboard::isKeyPressed(key))
+                tmp.push_back(key);
+        }
+    }
+    keysPressed = tmp;
+}
+
+CoupleFloat PlayerView::computeCoupleMovement(){
     int state = 3;
     int maxFrame = 12;
-     sf::Vector2f vector2f(0.f, 0.f);
 
-     if(player.isAlive()) {
-
-        if(sf::Keyboard::isKeyPressed(up)) {
-            vector2f.y += -deltaTime;
+    inputPlayer();
+    CoupleFloat couple(0.f, 0.f);
+    int deltaTime = 1;
+    for (sf::Keyboard::Key key : keysPressed) {
+        //up
+        if(key == keys[0]) {
+            couple.setY(couple.getY() - deltaTime);
         }
-        if(sf::Keyboard::isKeyPressed(left)) {
+        //left
+        if(key == keys[1]) {
             state = 5;
             maxFrame = 12;
-            vector2f.x += -deltaTime;
+            couple.setX(couple.getX() - deltaTime);
         }
-        if(sf::Keyboard::isKeyPressed(right)) {
+        //rigth
+        if(key == keys[2]) {
             state = 5;
             maxFrame = 12;
-            vector2f.x += deltaTime;
+            couple.setX(couple.getX() + deltaTime);
         }
-        if(sf::Keyboard::isKeyPressed(protectKey)){
-            player.setDefense(true);
-        }else{
-            player.setDefense(false);
-        }
-        if(sf::Keyboard::isKeyPressed(attackKey)){
-            state = 0;
-            maxFrame = 12;
-            //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
-            //la direction de l'attaque n'est gérée
-            std::vector<std::vector<int>> collision = directionCollisionPlayers(*this,p2);
-            if(collision.size()>0 && collision[0][0]>0){
-                for(auto i : collision){
-                    if((i[0]==3 && !looksRight) || (i[0]==4 && looksRight)){
-                        attack(p2);
-                    }
+    }
+    animate(state, maxFrame);
+    return couple;
+}
+
+void PlayerView::updateState(PlayerView &playerView){
+    inputPlayer();
+    //protect
+    if(sf::Keyboard::isKeyPressed(keys[4])){
+        player.setDefense(true);
+    } else {
+        player.setDefense(false);
+    }
+    //attack
+    if(sf::Keyboard::isKeyPressed(keys[3])){
+        //vérif s'il y a une collision, si oui on peut lancer l'appel de la fonction
+        //la direction de l'attaque n'est gérée
+        std::vector<std::vector<int>> collision = directionCollisionPlayers(*this, playerView);
+        if(collision.size() > 0 && collision[0][0] > 0){
+            for(auto i : collision){
+                if((i[0] == 3 && !looksRight) || (i[0] == 4 && looksRight)) {
+                    attack(playerView);
                 }
             }
         }
     }
-    animate(state,maxFrame);
-    return vector2f;
 }
 
 void PlayerView::attack(PlayerView &playerAttacked){

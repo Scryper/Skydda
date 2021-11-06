@@ -1,6 +1,8 @@
 #include "MapView.h"
 
-MapView::MapView(int seed, sf::Texture *platformTexture, string path) {
+MapView::MapView(){}
+
+MapView::MapView(int seed, sf::Texture *platformTexture, std::string path) {
     if(seed == 1) {
         border = createBorder(path, platformTexture);
 
@@ -39,7 +41,6 @@ MapView::MapView(int seed, sf::Texture *platformTexture, string path) {
     }
 }
 
-
 MapView::~MapView() { }
 
 std::vector<PlatformView> MapView::getBorders() const {
@@ -59,7 +60,7 @@ std::vector<PlatformView> MapView::getAllCollisions() const {
 }
 
 void MapView::drawPlatforms(sf::RenderWindow app) {
-    for(auto i : platforms){
-        app.draw(i.getSprite());
+    for(PlatformView platformView : platforms) {
+        app.draw(platformView.getSprite());
     }
 }

@@ -1,21 +1,21 @@
-#ifndef MATCH_H
-#define MATCH_H
+#ifndef GAME_H
+#define GAME_H
+
 #include "Player.h"
 
-class Match
-{
+class Game {
     private:
         Player* player1;
         Player* player2;
         int roundWinP1;
         int roundWinP2;
-        int MAX_ROUND=3; //const static
+        int MAX_ROUND = 3; //const static
 
     public:
-        Match();
-        Match(Player& player1, Player& player2);
-        virtual ~Match();
-        Match(const Match& other);
+        Game();
+        Game(Player& player1, Player& player2);
+        virtual ~Game();
+        Game(const Game& other);
 
         void incrementRoundWinP1();
         void incrementRoundWinP2();
@@ -29,7 +29,6 @@ class Match
         int getPlayerWin();
 
         void win();
-
 };
 
-#endif // MATCH_H
+#endif // GAME_H

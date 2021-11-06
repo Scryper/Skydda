@@ -53,6 +53,11 @@ void Player::setPosition(Position position) {
     this->position = position;
 }
 
+void Player::setPosition(float x, float y) {
+    Position position(x,y);
+    this->position = position;
+}
+
 void Player::setHealth(float health) {
     this->health = health;
 }
@@ -61,33 +66,34 @@ void Player::setDefense(bool def) {
     this->defense = def;
 }
 
-void Player::attackPlayer(Player &p, float clock) {
+void Player::attackPlayer(Player &player, float clock) {
     //vérif que le player ne bloque pas l'attaque
-    if(p.getDefense()==true)
+    if(player.getDefense() == true){
+        timeLastAttack = clock;
         return;
-    //vérif que les pv sont supérieur a 0
-    if(p.getHealth()<=0)
+    }
+
+    // verifiy that player's health > 0
+    if(player.getHealth() <= 0){
+        timeLastAttack = clock;
         return;
-    //faire l'animation d'attaque
+    }
 
-    cout<<clock <<" "<< timeLastAttack << "  "<< durationBetweenAttacks <<endl;
-
+    //fa attack animation
     if(clock - timeLastAttack >= durationBetweenAttacks){
-        std::cout<<"ATTACK"<<endl;
-        //retirer les PV
-        double health = p.getHealth();
-        if(health-attack>0){
-            p.setHealth(health-attack);
+        // deal damages
+        double health = player.getHealth();
+        if(health - attack > 0) {
+            player.setHealth(health - attack);
         }
-        else{
-            p.setHealth(0.f);
+        else {
+            player.setHealth(0.f);
         }
         timeLastAttack = clock;
     }
-
 }
 
-string Player::getName()const {
+std::string Player::getName()const {
     return name;
 }
 

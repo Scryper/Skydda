@@ -14,7 +14,7 @@ class Screen {
         Position center;
 
     public:
-        virtual int run(sf::RenderWindow &app) = 0;
+        virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed) = 0;
 
         sf::Vector2f getMousePosition(sf::RenderWindow *app) const;
         Position getScreenCenter(sf::RenderWindow *app);

@@ -1,6 +1,6 @@
 #include "OptionScreen.h"
 
-int OptionScreen::run(sf::RenderWindow &app) {
+int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     sf::Event event;
 
     sf::Vector2f mousePosition;
@@ -9,25 +9,27 @@ int OptionScreen::run(sf::RenderWindow &app) {
     Position positionText(position.getX() - 75, position.getY() - 12);
 
     sf::Texture textureBackground;
-    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/mario_fond.png", position, &textureBackground);
+    sf::Sprite backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_other.jpg", position, &textureBackground);
 
     /// Load Button
     sf::Texture textureButton;
     sf::Sprite buttonBack = initSprite(.5f, 1.f, "resources/images/button/button.png", position, &textureButton);
     // Text of buttonQuit
     positionText.setX(positionText.getX() + 35);
-    sf::Text textBack = TextInitializer::createText("Back", position);
+    sf::Text textBack = TextInitializer::createText("Back", positionText);
     textBack.setFillColor(TextInitializer::BetterRed);
 
     sf::Font font;
     font.loadFromFile("resources/fonts/glitch.otf");
-    textBack.setFont(font);
+
+    std::vector<sf::Text*> texts;
+    texts.push_back(&textBack);
+
+    TextInitializer::initFont(texts, &font);
 
     while(app.isOpen()) {
         while(app.pollEvent(event)) {
-            if(event.type == sf::Event::Closed) {
-                return -1;
-            }
+            if(event.type == sf::Event::Closed) return -1;
         }
 
         // Get the mouse position to verify if the user is over a sprite and/or click a sprite

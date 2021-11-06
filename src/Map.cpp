@@ -1,19 +1,10 @@
 #include "Map.h"
 
-Map::Map()
-{
-    //ctor
-}
+Map::Map() { }
 
-Map::~Map()
-{
-    //dtor
-}
+Map::~Map() { }
 
-Map::Map(const Map& other)
-{
-    //copy ctor
-}
+Map::Map(const Map& other) { }
 
 Map& Map::operator=(const Map& rhs)
 {

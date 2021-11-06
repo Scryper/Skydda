@@ -27,8 +27,8 @@ float CoupleFloat::getY()const {
 }
 
 void CoupleFloat::setX(float x) {
-    this->x=x;
+    this->x = x;
 }
 void CoupleFloat::setY(float y){
-    this->y=y;
+    this->y = y;
 }

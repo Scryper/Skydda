@@ -5,7 +5,7 @@
 
 class OptionScreen : public Screen {
     public:
-        virtual int run(sf::RenderWindow &app);
+        virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
 };
 
 #endif // OPTIONSCREEN_H
