@@ -8,17 +8,22 @@ PlayerView::PlayerView() {
     this->player = defaultPlayer;
 }
 
-PlayerView::PlayerView(sf::Sprite sprite, Player player,std::vector<sf::Keyboard::Key> keys,bool looksRight, CoupleFloat scalePlayer) {
+PlayerView::PlayerView(sf::Sprite sprite, Player player,std::vector<sf::Keyboard::Key> keys,bool looksRight, CoupleFloat scalePlayer, std::vector<std::vector<float>> offsetState) {
     this->sprite = sprite;
     this->player = player;
     this->keys = keys;
     this->looksRight = looksRight;
     this->scalePlayer = scalePlayer;
+    this->offsetState = offsetState;
 }
 
 PlayerView::PlayerView(const PlayerView& other) {
     this->sprite = other.sprite;
     this->player = other.player;
+    this->keys = other.keys;
+    this->looksRight = other.looksRight;
+    this->scalePlayer = other.scalePlayer;
+    this->offsetState = other.offsetState;
 }
 
 PlayerView::~PlayerView() { }
@@ -33,6 +38,10 @@ sf::Sprite PlayerView::getSprite() const {
 
 void PlayerView::setAlive(bool alive) {
     player.setAlive(alive);
+}
+
+std::vector<std::vector<float>> PlayerView::getOffset()const{
+        return offsetState;
 }
 
 bool PlayerView::isLooksRigth()const{

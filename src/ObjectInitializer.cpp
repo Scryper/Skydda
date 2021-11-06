@@ -49,6 +49,42 @@ PlayerView createPlayer(float sizeX,
                         bool looksRight,
                         std::string namePlayerStr) {
 
+    std::vector<std::vector<float>> offsetState;
+    for(int i = 0; i<7;i++){
+        std::vector<float> temp;
+        for(int j = 0;j<2;j++){
+            float temp2 = 0.f;
+            temp.push_back(temp2);
+        }
+        offsetState.push_back(temp);
+    }
+
+    //0 = alive
+    //1 = defense
+    //2 = attack
+    //3 = jumping
+    //4 = moving left
+    //5 = moving Rigth
+    //6 = idle
+
+    ///offsets
+    //if not in this list, the offset is null
+    //defense
+    offsetState[1][0]= 15.f;//X
+    offsetState[1][1]= 15.f;//Y
+
+    //attack
+    offsetState[2][0]= 15.f;//X
+    offsetState[2][1]= 15.f;//y
+
+    //jumping
+    offsetState[3][0]= 15.f;
+    offsetState[3][1]= 15.f;
+
+    //idle
+    offsetState[6][0]= 50.f;
+    offsetState[6][1]= 50.f;
+
     CoupleFloat velocity(.0f, .0f);
     CoupleFloat acceleration(.8f, 1.f);
     CoupleFloat maxSpeed(14.f, 20.f);
@@ -71,8 +107,8 @@ PlayerView createPlayer(float sizeX,
 
     float atk = 50.f;
 
-    Player player(namePlayerStr, atk, false, 100, playerPosition, movement);
-    PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple);
+    Player player(namePlayerStr, atk, 100, playerPosition, movement);
+    PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple, offsetState);
     return playerView;
 }
 

@@ -9,19 +9,27 @@
 /*This class represents a player.*/
 class Player {
     private:
+
+        ///summarise the actual state of the player
+        //0 = alive
+        //1 = defense
+        //2 = attack
+        //3 = jumping
+        //4 = moving left
+        //5 = moving Rigth
+        //6 = idle
+        std::vector<bool> state;
         std::string name;
         float attack;
         int timeLastAttack;
         int durationBetweenAttacks;
-        bool defense;
-        bool alive;
         float health;
         Position position;
         Movement movement;
 
     public:
         Player();
-        Player(std::string name, float attack, bool defense, float health, Position position, Movement movement);
+        Player(std::string name, float attack, float health, Position position, Movement movement);
 
         Player(const Player& other);
         virtual ~Player();
@@ -31,6 +39,8 @@ class Player {
 
         float getHealth()const;
         std::string getName()const;
+
+        std::vector<bool>& getState();
 
         void setHealth(float health);
 

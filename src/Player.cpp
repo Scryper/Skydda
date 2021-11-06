@@ -3,38 +3,48 @@
 Player::Player() {
     this->name = "Inconnu";
     this->attack = 0.0;
-    this->defense = false;
     this->health = 0.0;
     Position defaultPosition = Position();
     Movement defaultMovement;
     this->position = defaultPosition;
     this->movement = defaultMovement;
-    alive = true;
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
+    std::vector<bool> temp;
+    for(int i = 0 ; i < 7;i++){
+        temp.push_back(false);
+    }
+    this->state=temp;
+    state[0]=true;
+    state[6]=true;
 }
 
-Player::Player(std::string name, float attack, bool defense, float health, Position position, Movement movement) {
+Player::Player(std::string name, float attack, float health, Position position, Movement movement) {
     this->name = name;
     this->attack = attack;
-    this->defense = defense;
     this->health = health;
     this->position = position;
     this->movement = movement;
     timeLastAttack = 0;
-    alive = true;
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
+
+    std::vector<bool> temp;
+    for(int i = 0 ; i<7;i++){
+        temp.push_back(false);
+    }
+    this->state=temp;
+    state[0]=true;
+    state[6]=true;
 }
 
 Player::Player(const Player& other) {
     this->name = other.name;
     this->attack = other.attack;
-    this->defense = other.defense;
+    this->state = other.state;
     this->health = other.health;
     this->position = other.position;
     this->movement = other.movement;
-    this->alive = other.alive;
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
 }
@@ -63,7 +73,7 @@ void Player::setHealth(float health) {
 }
 
 void Player::setDefense(bool def) {
-    this->defense = def;
+    this->state[1] = def;
 }
 
 void Player::attackPlayer(Player &player, float clock) {
@@ -102,7 +112,7 @@ float Player::getHealth()const {
 }
 
 bool Player::getDefense()const{
-    return defense;
+    return state[1];
 }
 
 float Player::getAttack()const{
@@ -110,12 +120,17 @@ float Player::getAttack()const{
 }
 
 bool Player::isAlive()const {
-    return alive;
+    return state[0];
 }
 
 void Player::setAlive(bool alive){
-    this->alive = alive;
+    this->state[0] = alive;
 }
+
+std::vector<bool>& Player::getState(){
+    return state;
+}
+
 
 Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
     return movement.updatePosition(position, direction, collisions);
