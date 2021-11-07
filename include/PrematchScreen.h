@@ -50,19 +50,19 @@ class PrematchScreen : public Screen {
         Position positionTextMap;
 
         int indexMap = 0;
-        int indexCharacter = 0;
-
-        bool firstPlayerOk = false;
-        bool secondPlayerOk = false;
+        int indexCharacter1 = 0;
+        int indexCharacter2 = 3;
 
         std::vector<std::string> maps;
         std::vector<std::string> characters;
         std::vector<std::string> names;
         std::vector<std::string> spriteSheets;
+        std::vector<sf::Text*> texts;
 
         void initVectors();
         void initBackground();
         void initPositions();
+        void initFonts()
 
     public:
         std::string strFirstPlayerName;

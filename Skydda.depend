@@ -3174,19 +3174,19 @@
 	"HealthBarView.h"
 	"Game.h"
 
-1636277095 /home/florian/Documents/GitHub/Skydda/include/Screen.h
+1636277410 /home/florian/Documents/GitHub/Skydda/include/Screen.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 	"SpriteInitializer.h"
 	"TextInitializer.h"
 
-1636195999 source:/home/florian/Documents/GitHub/Skydda/src/MenuScreen.cpp
+1636278014 source:/home/florian/Documents/GitHub/Skydda/src/MenuScreen.cpp
 	"MenuScreen.h"
 
-1636136811 /home/florian/Documents/GitHub/Skydda/include/MenuScreen.h
+1636278066 /home/florian/Documents/GitHub/Skydda/include/MenuScreen.h
 	"Screen.h"
 
-1636136731 source:/home/florian/Documents/GitHub/Skydda/src/Screen.cpp
+1636277084 source:/home/florian/Documents/GitHub/Skydda/src/Screen.cpp
 	"Screen.h"
 
 1636024753 source:/home/florian/Documents/GitHub/Skydda/src/ScreenIncluder.cpp
@@ -3404,10 +3404,10 @@
 1636144970 source:/home/florian/Documents/GitHub/Skydda/src/Game.cpp
 	"Game.h"
 
-1636277109 /home/florian/Documents/GitHub/Skydda/include/PrematchScreen.h
+1636278302 /home/florian/Documents/GitHub/Skydda/include/PrematchScreen.h
 	"Screen.h"
 
-1636276491 source:/home/florian/Documents/GitHub/Skydda/src/PrematchScreen.cpp
+1636278728 source:/home/florian/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
 1636199713 /home/houdartf/Documents/GitHub/Skydda/include/PrematchScreen.h

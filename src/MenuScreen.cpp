@@ -1,52 +1,38 @@
 #include "MenuScreen.h"
 
 int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
-    sf::Event event;
-
-    sf::Vector2f mousePosition;
-
-    Position position = getScreenCenter(&app);
+    position = getScreenCenter(&app);
 
     /// Load background image
-    sf::Texture textureBackground;
-    sf::Sprite background = initSprite(1.f, 1.f, "resources/images/background/background_menu.jpg", position, &textureBackground);
+    initBackground();
 
     /// Load buttons (clickable sprites)
     position.setY(position.getY() - 150);
     Position positionText(position.getX() - 75, position.getY() - 12);
-    sf::Texture textureButton; // Button texture
-    sf::Sprite buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/buttons/button.png", position, &textureButton);
+    buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/buttons/button.png", position, &textureButton);
     // Text of buttonChooseCharacters
     positionText.setX(positionText.getX() + 40);
-    sf::Text textChooseCharacters = TextInitializer::createText("Play", positionText);
+    textChooseCharacters = TextInitializer::createText("Play", positionText);
 
     /// OptionScreen button
     position.setY(position.getY() + 100);
-    sf::Sprite buttonOptions = initSprite(1.f, 1.f, position, &textureButton);
+    buttonOptions = initSprite(1.f, 1.f, position, &textureButton);
     // Text of buttonOptions
     positionText.setY(positionText.getY() + 100);
     positionText.setX(positionText.getX() - 35);
-    sf::Text textOptions = TextInitializer::createText("Options", positionText);
+    textOptions = TextInitializer::createText("Options", positionText);
 
     /// Quit button
     position.setY(position.getY() + 100);
     positionText.setY(positionText.getY() + 100);
     positionText.setX(positionText.getX() + 35);
-    sf::Sprite buttonQuit = initSprite(.5f, 1.f, position, &textureButton);
+    buttonQuit = initSprite(.5f, 1.f, position, &textureButton);
     // Text of buttonQuit
-    sf::Text textQuit = TextInitializer::createText("Quit", positionText);
+    textQuit = TextInitializer::createText("Quit", positionText);
     textQuit.setFillColor(TextInitializer::BetterRed);
 
     /// Font of texts
-    sf::Font font;
-    font.loadFromFile("resources/fonts/glitch.otf");
-
-    std::vector<sf::Text*> texts;
-    texts.push_back(&textChooseCharacters);
-    texts.push_back(&textOptions);
-    texts.push_back(&textQuit);
-
-    TextInitializer::initFont(texts, &font);
+    initFonts();
 
     while(app.isOpen()) {
         while(app.pollEvent(event)) {
@@ -107,4 +93,18 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     }
 
     return -1; // Never reach, but in case
+}
+
+void MenuScreen::initBackground() {
+    background = initSprite(1.f, 1.f, "resources/images/background/background_menu.jpg", position, &textureBackground);
+}
+
+void MenuScreen::initFonts() {
+    font.loadFromFile("resources/fonts/glitch.otf");
+
+    texts.push_back(&textChooseCharacters);
+    texts.push_back(&textOptions);
+    texts.push_back(&textQuit);
+
+    TextInitializer::initFont(texts, &font);
 }

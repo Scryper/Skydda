@@ -14,6 +14,11 @@ class Screen {
 
         Position center;
 
+    protected:
+        sf::Event event;
+
+        sf::Vector2f mousePosition;
+
     public:
         virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed) = 0;
 
