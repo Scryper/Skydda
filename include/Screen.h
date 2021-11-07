@@ -11,6 +11,7 @@ class Screen {
     private:
         int middleScreenX;
         int middleScreenY;
+
         Position center;
 
     public:

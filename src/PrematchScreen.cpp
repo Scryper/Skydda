@@ -392,8 +392,8 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 }
 
 void PrematchScreen::initVectors() {
-    maps.push_back("resources/images/previews/maps/map1_visual.png");
-    maps.push_back("resources/images/previews/maps/map2_visual.png");
+    maps.push_back("resources/images/previews/maps/map1_preview.png");
+    maps.push_back("resources/images/previews/maps/map2_preview.png");
 
     names.push_back("Dark Golem");
     names.push_back("Dark Groot");
