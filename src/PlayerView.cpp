@@ -52,18 +52,18 @@ void PlayerView::flipSprite() {
     sprite.setScale(-scalePlayer.getX(), scalePlayer.getY());
 }
 
-Position PlayerView::computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){
-    return player.updatePosition(player.getPosition(), vectorDirection, collisions);
+Position PlayerView::computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool osef){
+    return player.updatePosition(player.getPosition(), vectorDirection, collisions, osef);
 }
 
-void PlayerView::movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions) {
+void PlayerView::movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool osef) {
     // we swap the player's sprite if he is not looking the way he is going
     if((looksRight && vectorDirection.getX() < 0) || (!looksRight && vectorDirection.getX() > 0)) {
         sprite.scale(-1.f, 1.f);
         looksRight = !looksRight; // to know where he is looking
     }
 
-    Position newPosition = computeNewPosition(vectorDirection, collisions);
+    Position newPosition = computeNewPosition(vectorDirection, collisions, osef);
     player.setPosition(newPosition);
     sprite.setPosition(newPosition.getX(), newPosition.getY());
 }

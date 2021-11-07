@@ -46,27 +46,31 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
         if(game.getPlayerWin() == 0) {
             if(game.getPlayer1().getHealth() == 0) {
                 game.incrementRoundWinP2();
-                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY() - 500);
-                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY() - 500);
+                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
+                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
                 if(game.getPlayerWin() == 0) {
                     game.getPlayer1().setHealth(100.f);
                     game.getPlayer2().setHealth(100.f);
                 }
-            }
-            if(game.getPlayer2().getHealth() == 0) {
+                movePlayers(deltaTime, true);
+            }else if(game.getPlayer2().getHealth() == 0) {
                 game.incrementRoundWinP1();
-                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY() - 500);
-                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY() - 500);
+                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
+                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
                 if(game.getPlayerWin() == 0) {
                     game.getPlayer1().setHealth(100.f);
                     game.getPlayer2().setHealth(100.f);
                 }
+                movePlayers(deltaTime, true);
+            }
+            else{
+                movePlayers(deltaTime, false);
             }
         } else {
             game.win();
         }
 
-        movePlayers(deltaTime);
+
 
         app.clear();
 
@@ -259,12 +263,12 @@ void GameScreen::initHealthBars() {
     createRoundCircles();
 }
 
-void GameScreen::movePlayers(float deltaTime) {
+void GameScreen::movePlayers(float deltaTime, bool osef) {
     playerViewP1.movePlayer(playerViewP1.computeCoupleMovement(),
-                            directionCollisions(playerViewP1, platforms));
+                            directionCollisions(playerViewP1, platforms), osef);
 
     playerViewP2.movePlayer(playerViewP2.computeCoupleMovement(),
-                            directionCollisions(playerViewP2, platforms));
+                            directionCollisions(playerViewP2, platforms), osef);
 }
 
 void GameScreen::playerUpdate(){

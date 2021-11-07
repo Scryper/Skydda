@@ -58,7 +58,7 @@ class Player {
 
         void setPosition(Position position);
         void setPosition(float x, float y);
-        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions, bool osef);
 };
 
 #endif // PLAYER_H
