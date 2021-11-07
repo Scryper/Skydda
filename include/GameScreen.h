@@ -68,7 +68,7 @@ class GameScreen : public Screen {
         void initVectors();
         void initMap();
         void initHealthBars();
-        void movePlayers(float deltaTime);
+        void movePlayers(float deltaTime, bool noTP);
         void playerUpdate();
 
         Game& getGame();
