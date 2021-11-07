@@ -3300,7 +3300,7 @@
 1636287165 /home/damien/Documents/GitHub/Skydda/include/MenuScreen.h
 	"Screen.h"
 
-1636283579 /home/damien/Documents/GitHub/Skydda/include/GameScreen.h
+1636288171 /home/damien/Documents/GitHub/Skydda/include/GameScreen.h
 	"Screen.h"
 	"PlayerView.h"
 	"PlatformView.h"
@@ -3424,4 +3424,7 @@
 
 1636280948 source:/home/damien/Documents/GitHub/Skydda/src/Game.cpp
 	"Game.h"
+
+1636287165 source:/home/damien/Documents/GitHub/Skydda/src/PrematchScreen.cpp
+	"PrematchScreen.h"
 

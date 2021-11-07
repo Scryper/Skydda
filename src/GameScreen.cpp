@@ -22,7 +22,7 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     initHealthBars();
 
     game = Game(playerViewP1.getPlayer(), playerViewP2.getPlayer());
-
+    clearRoundCircles();
     while(app.isOpen()) {
         deltaTime = clock.restart().asMilliseconds();
 
@@ -162,6 +162,16 @@ void GameScreen::actualiseRoundCircles() {
             roundCirclesP2[2].setFillColor(sf::Color::White);
             break;
     }
+}
+
+void GameScreen::clearRoundCircles() {
+    roundCirclesP1[0].setFillColor(sf::Color::Transparent);
+    roundCirclesP1[1].setFillColor(sf::Color::Transparent);
+    roundCirclesP1[2].setFillColor(sf::Color::Transparent);
+
+    roundCirclesP2[0].setFillColor(sf::Color::Transparent);
+    roundCirclesP2[1].setFillColor(sf::Color::Transparent);
+    roundCirclesP2[2].setFillColor(sf::Color::Transparent);
 }
 
 std::vector<sf::CircleShape> GameScreen::getRoundCirclesP1() {

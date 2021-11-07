@@ -70,6 +70,7 @@ class GameScreen : public Screen {
         void initHealthBars();
         void movePlayers(float deltaTime, bool noTP);
         void playerUpdate();
+        void clearRoundCircles();
 
         Game& getGame();
 };
