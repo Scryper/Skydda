@@ -132,8 +132,8 @@ std::vector<bool>& Player::getState(){
 }
 
 
-Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions, bool osef) {
-    return movement.updatePosition(position, direction, collisions, osef);
+Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions, bool noTP) {
+    return movement.updatePosition(position, direction, collisions, noTP);
 }
 
 void Player::stopX(){

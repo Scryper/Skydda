@@ -54,8 +54,8 @@ class PlayerView {
 
         CoupleFloat computeCoupleMovement();
 
-        Position computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool osef);
-        void movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool osef);
+        Position computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
+        void movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
         void updateState(PlayerView &playerView);
 
         void animate();

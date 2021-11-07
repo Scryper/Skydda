@@ -263,12 +263,12 @@ void GameScreen::initHealthBars() {
     createRoundCircles();
 }
 
-void GameScreen::movePlayers(float deltaTime, bool osef) {
+void GameScreen::movePlayers(float deltaTime, bool noTP) {
     playerViewP1.movePlayer(playerViewP1.computeCoupleMovement(),
-                            directionCollisions(playerViewP1, platforms), osef);
+                            directionCollisions(playerViewP1, platforms), noTP);
 
     playerViewP2.movePlayer(playerViewP2.computeCoupleMovement(),
-                            directionCollisions(playerViewP2, platforms), osef);
+                            directionCollisions(playerViewP2, platforms), noTP);
 }
 
 void GameScreen::playerUpdate(){
