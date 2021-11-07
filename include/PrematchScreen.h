@@ -45,9 +45,9 @@ class PrematchScreen : public Screen {
         sf::Sprite buttonBack;
 
         Position position;
-        Position positionPlayerElements = {350, 200};
-        Position positionButtonsMap = {860, 700};
-        Position positionTextMap = {positionButtonsMap.getX() - 75, positionButtonsMap.getY() - 13};
+        Position positionPlayerElements;
+        Position positionButtonsMap;
+        Position positionTextMap;
 
         int indexMap = 0;
         int indexCharacter = 0;
@@ -62,6 +62,7 @@ class PrematchScreen : public Screen {
 
         void initVectors();
         void initBackground();
+        void initPositions();
 
     public:
         std::string strFirstPlayerName;

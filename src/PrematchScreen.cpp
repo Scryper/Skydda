@@ -5,6 +5,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     initVectors();
     initBackground();
+    initPositions();
 
     /// First player elements
     // Name
@@ -418,4 +419,10 @@ void PrematchScreen::initVectors() {
 
 void PrematchScreen::initBackground() {
     backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_other.jpg", position, &textureBackground);
+}
+
+void PrematchScreen::initPositions() {
+    positionPlayerElements = {350, 200};
+    positionButtonsMap = {860, 700};
+    positionTextMap = {positionButtonsMap.getX() - 75, positionButtonsMap.getY() - 13};
 }
