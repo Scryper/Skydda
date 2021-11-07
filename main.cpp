@@ -1,15 +1,16 @@
-//#include <SFML/Audio.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 
 #include "ScreenIncluder.h"
+#include <iostream>
 
 int main() {
-//    sf::Music music;
-//    if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
-//        cout << "Music was not found" << endl;
-//    }
-//    music.setVolume(10.f);
-//    music.play();
+    sf::Music music;
+    if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
+        std::cout << "Music was not found" << std::endl;
+    }
+    music.setVolume(10.f);
+    music.play();
 
     // Create the main window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
