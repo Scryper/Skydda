@@ -1,9 +1,40 @@
 #include "MapView.h"
 
-MapView::MapView() { }
+MapView::MapView() {
+}
 
 /// !!! textures -> 0 : ground, 1 : long, 2 : small, 3 : tiny
-MapView::MapView(int seed, std::vector<sf::Texture*> textures) {
+MapView::MapView(Map mapModel, std::vector<sf::Texture*> textures) {
+    this->mapModel = mapModel;
+    this->textures = textures;
+    selectMap(mapModel.getMapSeed());
+}
+
+MapView::~MapView() { }
+
+std::vector<PlatformView> MapView::getBorders() const {
+    return borders;
+}
+
+std::vector<PlatformView> MapView::getPlatforms() const {
+    return platforms;
+}
+
+std::vector<PlatformView> MapView::getAllCollisions() const {
+    std::vector<PlatformView> temp = platforms;
+    for(PlatformView border : borders){
+        temp.push_back(border);
+    }
+    return temp;
+}
+
+void MapView::drawPlatforms(sf::RenderWindow app) {
+    for(PlatformView platformView : platforms) {
+        app.draw(platformView.getSprite());
+    }
+}
+
+void MapView::selectMap(int seed){
     if(seed == 1) {
         borders = createBorders(textures[0]);
 
@@ -39,29 +70,5 @@ MapView::MapView(int seed, std::vector<sf::Texture*> textures) {
         platforms.push_back(firstPlatform);
         platforms.push_back(secondPlatform);
         platforms.push_back(thirdPlatform);
-    }
-}
-
-MapView::~MapView() { }
-
-std::vector<PlatformView> MapView::getBorders() const {
-    return borders;
-}
-
-std::vector<PlatformView> MapView::getPlatforms() const {
-    return platforms;
-}
-
-std::vector<PlatformView> MapView::getAllCollisions() const {
-    std::vector<PlatformView> temp = platforms;
-    for(PlatformView border : borders){
-        temp.push_back(border);
-    }
-    return temp;
-}
-
-void MapView::drawPlatforms(sf::RenderWindow app) {
-    for(PlatformView platformView : platforms) {
-        app.draw(platformView.getSprite());
     }
 }

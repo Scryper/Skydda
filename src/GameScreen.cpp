@@ -173,8 +173,21 @@ std::vector<sf::CircleShape> GameScreen::getRoundCirclesP2() {
 }
 
 void GameScreen::initPlayers() {
-    positionP1 = Position(position.getX() - 500, position.getY());
-    positionP2 = Position(position.getX() + 500, position.getY());
+
+    switch(mapSeed) {
+    case 1:
+        positionP1 = Position(position.getX() - 500, position.getY()+300);
+        positionP2 = Position(position.getX() + 500, position.getY()+300);
+        break;
+    case 2:
+        positionP1 = Position(position.getX() - 500, position.getY());
+        positionP2 = Position(position.getX() + 500, position.getY());
+        break;
+    default:
+        positionP1 = Position(position.getX() - 500, position.getY());
+        positionP2 = Position(position.getX() + 500, position.getY());
+        break;
+    }
 
     CoupleFloat scaleP1(.5f, .5f);
     CoupleFloat scaleP2(.5f, .5f);
@@ -215,7 +228,9 @@ void GameScreen::initPlayers() {
 
 void GameScreen::initMap() {
     //loading the map
-    map_ = MapView(mapSeed, textures);
+    Map mapModel(mapSeed);
+    map_ = MapView(mapModel, textures);
+
     //get all the platforms from the map
     platforms = map_.getAllCollisions();
 }

@@ -62,7 +62,7 @@ class PrematchScreen : public Screen {
         void initVectors();
         void initBackground();
         void initPositions();
-        void initFonts()
+        void initFonts();
 
     public:
         std::string strFirstPlayerName;

@@ -6,14 +6,18 @@
 #include<PlatformView.h>
 #include<ObjectInitializer.h>
 
+#include "Map.h"
+
 class MapView {
     private:
+        Map mapModel;
         std::vector<PlatformView> platforms;
         std::vector<PlatformView> borders;
+        std::vector<sf::Texture*> textures;
 
     public:
         MapView();
-        MapView(int seed, std::vector<sf::Texture*> textures);
+        MapView(Map mapModel, std::vector<sf::Texture*> textures);
         virtual ~MapView();
 
         std::vector<PlatformView> getBorders() const;
@@ -21,6 +25,8 @@ class MapView {
         std::vector<PlatformView> getAllCollisions() const;
 
         void drawPlatforms(sf::RenderWindow app);
+
+        void selectMap(int seed);
 };
 
 #endif // MAPVIEW_H
