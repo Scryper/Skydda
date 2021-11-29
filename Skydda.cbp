@@ -51,7 +51,6 @@
 		</Compiler>
 		<Unit filename="include/Collision.h" />
 		<Unit filename="include/CoupleFloat.h" />
-		<Unit filename="include/CoupleVectorTransformer.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameScreen.h" />
 		<Unit filename="include/HealthBar.h" />
@@ -77,7 +76,6 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Collision.cpp" />
 		<Unit filename="src/CoupleFloat.cpp" />
-		<Unit filename="src/CoupleVectorTransformer.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameScreen.cpp" />
 		<Unit filename="src/HealthBar.cpp" />
