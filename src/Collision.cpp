@@ -10,12 +10,12 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
     std::vector<bool>states = player.getPlayer().getState();
     std::vector<std::vector<int>> collisions;
 
-    for (auto i : offset){
-        for(auto j : i){
-            //std::cout<<j<<" ";
-        }
-        //std::cout<<std::endl;
-    }
+//    for (auto i : offset){
+//        for(auto j : i){
+//            std::cout<<j<<" ";
+//        }
+//        std::cout<<std::endl;
+//    }
 
     //1 : Bottom, 2 : Top, 3 : Right, 4 : Left
     if(playerBounds.intersects(platformBounds)) {
