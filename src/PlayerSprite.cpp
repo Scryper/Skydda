@@ -4,7 +4,7 @@
 PlayerSprite::PlayerSprite():sf::Sprite() {
 
 }
-PlayerSprite::PlayerSprite(sf::Texture texture):sf::Sprite(texture) {
+PlayerSprite::PlayerSprite(sf::Texture& texture):sf::Sprite(texture) {
 
 }
 void PlayerSprite::setHitbox(const sf::FloatRect& hitbox) {
