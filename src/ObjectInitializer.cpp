@@ -52,7 +52,7 @@ PlayerView createPlayer(float sizeX,
     CoupleFloat velocity(.0f, .0f);
     CoupleFloat acceleration(.8f, 1.f);
     CoupleFloat maxSpeed(14.f, 20.f);
-    float jumpHeight = 25.f;
+    float jumpHeight = 27.f;
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
     std::vector<sf::Keyboard::Key> keys;

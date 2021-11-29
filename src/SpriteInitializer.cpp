@@ -16,7 +16,9 @@ PlayerSprite setSpriteOptionsPlayer(PlayerSprite *sprite, CoupleFloat size_, Cou
     // set the origin of the image to its center
     sprite->setOrigin(centerOfSprite.getX() / 2, centerOfSprite.getY() / 2);
     sprite->setPosition(position.getX(), position.getY());
-    sprite->setHitbox({position.getX() + 0.f, position.getY() + 0.f, 20.f, 20.f});
+
+    sf::FloatRect hitbox(0, 50, 170, 273);
+    sprite->setHitbox(hitbox);
 
     return *sprite;
 }

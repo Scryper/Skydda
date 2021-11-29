@@ -43,7 +43,18 @@ bool PlayerView::isLooksRigth()const{
 }
 
 void PlayerView::flipSprite() {
-    sprite.setScale(-scalePlayer.getX(), scalePlayer.getY());
+    float previousLeft = sprite.getGlobalHitbox().left;
+
+    sprite.scale(-1.f, 1.f);
+
+    float presentLeft = sprite.getGlobalHitbox().left;
+    float diff = previousLeft-presentLeft;
+
+    std::cout<<diff<<std::endl;
+
+    Position p(player.getPosition().getX()+diff, player.getPosition().getY());
+    sprite.setPosition(p.getX(), p.getY());
+    player.setPosition(p);
 }
 
 Position PlayerView::computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool noTP){
@@ -53,7 +64,7 @@ Position PlayerView::computeNewPosition(CoupleFloat vectorDirection, std::vector
 void PlayerView::movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool noTP) {
     // we swap the player's sprite if he is not looking the way he is going
     if((looksRight && vectorDirection.getX() < 0) || (!looksRight && vectorDirection.getX() > 0)) {
-        sprite.scale(-1.f, 1.f);
+        flipSprite();
         looksRight = !looksRight; // to know where he is looking
     }
 
