@@ -5,10 +5,11 @@
 #include "CoupleVectorTransformer.h"
 
 #include <SFML/Graphics.hpp>
+#include "PlayerSprite.h"
 
 class PlayerView {
     private:
-        sf::Sprite sprite;
+        PlayerSprite sprite;
         Player player;
 
         //0 : up
@@ -34,12 +35,12 @@ class PlayerView {
 
     public:
         PlayerView();
-        PlayerView(sf::Sprite sprite, Player player, std::vector<sf::Keyboard::Key> keys, bool looksRight, CoupleFloat scalePlayer,std::vector<std::vector<float>> offsetState);
+        PlayerView(PlayerSprite sprite, Player player, std::vector<sf::Keyboard::Key> keys, bool looksRight, CoupleFloat scalePlayer,std::vector<std::vector<float>> offsetState);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
         Player& getPlayer();
-        sf::Sprite getSprite() const;
+        PlayerSprite getSprite() const;
 
         void attack(PlayerView &playerAttacked);
         void setHealth(float health);

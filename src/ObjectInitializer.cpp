@@ -102,7 +102,7 @@ PlayerView createPlayer(float sizeX,
 
     CoupleFloat centerOfSprite(width, height);
 
-    sf::Sprite playerSprite = initSpritePlayer(sizeCouple, centerOfSprite, pathToPlayer, playerPosition, playerTexture);
+    PlayerSprite playerSprite = initSpritePlayer(sizeCouple, centerOfSprite, pathToPlayer, playerPosition, playerTexture);
     playerSprite.setTextureRect(sf::IntRect(0, 0, width, height));
 
     float atk = 50.f;

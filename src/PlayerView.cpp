@@ -2,13 +2,13 @@
 #include "Collision.h"
 
 PlayerView::PlayerView() {
-    sf::Sprite defaultSprite;
+    PlayerSprite defaultSprite;
     this->sprite = defaultSprite;
     Player defaultPlayer;
     this->player = defaultPlayer;
 }
 
-PlayerView::PlayerView(sf::Sprite sprite, Player player,std::vector<sf::Keyboard::Key> keys,bool looksRight, CoupleFloat scalePlayer, std::vector<std::vector<float>> offsetState) {
+PlayerView::PlayerView(PlayerSprite sprite, Player player,std::vector<sf::Keyboard::Key> keys,bool looksRight, CoupleFloat scalePlayer, std::vector<std::vector<float>> offsetState) {
     this->sprite = sprite;
     this->player = player;
     this->keys = keys;
@@ -32,7 +32,7 @@ Player& PlayerView::getPlayer() {
     return player;
 }
 
-sf::Sprite PlayerView::getSprite() const {
+PlayerSprite PlayerView::getSprite() const {
     return sprite;
 }
 
