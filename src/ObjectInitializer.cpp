@@ -72,7 +72,7 @@ PlayerView createPlayer(float sizeX,
     float atk = 50.f;
 
     Player player(namePlayerStr, atk, 100, playerPosition, movement);
-    PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple, offsetState);
+    PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple);
     return playerView;
 }
 
