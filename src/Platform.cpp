@@ -4,11 +4,11 @@ Platform::Platform() {
    Position defaultPlatform;
    this->position = defaultPlatform;
 
-   Size defaultSize;
+   CoupleFloat defaultSize;
    this->size_ = defaultSize;
 }
 
-Platform::Platform(const Position position, const Size size_) {
+Platform::Platform(const Position position, const CoupleFloat size_) {
     this->position = position;
     this->size_ = size_;
 }
@@ -24,7 +24,7 @@ Position Platform::getPosition() const {
     return position;
 }
 
-Size Platform::getSize() const {
+CoupleFloat Platform::getSize() const {
     return size_;
 }
 
@@ -32,6 +32,6 @@ void Platform::setPosition(Position position) {
     this->position = position;
 }
 
-void Platform::setSize(Size size_) {
+void Platform::setSize(CoupleFloat size_) {
     this->size_ = size_;
 }

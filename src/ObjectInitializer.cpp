@@ -3,7 +3,7 @@
 // creates the platform
 PlatformView createPlatform(float sizeX, float sizeY, Position platformPosition, sf::Texture *platformTexture) {
     CoupleFloat sizeCouple(sizeX, sizeY);
-    Size sizeOfSprite(sizeCouple);
+    CoupleFloat sizeOfSprite(sizeCouple);
 
     sf::Sprite platformSprite = initSprite(sizeOfSprite, platformPosition, platformTexture);
 
@@ -98,7 +98,7 @@ PlayerView createPlayer(float sizeX,
     keys.push_back(attack);
     keys.push_back(protect);
     CoupleFloat sizeCouple(sizeX, sizeY);
-    Size sizeOfSprite(sizeCouple);
+    CoupleFloat sizeOfSprite(sizeCouple);
 
     CoupleFloat centerOfSprite(width, height);
 
