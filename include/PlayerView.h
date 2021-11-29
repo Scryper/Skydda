@@ -20,9 +20,6 @@ class PlayerView {
         std::vector<sf::Keyboard::Key> keys;
         std::vector<sf::Keyboard::Key> keysPressed;
 
-        //
-        std::vector<std::vector<float>> offsetState;
-
         sf::Texture texture;
         sf::IntRect rectSourceSprite;
         sf::Clock clock;
@@ -35,7 +32,7 @@ class PlayerView {
 
     public:
         PlayerView();
-        PlayerView(PlayerSprite sprite, Player player, std::vector<sf::Keyboard::Key> keys, bool looksRight, CoupleFloat scalePlayer,std::vector<std::vector<float>> offsetState);
+        PlayerView(PlayerSprite sprite, Player player, std::vector<sf::Keyboard::Key> keys, bool looksRight, CoupleFloat scalePlayer);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
