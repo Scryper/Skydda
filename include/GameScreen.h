@@ -55,10 +55,12 @@ class GameScreen : public Screen {
         int mapSeed;
 
     public:
-        virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
+        int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
 
         std::vector<sf::CircleShape> getRoundCirclesP1();
         std::vector<sf::CircleShape> getRoundCirclesP2();
+
+        virtual void displayAnimations(sf::Time timer, sf::RenderWindow &app)=0;
 
         void createRoundCircles();
         void actualiseRoundCircles();

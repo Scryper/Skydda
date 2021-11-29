@@ -5,6 +5,9 @@
 #include <iostream>
 
 int main() {
+
+    int FPS = 60;
+
     sf::Music music;
     if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
         std::cout << "Music was not found" << std::endl;
@@ -22,7 +25,7 @@ int main() {
         "Skydda",
         sf::Style::Fullscreen
     );
-    app.setFramerateLimit(60);
+    app.setFramerateLimit(FPS);
 
     std::vector<Screen*> screens;
 	int screen = 0;
@@ -34,8 +37,8 @@ int main() {
 	PrematchScreen prematchScreen; // 1
 	screens.push_back(&prematchScreen);
 
-	GameScreen gameScreen; // 2
-	screens.push_back(&gameScreen);
+	GameScreenRound gameScreenRound; // 2
+	screens.push_back(&gameScreenRound);
 
 	OptionScreen optionScreen; // 3
 	screens.push_back(&optionScreen);

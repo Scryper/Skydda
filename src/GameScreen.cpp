@@ -11,6 +11,7 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
 
     float deltaTime;
     sf::Clock clock;
+    sf::Clock clockTimer;
 
     position = getScreenCenter(&app);
 
@@ -24,6 +25,8 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     game = Game(playerViewP1.getPlayer(), playerViewP2.getPlayer());
     clearRoundCircles();
     while(app.isOpen()) {
+
+        sf::Time timer = clockTimer.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
 
         while(app.pollEvent(event)) {
@@ -70,8 +73,6 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
             game.win();
         }
 
-
-
         app.clear();
 
         // Draw elements
@@ -94,6 +95,8 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
 
         app.draw(namePlayerP1);
         app.draw(namePlayerP2);
+
+        displayAnimations(timer, app);
 
         //for borders' debug
 //        for(PlatformView border : map_.getBorders()) app.draw(border.getSprite());

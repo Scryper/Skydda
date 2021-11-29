@@ -12,9 +12,9 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
 
     for (auto i : offset){
         for(auto j : i){
-            std::cout<<j<<" ";
+            //std::cout<<j<<" ";
         }
-        std::cout<<std::endl;
+        //std::cout<<std::endl;
     }
 
     //1 : Bottom, 2 : Top, 3 : Right, 4 : Left
