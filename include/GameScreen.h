@@ -12,7 +12,14 @@
 #include "Game.h"
 
 class GameScreen : public Screen {
-    private:
+    protected:
+
+        sf::Clock clockTimerAnimation;
+        bool isClockAlreadyRestarted = false;
+        bool startAnimationKO = false;
+        bool startAnimationWin = false;
+        int timeAnimation = 0;
+
         Position position;
         Position positionP1;
         Position positionP2;
@@ -62,7 +69,7 @@ class GameScreen : public Screen {
         std::vector<sf::CircleShape> getRoundCirclesP1();
         std::vector<sf::CircleShape> getRoundCirclesP2();
 
-        virtual sf::Text displayAnimations(sf::Time timer, sf::RenderWindow &app)=0;
+        virtual sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app)=0;
 
         void createRoundCircles();
         void actualiseRoundCircles();
@@ -76,8 +83,7 @@ class GameScreen : public Screen {
         void playerUpdate();
         void clearRoundCircles();
 
-        void setAnimationText(sf::Time timer,sf::RenderWindow &app);
-
+        void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
 
         Game& getGame();
 };

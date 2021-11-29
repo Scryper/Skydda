@@ -26,12 +26,13 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     clearRoundCircles();
 
 
-
     while(app.isOpen()) {
 
-
         sf::Time timer = clockTimer.getElapsedTime();
+        sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
+
+
 
         while(app.pollEvent(event)) {
             if(event.type == sf::Event::Closed) return -1;
@@ -40,6 +41,7 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
                 if(event.key.code == sf::Keyboard::Escape) return 0;
             }
         }
+
         //verif l'input
         //attaquer si poss
         //vérif et update les manches la vie et le reste -> va update la position SI MORT
@@ -50,8 +52,11 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
+        setAnimationText(timer, timerAnimation, app);
+
         if(game.getPlayerWin() == 0) {
             if(game.getPlayer1().getHealth() == 0) {
+
                 game.incrementRoundWinP2();
                 game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
                 game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
@@ -99,9 +104,6 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
 
         app.draw(namePlayerP1);
         app.draw(namePlayerP2);
-
-        setAnimationText(timer, app);
-
         app.draw(textAnimation);
 
         //for borders' debug
@@ -272,9 +274,9 @@ void GameScreen::initVectors() {
     textures.push_back(&texturePlatformTiny);
 }
 
-void GameScreen::setAnimationText(sf::Time timer,sf::RenderWindow &app) {
+void GameScreen::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
 
-    textAnimation = displayAnimations(timer, app);
+    textAnimation = displayAnimations(timer, timerAnimation, app);
 
     textAnimation.setFont(font);
     textAnimation.setCharacterSize(200);
