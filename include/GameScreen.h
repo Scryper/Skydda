@@ -39,6 +39,8 @@ class GameScreen : public Screen {
         sf::Text namePlayerP1;
         sf::Text namePlayerP2;
 
+        sf::Text textAnimation;
+
         Game game;
         MapView map_;
 
@@ -60,7 +62,7 @@ class GameScreen : public Screen {
         std::vector<sf::CircleShape> getRoundCirclesP1();
         std::vector<sf::CircleShape> getRoundCirclesP2();
 
-        virtual void displayAnimations(sf::Time timer, sf::RenderWindow &app)=0;
+        virtual sf::Text displayAnimations(sf::Time timer, sf::RenderWindow &app)=0;
 
         void createRoundCircles();
         void actualiseRoundCircles();
@@ -73,6 +75,9 @@ class GameScreen : public Screen {
         void movePlayers(float deltaTime, bool noTP);
         void playerUpdate();
         void clearRoundCircles();
+
+        void setAnimationText(sf::Time timer,sf::RenderWindow &app);
+
 
         Game& getGame();
 };

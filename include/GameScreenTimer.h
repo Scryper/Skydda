@@ -11,7 +11,7 @@ class GameScreenTimer : public GameScreen {
         GameScreenTimer(const GameScreenTimer& other);
         GameScreenTimer& operator=(const GameScreenTimer& other);
 
-        virtual void displayAnimations(sf::Time timer);
+        virtual sf::Text displayAnimations(sf::Time timer);
 
 };
 

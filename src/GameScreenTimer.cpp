@@ -22,6 +22,9 @@ GameScreenTimer& GameScreenTimer::operator=(const GameScreenTimer& rhs)
     return *this;
 }
 
-void GameScreenTimer::displayAnimations(sf::Time timer) {
+sf::Text GameScreenTimer::displayAnimations(sf::Time timer) {
     std::cout << "GameScreenTimer" << std::endl;
+    Position position(0, 0);
+    sf::Text tmpText = TextInitializer::createText("", position);
+    return tmpText;
 }

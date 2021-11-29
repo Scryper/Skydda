@@ -12,9 +12,9 @@ class GameScreenRound : public GameScreen {
         GameScreenRound(const GameScreenRound& other);
         GameScreenRound& operator=(const GameScreenRound& other);
 
-        virtual void displayAnimations(sf::Time timer, sf::RenderWindow &app);
+        virtual sf::Text displayAnimations(sf::Time timer, sf::RenderWindow &app);
 
-        void displayTextAnimation(sf::RenderWindow &app, std::string text);
+        sf::Text displayTextAnimation(sf::RenderWindow &app, std::string text);
 
 };
 

@@ -15,6 +15,8 @@ class TextInitializer {
         static sf::Text createText(std::string textContent, Position position);
 
         static void initFont(std::vector<sf::Text*> texts, sf::Font* font);
+
+        static void initFont(sf::Text*, sf::Font* font);
 };
 
 #endif // TEXTINITIALIZER_H

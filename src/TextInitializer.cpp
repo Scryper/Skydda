@@ -20,3 +20,6 @@ void TextInitializer::initFont(std::vector<sf::Text*> texts, sf::Font* font) {
     }
 }
 
+void TextInitializer::initFont(sf::Text* text, sf::Font* font) {
+    text->setFont(*font);
+}

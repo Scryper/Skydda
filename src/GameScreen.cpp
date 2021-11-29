@@ -24,7 +24,11 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
 
     game = Game(playerViewP1.getPlayer(), playerViewP2.getPlayer());
     clearRoundCircles();
+
+
+
     while(app.isOpen()) {
+
 
         sf::Time timer = clockTimer.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
@@ -96,7 +100,9 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
         app.draw(namePlayerP1);
         app.draw(namePlayerP2);
 
-        displayAnimations(timer, app);
+        setAnimationText(timer, app);
+
+        app.draw(textAnimation);
 
         //for borders' debug
 //        for(PlatformView border : map_.getBorders()) app.draw(border.getSprite());
@@ -264,6 +270,17 @@ void GameScreen::initVectors() {
     textures.push_back(&texturePlatformLong);
     textures.push_back(&texturePlatformSmall);
     textures.push_back(&texturePlatformTiny);
+}
+
+void GameScreen::setAnimationText(sf::Time timer,sf::RenderWindow &app) {
+
+    textAnimation = displayAnimations(timer, app);
+
+    textAnimation.setFont(font);
+    textAnimation.setCharacterSize(200);
+
+    sf::FloatRect textRect = textAnimation.getLocalBounds();
+    textAnimation.setOrigin(textRect.width/2,textRect.height/2);
 }
 
 void GameScreen::initHealthBars() {
