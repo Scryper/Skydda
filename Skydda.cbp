@@ -70,7 +70,6 @@
 		<Unit filename="include/PrematchScreen.h" />
 		<Unit filename="include/Screen.h" />
 		<Unit filename="include/ScreenIncluder.h" />
-		<Unit filename="include/Size.h" />
 		<Unit filename="include/SpriteInitializer.h" />
 		<Unit filename="include/TextInitializer.h" />
 		<Unit filename="include/TextureLoader.h" />
@@ -96,7 +95,6 @@
 		<Unit filename="src/PrematchScreen.cpp" />
 		<Unit filename="src/Screen.cpp" />
 		<Unit filename="src/ScreenIncluder.cpp" />
-		<Unit filename="src/Size.cpp" />
 		<Unit filename="src/SpriteInitializer.cpp" />
 		<Unit filename="src/TextInitializer.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />

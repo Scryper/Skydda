@@ -2654,7 +2654,7 @@
 1638181232 source:/home/houdartf/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1638181232 source:/home/houdartf/Documents/GitHub/Skydda/src/TextureLoader.cpp
+1638185161 source:/home/houdartf/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
 1638181232 source:/home/houdartf/Documents/GitHub/Skydda/src/Collision.cpp
@@ -4156,6 +4156,6 @@
 1638183453 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerSprite.cpp
 	"PlayerSprite.h"
 
-1638185294 /home/houdartf/Documents/GitHub/Skydda/include/PlayerSprite.h
+1638187787 /home/houdartf/Documents/GitHub/Skydda/include/PlayerSprite.h
 	<SFML/Graphics.hpp>
 
