@@ -4,20 +4,24 @@
 #include <string>
 
 class GameScreenRound : public GameScreen {
-    private:
+    protected:
+
 
     public:
+        virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
         GameScreenRound();
         virtual ~GameScreenRound();
         GameScreenRound(const GameScreenRound& other);
         GameScreenRound& operator=(const GameScreenRound& other);
 
-        virtual sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
+        std::vector<sf::CircleShape> getRoundCirclesP1();
+        std::vector<sf::CircleShape> getRoundCirclesP2();
 
-        sf::Text displayTextAnimation(sf::RenderWindow &app, std::string text);
+        void createRoundCircles();
+        void actualiseRoundCircles();
+        void clearRoundCircles();
 
-        void resetAnimationAndClock();
-        void startClock();
+        void initHealthBars();
 
 };
 

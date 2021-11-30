@@ -15,7 +15,6 @@
 
 class GameScreen : public Screen {
     protected:
-
         sf::Clock clockTimerAnimation;
         bool isClockAlreadyRestarted = false;
         bool startAnimationKO = false;
@@ -66,15 +65,15 @@ class GameScreen : public Screen {
         int mapSeed;
 
     public:
-        int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
+        virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed)=0;
 
-        std::vector<sf::CircleShape> getRoundCirclesP1();
-        std::vector<sf::CircleShape> getRoundCirclesP2();
+        sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
 
-        virtual sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app)=0;
+        sf::Text displayTextAnimation(sf::RenderWindow &app, std::string text);
 
-        void createRoundCircles();
-        void actualiseRoundCircles();
+        void resetAnimationAndClock();
+        void startClock();
+
         void initPlayers();
         void initSprites();
         void initTextures();
@@ -83,11 +82,8 @@ class GameScreen : public Screen {
         void initHealthBars();
         void movePlayers(float deltaTime, bool noTP);
         void playerUpdate();
-        void clearRoundCircles();
 
         void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
-
-
 
         Game& getGame();
 };
