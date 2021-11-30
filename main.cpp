@@ -23,7 +23,6 @@ int main() {
         sf::Style::Fullscreen
     );
     app.setFramerateLimit(60);
-
     std::vector<Screen*> screens;
 	int screen = 0;
 
