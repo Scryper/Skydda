@@ -49,7 +49,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="include/Collision.h" />
+		<Unit filename="include/Animation.h" />
+        <Unit filename="include/Collision.h" />
 		<Unit filename="include/CoupleFloat.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameScreen.h" />
@@ -74,6 +75,7 @@
 		<Unit filename="include/TextInitializer.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="main.cpp" />
+        <Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Collision.cpp" />
 		<Unit filename="src/CoupleFloat.cpp" />
 		<Unit filename="src/Game.cpp" />

@@ -1,11 +1,14 @@
 #include "PlayerView.h"
 #include "Collision.h"
+#include "Animation.h"
 
 PlayerView::PlayerView() {
     PlayerSprite defaultSprite;
     this->sprite = defaultSprite;
     Player defaultPlayer;
     this->player = defaultPlayer;
+    Animation anim;
+    this->animation = anim;
 }
 
 PlayerView::PlayerView(PlayerSprite sprite, Player player,std::vector<sf::Keyboard::Key> keys,bool looksRight, CoupleFloat scalePlayer) {
@@ -14,6 +17,9 @@ PlayerView::PlayerView(PlayerSprite sprite, Player player,std::vector<sf::Keyboa
     this->keys = keys;
     this->looksRight = looksRight;
     this->scalePlayer = scalePlayer;
+    Animation anim;
+    this->animation = anim;
+
 }
 
 PlayerView::PlayerView(const PlayerView& other) {
@@ -22,6 +28,9 @@ PlayerView::PlayerView(const PlayerView& other) {
     this->keys = other.keys;
     this->looksRight = other.looksRight;
     this->scalePlayer = other.scalePlayer;
+    Animation anim;
+    this->animation = anim;
+
 }
 
 PlayerView::~PlayerView() { }
@@ -155,7 +164,8 @@ void PlayerView::setState(int state) {
 
 void PlayerView::animate()
 {
-    float x = this->sprite.getOrigin().x * 2;
+    animation.startAnimation(&this->sprite, this->state);
+    /*float x = this->sprite.getOrigin().x * 2;
     float y = this->sprite.getOrigin().y * 2;
 
     this->maxFrame -= 1;
@@ -175,5 +185,5 @@ void PlayerView::animate()
 
         this->sprite.setTextureRect(sf::IntRect(this->tour * x, (this->lastState-1) * y, x, y));
 
-    }
+    }*/
 }

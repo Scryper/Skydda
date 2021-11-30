@@ -6,11 +6,13 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayerSprite.h"
+#include "Animation.h"
 
 class PlayerView {
     private:
         PlayerSprite sprite;
         Player player;
+        Animation animation;
 
         //0 : up
         //1 : left
@@ -24,8 +26,9 @@ class PlayerView {
         sf::IntRect rectSourceSprite;
         sf::Clock clock;
         int tour;
-        int lastState;
+        bool isAnimationDone;
         int state;
+        int lastState;
         int maxFrame;
         bool looksRight;
         CoupleFloat scalePlayer;
