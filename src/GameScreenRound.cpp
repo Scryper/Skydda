@@ -25,34 +25,31 @@ sf::Text GameScreenRound::displayAnimations(sf::Time timer, sf::Time timerAnimat
 
     timeAnimation = timerAnimation.asSeconds();
     int time = timer.asSeconds();
+    bool isPlayerDead = game.getPlayer1().getHealth() == 0 || game.getPlayer2().getHealth() == 0;
+    bool isPlayerWin = game.getPlayerWin() != 0;
     std::stringstream textWin;
 
-    // Lance un animation x seconde après le lancement de la partie
+    // Lance une animation x seconde après le lancement de la partie
     switch(time) {
         case 3: return displayTextAnimation(app, "Round 1 !");
         case 5: return displayTextAnimation(app, "Ready ?");
         case 7: return displayTextAnimation(app, "Fight !");
     }
 
-    bool isPlayerDead = game.getPlayer1().getHealth() == 0 || game.getPlayer2().getHealth() == 0;
-    bool isPlayerWin = game.getPlayerWin() != 0;
-
     if(isPlayerWin) startAnimationWin = true;
-
     else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
-
     if((isPlayerWin || isPlayerDead ) && !isClockAlreadyRestarted) startClock();
 
+    // Lance l'animation de victoire
     if(startAnimationWin) {
             textWin << "Player" << ((game.getPlayerWin() == 1)?"1":"2") << " Win !";
             return displayTextAnimation(app, textWin.str());
     }
-
+    // Lance l'animation de K.O.
     else if(startAnimationKO && timeAnimation < 3) return displayTextAnimation(app, "K.O. !");
 
     resetAnimationAndClock();
     return displayTextAnimation(app, "");
-
 }
 
 void GameScreenRound::resetAnimationAndClock() {
