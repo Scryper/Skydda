@@ -10,6 +10,8 @@
 #include "HealthBar.h"
 #include "HealthBarView.h"
 #include "Game.h"
+#include <sstream>
+#include <string>
 
 class GameScreen : public Screen {
     protected:
@@ -84,6 +86,8 @@ class GameScreen : public Screen {
         void clearRoundCircles();
 
         void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
+
+
 
         Game& getGame();
 };

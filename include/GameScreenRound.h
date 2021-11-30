@@ -16,6 +16,9 @@ class GameScreenRound : public GameScreen {
 
         sf::Text displayTextAnimation(sf::RenderWindow &app, std::string text);
 
+        void resetAnimationAndClock();
+        void startClock();
+
 };
 
 #endif // GAMESCREENROUND_H

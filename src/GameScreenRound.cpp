@@ -25,56 +25,45 @@ sf::Text GameScreenRound::displayAnimations(sf::Time timer, sf::Time timerAnimat
 
     timeAnimation = timerAnimation.asSeconds();
     int time = timer.asSeconds();
+    std::stringstream textWin;
 
+    // Lance un animation x seconde après le lancement de la partie
     switch(time) {
-        case 3:
-            return displayTextAnimation(app, "Round 1 !");
-        case 5:
-            return displayTextAnimation(app, "Ready ?");
-        case 7:
-            return displayTextAnimation(app, "Fight !");
+        case 3: return displayTextAnimation(app, "Round 1 !");
+        case 5: return displayTextAnimation(app, "Ready ?");
+        case 7: return displayTextAnimation(app, "Fight !");
     }
 
-    if(game.getPlayer1().getHealth() == 0 || game.getPlayer2().getHealth() == 0) {
-        if(game.getPlayerWin() == 0) startAnimationKO = true;
-    }
+    bool isPlayerDead = game.getPlayer1().getHealth() == 0 || game.getPlayer2().getHealth() == 0;
+    bool isPlayerWin = game.getPlayerWin() != 0;
 
-    if(game.getPlayerWin() == 1 || game.getPlayerWin() == 2) {
-        startAnimationWin = true;
-    }
+    if(isPlayerWin) startAnimationWin = true;
+
+    else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
+
+    if((isPlayerWin || isPlayerDead ) && !isClockAlreadyRestarted) startClock();
 
     if(startAnimationWin) {
-        if(!isClockAlreadyRestarted) {
-            clockTimerAnimation.restart();
-            isClockAlreadyRestarted = true;
-            timeAnimation = 0;
-        }
-        if(timeAnimation < 50) {
-            return (game.getPlayerWin() == 1)
-            ? displayTextAnimation(app, "Player 1 Win !")
-            : displayTextAnimation(app, "Player 2 Win !");
-        } else {
-            startAnimationWin = false;
-            isClockAlreadyRestarted = false;
-            return displayTextAnimation(app, "");
-        }
-    } else if(startAnimationKO) {
-        if(!isClockAlreadyRestarted) {
-            clockTimerAnimation.restart();
-            isClockAlreadyRestarted = true;
-            timeAnimation = 0;
-        }
-        if(timeAnimation < 3) {
-            return displayTextAnimation(app, "K.O. !");
-        } else {
-            startAnimationKO = false;
-            isClockAlreadyRestarted = false;
-            return displayTextAnimation(app, "");
-        }
-    } else {
-        return displayTextAnimation(app, "");
+            textWin << "Player" << ((game.getPlayerWin() == 1)?"1":"2") << " Win !";
+            return displayTextAnimation(app, textWin.str());
     }
 
+    else if(startAnimationKO && timeAnimation < 3) return displayTextAnimation(app, "K.O. !");
+
+    resetAnimationAndClock();
+    return displayTextAnimation(app, "");
+
+}
+
+void GameScreenRound::resetAnimationAndClock() {
+    startAnimationKO = false;
+    isClockAlreadyRestarted = false;
+}
+
+void GameScreenRound::startClock() {
+    clockTimerAnimation.restart();
+    isClockAlreadyRestarted = true;
+    timeAnimation = 0;
 }
 
 sf::Text GameScreenRound::displayTextAnimation(sf::RenderWindow &app, std::string textStr) {
