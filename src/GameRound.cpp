@@ -23,7 +23,13 @@ int GameRound::getPlayerWin() {
     else return 0;
 }
 
-
-int GameRound::getPlayerWin(int time) {
-    return 0;
+void GameRound::incrementRoundWinP1() {
+    if(getPlayerWin() == 0 && roundWinP1 < MAX_ROUND) {
+        roundWinP1++;
+    }
+}
+void GameRound::incrementRoundWinP2() {
+    if(getPlayerWin() == 0 && roundWinP2 < MAX_ROUND) {
+        roundWinP2++;
+    }
 }

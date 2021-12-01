@@ -17,17 +17,13 @@ class Game {
         virtual ~Game();
         Game(const Game& other);
 
-        void incrementRoundWinP1();
-        void incrementRoundWinP2();
+
 
         int getRoundWinP1();
         int getRoundWinP2();
 
         Player& getPlayer1();
         Player& getPlayer2();
-
-        virtual int getPlayerWin()=0;
-        virtual int getPlayerWin(int time)=0;
 
         void win();
 

@@ -16,17 +16,7 @@ Game::~Game() { }
 
 Game::Game(const Game& other) { }
 
-void Game::incrementRoundWinP1() {
-    if(getPlayerWin() == 0 && roundWinP1 < MAX_ROUND) {
-        roundWinP1++;
-    }
-}
 
-void Game::incrementRoundWinP2() {
-    if(getPlayerWin() == 0 && roundWinP2 < MAX_ROUND) {
-        roundWinP2++;
-    }
-}
 
 Player& Game::getPlayer1() {
     return *player1;
@@ -46,10 +36,4 @@ int Game::getRoundWinP1() {
 
 int Game::getRoundWinP2() {
     return roundWinP2;
-}
-
-int Game::getPlayerWin() {
-    if(roundWinP1 == MAX_ROUND) return 1;
-    else if(roundWinP2 == MAX_ROUND) return 2;
-    else return 0;
 }

@@ -3421,14 +3421,14 @@
 1636277454 source:/home/houdartf/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
-1638381726 /home/damien/Documents/GitHub/Skydda/include/Game.h
+1638383934 /home/damien/Documents/GitHub/Skydda/include/Game.h
 	<SFML/Graphics.hpp>
 	"Player.h"
 
 1638206108 /home/damien/Documents/GitHub/Skydda/include/PrematchScreen.h
 	"Screen.h"
 
-1638380297 source:/home/damien/Documents/GitHub/Skydda/src/Game.cpp
+1638383877 source:/home/damien/Documents/GitHub/Skydda/src/Game.cpp
 	"Game.h"
 
 1638206096 source:/home/damien/Documents/GitHub/Skydda/src/PrematchScreen.cpp
@@ -4160,22 +4160,22 @@
 	"GameRound.h"
 	<string>
 
-1638380932 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
+1638384040 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
 	"GameScreenTimer.h"
 
 1638379089 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
 	"GameScreen.h"
 	"GameTimer.h"
 
-1638382015 source:/home/damien/Documents/GitHub/Skydda/src/GameRound.cpp
+1638383858 source:/home/damien/Documents/GitHub/Skydda/src/GameRound.cpp
 	"GameRound.h"
 
-1638381808 /home/damien/Documents/GitHub/Skydda/include/GameRound.h
+1638383928 /home/damien/Documents/GitHub/Skydda/include/GameRound.h
 	"Game.h"
 
-1638380949 source:/home/damien/Documents/GitHub/Skydda/src/GameTimer.cpp
+1638384070 source:/home/damien/Documents/GitHub/Skydda/src/GameTimer.cpp
 	"GameTimer.h"
 
-1638381925 /home/damien/Documents/GitHub/Skydda/include/GameTimer.h
+1638384062 /home/damien/Documents/GitHub/Skydda/include/GameTimer.h
 	"Game.h"
 

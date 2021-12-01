@@ -12,8 +12,11 @@ class GameTimer: public Game {
         virtual ~GameTimer();
         GameTimer(const GameTimer& other);
 
-        virtual int getPlayerWin();
-        virtual int getPlayerWin(int timer);
+        //virtual int getPlayerWin();
+        int getPlayerWin(int timer);
+
+        void incrementRoundWinP1(int timer);
+        void incrementRoundWinP2(int timer);
 
 };
 

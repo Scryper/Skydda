@@ -12,8 +12,11 @@ class GameRound : public Game {
         virtual ~GameRound();
         GameRound(const GameRound& other);
 
-        virtual int getPlayerWin();
-        virtual int getPlayerWin(int timer);
+        int getPlayerWin();
+        //virtual int getPlayerWin(int timer);
+
+        void incrementRoundWinP1();
+        void incrementRoundWinP2();
 };
 
 #endif // GAMEROUND_H

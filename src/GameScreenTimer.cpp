@@ -80,7 +80,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         if(gameTimer.getPlayerWin(time) == 0) {
             if(gameTimer.getPlayer1().getHealth() == 0) {
 
-                gameTimer.incrementRoundWinP2();
+                gameTimer.incrementRoundWinP2(time);
                 gameTimer.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
                 gameTimer.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
                 if(gameTimer.getPlayerWin(time) == 0) {
@@ -89,7 +89,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 }
                 movePlayers(deltaTime, true);
             }else if(gameTimer.getPlayer2().getHealth() == 0) {
-                gameTimer.incrementRoundWinP1();
+                gameTimer.incrementRoundWinP1(time);
                 gameTimer.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
                 gameTimer.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
                 if(gameTimer.getPlayerWin(time) == 0) {
