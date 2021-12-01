@@ -19,6 +19,7 @@ class PrematchScreen : public Screen {
         sf::Text textSecondPlayerPrevious;
         sf::Text textSecondPlayerNext;
         sf::Text textValidateSecondPlayer;
+        sf::Text textMap;
         sf::Text textPreviousMap;
         sf::Text textNextMap;
         sf::Text textPlay;
@@ -57,6 +58,7 @@ class PrematchScreen : public Screen {
         int indexMap = 0;
         int indexCharacter1 = 0;
         int indexCharacter2 = 3;
+        int gameMode = 2;
 
         std::vector<std::string> maps;
         std::vector<std::string> characters;

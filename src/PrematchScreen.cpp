@@ -69,9 +69,31 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     textSecondPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
     textSecondPlayerNext.setFillColor(TextInitializer::BetterGrey);
 
-    /// Map elements
-    Position positionMap(position.getX(), 500);
+    /// Mode choosing elements
+    Position positionModeChoosing(position.getX() - 150, 200);
+    textMode = TextInitializer::createText("Choose game mode", positionModeChoosing);
 
+    positionModeChoosing.setY(positionModeChoosing.getY() + 80);
+    positionModeChoosing.setX(positionModeChoosing.getX() + 50);
+    buttonModeRounds = initSprite(.7f, 1.f, positionModeChoosing, &textureButton);
+    positionModeChoosing.setY(positionModeChoosing.getY() - 12);
+    positionModeChoosing.setX(positionModeChoosing.getX() - 65);
+    textModeRounds = TextInitializer::createText("Rounds", positionModeChoosing);
+
+    positionModeChoosing.setX(positionModeChoosing.getX() + 265);
+    positionModeChoosing.setY(positionModeChoosing.getY() + 12);
+    buttonModeTime = initSprite(.7f, 1.f, positionModeChoosing, &textureButton);
+    positionModeChoosing.setY(positionModeChoosing.getY() - 12);
+    positionModeChoosing.setX(positionModeChoosing.getX() - 35);
+    textModeTime = TextInitializer::createText("Time", positionModeChoosing);
+
+    /// Map elements
+    Position positionMap(position.getX() - 125, 400);
+
+    textMap = TextInitializer::createText("Choose the map", positionMap);
+
+    positionMap.setY(positionMap.getY() + 150);
+    positionMap.setX(positionMap.getX() + 125);
     spriteMap = initSprite(.2f, .2f, maps[indexMap], positionMap, &textureMap);
 
     auto scaledWidth = textureMap.getSize().x * spriteMap.getScale().x;
@@ -216,6 +238,30 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
         mousePosition = getMousePosition(&app);
 
+        /// Button rounds mode
+        if(buttonModeRounds.getGlobalBounds().contains(mousePosition)) {
+            textModeRounds.setFillColor(sf::Color::Green);
+            if(event.type == sf::Event::MouseButtonPressed) {
+                gameMode = 2;
+                // TODO : add image which represents the game mode
+            }
+        }
+        else {
+            textModeRounds.setFillColor(TextInitializer::BetterWhite);
+        }
+
+        /// Button time mode
+        if(buttonModeTime.getGlobalBounds().contains(mousePosition)) {
+            textModeTime.setFillColor(sf::Color::Green);
+            if(event.type == sf::Event::MouseButtonPressed) {
+                gameMode = 3;
+                // TODO : add image which represents the game mode
+            }
+        }
+        else {
+            textModeTime.setFillColor(TextInitializer::BetterWhite);
+        }
+
         /// Button play
         if(buttonPlay.getGlobalBounds().contains(mousePosition)) {
             textPlay.setFillColor(sf::Color::Green);
@@ -227,7 +273,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
                 strSecondPlayerName = secondPlayerName.getString().toAnsiString();
                 pathSpriteSecondPlayer = spriteSheets[indexCharacter2];
-                return 2;
+                return gameMode;
             }
         }
         else {
@@ -254,7 +300,18 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
         app.draw(buttonBack);
         app.draw(textBack);
 
-        // Map elements
+        // Choose mode elements
+        app.draw(textMode);
+
+        app.draw(buttonModeRounds);
+        app.draw(textModeRounds);
+
+        app.draw(buttonModeTime);
+        app.draw(textModeTime);
+
+        // Map element
+        app.draw(textMap);
+
         app.draw(outlineMap);
         app.draw(spriteMap);
 
@@ -299,23 +356,23 @@ void PrematchScreen::initVectors() {
     names.push_back("Dark Golem");
     names.push_back("Dark Groot");
     names.push_back("Dark Minotaur");
+    names.push_back("Light Minotaur");
     names.push_back("Light Golem");
     names.push_back("Light Groot");
-    names.push_back("Light Minotaur");
 
     characters.push_back("resources/images/previews/characters/golem_dark.png");
     characters.push_back("resources/images/previews/characters/groot_dark.png");
     characters.push_back("resources/images/previews/characters/minotaur_dark.png");
+    characters.push_back("resources/images/previews/characters/minotaur_light.png");
     characters.push_back("resources/images/previews/characters/golem_light.png");
     characters.push_back("resources/images/previews/characters/groot_light.png");
-    characters.push_back("resources/images/previews/characters/minotaur_light.png");
 
     spriteSheets.push_back("resources/images/characters/golem_dark.png");
     spriteSheets.push_back("resources/images/characters/groot_dark.png");
     spriteSheets.push_back("resources/images/characters/minotaur_dark.png");
+    spriteSheets.push_back("resources/images/characters/minotaur_light.png");
     spriteSheets.push_back("resources/images/characters/golem_light.png");
     spriteSheets.push_back("resources/images/characters/groot_light.png");
-    spriteSheets.push_back("resources/images/characters/minotaur_light.png");
 }
 
 void PrematchScreen::initBackground() {
@@ -335,10 +392,14 @@ void PrematchScreen::initFonts() {
     texts.push_back(&textBack);
     texts.push_back(&firstPlayerName);
     texts.push_back(&secondPlayerName);
+    texts.push_back(&textMap);
     texts.push_back(&textNextMap);
     texts.push_back(&textPreviousMap);
     texts.push_back(&textFirstPlayerNext);
     texts.push_back(&textFirstPlayerPrevious);
     texts.push_back(&textSecondPlayerNext);
     texts.push_back(&textSecondPlayerPrevious);
+    texts.push_back(&textMode);
+    texts.push_back(&textModeRounds);
+    texts.push_back(&textModeTime);
 }
