@@ -23,6 +23,9 @@ class PrematchScreen : public Screen {
         sf::Text textNextMap;
         sf::Text textPlay;
         sf::Text textBack;
+        sf::Text textMode;
+        sf::Text textModeRounds;
+        sf::Text textModeTime;
 
         sf::Texture textureBackground;
         sf::Texture textureButton;
@@ -43,6 +46,8 @@ class PrematchScreen : public Screen {
         sf::Sprite buttonNextMap;
         sf::Sprite buttonPlay;
         sf::Sprite buttonBack;
+        sf::Sprite buttonModeRounds;
+        sf::Sprite buttonModeTime;
 
         Position position;
         Position positionPlayerElements;
