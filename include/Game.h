@@ -4,12 +4,12 @@
 #include "Player.h"
 
 class Game {
-    private:
+    protected:
         Player* player1;
         Player* player2;
         int roundWinP1;
         int roundWinP2;
-        int MAX_ROUND = 3; //const static
+        int MAX_ROUND;
 
     public:
         Game();
@@ -26,7 +26,7 @@ class Game {
         Player& getPlayer1();
         Player& getPlayer2();
 
-        int getPlayerWin();
+        virtual int getPlayerWin()=0;
 
         void win();
 };
