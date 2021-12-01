@@ -1,6 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
-
+#include <SFML/Graphics.hpp>
 #include "Player.h"
 
 class Game {
@@ -27,8 +27,10 @@ class Game {
         Player& getPlayer2();
 
         virtual int getPlayerWin()=0;
+        virtual int getPlayerWin(int time)=0;
 
         void win();
+
 };
 
 #endif // GAME_H

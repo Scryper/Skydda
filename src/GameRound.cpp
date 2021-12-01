@@ -22,3 +22,8 @@ int GameRound::getPlayerWin() {
     else if(roundWinP2 == MAX_ROUND) return 2;
     else return 0;
 }
+
+
+int GameRound::getPlayerWin(int time) {
+    return 0;
+}

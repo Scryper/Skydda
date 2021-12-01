@@ -21,7 +21,19 @@ GameTimer::GameTimer(const GameTimer& other)
 }
 
 int GameTimer::getPlayerWin() {
-    if(roundWinP1 == MAX_ROUND) return 1;
-    else if(roundWinP2 == MAX_ROUND) return 2;
-    else return 0;
+    return 0;
+}
+
+int GameTimer::getPlayerWin(int time) {
+
+    if(time==25) {
+        if(roundWinP1>roundWinP2) {
+            return 1;
+        } else {
+            return 2;
+        }
+    } else {
+        return 0;
+    }
+
 }

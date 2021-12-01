@@ -77,13 +77,13 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
         setAnimationText(timer, timerAnimation, app);
 
-        if(gameTimer.getPlayerWin() == 0) {
+        if(gameTimer.getPlayerWin(time) == 0) {
             if(gameTimer.getPlayer1().getHealth() == 0) {
 
                 gameTimer.incrementRoundWinP2();
                 gameTimer.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
                 gameTimer.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(gameTimer.getPlayerWin() == 0) {
+                if(gameTimer.getPlayerWin(time) == 0) {
                     gameTimer.getPlayer1().setHealth(100.f);
                     gameTimer.getPlayer2().setHealth(100.f);
                 }
@@ -92,7 +92,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 gameTimer.incrementRoundWinP1();
                 gameTimer.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
                 gameTimer.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(gameTimer.getPlayerWin() == 0) {
+                if(gameTimer.getPlayerWin(time) == 0) {
                     gameTimer.getPlayer1().setHealth(100.f);
                     gameTimer.getPlayer2().setHealth(100.f);
                 }
@@ -140,7 +140,7 @@ sf::Text GameScreenTimer::displayAnimations(sf::Time timer, sf::Time timerAnimat
     timeAnimation = timerAnimation.asSeconds();
     int time = timer.asSeconds();
     bool isPlayerDead = gameTimer.getPlayer1().getHealth() == 0 || gameTimer.getPlayer2().getHealth() == 0;
-    bool isPlayerWin = gameTimer.getPlayerWin() != 0;
+    bool isPlayerWin = gameTimer.getPlayerWin(time) != 0;
     std::stringstream textWin;
 
     // Lance une animation x seconde après le lancement de la partie
@@ -156,7 +156,7 @@ sf::Text GameScreenTimer::displayAnimations(sf::Time timer, sf::Time timerAnimat
 
     // Lance l'animation de victoire
     if(startAnimationWin) {
-            textWin << "Player" << ((gameTimer.getPlayerWin() == 1)?"1":"2") << " Win !";
+            textWin << "Player" << ((gameTimer.getPlayerWin(time) == 1)?"1":"2") << " Win !";
             return displayTextAnimation(app, textWin.str());
     }
     // Lance l'animation de K.O.

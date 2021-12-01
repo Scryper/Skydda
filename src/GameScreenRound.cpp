@@ -40,14 +40,11 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     gameRound = GameRound(playerViewP1.getPlayer(), playerViewP2.getPlayer());
     clearRoundCircles();
 
-
     while(app.isOpen()) {
 
         sf::Time timer = clockTimer.getElapsedTime();
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
-
-
 
         while(app.pollEvent(event)) {
             if(event.type == sf::Event::Closed) return -1;

@@ -13,6 +13,7 @@ class GameRound : public Game {
         GameRound(const GameRound& other);
 
         virtual int getPlayerWin();
+        virtual int getPlayerWin(int timer);
 };
 
 #endif // GAMEROUND_H

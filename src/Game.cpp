@@ -53,4 +53,3 @@ int Game::getPlayerWin() {
     else if(roundWinP2 == MAX_ROUND) return 2;
     else return 0;
 }
-

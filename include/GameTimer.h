@@ -13,6 +13,7 @@ class GameTimer: public Game {
         GameTimer(const GameTimer& other);
 
         virtual int getPlayerWin();
+        virtual int getPlayerWin(int timer);
 
 };
 

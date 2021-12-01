@@ -119,19 +119,6 @@ void GameScreen::playerUpdate(){
     playerViewP2.animate();
 }
 
-
-
-void GameScreen::resetAnimationAndClock() {
-    startAnimationKO = false;
-    isClockAlreadyRestarted = false;
-}
-
-void GameScreen::startClock() {
-    clockTimerAnimation.restart();
-    isClockAlreadyRestarted = true;
-    timeAnimation = 0;
-}
-
 sf::Text GameScreen::displayTextAnimation(sf::RenderWindow &app, std::string textStr) {
     const int SCRWIDTH = app.getSize().x;
     const int SCRHEIGHT = app.getSize().y -200;
@@ -144,4 +131,15 @@ sf::Text GameScreen::displayTextAnimation(sf::RenderWindow &app, std::string tex
     textAnimation.setOutlineThickness(4);
 
     return textAnimation;
+}
+
+void GameScreen::resetAnimationAndClock() {
+    startAnimationKO = false;
+    isClockAlreadyRestarted = false;
+}
+
+void GameScreen::startClock() {
+    clockTimerAnimation.restart();
+    isClockAlreadyRestarted = true;
+    timeAnimation = 0;
 }
