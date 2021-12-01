@@ -15,12 +15,6 @@ GameScreenRound::GameScreenRound(const GameScreenRound& other)
     //copy ctor
 }
 
-GameScreenRound& GameScreenRound::operator=(const GameScreenRound& rhs) {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
-    return *this;
-}
-
 int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     playerName1 = data[0];
     spriteSheet1 = data[1];
@@ -43,17 +37,14 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     initPlayers();
     initHealthBars();
 
-    game = Game(playerViewP1.getPlayer(), playerViewP2.getPlayer());
+    gameRound = GameRound(playerViewP1.getPlayer(), playerViewP2.getPlayer());
     clearRoundCircles();
-
 
     while(app.isOpen()) {
 
         sf::Time timer = clockTimer.getElapsedTime();
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
-
-
 
         while(app.pollEvent(event)) {
             if(event.type == sf::Event::Closed) return -1;
@@ -73,26 +64,28 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
+
+
         setAnimationText(timer, timerAnimation, app);
 
-        if(game.getPlayerWin() == 0) {
-            if(game.getPlayer1().getHealth() == 0) {
+        if(gameRound.getPlayerWin() == 0) {
+            if(gameRound.getPlayer1().getHealth() == 0) {
 
-                game.incrementRoundWinP2();
-                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(game.getPlayerWin() == 0) {
-                    game.getPlayer1().setHealth(100.f);
-                    game.getPlayer2().setHealth(100.f);
+                gameRound.incrementRoundWinP2();
+                gameRound.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
+                gameRound.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
+                if(gameRound.getPlayerWin() == 0) {
+                    gameRound.getPlayer1().setHealth(100.f);
+                    gameRound.getPlayer2().setHealth(100.f);
                 }
                 movePlayers(deltaTime, true);
-            }else if(game.getPlayer2().getHealth() == 0) {
-                game.incrementRoundWinP1();
-                game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-                game.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(game.getPlayerWin() == 0) {
-                    game.getPlayer1().setHealth(100.f);
-                    game.getPlayer2().setHealth(100.f);
+            }else if(gameRound.getPlayer2().getHealth() == 0) {
+                gameRound.incrementRoundWinP1();
+                gameRound.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
+                gameRound.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
+                if(gameRound.getPlayerWin() == 0) {
+                    gameRound.getPlayer1().setHealth(100.f);
+                    gameRound.getPlayer2().setHealth(100.f);
                 }
                 movePlayers(deltaTime, true);
             }
@@ -100,7 +93,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 movePlayers(deltaTime, false);
             }
         } else {
-            game.win();
+            gameRound.win();
         }
 
         app.clear();
@@ -178,7 +171,7 @@ void GameScreenRound::createRoundCircles() {
 }
 
 void GameScreenRound::actualiseRoundCircles() {
-    switch(game.getRoundWinP1()) {
+    switch(gameRound.getRoundWinP1()) {
         case 1:
             roundCirclesP1[0].setFillColor(sf::Color::White);
             break;
@@ -189,7 +182,7 @@ void GameScreenRound::actualiseRoundCircles() {
             roundCirclesP1[2].setFillColor(sf::Color::White);
             break;
     }
-    switch(game.getRoundWinP2()) {
+    switch(gameRound.getRoundWinP2()) {
         case 1:
             roundCirclesP2[0].setFillColor(sf::Color::White);
             break;
@@ -236,3 +229,50 @@ void GameScreenRound::clearRoundCircles() {
     roundCirclesP2[1].setFillColor(sf::Color::Transparent);
     roundCirclesP2[2].setFillColor(sf::Color::Transparent);
 }
+
+GameRound& GameScreenRound::getGameRound() {
+    return gameRound;
+}
+
+sf::Text GameScreenRound::displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
+
+    timeAnimation = timerAnimation.asSeconds();
+    int time = timer.asSeconds();
+    bool isPlayerDead = gameRound.getPlayer1().getHealth() == 0 || gameRound.getPlayer2().getHealth() == 0;
+    bool isPlayerWin = gameRound.getPlayerWin() != 0;
+    std::stringstream textWin;
+
+    // Lance une animation x seconde après le lancement de la partie
+    switch(time) {
+        case 3: return displayTextAnimation(app, "Round 1 !");
+        case 5: return displayTextAnimation(app, "Ready ?");
+        case 7: return displayTextAnimation(app, "Fight !");
+    }
+
+    if(isPlayerWin) startAnimationWin = true;
+    else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
+    if((isPlayerWin || isPlayerDead ) && !isClockAlreadyRestarted) startClock();
+
+    // Lance l'animation de victoire
+    if(startAnimationWin) {
+            textWin << ( (gameRound.getPlayerWin() == 1) ? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
+            return displayTextAnimation(app, textWin.str());
+    }
+    // Lance l'animation de K.O.
+    else if(startAnimationKO && timeAnimation < 3) return displayTextAnimation(app, "K.O. !");
+
+    resetAnimationAndClock();
+    return displayTextAnimation(app, "");
+}
+
+void GameScreenRound::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
+
+    textAnimation = displayAnimations(timer, timerAnimation, app);
+
+    textAnimation.setFont(font);
+    textAnimation.setCharacterSize(150);
+
+    sf::FloatRect textRect = textAnimation.getLocalBounds();
+    textAnimation.setOrigin(textRect.width/2,textRect.height/2);
+}
+
