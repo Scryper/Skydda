@@ -53,7 +53,7 @@ void Movement::stopY(){
     this->speed.setY(0);
 }
 
-Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions,bool noTP) {
+Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
     // get the info about X movement
     float speedX = speed.getX();
     float directionX = direction.getX();
@@ -144,7 +144,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
             speed.setY(speedY + accelerationY);
         }
     }
-    if( noTP != true){
+
         for(auto& i : collisions){
             for(auto& j : i){
                 switch(j[0]){
@@ -176,7 +176,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
                     break;
                 }
             }
-        }
+
 
         for(auto i : coll){
             if(i[0] == 1 || i[0] == 2){

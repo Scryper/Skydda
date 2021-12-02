@@ -55,7 +55,7 @@ PlayerView createPlayer(float sizeX,
     float jumpHeight = 27.f;
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
-    std::vector<pair<playerStatePriority,sf::Keyboard::Key>> keys;
+    std::vector<pair<PlayerStateEnum,sf::Keyboard::Key>> keys;
     keys.push_back({jumping,up});
     keys.push_back({movingLeft,left});
     keys.push_back({movingRight,right});

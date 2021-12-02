@@ -38,10 +38,12 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
         //vérif et update les manches la vie et le reste -> va update la position SI MORT
         //update la position en fonction de cette nouvelle position
 
-        playerUpdate();
+        movePlayers(deltaTime);
 
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
+        //std::cout<<playerViewP1.getPlayer().getHealth()<<endl;
+        //std::cout<<playerViewP2.getPlayer().getHealth()<<endl;
 
         if(game.getPlayerWin() == 0) {
             if(game.getPlayer1().getHealth() == 0) {
@@ -52,7 +54,6 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
                     game.getPlayer1().setHealth(100.f);
                     game.getPlayer2().setHealth(100.f);
                 }
-                movePlayers(deltaTime, true);
             }else if(game.getPlayer2().getHealth() == 0) {
                 game.incrementRoundWinP1();
                 game.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
@@ -61,11 +62,8 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
                     game.getPlayer1().setHealth(100.f);
                     game.getPlayer2().setHealth(100.f);
                 }
-                movePlayers(deltaTime, true);
             }
-            else{
-                movePlayers(deltaTime, false);
-            }
+
         } else {
             game.win();
         }
@@ -288,15 +286,7 @@ void GameScreen::initHealthBars() {
     createRoundCircles();
 }
 
-void GameScreen::movePlayers(float deltaTime, bool noTP) {
-    playerViewP1.movePlayer(directionCollisions(playerViewP1, platforms), noTP);
-
-    playerViewP2.movePlayer(directionCollisions(playerViewP2, platforms), noTP);
-}
-
-void GameScreen::playerUpdate(){
-    playerViewP1.updateState(playerViewP2);
-    playerViewP2.updateState(playerViewP1);
-    playerViewP1.animate();
-    playerViewP2.animate();
+void GameScreen::movePlayers(float deltaTime) {
+    playerViewP1.computeFrame(directionCollisions(playerViewP1, platforms), playerViewP2);
+    playerViewP2.computeFrame(directionCollisions(playerViewP2, platforms), playerViewP1);
 }

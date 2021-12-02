@@ -33,9 +33,9 @@ int main() {
 	PrematchScreen prematchScreen; // 1
 	screens.push_back(&prematchScreen);
 
+
 	GameScreen gameScreen; // 2
 	screens.push_back(&gameScreen);
-
 	OptionScreen optionScreen; // 3
 	screens.push_back(&optionScreen);
 

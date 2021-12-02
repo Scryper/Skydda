@@ -15,19 +15,18 @@ class PlayerView {
         Player player;
         Animation animation;
 
-        std::vector<std::pair<playerStatePriority,sf::Keyboard::Key>> keys;
-        std::vector<std::pair<playerStatePriority,sf::Keyboard::Key>> keysPressed;
+        std::vector<std::pair<PlayerStateEnum,sf::Keyboard::Key>> keys;
+        std::vector<std::pair<PlayerStateEnum,sf::Keyboard::Key>> keysPressed;
 
         sf::Texture texture;
         sf::IntRect rectSourceSprite;
         sf::Clock clock;
-        int state;
         bool looksRight;
         CoupleFloat scalePlayer;
 
     public:
         PlayerView();
-        PlayerView(PlayerSprite sprite, Player player, std::vector<std::pair<playerStatePriority,sf::Keyboard::Key>> keys, bool looksRight, CoupleFloat scalePlayer);
+        PlayerView(PlayerSprite sprite, Player player, std::vector<std::pair<PlayerStateEnum,sf::Keyboard::Key>> keys, bool looksRight, CoupleFloat scalePlayer);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
@@ -36,7 +35,6 @@ class PlayerView {
 
         void attack(PlayerView &playerAttacked);
         void setHealth(float health);
-        void setState(int state);
 
         std::vector<std::vector<float>> getOffset()const;
         bool isLooksRigth()const;
@@ -45,14 +43,15 @@ class PlayerView {
 
         CoupleFloat computeCoupleMovement();
 
-        Position computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
-        void movePlayer(std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
-        void updateState(PlayerView &playerView);
-        std::vector<playerStatePriority> getStatesFromInput();
+        Position computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
+        void movePlayer(std::vector<std::vector<std::vector<int>>> collisions, PlayerStateEnum state);
+        //void updateState(PlayerView &playerView);
+        std::vector<PlayerStateEnum> getStatesFromInput();
 
-        void animate();
+        void animate(bool first,PlayerStateEnum state, bool boucle);
         void flipSprite();
-        void computeFrame();
+        void computeFrame(std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView);
+        void doAction(PlayerStateEnum state,std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView);
 };
 
 #endif // PLAYERVIEW_H

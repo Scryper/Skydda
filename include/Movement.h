@@ -31,7 +31,7 @@ class Movement {
         void stopY();
 
 
-        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
 };
 
 #endif // MOVEMENT_H

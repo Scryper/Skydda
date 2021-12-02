@@ -1,6 +1,7 @@
 #include "Player.h"
 
 Player::Player() {
+    //cout<<"Constructeur player"<<endl;
     this->name = "Inconnu";
     this->attack = 0.0;
     this->health = 0.0;
@@ -24,6 +25,7 @@ Player::Player(std::string name, float attack, float health, Position position, 
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
     stateInitializer();
+    //cout<<"Constructeur player"<<endl;
 }
 
 Player::Player(const Player& other) {
@@ -35,10 +37,16 @@ Player::Player(const Player& other) {
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
     stateInitializer();
+    //cout<<"Constructeur player"<<endl;
 }
 
 Player::~Player() {
+    //cout<<"destructeur player"<<endl;
     //stateDestroyer();
+    //for (PlayerStatePair* p : state ){
+        //delete p;
+    //}
+    state.clear();
 }
 
 Movement Player::getMovement() const {
@@ -110,28 +118,26 @@ void Player::stateInitializer(){
     initStatePointer(jumping,0);
     initStatePointer(movingLeft,0);
     initStatePointer(movingRight,0);
-    initStatePointer(idle,1);
+    initStatePointer(momentum,1);
+    initStatePointer(idle,0);
 }
 
-void Player::initStatePointer(playerStatePriority s, int val){
-    PlayerStatePair *temp(0);
-    temp = new PlayerStatePair;
-    PlayerStatePair temp2 = {s,val};
-    *temp = temp2;
+void Player::initStatePointer(PlayerStateEnum s, int val){
+    PlayerStatePair *temp;
+    temp = new PlayerStatePair{s,val};
     state.push_back(temp);
 }
 
 void Player::stateDestroyer(){
-    for (auto i : state){
-        delete i;
-    }
+    //for()
+    //state.clear();
 }
 
-Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions, bool noTP) {
-    return movement.updatePosition(position, direction, collisions, noTP);
+Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
+    return movement.updatePosition(position, direction, collisions);
 }
 
-void Player::setState(playerStatePriority s, bool value){
+void Player::setState(PlayerStateEnum s, bool value){
      for(auto itStates : state){
         if(itStates->first==s){
             itStates->second=value;
@@ -139,7 +145,7 @@ void Player::setState(playerStatePriority s, bool value){
      }
 }
 
-bool Player::getState(playerStatePriority s)const{
+bool Player::getState(PlayerStateEnum s)const{
     for(auto itStates : state){
         if(itStates->first==s){
             return itStates->second;
@@ -148,8 +154,20 @@ bool Player::getState(playerStatePriority s)const{
      return 0;
 }
 
-PlayerStateBoolArray Player::computeStates(std::vector<playerStatePriority> keyPressed){
-    std::cout<<"ici"<<std::endl;
+PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPressed){
+    //si pas en train de défendre -> change state
+    bool def = 0;
+    for(auto i : keyPressed){
+        if(i== defending)def = 1;
+    }
+    if(!def){
+        for (auto itStates : state){
+            if (itStates->first == defending)
+                itStates->second = 0;
+        }
+    }
+
+
 
     //on parcourt tous les états dans l'ordre croissant d'importance
     for(auto itStates : state){
@@ -195,6 +213,7 @@ PlayerStateBoolArray Player::computeStates(std::vector<playerStatePriority> keyP
     //on parcourt tous les états dans l'ordre croissant d'importance
     bool notStackable = 0;
     bool activated = 0;
+    bool movmentStateActivated = 0;
     for(auto itStates : state){
         //si noStackable = 0
         if(notStackable == 0){
@@ -202,6 +221,11 @@ PlayerStateBoolArray Player::computeStates(std::vector<playerStatePriority> keyP
             if(itStates->second==1){
                  if(itStates->first!=idle){
                     activated = 1;
+                    for(auto itConstPlayerStates : constPlayerStates){
+                        if(itConstPlayerStates.state==itStates->first && itConstPlayerStates.isMovement == 1){
+                            movmentStateActivated = 1;
+                        }
+                    }
                  }
                  for(auto itConstPlayerStates : constPlayerStates){
                     //si not stackable
@@ -217,7 +241,15 @@ PlayerStateBoolArray Player::computeStates(std::vector<playerStatePriority> keyP
         }
     }
 
-    //si aucun état n'est activé, c'est idle
+    //si pas de movementState ET vitesse horizontale et verticale != 0 ou bien qu'il n'y a pas de collision en dessous du player
+    if(movmentStateActivated!=1 && (movement.getSpeed().getX()!=0||movement.getSpeed().getY()!=0)){
+        for(auto itStates : state){
+            if(itStates->first==momentum){
+                itStates->second=1;
+            }
+        }
+    }
+
     for(auto itStates : state){
         if(itStates->first==idle){
             if(activated==0){
@@ -228,7 +260,6 @@ PlayerStateBoolArray Player::computeStates(std::vector<playerStatePriority> keyP
             }
         }
     }
-
     return state;
 }
 

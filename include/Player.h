@@ -28,7 +28,7 @@ class Player {
         Player(const Player& other);
         virtual ~Player();
         void stateDestroyer();
-        void initStatePointer(playerStatePriority s, int val);
+        void initStatePointer(PlayerStateEnum s, int val);
 
         Movement getMovement() const;
         Position getPosition() const;
@@ -39,13 +39,13 @@ class Player {
         void setPosition(Position position);
         void setPosition(float x, float y);
         void stateInitializer();
-        void setState(playerStatePriority s, bool value);
-        bool getState(playerStatePriority s)const;
+        void setState(PlayerStateEnum s, bool value);
+        bool getState(PlayerStateEnum s)const;
 
 
         void attackPlayer(Player& p, float clock);
-        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
-        PlayerStateBoolArray computeStates(std::vector<playerStatePriority> keyPressed);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
+        PlayerStateBoolArray computeStates(std::vector<PlayerStateEnum> keyPressed);
 
 };
 
