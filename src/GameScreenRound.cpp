@@ -276,7 +276,7 @@ void GameScreenRound::setAnimationText(sf::Time timer, sf::Time timerAnimation, 
     textAnimation = displayAnimations(timer, timerAnimation, app);
 
     textAnimation.setFont(font);
-    textAnimation.setCharacterSize(150);
+    textAnimation.setCharacterSize(140);
 
     sf::FloatRect textRect = textAnimation.getLocalBounds();
     textAnimation.setOrigin(textRect.width/2,textRect.height/2);

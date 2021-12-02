@@ -356,23 +356,26 @@ void PrematchScreen::initVectors() {
     names.push_back("Dark Golem");
     names.push_back("Dark Groot");
     names.push_back("Dark Minotaur");
-    names.push_back("Light Minotaur");
+
     names.push_back("Light Golem");
     names.push_back("Light Groot");
+    names.push_back("Light Minotaur");
 
     characters.push_back("resources/images/previews/characters/golem_dark.png");
     characters.push_back("resources/images/previews/characters/groot_dark.png");
     characters.push_back("resources/images/previews/characters/minotaur_dark.png");
-    characters.push_back("resources/images/previews/characters/minotaur_light.png");
+
     characters.push_back("resources/images/previews/characters/golem_light.png");
     characters.push_back("resources/images/previews/characters/groot_light.png");
+    characters.push_back("resources/images/previews/characters/minotaur_light.png");
 
     spriteSheets.push_back("resources/images/characters/golem_dark.png");
     spriteSheets.push_back("resources/images/characters/groot_dark.png");
     spriteSheets.push_back("resources/images/characters/minotaur_dark.png");
-    spriteSheets.push_back("resources/images/characters/minotaur_light.png");
+
     spriteSheets.push_back("resources/images/characters/golem_light.png");
     spriteSheets.push_back("resources/images/characters/groot_light.png");
+    spriteSheets.push_back("resources/images/characters/minotaur_light.png");
 }
 
 void PrematchScreen::initBackground() {

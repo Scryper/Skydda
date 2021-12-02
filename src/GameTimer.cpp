@@ -21,9 +21,9 @@ GameTimer::GameTimer(const GameTimer& other)
     //copy ctor
 }
 
-int GameTimer::getPlayerWin(int time) {
+int GameTimer::getPlayerWin() {
 
-    if(time>=25) {
+    if(COUNTDOWN<=0) {
         if(roundWinP1>roundWinP2) {
             return 1;
         } else if(roundWinP2>roundWinP1) {
@@ -36,13 +36,13 @@ int GameTimer::getPlayerWin(int time) {
 
 }
 
-void GameTimer::incrementRoundWinP1(int time) {
-    if(getPlayerWin(time) == 0 && roundWinP1 < MAX_ROUND) {
+void GameTimer::incrementRoundWinP1() {
+    if(getPlayerWin() == 0 && roundWinP1 < MAX_ROUND) {
         roundWinP1++;
     }
 }
-void GameTimer::incrementRoundWinP2(int time) {
-    if(getPlayerWin(time) == 0 && roundWinP2 < MAX_ROUND) {
+void GameTimer::incrementRoundWinP2() {
+    if(getPlayerWin() == 0 && roundWinP2 < MAX_ROUND) {
         roundWinP2++;
     }
 }

@@ -44,7 +44,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         //const int SCRHEIGHT = app.getSize().y -200;
         // --- TextTimer ---
         sf::Time timer = clockTimer.getElapsedTime();
-        int time = timer.asSeconds();
+        //int time = timer.asSeconds();
 //        sf::Text timeTxt;
 
         std::stringstream ss;
@@ -94,22 +94,22 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
         setAnimationText(timer, timerAnimation, app);
 
-        if(gameTimer.getPlayerWin(time) == 0) {
+        if(gameTimer.getPlayerWin() == 0) {
             if(gameTimer.getPlayer1().getHealth() == 0) {
 
-                gameTimer.incrementRoundWinP2(time);
+                gameTimer.incrementRoundWinP2();
                 gameTimer.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
                 gameTimer.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(gameTimer.getPlayerWin(time) == 0) {
+                if(gameTimer.getPlayerWin() == 0) {
                     gameTimer.getPlayer1().setHealth(100.f);
                     gameTimer.getPlayer2().setHealth(100.f);
                 }
                 movePlayers(deltaTime, true);
             }else if(gameTimer.getPlayer2().getHealth() == 0) {
-                gameTimer.incrementRoundWinP1(time);
+                gameTimer.incrementRoundWinP1();
                 gameTimer.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
                 gameTimer.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(gameTimer.getPlayerWin(time) == 0) {
+                if(gameTimer.getPlayerWin() == 0) {
                     gameTimer.getPlayer1().setHealth(100.f);
                     gameTimer.getPlayer2().setHealth(100.f);
                 }
@@ -144,9 +144,6 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         app.draw(rectangle);
         app.draw(timeTxt);
 
-
-
-
         //for borders' debug
 //        for(PlatformView border : map_.getBorders()) app.draw(border.getSprite());
 
@@ -164,7 +161,7 @@ sf::Text GameScreenTimer::displayAnimations(sf::Time timer, sf::Time timerAnimat
     timeAnimation = timerAnimation.asSeconds();
     int time = timer.asSeconds();
     bool isPlayerDead = gameTimer.getPlayer1().getHealth() == 0 || gameTimer.getPlayer2().getHealth() == 0;
-    bool isPlayerWin = gameTimer.getPlayerWin(time) != 0;
+    bool isPlayerWin = gameTimer.getPlayerWin() != 0;
     std::stringstream textWin;
 
     // Lance une animation x seconde après le lancement de la partie
@@ -180,7 +177,7 @@ sf::Text GameScreenTimer::displayAnimations(sf::Time timer, sf::Time timerAnimat
 
     // Lance l'animation de victoire
     if(startAnimationWin) {
-            textWin << ( (gameTimer.getPlayerWin(time) == 1)? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
+            textWin << ( (gameTimer.getPlayerWin() == 1)? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
             return displayTextAnimation(app, textWin.str());
     }
     // Lance l'animation de K.O.
@@ -195,7 +192,7 @@ void GameScreenTimer::setAnimationText(sf::Time timer, sf::Time timerAnimation, 
     textAnimation = displayAnimations(timer, timerAnimation, app);
 
     textAnimation.setFont(font);
-    textAnimation.setCharacterSize(150);
+    textAnimation.setCharacterSize(140);
 
     sf::FloatRect textRect = textAnimation.getLocalBounds();
     textAnimation.setOrigin(textRect.width/2,textRect.height/2);

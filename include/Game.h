@@ -17,7 +17,7 @@ class Game {
         virtual ~Game();
         Game(const Game& other);
 
-
+        virtual int getPlayerWin()=0;
 
         int getRoundWinP1();
         int getRoundWinP2();
