@@ -39,12 +39,18 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
     gameRound = GameRound(playerViewP1.getPlayer(), playerViewP2.getPlayer());
     clearRoundCircles();
+    sf::Clock clockTest;
+    clockTest.restart().asMilliseconds();
 
     while(app.isOpen()) {
 
         sf::Time timer = clockTimer.getElapsedTime();
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
+
+        if(clockTest.getElapsedTime().asMilliseconds() >= 2000 && clockTest.getElapsedTime().asMilliseconds() <= 2016) {
+            SoundLoader::playRandomSound();
+        }
 
         while(app.pollEvent(event)) {
             if(event.type == sf::Event::Closed) return -1;

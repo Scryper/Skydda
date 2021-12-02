@@ -5,6 +5,7 @@
 
 #include "Position.h"
 #include "Movement.h"
+#include "SoundLoader.h"
 
 /*This class represents a player.*/
 class Player {
