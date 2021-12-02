@@ -1,5 +1,6 @@
 #include "GameTimer.h"
 
+
 GameTimer::GameTimer()
 :Game() {
 
@@ -44,4 +45,14 @@ void GameTimer::incrementRoundWinP2(int time) {
     if(getPlayerWin(time) == 0 && roundWinP2 < MAX_ROUND) {
         roundWinP2++;
     }
+}
+
+void GameTimer::decrementCountDown() {
+    if(COUNTDOWN>0) {
+        COUNTDOWN -= 1./GlobalVariables::FPS;
+    }
+}
+
+float GameTimer::getCountDown() {
+    return COUNTDOWN;
 }

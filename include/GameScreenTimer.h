@@ -7,6 +7,7 @@ class GameScreenTimer : public GameScreen {
     protected:
         GameTimer gameTimer;
 
+
     public:
         virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
         GameScreenTimer();

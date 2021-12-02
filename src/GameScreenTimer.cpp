@@ -40,18 +40,35 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     gameTimer = GameTimer(playerViewP1.getPlayer(), playerViewP2.getPlayer());
 
     while(app.isOpen()) {
-
+        const int SCRWIDTH = app.getSize().x;
+        //const int SCRHEIGHT = app.getSize().y -200;
         // --- TextTimer ---
         sf::Time timer = clockTimer.getElapsedTime();
         int time = timer.asSeconds();
-        sf::Text timeTxt;
+//        sf::Text timeTxt;
+
         std::stringstream ss;
-        ss << time;
-        timeTxt.setString(ss.str().c_str());
-        timeTxt.setPosition(800., 0.);
+        ss << (int)gameTimer.getCountDown();
+        Position position(SCRWIDTH/2.0f, 50.f);
+        sf::Text timeTxt = TextInitializer::createText(ss.str(), position);
+
+//        timeTxt.setString(ss.str().c_str());
+//        timeTxt.setPosition(800., 0.);
         timeTxt.setFillColor(sf::Color::Red);
         timeTxt.setFont(font);
         timeTxt.setCharacterSize(80);
+        sf::FloatRect textRectTime = timeTxt.getLocalBounds();
+        timeTxt.setOrigin(textRectTime.width/2,textRectTime.height/2);
+
+
+        sf::RectangleShape rectangle(sf::Vector2f(300.0f,100.0f));
+        rectangle.setFillColor(sf::Color::White);
+        rectangle.setOutlineColor(sf::Color::Black);
+        rectangle.setOutlineThickness(5);
+        rectangle.setPosition(SCRWIDTH/2.0f,70.f);
+        sf::FloatRect textRectRect = rectangle.getLocalBounds();
+        rectangle.setOrigin(textRectRect.width/2,textRectRect.height/2);
+
         // --- TextTimer ---
 
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
@@ -124,12 +141,19 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         app.draw(namePlayerP2);
         app.draw(textAnimation);
 
+        app.draw(rectangle);
         app.draw(timeTxt);
+
+
+
 
         //for borders' debug
 //        for(PlatformView border : map_.getBorders()) app.draw(border.getSprite());
 
         app.display();
+
+        gameTimer.decrementCountDown();
+
     }
 
     return -1;

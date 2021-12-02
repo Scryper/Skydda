@@ -1,19 +1,20 @@
 #include <SFML/Audio.hpp>
 #include <vector>
-
+#include "GlobalVariables.h"
 #include "ScreenIncluder.h"
 #include <iostream>
 
+int GlobalVariables::FPS = 60;
+float GlobalVariables::VOLUME_MUSIC = 0.f;
+
 int main() {
 
-    int FPS = 60;
-
-//    sf::Music music;
-//    if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
-//        std::cout << "Music was not found" << std::endl;
-//    }
-//    music.setVolume(10.f);
-//    music.play();
+    sf::Music music;
+    if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
+        std::cout << "Music was not found" << std::endl;
+    }
+    music.setVolume(GlobalVariables::VOLUME_MUSIC);
+    music.play();
 
     // Create the main window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
@@ -25,7 +26,7 @@ int main() {
         "Skydda",
         sf::Style::Fullscreen
     );
-    app.setFramerateLimit(FPS);
+    app.setFramerateLimit(GlobalVariables::FPS);
 
     std::vector<Screen*> screens;
 	int screen = 0;
