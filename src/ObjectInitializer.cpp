@@ -55,12 +55,12 @@ PlayerView createPlayer(float sizeX,
     float jumpHeight = 27.f;
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
-    std::vector<sf::Keyboard::Key> keys;
-    keys.push_back(up);
-    keys.push_back(left);
-    keys.push_back(right);
-    keys.push_back(attack);
-    keys.push_back(protect);
+    std::vector<pair<playerStatePriority,sf::Keyboard::Key>> keys;
+    keys.push_back({jumping,up});
+    keys.push_back({movingLeft,left});
+    keys.push_back({movingRight,right});
+    keys.push_back({attacking,attack});
+    keys.push_back({defending,protect});
     CoupleFloat sizeCouple(sizeX, sizeY);
     CoupleFloat sizeOfSprite(sizeCouple);
 

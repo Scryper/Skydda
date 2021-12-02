@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "PlayerSprite.h"
 #include "Animation.h"
+#include "StatePlayer.h"
 
 class PlayerView {
     private:
@@ -14,28 +15,19 @@ class PlayerView {
         Player player;
         Animation animation;
 
-        //0 : up
-        //1 : left
-        //2 : rigth
-        //3 : attack
-        //4 : protect
-        std::vector<sf::Keyboard::Key> keys;
-        std::vector<sf::Keyboard::Key> keysPressed;
+        std::vector<std::pair<playerStatePriority,sf::Keyboard::Key>> keys;
+        std::vector<std::pair<playerStatePriority,sf::Keyboard::Key>> keysPressed;
 
         sf::Texture texture;
         sf::IntRect rectSourceSprite;
         sf::Clock clock;
-        int tour;
-        bool isAnimationDone;
         int state;
-        int lastState;
-        int maxFrame;
         bool looksRight;
         CoupleFloat scalePlayer;
 
     public:
         PlayerView();
-        PlayerView(PlayerSprite sprite, Player player, std::vector<sf::Keyboard::Key> keys, bool looksRight, CoupleFloat scalePlayer);
+        PlayerView(PlayerSprite sprite, Player player, std::vector<std::pair<playerStatePriority,sf::Keyboard::Key>> keys, bool looksRight, CoupleFloat scalePlayer);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
@@ -44,9 +36,7 @@ class PlayerView {
 
         void attack(PlayerView &playerAttacked);
         void setHealth(float health);
-        void setAlive(bool alive);
         void setState(int state);
-        void setMaxFrame(int maxFrame);
 
         std::vector<std::vector<float>> getOffset()const;
         bool isLooksRigth()const;
@@ -56,11 +46,13 @@ class PlayerView {
         CoupleFloat computeCoupleMovement();
 
         Position computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
-        void movePlayer(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
+        void movePlayer(std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
         void updateState(PlayerView &playerView);
+        std::vector<playerStatePriority> getStatesFromInput();
 
         void animate();
         void flipSprite();
+        void computeFrame();
 };
 
 #endif // PLAYERVIEW_H

@@ -289,11 +289,9 @@ void GameScreen::initHealthBars() {
 }
 
 void GameScreen::movePlayers(float deltaTime, bool noTP) {
-    playerViewP1.movePlayer(playerViewP1.computeCoupleMovement(),
-                            directionCollisions(playerViewP1, platforms), noTP);
+    playerViewP1.movePlayer(directionCollisions(playerViewP1, platforms), noTP);
 
-    playerViewP2.movePlayer(playerViewP2.computeCoupleMovement(),
-                            directionCollisions(playerViewP2, platforms), noTP);
+    playerViewP2.movePlayer(directionCollisions(playerViewP2, platforms), noTP);
 }
 
 void GameScreen::playerUpdate(){

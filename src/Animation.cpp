@@ -2,7 +2,7 @@
 #include <iostream>
 
 Animation::Animation() {
-
+    initClocks();
 }
 
 
@@ -10,6 +10,10 @@ Animation::Animation(const Animation& other) {
 }
 
 Animation::~Animation() {
+
+}
+
+void Animation::initClocks(){
 
 }
 

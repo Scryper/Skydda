@@ -36,8 +36,8 @@ Player& Game::getPlayer2() {
 }
 
 void Game::win() {
-    player1->setAlive(false);
-    player2->setAlive(false);
+    player1->setState(dead,true);
+    player2->setState(dead,true);
 }
 
 int Game::getRoundWinP1() {
