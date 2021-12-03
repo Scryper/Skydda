@@ -29,7 +29,6 @@ PlayerView::PlayerView(const PlayerView& other) {
     this->scalePlayer = other.scalePlayer;
     Animation anim;
     this->animation = anim;
-
 }
 
 PlayerView::~PlayerView() { }
@@ -130,13 +129,13 @@ void PlayerView::getHit(int value){
 
 void PlayerView::attack(PlayerView &playerAttacked, bool left){
     player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
+    this->soundManager->playRandomSound();
 
     //si attaqué changer state
     if(playerAttacked.getPlayer().getHealth() != 0.f){
         playerAttacked.getPlayer().setState(receiveDamage,true);
         //lui donner une vitesse dans le sens du tapage
         playerAttacked.getHit(10.f);
-        std::cout<<playerAttacked.getPlayer().getMovement().getSpeed().getX()<<endl;
     }
     else{
         playerAttacked.getPlayer().setState(dead,true);
@@ -254,7 +253,6 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<std::vector<std::ve
     case receiveDamage:
         break;
     case attacking:
-        std::cout<<" Attacking "<<std::endl;
         //on calcule les collisions entre players
         collisionPlayer = directionCollisionPlayers(*this, playerView);
         //on vérifie qu'il y a collision et que

@@ -7,6 +7,7 @@
 #include "PlayerSprite.h"
 #include "Animation.h"
 #include "StatePlayer.h"
+#include "SoundManager.h"
 
 class PlayerView {
     private:
@@ -22,6 +23,8 @@ class PlayerView {
         sf::Clock clock;
         bool looksRight;
         CoupleFloat scalePlayer;
+
+        SoundManager* soundManager = SoundManager::getInstance();
 
     public:
         PlayerView();

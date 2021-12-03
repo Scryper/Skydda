@@ -3,7 +3,7 @@
 std::mutex MusicManager::mutex_;
 
 MusicManager::MusicManager() {
-    if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
+    if(!music.openFromFile("resources/audio/theme/fight_theme.ogg")) {
         std::cout << "Music was not found" << std::endl;
     }
     music.setVolume(GlobalVariables::VOLUME_MUSIC);
