@@ -87,9 +87,9 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     positionModeChoosing.setX(positionModeChoosing.getX() - 35);
     textModeTime = TextInitializer::createText("Time", positionModeChoosing);
 
-    Position positionGameMode(position.getX() - 125, 200);
+    Position positionGameMode(position.getX(), 350);
 
-    spriteMode = initSprite(1.f, 1.f, gameModes[gameMode - 2], positionGameMode, &textureGameMode);
+    spriteMode = initSprite(.5f, .5f, gameModes[gameMode - 2], positionGameMode, &textureGameMode);
 
     /// Map elements
     Position positionMap(position.getX() - 125, 400);
