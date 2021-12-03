@@ -1,6 +1,7 @@
 #include "GameRound.h"
 
-GameRound::GameRound():Game() {
+GameRound::GameRound()
+:Game() {
 
 }
 
@@ -18,18 +19,10 @@ GameRound::GameRound(const GameRound& other) {
 }
 
 int GameRound::getPlayerWin() {
+//    std::cout << "roundWinP1 : " << roundWinP1 << std::endl;
+//    std::cout << "roundWinP2 : " << roundWinP2 << std::endl;
+
     if(roundWinP1 == MAX_ROUND) return 1;
     else if(roundWinP2 == MAX_ROUND) return 2;
     else return 0;
-}
-
-void GameRound::incrementRoundWinP1() {
-    if(getPlayerWin() == 0 && roundWinP1 < MAX_ROUND) {
-        roundWinP1++;
-    }
-}
-void GameRound::incrementRoundWinP2() {
-    if(getPlayerWin() == 0 && roundWinP2 < MAX_ROUND) {
-        roundWinP2++;
-    }
 }

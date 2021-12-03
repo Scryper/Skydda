@@ -14,8 +14,6 @@ class GameRound : public Game {
 
         virtual int getPlayerWin();
 
-        void incrementRoundWinP1();
-        void incrementRoundWinP2();
 };
 
 #endif // GAMEROUND_H

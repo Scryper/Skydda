@@ -7,7 +7,6 @@
 
 class GameScreenRound : public GameScreen {
     protected:
-        GameRound gameRound;
 
     public:
         virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
@@ -15,19 +14,15 @@ class GameScreenRound : public GameScreen {
         virtual ~GameScreenRound();
         GameScreenRound(const GameScreenRound& other);
 
-        virtual sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
-        virtual void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
-
         std::vector<sf::CircleShape> getRoundCirclesP1();
         std::vector<sf::CircleShape> getRoundCirclesP2();
 
         void createRoundCircles();
         void actualiseRoundCircles();
         void clearRoundCircles();
-
         void initHealthBars();
 
-        GameRound& getGameRound();
+        virtual void drawAll(sf::RenderWindow *app);
 
 };
 

@@ -60,15 +60,6 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         sf::FloatRect textRectTime = timeTxt.getLocalBounds();
         timeTxt.setOrigin(textRectTime.width/2,textRectTime.height/2);
 
-
-        sf::RectangleShape rectangle(sf::Vector2f(300.0f,100.0f));
-        rectangle.setFillColor(sf::Color::White);
-        rectangle.setOutlineColor(sf::Color::Black);
-        rectangle.setOutlineThickness(5);
-        rectangle.setPosition(SCRWIDTH/2.0f,70.f);
-        sf::FloatRect textRectRect = rectangle.getLocalBounds();
-        rectangle.setOrigin(textRectRect.width/2,textRectRect.height/2);
-
         // --- TextTimer ---
 
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
@@ -94,60 +85,11 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
         setAnimationText(timer, timerAnimation, app);
 
-        if(gameTimer.getPlayerWin() == 0) {
-            if(gameTimer.getPlayer1().getHealth() == 0) {
-
-                gameTimer.incrementRoundWinP2();
-                gameTimer.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-                gameTimer.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(gameTimer.getPlayerWin() == 0) {
-                    gameTimer.getPlayer1().setHealth(100.f);
-                    gameTimer.getPlayer2().setHealth(100.f);
-                }
-                movePlayers(deltaTime, true);
-            }else if(gameTimer.getPlayer2().getHealth() == 0) {
-                gameTimer.incrementRoundWinP1();
-                gameTimer.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-                gameTimer.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(gameTimer.getPlayerWin() == 0) {
-                    gameTimer.getPlayer1().setHealth(100.f);
-                    gameTimer.getPlayer2().setHealth(100.f);
-                }
-                movePlayers(deltaTime, true);
-            }
-            else{
-                movePlayers(deltaTime, false);
-            }
-        } else {
-            gameTimer.win();
-        }
+        managementWin(deltaTime, &gameTimer);
 
         app.clear();
 
-        // Draw elements
-        app.draw(backgroundSprite);
-        app.draw(playerViewP1.getSprite());
-        app.draw(playerViewP2.getSprite());
-
-        for(auto platform : map_.getPlatforms()) app.draw(platform.getSprite());
-
-        app.draw(healthBarViewP1.getHealthBarOut());
-        app.draw(healthBarViewP1.getHealthBarIn());
-
-        app.draw(healthBarViewP2.getHealthBarOut());
-        app.draw(healthBarViewP2.getHealthBarIn());
-
-        app.draw(namePlayerP1);
-        app.draw(namePlayerP2);
-        app.draw(textAnimation);
-
-        app.draw(rectangle);
-        app.draw(timeTxt);
-
-        //for borders' debug
-//        for(PlatformView border : map_.getBorders()) app.draw(border.getSprite());
-
-        app.display();
+        drawAll(&app, timeTxt);
 
         gameTimer.decrementCountDown();
 
@@ -197,3 +139,25 @@ void GameScreenTimer::setAnimationText(sf::Time timer, sf::Time timerAnimation, 
     sf::FloatRect textRect = textAnimation.getLocalBounds();
     textAnimation.setOrigin(textRect.width/2,textRect.height/2);
 }
+
+void GameScreenTimer::drawAll(sf::RenderWindow *app, sf::Text timeTxt) {
+
+    app->draw(backgroundSprite);
+    app->draw(playerViewP1.getSprite());
+    app->draw(playerViewP2.getSprite());
+
+    for(auto platform : map_.getPlatforms()) app->draw(platform.getSprite());
+
+    app->draw(healthBarViewP1.getHealthBarOut());
+    app->draw(healthBarViewP1.getHealthBarIn());
+    app->draw(healthBarViewP2.getHealthBarOut());
+    app->draw(healthBarViewP2.getHealthBarIn());
+    app->draw(namePlayerP1);
+    app->draw(namePlayerP2);
+    app->draw(textAnimation);
+    app->draw(timeTxt);
+
+    app->display();
+
+}
+

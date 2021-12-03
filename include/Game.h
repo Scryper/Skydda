@@ -9,7 +9,6 @@ class Game {
         Player* player2;
         int roundWinP1;
         int roundWinP2;
-        int MAX_ROUND;
 
     public:
         Game();
@@ -21,6 +20,9 @@ class Game {
 
         int getRoundWinP1();
         int getRoundWinP2();
+
+        void incrementRoundWinP1();
+        void incrementRoundWinP2();
 
         Player& getPlayer1();
         Player& getPlayer2();

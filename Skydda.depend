@@ -3313,7 +3313,7 @@
 1638387021 /home/damien/Documents/GitHub/Skydda/include/MenuScreen.h
 	"Screen.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/GameScreen.h
+1638488087 /home/damien/Documents/GitHub/Skydda/include/GameScreen.h
 	"Screen.h"
 	"PlayerView.h"
 	"PlatformView.h"
@@ -3323,6 +3323,8 @@
 	"HealthBar.h"
 	"HealthBarView.h"
 	"Game.h"
+	"GameRound.h"
+	"GameTimer.h"
 	<sstream>
 	<string>
 
@@ -3371,7 +3373,7 @@
 1638387022 source:/home/damien/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
+1638488094 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
 1636069133 source:/home/florian/Documents/GitHub/Skydda/src/Match.cpp
@@ -3432,14 +3434,14 @@
 1636277454 source:/home/houdartf/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
-1638478025 /home/damien/Documents/GitHub/Skydda/include/Game.h
+1638489851 /home/damien/Documents/GitHub/Skydda/include/Game.h
 	<SFML/Graphics.hpp>
 	"Player.h"
 
 1638455865 /home/damien/Documents/GitHub/Skydda/include/PrematchScreen.h
 	"Screen.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/Game.cpp
+1638489844 source:/home/damien/Documents/GitHub/Skydda/src/Game.cpp
 	"Game.h"
 
 1638478969 source:/home/damien/Documents/GitHub/Skydda/src/PrematchScreen.cpp
@@ -4163,31 +4165,31 @@
 1636371277 source:/home/martin/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
-1638455865 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenRound.cpp
+1638488101 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenRound.cpp
 	"GameScreenRound.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/GameScreenRound.h
+1638483874 /home/damien/Documents/GitHub/Skydda/include/GameScreenRound.h
 	"GameScreen.h"
 	"GameRound.h"
 	<string>
 
-1638477987 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
+1638488078 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
 	"GameScreenTimer.h"
 
-1638459842 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
+1638488104 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
 	"GameScreen.h"
 	"GameTimer.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/GameRound.cpp
+1638489591 source:/home/damien/Documents/GitHub/Skydda/src/GameRound.cpp
 	"GameRound.h"
 
-1638478044 /home/damien/Documents/GitHub/Skydda/include/GameRound.h
+1638485761 /home/damien/Documents/GitHub/Skydda/include/GameRound.h
 	"Game.h"
 
-1638477920 source:/home/damien/Documents/GitHub/Skydda/src/GameTimer.cpp
+1638489603 source:/home/damien/Documents/GitHub/Skydda/src/GameTimer.cpp
 	"GameTimer.h"
 
-1638478033 /home/damien/Documents/GitHub/Skydda/include/GameTimer.h
+1638489396 /home/damien/Documents/GitHub/Skydda/include/GameTimer.h
 	"Game.h"
 	"GlobalVariables.h"
 

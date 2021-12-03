@@ -4,7 +4,7 @@
 #include "GlobalVariables.h"
 
 class GameTimer: public Game {
-    private:
+    protected:
         int MAX_ROUND = 1000;
         float COUNTDOWN = 25.;
 
@@ -15,9 +15,6 @@ class GameTimer: public Game {
         GameTimer(const GameTimer& other);
 
         virtual int getPlayerWin();
-
-        void incrementRoundWinP1();
-        void incrementRoundWinP2();
 
         void decrementCountDown();
 

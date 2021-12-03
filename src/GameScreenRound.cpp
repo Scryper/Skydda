@@ -70,72 +70,39 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-
-
         setAnimationText(timer, timerAnimation, app);
 
-        if(gameRound.getPlayerWin() == 0) {
-            if(gameRound.getPlayer1().getHealth() == 0) {
-
-                gameRound.incrementRoundWinP2();
-                gameRound.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-                gameRound.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(gameRound.getPlayerWin() == 0) {
-                    gameRound.getPlayer1().setHealth(100.f);
-                    gameRound.getPlayer2().setHealth(100.f);
-                }
-                movePlayers(deltaTime, true);
-            }else if(gameRound.getPlayer2().getHealth() == 0) {
-                gameRound.incrementRoundWinP1();
-                gameRound.getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-                gameRound.getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-                if(gameRound.getPlayerWin() == 0) {
-                    gameRound.getPlayer1().setHealth(100.f);
-                    gameRound.getPlayer2().setHealth(100.f);
-                }
-                movePlayers(deltaTime, true);
-            }
-            else{
-                movePlayers(deltaTime, false);
-            }
-        } else {
-            gameRound.win();
-        }
+        managementWin(deltaTime, &gameRound);
 
         app.clear();
 
-        // Draw elements
-        app.draw(backgroundSprite);
-        app.draw(playerViewP1.getSprite());
-        app.draw(playerViewP2.getSprite());
-
-        for(auto platform : map_.getPlatforms()) app.draw(platform.getSprite());
-
-        for(auto circle : getRoundCirclesP1()) app.draw(circle);
-
-        for(auto circle : getRoundCirclesP2()) app.draw(circle);
-
-        actualiseRoundCircles();
-        app.draw(healthBarViewP1.getHealthBarOut());
-        app.draw(healthBarViewP1.getHealthBarIn());
-
-        app.draw(healthBarViewP2.getHealthBarOut());
-        app.draw(healthBarViewP2.getHealthBarIn());
-
-        app.draw(namePlayerP1);
-        app.draw(namePlayerP2);
-        app.draw(textAnimation);
-
-        //for borders' debug
-//        for(PlatformView border : map_.getBorders()) app.draw(border.getSprite());
-
-        app.display();
+        drawAll(&app);
     }
 
     return -1;
 }
 
+void GameScreenRound::drawAll(sf::RenderWindow *app) {
 
+    app->draw(backgroundSprite);
+    app->draw(playerViewP1.getSprite());
+    app->draw(playerViewP2.getSprite());
+
+    for(auto platform : map_.getPlatforms()) app->draw(platform.getSprite());
+    for(auto circle : getRoundCirclesP1()) app->draw(circle);
+    for(auto circle : getRoundCirclesP2()) app->draw(circle);
+
+    actualiseRoundCircles();
+    app->draw(healthBarViewP1.getHealthBarOut());
+    app->draw(healthBarViewP1.getHealthBarIn());
+    app->draw(healthBarViewP2.getHealthBarOut());
+    app->draw(healthBarViewP2.getHealthBarIn());
+    app->draw(namePlayerP1);
+    app->draw(namePlayerP2);
+    app->draw(textAnimation);
+
+    app->display();
+}
 
 std::vector<sf::CircleShape> GameScreenRound::getRoundCirclesP1() {
     return roundCirclesP1;
@@ -235,50 +202,3 @@ void GameScreenRound::clearRoundCircles() {
     roundCirclesP2[1].setFillColor(sf::Color::Transparent);
     roundCirclesP2[2].setFillColor(sf::Color::Transparent);
 }
-
-GameRound& GameScreenRound::getGameRound() {
-    return gameRound;
-}
-
-sf::Text GameScreenRound::displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
-
-    timeAnimation = timerAnimation.asSeconds();
-    int time = timer.asSeconds();
-    bool isPlayerDead = gameRound.getPlayer1().getHealth() == 0 || gameRound.getPlayer2().getHealth() == 0;
-    bool isPlayerWin = gameRound.getPlayerWin() != 0;
-    std::stringstream textWin;
-
-    // Lance une animation x seconde après le lancement de la partie
-    switch(time) {
-        case 3: return displayTextAnimation(app, "Round 1 !");
-        case 5: return displayTextAnimation(app, "Ready ?");
-        case 7: return displayTextAnimation(app, "Fight !");
-    }
-
-    if(isPlayerWin) startAnimationWin = true;
-    else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
-    if((isPlayerWin || isPlayerDead ) && !isClockAlreadyRestarted) startClock();
-
-    // Lance l'animation de victoire
-    if(startAnimationWin) {
-            textWin << ( (gameRound.getPlayerWin() == 1) ? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
-            return displayTextAnimation(app, textWin.str());
-    }
-    // Lance l'animation de K.O.
-    else if(startAnimationKO && timeAnimation < 3) return displayTextAnimation(app, "K.O. !");
-
-    resetAnimationAndClock();
-    return displayTextAnimation(app, "");
-}
-
-void GameScreenRound::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
-
-    textAnimation = displayAnimations(timer, timerAnimation, app);
-
-    textAnimation.setFont(font);
-    textAnimation.setCharacterSize(140);
-
-    sf::FloatRect textRect = textAnimation.getLocalBounds();
-    textAnimation.setOrigin(textRect.width/2,textRect.height/2);
-}
-

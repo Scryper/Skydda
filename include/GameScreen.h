@@ -10,11 +10,16 @@
 #include "HealthBar.h"
 #include "HealthBarView.h"
 #include "Game.h"
+#include "GameRound.h"
+#include "GameTimer.h"
 #include <sstream>
 #include <string>
 
 class GameScreen : public Screen {
     protected:
+        GameRound gameRound;
+        GameTimer gameTimer;
+
         sf::Clock clockTimerAnimation;
         bool isClockAlreadyRestarted = false;
         bool startAnimationKO = false;
@@ -65,11 +70,10 @@ class GameScreen : public Screen {
 
     public:
         virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed)=0;
-
         virtual sf::Text displayTextAnimation(sf::RenderWindow &app, std::string text);
 
-        virtual sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app)=0;
-        virtual void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app)=0;
+        sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
+        void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
 
         void initPlayers();
         void initSprites();
@@ -79,9 +83,11 @@ class GameScreen : public Screen {
         void initHealthBars();
         void movePlayers(float deltaTime, bool noTP);
         void playerUpdate();
-
         void resetAnimationAndClock();
         void startClock();
+
+        void managementWin(float deltaTime, Game* gameTimer);
+
 
 };
 
