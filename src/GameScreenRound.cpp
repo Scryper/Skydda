@@ -1,17 +1,14 @@
 #include "GameScreenRound.h"
 
-GameScreenRound::GameScreenRound()
-{
+GameScreenRound::GameScreenRound() {
     //ctor
 }
 
-GameScreenRound::~GameScreenRound()
-{
+GameScreenRound::~GameScreenRound() {
     //dtor
 }
 
-GameScreenRound::GameScreenRound(const GameScreenRound& other)
-{
+GameScreenRound::GameScreenRound(const GameScreenRound& other) {
     //copy ctor
 }
 
@@ -70,7 +67,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-        setAnimationText(timer, timerAnimation, app);
+        setAnimationText(timer, timerAnimation, &app, &gameRound);
 
         managementWin(deltaTime, &gameRound);
 

@@ -119,9 +119,9 @@ void GameScreen::playerUpdate(){
     playerViewP2.animate();
 }
 
-sf::Text GameScreen::displayTextAnimation(sf::RenderWindow &app, std::string textStr) {
-    const int SCRWIDTH = app.getSize().x;
-    const int SCRHEIGHT = app.getSize().y -200;
+sf::Text GameScreen::displayTextAnimation(sf::RenderWindow *app, std::string textStr) {
+    const int SCRWIDTH = app->getSize().x;
+    const int SCRHEIGHT = app->getSize().y -200;
 
     Position position(SCRWIDTH/2.0f, SCRHEIGHT/2.0f);
     sf::Text textAnimation = TextInitializer::createText(textStr, position);
@@ -144,12 +144,12 @@ void GameScreen::startClock() {
     timeAnimation = 0;
 }
 
-sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
+sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu) {
 
     timeAnimation = timerAnimation.asSeconds();
     int time = timer.asSeconds();
-    bool isPlayerDead = gameRound.getPlayer1().getHealth() == 0 || gameRound.getPlayer2().getHealth() == 0;
-    bool isPlayerWin = gameRound.getPlayerWin() != 0;
+    bool isPlayerDead = modeJeu->getPlayer1().getHealth() == 0 || modeJeu->getPlayer2().getHealth() == 0;
+    bool isPlayerWin = modeJeu->getPlayerWin() != 0;
     std::stringstream textWin;
 
     // Lance une animation x seconde après le lancement de la partie
@@ -165,7 +165,7 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
 
     // Lance l'animation de victoire
     if(startAnimationWin) {
-            textWin << ( (gameRound.getPlayerWin() == 1) ? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
+            textWin << ( (modeJeu->getPlayerWin() == 1) ? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
             return displayTextAnimation(app, textWin.str());
     }
     // Lance l'animation de K.O.
@@ -175,9 +175,9 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
     return displayTextAnimation(app, "");
 }
 
-void GameScreen::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
+void GameScreen::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu) {
 
-    textAnimation = displayAnimations(timer, timerAnimation, app);
+    textAnimation = displayAnimations(timer, timerAnimation, app, modeJeu);
 
     textAnimation.setFont(font);
     textAnimation.setCharacterSize(140);

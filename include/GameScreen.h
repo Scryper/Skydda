@@ -70,10 +70,10 @@ class GameScreen : public Screen {
 
     public:
         virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed)=0;
-        virtual sf::Text displayTextAnimation(sf::RenderWindow &app, std::string text);
+        virtual sf::Text displayTextAnimation(sf::RenderWindow *app, std::string text);
 
-        sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
-        void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app);
+        sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu);
+        void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu);
 
         void initPlayers();
         void initSprites();

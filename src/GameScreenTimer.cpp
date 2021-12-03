@@ -1,17 +1,14 @@
 #include "GameScreenTimer.h"
 
-GameScreenTimer::GameScreenTimer()
-{
+GameScreenTimer::GameScreenTimer() {
     //ctor
 }
 
-GameScreenTimer::~GameScreenTimer()
-{
+GameScreenTimer::~GameScreenTimer() {
     //dtor
 }
 
-GameScreenTimer::GameScreenTimer(const GameScreenTimer& other)
-{
+GameScreenTimer::GameScreenTimer(const GameScreenTimer& other){
     //copy ctor
 }
 
@@ -83,7 +80,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-        setAnimationText(timer, timerAnimation, app);
+        setAnimationText(timer, timerAnimation, &app, &gameTimer);
 
         managementWin(deltaTime, &gameTimer);
 
@@ -96,48 +93,6 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     }
 
     return -1;
-}
-
-sf::Text GameScreenTimer::displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
-
-    timeAnimation = timerAnimation.asSeconds();
-    int time = timer.asSeconds();
-    bool isPlayerDead = gameTimer.getPlayer1().getHealth() == 0 || gameTimer.getPlayer2().getHealth() == 0;
-    bool isPlayerWin = gameTimer.getPlayerWin() != 0;
-    std::stringstream textWin;
-
-    // Lance une animation x seconde après le lancement de la partie
-    switch(time) {
-        case 3: return displayTextAnimation(app, "Round 1 !");
-        case 5: return displayTextAnimation(app, "Ready ?");
-        case 7: return displayTextAnimation(app, "Fight !");
-    }
-
-    if(isPlayerWin) startAnimationWin = true;
-    else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
-    if((isPlayerWin || isPlayerDead ) && !isClockAlreadyRestarted) startClock();
-
-    // Lance l'animation de victoire
-    if(startAnimationWin) {
-            textWin << ( (gameTimer.getPlayerWin() == 1)? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
-            return displayTextAnimation(app, textWin.str());
-    }
-    // Lance l'animation de K.O.
-    else if(startAnimationKO && timeAnimation < 3) return displayTextAnimation(app, "K.O. !");
-
-    resetAnimationAndClock();
-    return displayTextAnimation(app, "");
-}
-
-void GameScreenTimer::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow &app) {
-
-    textAnimation = displayAnimations(timer, timerAnimation, app);
-
-    textAnimation.setFont(font);
-    textAnimation.setCharacterSize(140);
-
-    sf::FloatRect textRect = textAnimation.getLocalBounds();
-    textAnimation.setOrigin(textRect.width/2,textRect.height/2);
 }
 
 void GameScreenTimer::drawAll(sf::RenderWindow *app, sf::Text timeTxt) {
@@ -160,4 +115,3 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app, sf::Text timeTxt) {
     app->display();
 
 }
-
