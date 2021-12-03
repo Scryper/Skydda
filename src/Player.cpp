@@ -221,10 +221,6 @@ PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPress
 
     if(!activated)state[idle]->second=1;
 
-    for(auto i : state){
-        if(i->first==receiveDamage && i -> second==1)cout<< i->first <<" " <<i->second<<endl;
-    }
-
 
     return state;
 }

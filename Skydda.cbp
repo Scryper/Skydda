@@ -77,13 +77,11 @@
 		<Unit filename="include/PrematchScreen.h" />
 		<Unit filename="include/Screen.h" />
 		<Unit filename="include/ScreenIncluder.h" />
-		<Unit filename="include/SoundLoader.h" />
 		<Unit filename="include/SoundManager.h" />
 		<Unit filename="include/SpriteInitializer.h" />
 		<Unit filename="include/StatePlayer.h" />
 		<Unit filename="include/TextInitializer.h" />
 		<Unit filename="include/TextureLoader.h" />
-
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Collision.cpp" />
@@ -112,13 +110,10 @@
 		<Unit filename="src/PrematchScreen.cpp" />
 		<Unit filename="src/Screen.cpp" />
 		<Unit filename="src/ScreenIncluder.cpp" />
-		<Unit filename="src/SoundLoader.cpp" />
 		<Unit filename="src/SoundManager.cpp" />
 		<Unit filename="src/SpriteInitializer.cpp" />
 		<Unit filename="src/TextInitializer.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
-
-
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -3,6 +3,7 @@
 #include "GlobalVariables.h"
 #include "ScreenIncluder.h"
 #include "MusicManager.h"
+#include "SoundManager.h"
 
 #include <iostream>
 
@@ -13,6 +14,9 @@ int main() {
 
     MusicManager* musicManager = MusicManager::getInstance();
     musicManager->play();
+
+    SoundManager* soundManager = SoundManager::getInstance();
+    soundManager->playRandomSound();
 
     // Create the main window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();

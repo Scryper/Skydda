@@ -50,10 +50,6 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
 
-        if(clockTest.getElapsedTime().asMilliseconds() >= 2000 && clockTest.getElapsedTime().asMilliseconds() <= 2016) {
-            SoundLoader::playRandomSound();
-        }
-
         while(app.pollEvent(event)) {
             if(event.type == sf::Event::Closed) return -1;
 
