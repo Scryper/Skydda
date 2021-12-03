@@ -7,7 +7,7 @@
 #include <iostream>
 
 int GlobalVariables::FPS = 60;
-float GlobalVariables::VOLUME_MUSIC = 0.0f;
+float GlobalVariables::VOLUME_MUSIC = 50.0f;
 
 int main() {
 
