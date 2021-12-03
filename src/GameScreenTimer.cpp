@@ -37,27 +37,16 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     gameTimer = GameTimer(playerViewP1.getPlayer(), playerViewP2.getPlayer());
 
     while(app.isOpen()) {
-        const int SCRWIDTH = app.getSize().x;
-        //const int SCRHEIGHT = app.getSize().y -200;
-        // --- TextTimer ---
+        const int SCRWIDTH = app.getSize().x; //const int SCRHEIGHT = app.getSize().y -200;
         sf::Time timer = clockTimer.getElapsedTime();
-        //int time = timer.asSeconds();
-//        sf::Text timeTxt;
 
+        // --- TextTimer ---
         std::stringstream ss;
         ss << (int)gameTimer.getCountDown();
         Position position(SCRWIDTH/2.0f, 50.f);
         sf::Text timeTxt = TextInitializer::createText(ss.str(), position);
 
-//        timeTxt.setString(ss.str().c_str());
-//        timeTxt.setPosition(800., 0.);
-        timeTxt.setFillColor(sf::Color::Red);
-        timeTxt.setFont(font);
-        timeTxt.setCharacterSize(80);
-        sf::FloatRect textRectTime = timeTxt.getLocalBounds();
-        timeTxt.setOrigin(textRectTime.width/2,textRectTime.height/2);
-
-        // --- TextTimer ---
+        setTextTime(&timeTxt);
 
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
@@ -86,7 +75,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
         app.clear();
 
-        drawAll(&app, timeTxt);
+        drawAll(&app, &timeTxt);
 
         gameTimer.decrementCountDown();
 
@@ -95,8 +84,15 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     return -1;
 }
 
-void GameScreenTimer::drawAll(sf::RenderWindow *app, sf::Text timeTxt) {
+void GameScreenTimer::setTextTime(sf::Text *timeTxt) {
+    timeTxt->setFillColor(sf::Color::Red);
+    timeTxt->setFont(font);
+    timeTxt->setCharacterSize(80);
+    sf::FloatRect textRectTime = timeTxt->getLocalBounds();
+    timeTxt->setOrigin(textRectTime.width/2,textRectTime.height/2);
+}
 
+void GameScreenTimer::drawAll(sf::RenderWindow *app, sf::Text *timeTxt) {
     app->draw(backgroundSprite);
     app->draw(playerViewP1.getSprite());
     app->draw(playerViewP2.getSprite());
@@ -110,8 +106,7 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app, sf::Text timeTxt) {
     app->draw(namePlayerP1);
     app->draw(namePlayerP2);
     app->draw(textAnimation);
-    app->draw(timeTxt);
+    app->draw(*timeTxt);
 
     app->display();
-
 }

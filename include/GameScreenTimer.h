@@ -13,7 +13,8 @@ class GameScreenTimer : public GameScreen {
         GameScreenTimer(const GameScreenTimer& other);
         GameScreenTimer& operator=(const GameScreenTimer& other);
 
-        virtual void drawAll(sf::RenderWindow *app, sf::Text timeTxt);
+        virtual void drawAll(sf::RenderWindow *app, sf::Text *timeTxt);
+        void setTextTime(sf::Text *timeTxt);
 };
 
 #endif // GAMESCREENTIMER_H
