@@ -83,8 +83,7 @@ class GameScreen : public Screen {
         void initTextures();
         void initVectors();
         void initMap();
-        void movePlayers(float deltaTime, bool noTP);
-        void playerUpdate();
+        void movePlayers(float deltaTime);
         void resetAnimationAndClock();
         void startClock();
         void initHealthBars();

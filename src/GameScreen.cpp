@@ -83,19 +83,9 @@ void GameScreen::initVectors() {
 
 
 
-void GameScreen::movePlayers(float deltaTime, bool noTP) {
-    playerViewP1.movePlayer(playerViewP1.computeCoupleMovement(),
-                            directionCollisions(playerViewP1, platforms), noTP);
-
-    playerViewP2.movePlayer(playerViewP2.computeCoupleMovement(),
-                            directionCollisions(playerViewP2, platforms), noTP);
-}
-
-void GameScreen::playerUpdate(){
-    playerViewP1.updateState(playerViewP2);
-    playerViewP2.updateState(playerViewP1);
-    playerViewP1.animate();
-    playerViewP2.animate();
+void GameScreen::movePlayers(float deltaTime) {
+    playerViewP1.computeFrame(directionCollisions(playerViewP1, platforms),playerViewP2);
+    playerViewP2.computeFrame(directionCollisions(playerViewP2, platforms),playerViewP1);
 }
 
 sf::Text GameScreen::displayTextAnimation(sf::RenderWindow *app, std::string textStr) {
@@ -178,7 +168,7 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu) {
                 modeJeu->getPlayer1().setHealth(100.f);
                 modeJeu->getPlayer2().setHealth(100.f);
             }
-            movePlayers(deltaTime, true);
+            movePlayers(deltaTime);
         }else if(modeJeu->getPlayer2().getHealth() == 0) {
             modeJeu->incrementRoundWinP1();
             modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
@@ -187,10 +177,10 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu) {
                 modeJeu->getPlayer1().setHealth(100.f);
                 modeJeu->getPlayer2().setHealth(100.f);
             }
-            movePlayers(deltaTime, true);
+            movePlayers(deltaTime);
         }
         else{
-            movePlayers(deltaTime, false);
+            movePlayers(deltaTime);
         }
     } else {
         modeJeu->win();

@@ -65,6 +65,7 @@
 		<Unit filename="include/MapView.h" />
 		<Unit filename="include/MenuScreen.h" />
 		<Unit filename="include/Movement.h" />
+		<Unit filename="include/MusicManager.h" />
 		<Unit filename="include/ObjectInitializer.h" />
 		<Unit filename="include/OptionScreen.h" />
 		<Unit filename="include/Platform.h" />
@@ -77,13 +78,12 @@
 		<Unit filename="include/Screen.h" />
 		<Unit filename="include/ScreenIncluder.h" />
 		<Unit filename="include/SoundLoader.h" />
+		<Unit filename="include/SoundManager.h" />
 		<Unit filename="include/SpriteInitializer.h" />
 		<Unit filename="include/StatePlayer.h" />
 		<Unit filename="include/TextInitializer.h" />
 		<Unit filename="include/TextureLoader.h" />
-		<Unit filename="include/SoundLoader.h" />
-		<Unit filename="include/MusicManager.h" />
-		<Unit filename="include/SoundManager.h" />
+
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Collision.cpp" />
@@ -100,6 +100,7 @@
 		<Unit filename="src/MapView.cpp" />
 		<Unit filename="src/MenuScreen.cpp" />
 		<Unit filename="src/Movement.cpp" />
+		<Unit filename="src/MusicManager.cpp" />
 		<Unit filename="src/ObjectInitializer.cpp" />
 		<Unit filename="src/OptionScreen.cpp" />
 		<Unit filename="src/Platform.cpp" />
@@ -112,12 +113,12 @@
 		<Unit filename="src/Screen.cpp" />
 		<Unit filename="src/ScreenIncluder.cpp" />
 		<Unit filename="src/SoundLoader.cpp" />
+		<Unit filename="src/SoundManager.cpp" />
 		<Unit filename="src/SpriteInitializer.cpp" />
 		<Unit filename="src/TextInitializer.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
-		<Unit filename="src/SoundLoader.cpp" />
-		<Unit filename="src/MusicManager.cpp" />
-		<Unit filename="src/SoundManager.cpp" />
+
+
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -2157,9 +2157,13 @@
 1638451048 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
-1636218182 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
+1638534763 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
+	<SFML/Audio.hpp>
 	<vector>
+	"GlobalVariables.h"
 	"ScreenIncluder.h"
+	"MusicManager.h"
+	<iostream>
 
 1636105538 /home/houdartf/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Graphics.hpp
 	<SFML/Window.hpp>
@@ -2570,28 +2574,31 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1636058387 /home/houdartf/Documents/GitHub/Skydda/include/TextureLoader.h
+1638534455 /home/houdartf/Documents/GitHub/Skydda/include/TextureLoader.h
 	<SFML/Graphics.hpp>
 	<string>
 	<iostream>
+	"PlayerSprite.h"
 
 1636058387 /home/houdartf/Documents/GitHub/Skydda/include/Size.h
 	"CoupleFloat.h"
 
-1636058387 /home/houdartf/Documents/GitHub/Skydda/include/CoupleFloat.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/CoupleFloat.h
 	<iostream>
 
-1636058387 /home/houdartf/Documents/GitHub/Skydda/include/Position.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/Position.h
 	<iostream>
 
 1636058387 /home/houdartf/Documents/GitHub/Skydda/include/CoupleVectorTransformer.h
 	<SFML/Graphics.hpp>
 	"CoupleFloat.h"
 
-1636278717 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
+1638534729 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
+	"SoundLoader.h"
+	"StatePlayer.h"
 
 1635949999 shed changes
 	<string>
@@ -2603,64 +2610,67 @@
 	<SFML/Graphics.hpp>
 	"Collision.h"
 
-1636278717 /home/houdartf/Documents/GitHub/Skydda/include/Movement.h
+1638534455 /home/houdartf/Documents/GitHub/Skydda/include/Movement.h
 	"Position.h"
 	"CoupleFloat.h"
 	<stdlib.h>
 	<vector>
 	<iostream>
 
-1636278717 /home/houdartf/Documents/GitHub/Skydda/include/PlayerView.h
+1638535197 /home/houdartf/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
-	"CoupleVectorTransformer.h"
 	<SFML/Graphics.hpp>
+	"PlayerSprite.h"
+	"Animation.h"
+	"StatePlayer.h"
 
-1636191167 /home/houdartf/Documents/GitHub/Skydda/include/Platform.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/Platform.h
 	"Position.h"
-	"Size.h"
+	"CoupleFloat.h"
 
-1636058387 /home/houdartf/Documents/GitHub/Skydda/include/PlatformView.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/PlatformView.h
 	<SFML/Graphics.hpp>
 	"Platform.h"
 
-1636191167 /home/houdartf/Documents/GitHub/Skydda/include/Collision.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/Collision.h
 	<vector>
 	<math.h>
 	"PlayerView.h"
 	"PlatformView.h"
 
-1636191167 source:/home/houdartf/Documents/GitHub/Skydda/src/CoupleFloat.cpp
+1638197952 source:/home/houdartf/Documents/GitHub/Skydda/src/CoupleFloat.cpp
 	"CoupleFloat.h"
 
 1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/CoupleVectorTransformer.cpp
 	"CoupleVectorTransformer.h"
 
-1636278382 source:/home/houdartf/Documents/GitHub/Skydda/src/Movement.cpp
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/Movement.cpp
 	"Movement.h"
 
-1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/Platform.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/Platform.cpp
 	"Platform.h"
 
-1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/PlatformView.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/PlatformView.cpp
 	"PlatformView.h"
 
-1636278382 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1636278382 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 	"Collision.h"
+	"Animation.h"
 
-1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/Position.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/Position.cpp
 	"Position.h"
 
 1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1636124503 source:/home/houdartf/Documents/GitHub/Skydda/src/TextureLoader.cpp
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
-1636218195 source:/home/houdartf/Documents/GitHub/Skydda/src/Collision.cpp
+1638534779 source:/home/houdartf/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
 1635942714 source:/home/florian/Documents/GitHub/Skydda/src/Initializer.cpp
@@ -2703,7 +2713,7 @@
 1638525114 source:/home/florian/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
-1636218182 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/ObjectInitializer.h
 	<vector>
 	"SpriteInitializer.h"
 	"PlatformView.h"
@@ -2712,17 +2722,17 @@
 	"PlayerView.h"
 	"HealthBarView.h"
 
-1636218182 /home/houdartf/Documents/GitHub/Skydda/include/SpriteInitializer.h
+1638534455 /home/houdartf/Documents/GitHub/Skydda/include/SpriteInitializer.h
 	<SFML/Graphics.hpp>
 	"Position.h"
-	"Size.h"
 	"CoupleFloat.h"
 	"TextureLoader.h"
+	"PlayerSprite.h"
 
-1636218195 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
-1636218182 source:/home/houdartf/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
 	"SpriteInitializer.h"
 
 1638387021 /home/damien/Documents/GitHub/Skydda/include/ObjectInitializer.h
@@ -2761,13 +2771,14 @@
 1638387021 /home/damien/Documents/GitHub/Skydda/include/HealthBar.h
 	"Position.h"
 
-1636218182 source:/home/houdartf/Documents/GitHub/Skydda/src/MapView.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/MapView.cpp
 	"MapView.h"
 
-1636218182 /home/houdartf/Documents/GitHub/Skydda/include/MapView.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/MapView.h
 	<vector>
 	<PlatformView.h>
 	<ObjectInitializer.h>
+	"Map.h"
 
 1638387021 /home/damien/Documents/GitHub/Skydda/include/MapView.h
 	<vector>
@@ -2778,19 +2789,19 @@
 1638387022 source:/home/damien/Documents/GitHub/Skydda/src/MapView.cpp
 	"MapView.h"
 
-1636191167 /home/houdartf/Documents/GitHub/Skydda/include/HealthBar.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/HealthBar.h
 	"Position.h"
 
-1636191167 /home/houdartf/Documents/GitHub/Skydda/include/HealthBarView.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/HealthBarView.h
 	<SFML/Graphics.hpp>
 	"HealthBar.h"
 	"Player.h"
 	"TextInitializer.h"
 
-1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBar.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBar.cpp
 	"HealthBar.h"
 
-1636191167 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBarView.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/HealthBarView.cpp
 	"HealthBarView.h"
 
 1635962377 View.h"
@@ -3225,10 +3236,10 @@
 1638451048 source:/home/florian/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
-1636278521 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreen.cpp
+1638535333 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
-1636278717 /home/houdartf/Documents/GitHub/Skydda/include/GameScreen.h
+1638535313 /home/houdartf/Documents/GitHub/Skydda/include/GameScreen.h
 	"Screen.h"
 	"PlayerView.h"
 	"PlatformView.h"
@@ -3238,49 +3249,56 @@
 	"HealthBar.h"
 	"HealthBarView.h"
 	"Game.h"
+	"GameRound.h"
+	"GameTimer.h"
+	<sstream>
+	<string>
 
-1636277454 /home/houdartf/Documents/GitHub/Skydda/include/Screen.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/Screen.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 	"SpriteInitializer.h"
 	"TextInitializer.h"
 
-1636137352 /home/houdartf/Documents/GitHub/Skydda/include/TextInitializer.h
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/TextInitializer.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 
-1636200592 source:/home/houdartf/Documents/GitHub/Skydda/src/MenuScreen.cpp
+1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/MenuScreen.cpp
 	"MenuScreen.h"
 
-1636137352 /home/houdartf/Documents/GitHub/Skydda/include/MenuScreen.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/MenuScreen.h
 	"Screen.h"
 
-1636200592 source:/home/houdartf/Documents/GitHub/Skydda/src/OptionScreen.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/OptionScreen.cpp
 	"OptionScreen.h"
 
-1636137352 /home/houdartf/Documents/GitHub/Skydda/include/OptionScreen.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/OptionScreen.h
 	"Screen.h"
 
-1636137352 source:/home/houdartf/Documents/GitHub/Skydda/src/Screen.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/Screen.cpp
 	"Screen.h"
 
-1636058388 source:/home/houdartf/Documents/GitHub/Skydda/src/ScreenIncluder.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/ScreenIncluder.cpp
 	"ScreenIncluder.h"
 
-1636196835 /home/houdartf/Documents/GitHub/Skydda/include/ScreenIncluder.h
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/ScreenIncluder.h
 	"Screen.h"
 	"MenuScreen.h"
 	"GameScreen.h"
+	"GameScreenRound.h"
+	"GameScreenTimer.h"
 	"OptionScreen.h"
 	"PrematchScreen.h"
 
-1636137352 source:/home/houdartf/Documents/GitHub/Skydda/src/TextInitializer.cpp
+1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
-1636191167 source:/home/houdartf/Documents/GitHub/Skydda/src/Map.cpp
+1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/Map.cpp
 	"Map.h"
 
-1636191167 /home/houdartf/Documents/GitHub/Skydda/include/Map.h
+1638186855 /home/houdartf/Documents/GitHub/Skydda/include/Map.h
+	"CoupleFloat.h"
 
 1636533784 source:/home/florian/Documents/GitHub/Skydda/src/Map.cpp
 	"Map.h"
@@ -3412,10 +3430,11 @@
 	<vector>
 	"Game.h"
 
-1636191167 source:/home/houdartf/Documents/GitHub/Skydda/src/Game.cpp
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/Game.cpp
 	"Game.h"
 
-1636191167 /home/houdartf/Documents/GitHub/Skydda/include/Game.h
+1638534562 /home/houdartf/Documents/GitHub/Skydda/include/Game.h
+	<SFML/Graphics.hpp>
 	"Player.h"
 
 1638451048 /home/florian/Documents/GitHub/Skydda/include/Game.h
@@ -3431,10 +3450,10 @@
 1638451048 source:/home/florian/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
-1636277454 /home/houdartf/Documents/GitHub/Skydda/include/PrematchScreen.h
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/PrematchScreen.h
 	"Screen.h"
 
-1636277454 source:/home/houdartf/Documents/GitHub/Skydda/src/PrematchScreen.cpp
+1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
 1638532090 /home/damien/Documents/GitHub/Skydda/include/Game.h
@@ -4262,6 +4281,80 @@
 	"SoundManager.h"
 
 1638530247 /home/damien/Documents/GitHub/Skydda/include/SoundManager.h
+	<SFML/Audio.hpp>
+	<random>
+	<iostream>
+
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/Animation.cpp
+	"Animation.h"
+	<iostream>
+
+1638534455 /home/houdartf/Documents/GitHub/Skydda/include/Animation.h
+	<SFML/Graphics.hpp>
+	"PlayerSprite.h"
+	"StatePlayer.h"
+
+1638534455 /home/houdartf/Documents/GitHub/Skydda/include/PlayerSprite.h
+	<SFML/Graphics.hpp>
+
+1638534455 /home/houdartf/Documents/GitHub/Skydda/include/StatePlayer.h
+	<map>
+	<SFML/Graphics.hpp>
+
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/GlobalVariables.h
+
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/SoundLoader.h
+	<SFML/Audio.hpp>
+	<random>
+	<iostream>
+
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/GameRound.h
+	"Game.h"
+
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/GameTimer.h
+	"Game.h"
+	"GlobalVariables.h"
+
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/GameScreenRound.h
+	"GameScreen.h"
+	"GameRound.h"
+	<string>
+
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/GameScreenTimer.h
+	"GameScreen.h"
+	"GameTimer.h"
+
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/MusicManager.h
+	"GlobalVariables.h"
+	<SFML/Audio.hpp>
+	<iostream>
+	<mutex>
+
+1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/GameRound.cpp
+	"GameRound.h"
+
+1638535338 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreenRound.cpp
+	"GameScreenRound.h"
+
+1638535341 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
+	"GameScreenTimer.h"
+
+1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/GameTimer.cpp
+	"GameTimer.h"
+
+1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/MusicManager.cpp
+	"MusicManager.h"
+
+1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerSprite.cpp
+	"PlayerSprite.h"
+
+1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/SoundLoader.cpp
+	"SoundLoader.h"
+
+1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/SoundManager.cpp
+	"SoundManager.h"
+
+1638534436 /home/houdartf/Documents/GitHub/Skydda/include/SoundManager.h
 	<SFML/Audio.hpp>
 	<random>
 	<iostream>

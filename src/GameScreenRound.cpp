@@ -63,7 +63,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
         //vérif et update les manches la vie et le reste -> va update la position SI MORT
         //update la position en fonction de cette nouvelle position
 
-        playerUpdate();
+
 
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());

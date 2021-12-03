@@ -2,7 +2,6 @@
 #define PLAYERVIEW_H
 
 #include "Player.h"
-#include "CoupleVectorTransformer.h"
 
 #include <SFML/Graphics.hpp>
 #include "PlayerSprite.h"
