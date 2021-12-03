@@ -2104,10 +2104,11 @@
 1634148388 source:/home/florian/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1638525114 source:/home/florian/Documents/GitHub/Skydda/main.cpp
+1638526443 source:/home/florian/Documents/GitHub/Skydda/main.cpp
 	<SFML/Audio.hpp>
 	<vector>
 	"ScreenIncluder.h"
+	"MusicManager.h"
 	<iostream>
 
 1638451048 /home/florian/Documents/GitHub/Skydda/include/TextureLoader.h
@@ -2903,12 +2904,13 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1635948835 source:/home/florian/Documents/GitHub/Skydda/src/MusicManager.cpp
+1638526415 source:/home/florian/Documents/GitHub/Skydda/src/MusicManager.cpp
 	"MusicManager.h"
 
-1635949999 /home/florian/Documents/GitHub/Skydda/include/MusicManager.h
+1638526531 /home/florian/Documents/GitHub/Skydda/include/MusicManager.h
 	<SFML/Audio.hpp>
 	<iostream>
+	<mutex>
 
 1635985163 source:/home/florian/Documents/GitHub/Skydda/src/HealthBar.cpp
 	"HealthBar.h"
@@ -4220,7 +4222,7 @@
 1638451048 source:/home/florian/Documents/GitHub/Skydda/src/GameTimer.cpp
 	"GameTimer.h"
 
-1638442310 source:/home/florian/Documents/GitHub/Skydda/src/SoundLoader.cpp
+1638451048 source:/home/florian/Documents/GitHub/Skydda/src/SoundLoader.cpp
 	"SoundLoader.h"
 
 1638443124 /home/florian/Documents/GitHub/Skydda/include/SoundManager.h
