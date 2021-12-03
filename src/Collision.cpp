@@ -1,45 +1,23 @@
 #include "Collision.h"
 
 std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView platform) {
-    sf::FloatRect playerBounds = player.getSprite().getGlobalBounds();
+    sf::FloatRect playerBounds = player.getSprite().getGlobalHitbox();
     sf::FloatRect platformBounds = platform.getSprite().getGlobalBounds();
-    bool rigthP1 = player.isLooksRigth();
-    std::vector<std::vector<float>> offset = player.getOffset();
 
-
-    std::vector<bool>states = player.getPlayer().getState();
     std::vector<std::vector<int>> collisions;
-
-//    for (auto i : offset){
-//        for(auto j : i){
-//            std::cout<<j<<" ";
-//        }
-//        std::cout<<std::endl;
-//    }
 
     //1 : Bottom, 2 : Top, 3 : Right, 4 : Left
     if(playerBounds.intersects(platformBounds)) {
         float playerLeft;
         float playerRigth;
-        float halfHplayer;
-        //float halfVplayer;
 
         float playerVSize = playerBounds.height;
         float playerHSize = playerBounds.width;
         float playerTop = playerBounds.top;
         float playerBottom = playerTop + playerVSize;
 
-        //si le joueur regarde a droite, le baton est a droite
-        if(rigthP1==true){
-            playerLeft = playerBounds.left;
-            playerRigth = playerLeft + playerHSize-offset[6][0];
-            halfHplayer = std::floor(playerRigth - playerLeft - 2*offset[6][0]);
-        }
-        else{
-            playerLeft = playerBounds.left + offset[6][0];
-            playerRigth = playerLeft + playerHSize;
-            halfHplayer = std::floor(playerRigth - playerLeft - 3*offset[6][0]);
-        }
+        playerLeft = playerBounds.left;
+        playerRigth = playerLeft + playerHSize;
 
         float platformVSize = platformBounds.height;
         float platformHSize = platformBounds.width;
@@ -60,7 +38,7 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
            ) {
             std::vector <int> tmp;
             tmp.push_back(3);
-            float value = platformRigth + halfHplayer + 1;
+            float value = platformRigth + 1;
             tmp.push_back(value);
             collisions.push_back(tmp);
         }
@@ -75,7 +53,7 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
            ){
             std::vector <int> tmp;
             tmp.push_back(4);
-            float value = platformLeft - halfHplayer - 1;
+            float value = platformLeft- 1;
             tmp.push_back(value);
             collisions.push_back(tmp);
         }
@@ -90,7 +68,7 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
            ) {
             std::vector <int> tmp;
             tmp.push_back(1);
-            tmp.push_back(platformBottom + std::floor(playerVSize / 2) - 1);
+            tmp.push_back(platformBottom + std::floor(playerVSize / 3) - 1);
             collisions.push_back(tmp);
         }
 

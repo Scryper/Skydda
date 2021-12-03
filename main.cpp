@@ -24,6 +24,7 @@ int main() {
         "Skydda",
         sf::Style::Fullscreen
     );
+
     app.setFramerateLimit(GlobalVariables::FPS);
 
     std::vector<Screen*> screens;
@@ -36,6 +37,7 @@ int main() {
 	PrematchScreen prematchScreen; // 1
 	screens.push_back(&prematchScreen);
 
+
 	GameScreenRound gameScreenRound; // 2
 	screens.push_back(&gameScreenRound);
 
@@ -43,6 +45,7 @@ int main() {
 	screens.push_back(&gameScreenTimer);
 
 	OptionScreen optionScreen; // 4
+
 	screens.push_back(&optionScreen);
 
 	std::vector<std::string> data;

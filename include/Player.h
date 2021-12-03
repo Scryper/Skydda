@@ -6,21 +6,15 @@
 #include "Position.h"
 #include "Movement.h"
 #include "SoundLoader.h"
+#include "StatePlayer.h"
+
+using namespace std;
 
 /*This class represents a player.*/
 class Player {
     private:
-
-        ///summarise the actual state of the player
-        //0 = alive
-        //1 = defense
-        //2 = attack
-        //3 = jumping
-        //4 = moving left
-        //5 = moving Rigth
-        //6 = idle
-        std::vector<bool> state;
-        std::string name;
+        PlayerStateBoolArray state;
+        string name;
         float attack;
         int timeLastAttack;
         int durationBetweenAttacks;
@@ -28,38 +22,37 @@ class Player {
         Position position;
         Movement movement;
 
+
     public:
         Player();
         Player(std::string name, float attack, float health, Position position, Movement movement);
 
         Player(const Player& other);
         virtual ~Player();
+        void stateDestroyer();
+        void initStatePointer(PlayerStateEnum s, int val);
 
         Movement getMovement() const;
         Position getPosition() const;
-
-        float getHealth()const;
         std::string getName()const;
-
-        std::vector<bool>& getState();
-
+        float getHealth()const;
         void setHealth(float health);
-
-        bool getDefense()const;
-        void setDefense(bool def);
         float getAttack()const;
-
-        void attackPlayer(Player& p, float clock);
-
-        void stopX();
-        void stopY();
-
-        bool isAlive()const;
-        void setAlive(bool alive);
-
         void setPosition(Position position);
         void setPosition(float x, float y);
-        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
+        void stateInitializer();
+        void setState(PlayerStateEnum s, bool value);
+        bool getState(PlayerStateEnum s)const;
+        void getHit(int value);
+
+        template <typename T>
+        bool isFoundInArray(std::vector<T> vect, T element);
+
+
+        void attackPlayer(Player& p, float clock);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
+        PlayerStateBoolArray computeStates(std::vector<PlayerStateEnum> keyPressed, bool bottomCollision);
+
 };
 
 #endif // PLAYER_H

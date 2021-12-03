@@ -49,66 +49,30 @@ PlayerView createPlayer(float sizeX,
                         bool looksRight,
                         std::string namePlayerStr) {
 
-    std::vector<std::vector<float>> offsetState;
-    for(int i = 0; i<7;i++){
-        std::vector<float> temp;
-        for(int j = 0;j<2;j++){
-            float temp2 = 0.f;
-            temp.push_back(temp2);
-        }
-        offsetState.push_back(temp);
-    }
-
-    //0 = alive
-    //1 = defense
-    //2 = attack
-    //3 = jumping
-    //4 = moving left
-    //5 = moving Rigth
-    //6 = idle
-
-    ///offsets
-    //if not in this list, the offset is null
-    //defense
-    offsetState[1][0]= 15.f;//X
-    offsetState[1][1]= 15.f;//Y
-
-    //attack
-    offsetState[2][0]= 15.f;//X
-    offsetState[2][1]= 15.f;//y
-
-    //jumping
-    offsetState[3][0]= 15.f;
-    offsetState[3][1]= 15.f;
-
-    //idle
-    offsetState[6][0]= 50.f;
-    offsetState[6][1]= 50.f;
-
     CoupleFloat velocity(.0f, .0f);
     CoupleFloat acceleration(.8f, 1.f);
     CoupleFloat maxSpeed(14.f, 20.f);
-    float jumpHeight = 25.f;
+    float jumpHeight = 27.f;
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
-    std::vector<sf::Keyboard::Key> keys;
-    keys.push_back(up);
-    keys.push_back(left);
-    keys.push_back(right);
-    keys.push_back(attack);
-    keys.push_back(protect);
+    std::vector<pair<PlayerStateEnum,sf::Keyboard::Key>> keys;
+    keys.push_back({jumping,up});
+    keys.push_back({movingLeft,left});
+    keys.push_back({movingRight,right});
+    keys.push_back({attacking,attack});
+    keys.push_back({defending,protect});
     CoupleFloat sizeCouple(sizeX, sizeY);
     CoupleFloat sizeOfSprite(sizeCouple);
 
     CoupleFloat centerOfSprite(width, height);
 
-    sf::Sprite playerSprite = initSpritePlayer(sizeCouple, centerOfSprite, pathToPlayer, playerPosition, playerTexture);
+    PlayerSprite playerSprite = initSpritePlayer(sizeCouple, centerOfSprite, pathToPlayer, playerPosition, playerTexture);
     playerSprite.setTextureRect(sf::IntRect(0, 0, width, height));
 
     float atk = 50.f;
 
     Player player(namePlayerStr, atk, 100, playerPosition, movement);
-    PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple, offsetState);
+    PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple);
     return playerView;
 }
 

@@ -8,6 +8,9 @@
 class PlayerSprite : public sf::Sprite
 {
     public:
+        PlayerSprite();
+        PlayerSprite(sf::Texture& texture);
+
         void setHitbox(const sf::FloatRect& hitbox);
         sf::FloatRect getGlobalHitbox() const;
 

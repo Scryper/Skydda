@@ -1,6 +1,7 @@
 #include "Player.h"
 
 Player::Player() {
+    //cout<<"Constructeur player"<<endl;
     this->name = "Inconnu";
     this->attack = 0.0;
     this->health = 0.0;
@@ -10,13 +11,8 @@ Player::Player() {
     this->movement = defaultMovement;
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
-    std::vector<bool> temp;
-    for(int i = 0 ; i < 7;i++){
-        temp.push_back(false);
-    }
-    this->state=temp;
-    state[0]=true;
-    state[6]=true;
+    stateInitializer();
+
 }
 
 Player::Player(std::string name, float attack, float health, Position position, Movement movement) {
@@ -28,28 +24,30 @@ Player::Player(std::string name, float attack, float health, Position position, 
     timeLastAttack = 0;
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
-
-    std::vector<bool> temp;
-    for(int i = 0 ; i<7;i++){
-        temp.push_back(false);
-    }
-    this->state=temp;
-    state[0]=true;
-    state[6]=true;
+    stateInitializer();
+    //cout<<"Constructeur player"<<endl;
 }
 
 Player::Player(const Player& other) {
     this->name = other.name;
     this->attack = other.attack;
-    this->state = other.state;
     this->health = other.health;
     this->position = other.position;
     this->movement = other.movement;
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
+    stateInitializer();
+    //cout<<"Constructeur player"<<endl;
 }
 
-Player::~Player() { }
+Player::~Player() {
+    //cout<<"destructeur player"<<endl;
+    //stateDestroyer();
+    //for (PlayerStatePair* p : state ){
+        //delete p;
+    //}
+    state.clear();
+}
 
 Movement Player::getMovement() const {
     return movement;
@@ -72,13 +70,9 @@ void Player::setHealth(float health) {
     this->health = health;
 }
 
-void Player::setDefense(bool def) {
-    this->state[1] = def;
-}
-
 void Player::attackPlayer(Player &player, float clock) {
     //vérif que le player ne bloque pas l'attaque
-    if(player.getDefense() == true){
+    if(player.getState(defending) == true){
         timeLastAttack = clock;
         return;
     }
@@ -111,37 +105,131 @@ float Player::getHealth()const {
     return health;
 }
 
-bool Player::getDefense()const{
-    return state[1];
-}
-
 float Player::getAttack()const{
     return attack;
 }
 
-bool Player::isAlive()const {
-    return state[0];
+void Player::stateInitializer(){
+    initStatePointer(dead, 0);
+    initStatePointer(standby,0);
+    initStatePointer(defending,0);
+    initStatePointer(receiveDamage,0);
+    initStatePointer(attacking,0);
+    initStatePointer(jumping,0);
+    initStatePointer(movingLeft,0);
+    initStatePointer(movingRight,0);
+    initStatePointer(momentum,1);
+    initStatePointer(idle,0);
 }
 
-void Player::setAlive(bool alive){
-    this->state[0] = alive;
+void Player::initStatePointer(PlayerStateEnum s, int val){
+    PlayerStatePair *temp;
+    temp = new PlayerStatePair{s,val};
+    state.push_back(temp);
 }
 
-std::vector<bool>& Player::getState(){
+void Player::stateDestroyer(){
+    //for()
+    //state.clear();
+}
+
+Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
+    return movement.updatePosition(position, direction, collisions);
+}
+
+void Player::setState(PlayerStateEnum s, bool value){
+     for(auto itStates : state){
+        if(itStates->first==s){
+            itStates->second=value;
+        }
+     }
+}
+
+bool Player::getState(PlayerStateEnum s)const{
+    for(auto itStates : state){
+        if(itStates->first==s){
+            return itStates->second;
+        }
+     }
+     return 0;
+}
+
+void Player::getHit(int value){
+    movement.recul(value);
+};
+
+PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPressed, bool bottomCollision){
+
+    //on parcourt tous les états dans l'ordre
+    for(auto itStates : state){
+        //vérif si l'état est activé
+        if(itStates->second==1){
+            //verif si l'état n'est pas timed et qu'il dépend d'un user input
+            if(constPlayerStates[itStates->first].isTimed==0
+               && constPlayerStates[itStates->first].onUserInput==1){
+                //vérif si la key n'est pas pressed down, si elle l'est on passe l'état a 1
+                itStates->second = 0;
+                if(isFoundInArray(keyPressed,itStates->first)) itStates->second = 1;
+            }
+            if(constPlayerStates[itStates->first].isTimed==0
+               && constPlayerStates[itStates->first].onUserInput==0
+               &&itStates->first == momentum){
+                itStates->second=0;
+               }
+
+        }
+        //l'état n'est pas activé
+        else{
+             //verif si l'état dépend d'un user input
+            if(constPlayerStates[itStates->first].onUserInput==1){
+                //vérif si la key n'est pas pressed down, si elle l'est on passe l'état a 1
+                itStates->second = 0;
+                if(isFoundInArray(keyPressed,itStates->first)) itStates->second = 1;
+            }
+        }
+    }
+
+    bool activated = 0;
+    bool movmentStateActivated = 0;
+
+    //permet de savoir si c'est un état de mouvement ou pas
+    //on parcourt tous les états dans l'ordre croissant d'importance
+    for(auto itStates : state){
+        if(activated==1){
+            itStates->second=0;
+        }
+        //si état activé et que l'état n'est pas idle
+        if(activated==0&&itStates->second==1&& itStates->first!=idle){
+            //état est activé
+            activated = 1;
+            //si c'est un état de movement, movmentState -> true
+            if(constPlayerStates[itStates->first].isMovement==1) movmentStateActivated = true;
+        }
+
+    }
+    //si pas de movementState ET vitesse horizontale et verticale != 0
+    /// ou bien qu'il n'y a pas de collision en dessous du player et pas de mouvement
+    if(( movmentStateActivated!=1 && (movement.getSpeed().getX()!=0||movement.getSpeed().getY()!=0))||(bottomCollision==false && movmentStateActivated!=1)){
+        state[momentum]->second=1;
+    }
+
+    //si aucun état activated, on set le state a idle
+    activated = 0;
+    for (auto i : state){
+        if(i->second==1)activated=1;
+    }
+
+    if(!activated)state[idle]->second=1;
+
+    for(auto i : state){
+        if(i->first==receiveDamage && i -> second==1)cout<< i->first <<" " <<i->second<<endl;
+    }
+
+
     return state;
 }
 
-
-Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions, bool noTP) {
-    return movement.updatePosition(position, direction, collisions, noTP);
+template <typename T>
+bool Player::isFoundInArray(std::vector<T> vect, T element){
+    return std::find(vect.begin(), vect.end(), element) != vect.end();
 }
-
-void Player::stopX(){
-    this->movement.stopX();
-}
-
-void Player::stopY(){
-    this->movement.stopY();
-}
-
-

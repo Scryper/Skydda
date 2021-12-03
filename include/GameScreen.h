@@ -87,11 +87,8 @@ class GameScreen : public Screen {
         void playerUpdate();
         void resetAnimationAndClock();
         void startClock();
-
         void initHealthBars();
-
         void managementWin(float deltaTime, Game* gameTimer);
-
 
 };
 

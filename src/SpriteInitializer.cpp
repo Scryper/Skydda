@@ -10,12 +10,15 @@ sf::Sprite setSpriteOptions(sf::Sprite *sprite, CoupleFloat size_, Position posi
     return *sprite;
 }
 
-sf::Sprite setSpriteOptionsPlayer(sf::Sprite *sprite, CoupleFloat size_, CoupleFloat centerOfSprite, Position position) {
+PlayerSprite setSpriteOptionsPlayer(PlayerSprite *sprite, CoupleFloat size_, CoupleFloat centerOfSprite, Position position) {
     sprite->setScale(size_.getX(), size_.getY());
 
     // set the origin of the image to its center
     sprite->setOrigin(centerOfSprite.getX() / 2, centerOfSprite.getY() / 2);
     sprite->setPosition(position.getX(), position.getY());
+
+    sf::FloatRect hitbox(0, 50, 170, 273);
+    sprite->setHitbox(hitbox);
 
     return *sprite;
 }
@@ -26,8 +29,8 @@ sf::Sprite initSprite(CoupleFloat sizeOfSprite, std::string pathToSprite, Positi
     return sprite;
 }
 
-sf::Sprite initSpritePlayer(CoupleFloat sizeOfSprite, CoupleFloat centerOfSprite, std::string pathToSprite, Position spritePosition, sf::Texture *spriteTexture) {
-    sf::Sprite sprite = loadTexture(pathToSprite, *spriteTexture);
+PlayerSprite initSpritePlayer(CoupleFloat sizeOfSprite, CoupleFloat centerOfSprite, std::string pathToSprite, Position spritePosition, sf::Texture *spriteTexture) {
+    PlayerSprite sprite = loadTexturePlayer(pathToSprite, *spriteTexture);
     sprite = setSpriteOptionsPlayer(&sprite, sizeOfSprite, centerOfSprite, spritePosition);
     return sprite;
 }

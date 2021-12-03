@@ -29,9 +29,9 @@ class Movement {
         void setAcceleration(CoupleFloat acceleration);
         void stopX();
         void stopY();
+        void recul(int value);
 
-
-        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions, bool noTP);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
 };
 
 #endif // MOVEMENT_H
