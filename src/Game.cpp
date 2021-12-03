@@ -16,8 +16,6 @@ Game::~Game() { }
 
 Game::Game(const Game& other) { }
 
-
-
 Player& Game::getPlayer1() {
     return *player1;
 }
@@ -36,4 +34,15 @@ int Game::getRoundWinP1() {
 
 int Game::getRoundWinP2() {
     return roundWinP2;
+}
+
+void Game::incrementRoundWinP1() {
+    if(getPlayerWin() == 0) {
+        roundWinP1++;
+    }
+}
+void Game::incrementRoundWinP2() {
+    if(getPlayerWin() == 0) {
+        roundWinP2++;
+    }
 }

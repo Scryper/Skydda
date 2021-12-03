@@ -1,10 +1,12 @@
 #ifndef GAMETIMER_H
 #define GAMETIMER_H
 #include "Game.h"
+#include "GlobalVariables.h"
 
 class GameTimer: public Game {
-    private:
+    protected:
         int MAX_ROUND = 1000;
+        float COUNTDOWN = 25.;
 
     public:
         GameTimer();
@@ -12,11 +14,12 @@ class GameTimer: public Game {
         virtual ~GameTimer();
         GameTimer(const GameTimer& other);
 
-        //virtual int getPlayerWin();
-        int getPlayerWin(int timer);
+        virtual int getPlayerWin();
 
-        void incrementRoundWinP1(int timer);
-        void incrementRoundWinP2(int timer);
+        void decrementCountDown();
+
+        float getCountDown();
+        void initHealthBars();
 
 };
 

@@ -53,10 +53,11 @@
 		<Unit filename="include/CoupleFloat.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/GameRound.h" />
-		<Unit filename="include/GameTimer.h" />
 		<Unit filename="include/GameScreen.h" />
 		<Unit filename="include/GameScreenRound.h" />
 		<Unit filename="include/GameScreenTimer.h" />
+		<Unit filename="include/GameTimer.h" />
+		<Unit filename="include/GlobalVariables.h" />
 		<Unit filename="include/HealthBar.h" />
 		<Unit filename="include/HealthBarView.h" />
 		<Unit filename="include/Map.h" />
@@ -73,19 +74,22 @@
 		<Unit filename="include/PrematchScreen.h" />
 		<Unit filename="include/Screen.h" />
 		<Unit filename="include/ScreenIncluder.h" />
+		<Unit filename="include/SoundLoader.h" />
 		<Unit filename="include/SpriteInitializer.h" />
 		<Unit filename="include/TextInitializer.h" />
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/SoundLoader.h" />
+		<Unit filename="include/MusicManager.h" />
+		<Unit filename="include/SoundManager.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Collision.cpp" />
 		<Unit filename="src/CoupleFloat.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameRound.cpp" />
-		<Unit filename="src/GameTimer.cpp" />
 		<Unit filename="src/GameScreen.cpp" />
 		<Unit filename="src/GameScreenRound.cpp" />
 		<Unit filename="src/GameScreenTimer.cpp" />
+		<Unit filename="src/GameTimer.cpp" />
 		<Unit filename="src/HealthBar.cpp" />
 		<Unit filename="src/HealthBarView.cpp" />
 		<Unit filename="src/Map.cpp" />
@@ -102,10 +106,13 @@
 		<Unit filename="src/PrematchScreen.cpp" />
 		<Unit filename="src/Screen.cpp" />
 		<Unit filename="src/ScreenIncluder.cpp" />
+		<Unit filename="src/SoundLoader.cpp" />
 		<Unit filename="src/SpriteInitializer.cpp" />
 		<Unit filename="src/TextInitializer.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
-<Unit filename="src/SoundLoader.cpp" />
+		<Unit filename="src/SoundLoader.cpp" />
+		<Unit filename="src/MusicManager.cpp" />
+		<Unit filename="src/SoundManager.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

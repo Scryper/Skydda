@@ -10,19 +10,20 @@ GameTimer::GameTimer(Player& player1, Player& player2)
 
 }
 
-GameTimer::~GameTimer()
-{
+GameTimer::~GameTimer() {
     //dtor
 }
 
-GameTimer::GameTimer(const GameTimer& other)
-{
+GameTimer::GameTimer(const GameTimer& other) {
     //copy ctor
 }
 
-int GameTimer::getPlayerWin(int time) {
+int GameTimer::getPlayerWin() {
 
-    if(time>=25) {
+//    std::cout << "roundWinP1 : " << roundWinP1 << std::endl;
+//    std::cout << "roundWinP2 : " << roundWinP2 << std::endl;
+
+    if(COUNTDOWN<=0) {
         if(roundWinP1>roundWinP2) {
             return 1;
         } else if(roundWinP2>roundWinP1) {
@@ -35,13 +36,12 @@ int GameTimer::getPlayerWin(int time) {
 
 }
 
-void GameTimer::incrementRoundWinP1(int time) {
-    if(getPlayerWin(time) == 0 && roundWinP1 < MAX_ROUND) {
-        roundWinP1++;
+void GameTimer::decrementCountDown() {
+    if(COUNTDOWN>0) {
+        COUNTDOWN -= 1./GlobalVariables::FPS;
     }
 }
-void GameTimer::incrementRoundWinP2(int time) {
-    if(getPlayerWin(time) == 0 && roundWinP2 < MAX_ROUND) {
-        roundWinP2++;
-    }
+
+float GameTimer::getCountDown() {
+    return COUNTDOWN;
 }

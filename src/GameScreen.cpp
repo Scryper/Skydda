@@ -81,6 +81,122 @@ void GameScreen::initVectors() {
     textures.push_back(&texturePlatformTiny);
 }
 
+
+
+void GameScreen::movePlayers(float deltaTime, bool noTP) {
+    playerViewP1.movePlayer(playerViewP1.computeCoupleMovement(),
+                            directionCollisions(playerViewP1, platforms), noTP);
+
+    playerViewP2.movePlayer(playerViewP2.computeCoupleMovement(),
+                            directionCollisions(playerViewP2, platforms), noTP);
+}
+
+void GameScreen::playerUpdate(){
+    playerViewP1.updateState(playerViewP2);
+    playerViewP2.updateState(playerViewP1);
+    playerViewP1.animate();
+    playerViewP2.animate();
+}
+
+sf::Text GameScreen::displayTextAnimation(sf::RenderWindow *app, std::string textStr) {
+    const int SCRWIDTH = app->getSize().x;
+    const int SCRHEIGHT = app->getSize().y -200;
+
+    Position position(SCRWIDTH/2.0f, SCRHEIGHT/2.0f);
+    sf::Text textAnimation = TextInitializer::createText(textStr, position);
+
+    textAnimation.setFillColor(sf::Color::Red);
+    textAnimation.setOutlineColor(sf::Color::Black);
+    textAnimation.setOutlineThickness(4);
+
+    return textAnimation;
+}
+
+void GameScreen::resetAnimationAndClock() {
+    startAnimationKO = false;
+    isClockAlreadyRestarted = false;
+}
+
+void GameScreen::startClock() {
+    clockTimerAnimation.restart();
+    isClockAlreadyRestarted = true;
+    timeAnimation = 0;
+}
+
+sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu) {
+
+    timeAnimation = timerAnimation.asSeconds();
+    int time = timer.asSeconds();
+    bool isPlayerDead = modeJeu->getPlayer1().getHealth() == 0 || modeJeu->getPlayer2().getHealth() == 0;
+    bool isPlayerWin = modeJeu->getPlayerWin() != 0;
+    std::stringstream textWin;
+
+    // Lance une animation x seconde après le lancement de la partie
+    switch(time) {
+        case 3: return displayTextAnimation(app, "Round 1 !");
+        case 5: return displayTextAnimation(app, "Ready ?");
+        case 7: return displayTextAnimation(app, "Fight !");
+    }
+
+    if(isPlayerWin) startAnimationWin = true;
+    else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
+    if((isPlayerWin || isPlayerDead ) && !isClockAlreadyRestarted) startClock();
+
+    // Lance l'animation de victoire
+    if(startAnimationWin) {
+            textWin << ( (modeJeu->getPlayerWin() == 1) ? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
+            return displayTextAnimation(app, textWin.str());
+    }
+    // Lance l'animation de K.O.
+    else if(startAnimationKO && timeAnimation < 3) return displayTextAnimation(app, "K.O. !");
+
+    resetAnimationAndClock();
+    return displayTextAnimation(app, "");
+}
+
+void GameScreen::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu) {
+
+    textAnimation = displayAnimations(timer, timerAnimation, app, modeJeu);
+
+    textAnimation.setFont(font);
+    textAnimation.setCharacterSize(140);
+
+    sf::FloatRect textRect = textAnimation.getLocalBounds();
+    textAnimation.setOrigin(textRect.width/2,textRect.height/2);
+}
+
+void GameScreen::managementWin(float deltaTime, Game* modeJeu) {
+
+    if(modeJeu->getPlayerWin() == 0) {
+        if(modeJeu->getPlayer1().getHealth() == 0) {
+
+            modeJeu->incrementRoundWinP2();
+            modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
+            modeJeu->getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
+            if(modeJeu->getPlayerWin() == 0) {
+                modeJeu->getPlayer1().setHealth(100.f);
+                modeJeu->getPlayer2().setHealth(100.f);
+            }
+            movePlayers(deltaTime, true);
+        }else if(modeJeu->getPlayer2().getHealth() == 0) {
+            modeJeu->incrementRoundWinP1();
+            modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
+            modeJeu->getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
+            if(modeJeu->getPlayerWin() == 0) {
+                modeJeu->getPlayer1().setHealth(100.f);
+                modeJeu->getPlayer2().setHealth(100.f);
+            }
+            movePlayers(deltaTime, true);
+        }
+        else{
+            movePlayers(deltaTime, false);
+        }
+    } else {
+        modeJeu->win();
+    }
+
+}
+
 void GameScreen::initHealthBars() {
     // Create HealthBar
     Position posHealthBarP1(50.f, 50.f);
@@ -102,44 +218,4 @@ void GameScreen::initHealthBars() {
     texts.push_back(&namePlayerP2);
 
     TextInitializer::initFont(texts, &font);
-}
-
-void GameScreen::movePlayers(float deltaTime, bool noTP) {
-    playerViewP1.movePlayer(playerViewP1.computeCoupleMovement(),
-                            directionCollisions(playerViewP1, platforms), noTP);
-
-    playerViewP2.movePlayer(playerViewP2.computeCoupleMovement(),
-                            directionCollisions(playerViewP2, platforms), noTP);
-}
-
-void GameScreen::playerUpdate(){
-    playerViewP1.updateState(playerViewP2);
-    playerViewP2.updateState(playerViewP1);
-    playerViewP1.animate();
-    playerViewP2.animate();
-}
-
-sf::Text GameScreen::displayTextAnimation(sf::RenderWindow &app, std::string textStr) {
-    const int SCRWIDTH = app.getSize().x;
-    const int SCRHEIGHT = app.getSize().y -200;
-
-    Position position(SCRWIDTH/2.0f, SCRHEIGHT/2.0f);
-    sf::Text textAnimation = TextInitializer::createText(textStr, position);
-
-    textAnimation.setFillColor(sf::Color::Red);
-    textAnimation.setOutlineColor(sf::Color::Black);
-    textAnimation.setOutlineThickness(4);
-
-    return textAnimation;
-}
-
-void GameScreen::resetAnimationAndClock() {
-    startAnimationKO = false;
-    isClockAlreadyRestarted = false;
-}
-
-void GameScreen::startClock() {
-    clockTimerAnimation.restart();
-    isClockAlreadyRestarted = true;
-    timeAnimation = 0;
 }
