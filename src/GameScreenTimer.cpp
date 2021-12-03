@@ -40,13 +40,13 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         const int SCRWIDTH = app.getSize().x; //const int SCRHEIGHT = app.getSize().y -200;
         sf::Time timer = clockTimer.getElapsedTime();
 
-        // --- TextTimer ---
-        std::stringstream ss;
-        ss << (int)gameTimer.getCountDown();
-        Position position(SCRWIDTH/2.0f, 50.f);
-        sf::Text timeTxt = TextInitializer::createText(ss.str(), position);
+        setTextTime(SCRWIDTH);
+        setTextRoundWin();
 
-        setTextTime(&timeTxt);
+        std::cout << "getRoundWinP1 : " << gameTimer.getRoundWinP1() << std::endl;
+        std::cout << "getRoundWinP2 : " << gameTimer.getRoundWinP2() << std::endl;
+        // --- TextRoundWin ---
+
 
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
@@ -75,7 +75,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
         app.clear();
 
-        drawAll(&app, &timeTxt);
+        drawAll(&app);
 
         gameTimer.decrementCountDown();
 
@@ -84,15 +84,49 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     return -1;
 }
 
-void GameScreenTimer::setTextTime(sf::Text *timeTxt) {
-    timeTxt->setFillColor(sf::Color::Red);
-    timeTxt->setFont(font);
-    timeTxt->setCharacterSize(80);
-    sf::FloatRect textRectTime = timeTxt->getLocalBounds();
-    timeTxt->setOrigin(textRectTime.width/2,textRectTime.height/2);
+void GameScreenTimer::setTextRoundWin() {
+    std::stringstream ss1;
+    ss1 << gameTimer.getRoundWinP1();
+    positionRoundWinTxtP1.setX(75.f);
+    positionRoundWinTxtP1.setY(140.f);
+    RoundWinTxtP1 = TextInitializer::createText(ss1.str(), positionRoundWinTxtP1);
+
+    RoundWinTxtP1.setFillColor(sf::Color::Red);
+    RoundWinTxtP1.setFont(font);
+    RoundWinTxtP1.setCharacterSize(40);
+    sf::FloatRect textRectTime1 = RoundWinTxtP1.getLocalBounds();
+    RoundWinTxtP1.setOrigin(textRectTime1.width/2,textRectTime1.height/2);
+
+    std::stringstream ss2;
+    ss2 << gameTimer.getRoundWinP2();
+    positionRoundWinTxtP2.setX(1580.f);
+    positionRoundWinTxtP2.setY(140.f);
+    RoundWinTxtP2 = TextInitializer::createText(ss2.str(), positionRoundWinTxtP2);
+
+    RoundWinTxtP2.setFillColor(sf::Color::Red);
+    RoundWinTxtP2.setFont(font);
+    RoundWinTxtP2.setCharacterSize(40);
+    sf::FloatRect textRectTime2 = RoundWinTxtP2.getLocalBounds();
+    RoundWinTxtP2.setOrigin(textRectTime2.width/2,textRectTime2.height/2);
+
+
 }
 
-void GameScreenTimer::drawAll(sf::RenderWindow *app, sf::Text *timeTxt) {
+void GameScreenTimer::setTextTime(int SCRWIDTH) {
+    std::stringstream ss;
+    ss << (int)gameTimer.getCountDown();
+    positionTimeTxt.setX(SCRWIDTH/2.0f);
+    positionTimeTxt.setY(50.f);
+    timeTxt = TextInitializer::createText(ss.str(), positionTimeTxt);
+
+    timeTxt.setFillColor(sf::Color::Red);
+    timeTxt.setFont(font);
+    timeTxt.setCharacterSize(80);
+    sf::FloatRect textRectTime = timeTxt.getLocalBounds();
+    timeTxt.setOrigin(textRectTime.width/2,textRectTime.height/2);
+}
+
+void GameScreenTimer::drawAll(sf::RenderWindow *app) {
     app->draw(backgroundSprite);
     app->draw(playerViewP1.getSprite());
     app->draw(playerViewP2.getSprite());
@@ -106,7 +140,9 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app, sf::Text *timeTxt) {
     app->draw(namePlayerP1);
     app->draw(namePlayerP2);
     app->draw(textAnimation);
-    app->draw(*timeTxt);
+    app->draw(timeTxt);
+    app->draw(RoundWinTxtP1);
+    app->draw(RoundWinTxtP2);
 
     app->display();
 }

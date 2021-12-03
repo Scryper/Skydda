@@ -1154,7 +1154,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1638532805 source:/home/damien/Documents/GitHub/Skydda/main.cpp
+1638532860 source:/home/damien/Documents/GitHub/Skydda/main.cpp
 	<SFML/Audio.hpp>
 	<vector>
 	"GlobalVariables.h"
@@ -4176,10 +4176,10 @@
 	"GameRound.h"
 	<string>
 
-1638532090 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
+1638533833 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
 	"GameScreenTimer.h"
 
-1638532090 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
+1638534626 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
 	"GameScreen.h"
 	"GameTimer.h"
 
