@@ -19,6 +19,7 @@ MusicManager* MusicManager::getInstance() {
 
 void MusicManager::play() {
     music.play();
+    music.setLoop(true);
 }
 
 void MusicManager::changeVolume(float newValue) {
