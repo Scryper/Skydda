@@ -24,8 +24,6 @@ Player& Game::getPlayer2() {
 }
 
 void Game::win() {
-    SoundManager* soundManager = SoundManager::getInstance();
-    soundManager->playVictorySound();
     player1->setState(dead,true);
     player2->setState(dead,true);
 }
