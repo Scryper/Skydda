@@ -138,7 +138,6 @@ void GameScreenRound::createRoundCircles() {
 
     roundCircle.setPosition(posP2.getX() + 300, posP2.getY());
     roundCirclesP2.push_back(roundCircle);
-
 }
 
 void GameScreenRound::actualiseRoundCircles() {

@@ -71,4 +71,24 @@ void MapView::selectMap(int seed){
         platforms.push_back(secondPlatform);
         platforms.push_back(thirdPlatform);
     }
+    if(seed == 3) {
+        borders = createBorders(textures[0]);
+
+        Position firstPosition(950, 1050);
+        PlatformView firstPlatform = createPlatform(1.1f, .5f, firstPosition, textures[0]);
+
+        Position secondPosition(800, 350);
+        PlatformView secondPlatform = createPlatform(1.f, 1.f, secondPosition, textures[2]);
+
+        Position thirdPosition(1500, 700);
+        PlatformView thirdPlatform = createPlatform(1.f, 1.f, thirdPosition, textures[2]);
+
+        Position fourthPosition(250, 600);
+        PlatformView fourthPlatform = createPlatform(1.f, 1.f, fourthPosition, textures[3]);
+
+        platforms.push_back(firstPlatform);
+        platforms.push_back(secondPlatform);
+        platforms.push_back(thirdPlatform);
+        platforms.push_back(fourthPlatform);
+    }
 }

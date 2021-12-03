@@ -2093,7 +2093,7 @@
 	"SoundLoader.h"
 	"StatePlayer.h"
 
-1638542931 source:/home/florian/Documents/GitHub/Skydda/src/PlayerView.cpp
+1638567617 source:/home/florian/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 	"Collision.h"
 	"Animation.h"
@@ -2112,7 +2112,7 @@
 1634148388 source:/home/florian/Documents/GitHub/Skydda/src/Size.cpp
 	"Size.h"
 
-1638542939 source:/home/florian/Documents/GitHub/Skydda/main.cpp
+1638569040 source:/home/florian/Documents/GitHub/Skydda/main.cpp
 	<SFML/Audio.hpp>
 	<vector>
 	"GlobalVariables.h"
@@ -2927,7 +2927,7 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1638547482 source:/home/florian/Documents/GitHub/Skydda/src/MusicManager.cpp
+1638551576 source:/home/florian/Documents/GitHub/Skydda/src/MusicManager.cpp
 	"MusicManager.h"
 
 1638550378 /home/florian/Documents/GitHub/Skydda/include/MusicManager.h
@@ -2951,7 +2951,7 @@
 	"Player.h"
 	"TextInitializer.h"
 
-1636533784 source:/home/florian/Documents/GitHub/Skydda/src/MapView.cpp
+1638568689 source:/home/florian/Documents/GitHub/Skydda/src/MapView.cpp
 	"MapView.h"
 
 1636533784 /home/florian/Documents/GitHub/Skydda/include/MapView.h
@@ -3190,7 +3190,7 @@
 	<vector>
 	<iostream>
 
-1638542931 source:/home/florian/Documents/GitHub/Skydda/src/GameScreen.cpp
+1638569420 source:/home/florian/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
 1638538745 /home/florian/Documents/GitHub/Skydda/include/GameScreen.h
@@ -3451,17 +3451,17 @@
 	<SFML/Graphics.hpp>
 	"Player.h"
 
-1638538745 /home/florian/Documents/GitHub/Skydda/include/Game.h
+1638567617 /home/florian/Documents/GitHub/Skydda/include/Game.h
 	<SFML/Graphics.hpp>
 	"Player.h"
 
-1638538745 source:/home/florian/Documents/GitHub/Skydda/src/Game.cpp
+1638567538 source:/home/florian/Documents/GitHub/Skydda/src/Game.cpp
 	"Game.h"
 
 1638550378 /home/florian/Documents/GitHub/Skydda/include/PrematchScreen.h
 	"Screen.h"
 
-1638550378 source:/home/florian/Documents/GitHub/Skydda/src/PrematchScreen.cpp
+1638568869 source:/home/florian/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
 1638534436 /home/houdartf/Documents/GitHub/Skydda/include/PrematchScreen.h
@@ -4238,7 +4238,7 @@
 	"GameScreen.h"
 	"GameTimer.h"
 
-1638542931 source:/home/florian/Documents/GitHub/Skydda/src/GameScreenRound.cpp
+1638569413 source:/home/florian/Documents/GitHub/Skydda/src/GameScreenRound.cpp
 	"GameScreenRound.h"
 
 1638538745 source:/home/florian/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
@@ -4265,14 +4265,14 @@
 1638451048 source:/home/florian/Documents/GitHub/Skydda/src/SoundLoader.cpp
 	"SoundLoader.h"
 
-1638542931 /home/florian/Documents/GitHub/Skydda/include/SoundManager.h
+1638567617 /home/florian/Documents/GitHub/Skydda/include/SoundManager.h
 	<SFML/Audio.hpp>
 	<random>
 	<iostream>
 	<map>
 	<mutex>
 
-1638542931 source:/home/florian/Documents/GitHub/Skydda/src/SoundManager.cpp
+1638567617 source:/home/florian/Documents/GitHub/Skydda/src/SoundManager.cpp
 	"SoundManager.h"
 
 1638455865 /home/damien/Documents/GitHub/Skydda/include/SoundLoader.h

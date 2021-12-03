@@ -64,7 +64,22 @@ void GameScreen::initMap() {
 }
 
 void GameScreen::initSprites() {
-    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_battle.png", position, &textureBackground);
+    std::string path = "";
+    switch(mapSeed) {
+        case 1:
+            path = "resources/images/background/background_battle_1.png";
+            break;
+        case 2:
+            path = "resources/images/background/background_battle_2.png";
+            break;
+        case 3:
+            path = "resources/images/background/background_battle_3.png";
+            break;
+        default:
+            path = "resources/images/background/background_battle_1.png";
+            break;
+    }
+    backgroundSprite = initSprite(1.f, 1.f, path, position, &textureBackground);
 }
 
 void GameScreen::initTextures() {
@@ -80,8 +95,6 @@ void GameScreen::initVectors() {
     textures.push_back(&texturePlatformSmall);
     textures.push_back(&texturePlatformTiny);
 }
-
-
 
 void GameScreen::movePlayers(float deltaTime) {
     playerViewP1.computeFrame(directionCollisions(playerViewP1, platforms),playerViewP2);
