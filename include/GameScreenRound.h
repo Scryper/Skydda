@@ -20,7 +20,6 @@ class GameScreenRound : public GameScreen {
         void createRoundCircles();
         void actualiseRoundCircles();
         void clearRoundCircles();
-        void initHealthBars();
 
         virtual void drawAll(sf::RenderWindow *app);
 

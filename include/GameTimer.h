@@ -19,6 +19,7 @@ class GameTimer: public Game {
         void decrementCountDown();
 
         float getCountDown();
+        void initHealthBars();
 
 };
 

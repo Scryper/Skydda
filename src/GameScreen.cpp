@@ -81,28 +81,7 @@ void GameScreen::initVectors() {
     textures.push_back(&texturePlatformTiny);
 }
 
-void GameScreen::initHealthBars() {
-    // Create HealthBar
-    Position posHealthBarP1(50.f, 50.f);
-    Position posHealthBarP2(1550.f, 50.f);
 
-    healthBarViewP1 = createHealthBar(playerViewP1.getPlayer(), posHealthBarP1);
-    healthBarViewP2 = createHealthBar(playerViewP2.getPlayer(), posHealthBarP2);
-
-    // Create posNamePlayer
-    Position posNamePlayerP1(50.f, 80.f);
-    Position posNamePlayerP2(1550.f, 80.f);
-    namePlayerP1 = healthBarViewP1.createNamePlayer(playerViewP1.getPlayer(), posNamePlayerP1);
-    namePlayerP2 = healthBarViewP2.createNamePlayer(playerViewP2.getPlayer(), posNamePlayerP2);
-
-    font.loadFromFile("resources/fonts/glitch.otf");
-
-    std::vector<sf::Text*> texts;
-    texts.push_back(&namePlayerP1);
-    texts.push_back(&namePlayerP2);
-
-    TextInitializer::initFont(texts, &font);
-}
 
 void GameScreen::movePlayers(float deltaTime, bool noTP) {
     playerViewP1.movePlayer(playerViewP1.computeCoupleMovement(),
@@ -216,4 +195,27 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu) {
         modeJeu->win();
     }
 
+}
+
+void GameScreen::initHealthBars() {
+    // Create HealthBar
+    Position posHealthBarP1(50.f, 50.f);
+    Position posHealthBarP2(1550.f, 50.f);
+
+    healthBarViewP1 = createHealthBar(playerViewP1.getPlayer(), posHealthBarP1);
+    healthBarViewP2 = createHealthBar(playerViewP2.getPlayer(), posHealthBarP2);
+
+    // Create posNamePlayer
+    Position posNamePlayerP1(50.f, 80.f);
+    Position posNamePlayerP2(1550.f, 80.f);
+    namePlayerP1 = healthBarViewP1.createNamePlayer(playerViewP1.getPlayer(), posNamePlayerP1);
+    namePlayerP2 = healthBarViewP2.createNamePlayer(playerViewP2.getPlayer(), posNamePlayerP2);
+
+    font.loadFromFile("resources/fonts/glitch.otf");
+
+    std::vector<sf::Text*> texts;
+    texts.push_back(&namePlayerP1);
+    texts.push_back(&namePlayerP2);
+
+    TextInitializer::initFont(texts, &font);
 }
