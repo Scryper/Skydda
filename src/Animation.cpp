@@ -3,29 +3,39 @@
 
 Animation::Animation() {
     initClocks();
+    initTours();
 }
 
 
 Animation::Animation(const Animation& other) {
     initClocks();
+    initTours();
 }
 
 Animation::~Animation() {
     stateClocks.clear();
+    tours.clear();
+}
+
+void Animation::initTours(){
+    for(auto i : constPlayerStates){
+        initTour(i.state);
+    }
+}
+
+void Animation::initTour(PlayerStateEnum s){
+    animStateTour* temp(0);
+    temp = new animStateTour;
+
+    animStateTour temp2 = {s,0};
+    *temp=temp2;
+    tours.push_back(temp);
 }
 
 void Animation::initClocks(){
-    initClock(dead);
-    initClock(standby);
-    initClock(defending);
-    initClock(receiveDamage);
-    initClock(attacking);
-    initClock(jumping);
-    initClock(movingLeft);
-    initClock(movingRight);
-    initClock(momentum);
-    initClock(idle);
-    tour = 0 ;
+    for(auto i : constPlayerStates){
+        initClock(i.state);
+    }
 }
 
 void Animation::initClock(PlayerStateEnum s){
@@ -44,49 +54,21 @@ PlayerStateClockArray* Animation::getStateClock(){
     return &stateClocks;
 }
 
+void Animation::resetTour(PlayerStateEnum state){
+    tours[state]->tour=0;
+}
+
 sf::IntRect Animation::animate(int row, int frame, float x, float y)
 {
     return sf::IntRect(frame * x, row * y, x, y);
 }
 
-void Animation::startAnimation(PlayerSprite* sprite, PlayerStateEnum state, bool boucle)
+void Animation::startAnimation(PlayerSprite* sprite, PlayerStateEnum state, bool isPlayedOneTime)
 {
-    int row;
-    maxFrame = 12-1;
-    switch(state){
-    case dead:
-        row = 1;
-        break;
-    case standby:
-        row = 3;
-        break;
-    case defending:
-        row = 2;
-        break;
-    case receiveDamage:
-        row = 2;
-        break;
-    case attacking:
-        row = 0;
-        break;
-    case jumping :
-        //maxFrame=6-1;
-        //row = 4;
-        row = 2;
-        break;
-    case movingLeft:
-        row = 5;
-        break;
-    case movingRight:
-        row = 5;
-        break;
-    case momentum :
-        row = 3;
-        break;
-    case idle:
-        row = 3;
-        break;
-    }
+
+    //std::cout<<"animation état : " << state<<std::endl;
+    int row = constAnimState[state].row;
+    int maxFrame = constAnimState[state].maxFrame;
 
     float x = sprite->getOrigin().x * 2;
     float y = sprite->getOrigin().y * 2;
@@ -99,30 +81,39 @@ void Animation::startAnimation(PlayerSprite* sprite, PlayerStateEnum state, bool
         }
     }
 
-    int time = clock.getElapsedTime().asMilliseconds();
-    int animDuration = 0;
-    if (time % 3 == 0){
-        //si c'est un state timed
-        bool isTimed = 0;
-        for(auto i : constPlayerStates){
-            if(state==i.state&& i.isTimed==1){
-                isTimed=1;
-                animDuration = i.animationDuration;
-            }
-        }
-
-        if(isTimed){
-            //si le timer a été dépassé, on n'update plus l'image
-            //std::cout<<time<<" " <<animDuration<<std::endl;
-            if(time<=animDuration&& tour<maxFrame){
-                tour++;
-            }
-        }
-        //si ce n'est pas un state timed
-        else{
-            if (tour == maxFrame) tour = 0;
-            else tour++;
-        }
+    if(lastState!=state){
+        tours[state]->tour = 0;
     }
-    sprite->setTextureRect(sf::IntRect(tour*x, row * y, x, y));
+
+    int tour = tours[state]->tour;
+    //s'il n'est pas joué qu'une seule fois ou qu'on a atteint la frame limite
+    if(!isPlayedOneTime || tour<maxFrame){
+        int time = clock.getElapsedTime().asMilliseconds();
+        int animDuration = 0;
+        if (time % 3 == 0){
+            //si c'est un state timed
+            bool isTimed = 0;
+            for(auto i : constPlayerStates){
+                if(state==i.state&& i.isTimed==1){
+                    isTimed=1;
+                    animDuration = i.animationDuration;
+                }
+            }
+
+            if(isTimed){
+                //si le timer a été dépassé, on n'update plus l'image
+                if(time<=animDuration&& tour<maxFrame){
+                    tours[state]->tour++;
+                }
+            }
+            //si ce n'est pas un state timed
+            else{
+                if (tour == maxFrame) tours[state]->tour = 0;
+                else tours[state]->tour++;
+            }
+        }
+        sprite->setTextureRect(sf::IntRect(tours[state]->tour*x, row * y, x, y));
+    }
+
+    lastState = state;
 }

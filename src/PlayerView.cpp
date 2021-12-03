@@ -124,12 +124,19 @@ CoupleFloat PlayerView::computeCoupleMovement(){
     return couple;
 }
 
-void PlayerView::attack(PlayerView &playerAttacked){
+void PlayerView::getHit(int value){
+    player.getHit(value);
+}
+
+void PlayerView::attack(PlayerView &playerAttacked, bool left){
     player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
 
     //si attaqué changer state
     if(playerAttacked.getPlayer().getHealth() != 0.f){
         playerAttacked.getPlayer().setState(receiveDamage,true);
+        //lui donner une vitesse dans le sens du tapage
+        playerAttacked.getHit(10.f);
+        std::cout<<playerAttacked.getPlayer().getMovement().getSpeed().getX()<<endl;
     }
     else{
         playerAttacked.getPlayer().setState(dead,true);
@@ -159,86 +166,71 @@ bool PlayerView::isBottomCollision(std::vector<std::vector<std::vector<int>>> co
 
 void PlayerView::computeFrame(std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView){
 
-    //compute collisions?
-
     //compute states
     std::vector<PlayerStateEnum> statesFromInput = getStatesFromInput();
     PlayerStateBoolArray playerStates =player.computeStates(statesFromInput, isBottomCollision(collisions));
 
-    //for (auto i : )
-
-    //pour se souvenir de si c'est le premier état
+    //pour se souvenir de si c'est le premier état => si on doit faire l'animation
     bool firstStateActivated = 0 ;
 
     //On passe la clock de tous les états non activés a 0
     for (auto state : playerStates){
         if(state->second==0){
-            for(auto timer : *animation.getStateClock()){
-                //si c'est la clock associée au state
-                if (timer->first == state->first){
-                    timer->second->restart();
-                }
-            }
+            (*animation.getStateClock())[state->first]->second->restart();
         }
     }
     //parcourir les états
     for (auto state : playerStates){
         //regarder si l'état est activé
         if(state->second==1){
-            //état timed?
-            bool isTimed = 0;
-            //on parcour les constPlayerState pour savoir si l'état est timed
-            for (auto constState : constPlayerStates){
-                if(state->first== constState.state && constState.isTimed==1){
-                    isTimed = 1;
-                }
-            }
 
+            //état timed?
+            bool isTimed = constPlayerStates[state->first].isTimed;
             //si l'état est timed
             if(isTimed == 1 ){
-                //on parcours les clock pour trouver celle correspondante
-                for(auto timer : *animation.getStateClock()){
-                    //si c'est la clock associée au state
-                    if (timer->first == state->first){
-                        //on regarde si on l'a pas dépassée
-                        if(timer->second->getElapsedTime().asMilliseconds()>=constPlayerStates[state->first].animationDuration){
-                            //si c'est le cas c'est qu'il faut remettre le state a 0
-                            state->second = 0;
-                            timer->second->restart();
-                        }
-                        else{
-                            animate(!firstStateActivated,state->first, false);
-                        }
 
-                        //on vérif le timming de l'action, si c'est 0 il faut l'effectuer de suite
-                        bool actionImmediate = 0;
-                        for (auto constState : constPlayerStates){
-                            if(state->first== constState.state && constState.timeAction==0){
-                                actionImmediate = 1;
-                            }
-                        }
-                        //action a t = 0
-                        if(actionImmediate == 1){
-                            doAction(state->first, collisions,playerView);
-                        }
-                        //action a t > 0
-                        else{
-                            //si le temps est compris entre la limite et limite + 15 faire l'action
-                            for (auto constState : constPlayerStates){
-                                if(state->first== constState.state &&
-                                   (timer->second->getElapsedTime().asMilliseconds()>=constState.timeAction
-                                    && timer->second->getElapsedTime().asMilliseconds()<=constState.timeAction+16)){
-                                    actionImmediate = 1;
-                                }
-                            }
-                        }
+                //on récup la clock de létat
+                sf::Clock* stateClock = (*animation.getStateClock())[state->first]->second;
+                int timeElapsed = stateClock->getElapsedTime().asMilliseconds();
+                int timeAction = constPlayerStates[state->first].timeAction;
+
+                //on vérif le timming de l'action, si c'est 0 il faut l'effectuer de suite
+                bool actionImmediate = (timeAction==0);
+                if(actionImmediate == 1){
+                    doAction(state->first, collisions,playerView);
+                }
+                //action a t > 0
+                else{
+                    if(timeElapsed>=timeAction&& timeElapsed<=timeAction+16){
+                        doAction(state->first, collisions,playerView);
                     }
                 }
+                //cout<<timeElapsed<<endl;
+                if(timeElapsed<15){
+                    //cout<<"resetTour"<<endl;
+                    animation.resetTour(state->first);
+                }
+
+                //si le temps écoulé est trop grand
+                if(timeElapsed>=constPlayerStates[state->first].animationDuration){
+                    state->second = 0;
+                    stateClock->restart();
+                    animation.resetTour(state->first);
+                }
+                else{
+                    if(!firstStateActivated)
+                        animate(!firstStateActivated,state->first,constPlayerStates[state->first].isPlayedOneTime);
+                }
+
+
             }
+            //state not timed
             else{
+                //s'il est joué la première fois
                 //executer l'action
                 doAction(state->first, collisions,playerView);
-                animate(!firstStateActivated,state->first, false);
+                if(!firstStateActivated)
+                    animate(!firstStateActivated,state->first,constPlayerStates[state->first].isPlayedOneTime);
             }
 
             //on est passé dans un état
@@ -250,28 +242,26 @@ void PlayerView::computeFrame(std::vector<std::vector<std::vector<int>>> collisi
 void PlayerView::doAction(PlayerStateEnum state, std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView){
     CoupleFloat vectorDirection;
     Position newPosition;
-    std::vector<std::vector<int>> collision;
+    std::vector<std::vector<int>> collisionPlayer;
     switch(state){
     case dead:
-        //std::cout<<" dead "<<std::endl;
         break;
     case standby:
-        //std::cout<<" standby "<<std::endl;
         break;
     case defending:
-        //std::cout<<" Defending "<<std::endl;
         player.setState(defending,true);
         break;
     case receiveDamage:
-        //std::cout<<" receiveDamage "<<std::endl;
         break;
     case attacking:
-        //std::cout<<" Attacking "<<std::endl;
-        collision = directionCollisionPlayers(*this, playerView);
-        if(collision.size() > 0 && collision[0][0] > 0){
-            for(auto i : collision){
+        std::cout<<" Attacking "<<std::endl;
+        //on calcule les collisions entre players
+        collisionPlayer = directionCollisionPlayers(*this, playerView);
+        //on vérifie qu'il y a collision et que
+        if(collisionPlayer.size() > 0 && collisionPlayer[0][0] > 0){
+            for(auto i : collisionPlayer){
                 if((i[0] == 3 && !looksRight) || (i[0] == 4 && looksRight)) {
-                    attack(playerView);
+                    attack(playerView, true);
                 }
             }
         }

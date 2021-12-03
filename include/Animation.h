@@ -9,9 +9,8 @@
 class Animation {
     private:
         PlayerStateClockArray stateClocks;
-        int frame;
-        int tour;
-        int maxFrame;
+        AnimStateTours tours;
+        PlayerStateEnum lastState;
 
     public:
         Animation();
@@ -20,10 +19,14 @@ class Animation {
 
         void initClocks();
         void initClock(PlayerStateEnum state);
+        void initTours();
+        void initTour(PlayerStateEnum state);
+
         PlayerStateClockArray* getStateClock();
+        void resetTour(PlayerStateEnum state);
 
         sf::IntRect animate(int row, int frame, float x, float y);
-        void startAnimation(PlayerSprite* sprite, PlayerStateEnum newState, bool boucle);
+        void startAnimation(PlayerSprite* sprite, PlayerStateEnum newState, bool isPlayedOneTime);
 
 };
 

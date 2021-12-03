@@ -42,6 +42,7 @@ class Player {
         void stateInitializer();
         void setState(PlayerStateEnum s, bool value);
         bool getState(PlayerStateEnum s)const;
+        void getHit(int value);
 
         template <typename T>
         bool isFoundInArray(std::vector<T> vect, T element);

@@ -33,11 +33,12 @@ class PlayerView {
         Player& getPlayer();
         PlayerSprite getSprite() const;
 
-        void attack(PlayerView &playerAttacked);
+        void attack(PlayerView &playerAttacked, bool left);
         void setHealth(float health);
 
         std::vector<std::vector<float>> getOffset()const;
         bool isLooksRigth()const;
+        void getHit(int value);
 
         void inputPlayer();
 

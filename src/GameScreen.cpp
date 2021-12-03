@@ -20,7 +20,7 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     initMap();
     initPlayers();
     initHealthBars();
-
+    //playerViewP1.getPlayer().setState(dead,1);
     game = Game(playerViewP1.getPlayer(), playerViewP2.getPlayer());
     clearRoundCircles();
     while(app.isOpen()) {
@@ -37,8 +37,8 @@ int GameScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
         //attaquer si poss
         //vérif et update les manches la vie et le reste -> va update la position SI MORT
         //update la position en fonction de cette nouvelle position
-
         movePlayers(deltaTime);
+
 
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());

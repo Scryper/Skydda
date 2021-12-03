@@ -154,6 +154,10 @@ bool Player::getState(PlayerStateEnum s)const{
      return 0;
 }
 
+void Player::getHit(int value){
+    movement.recul(value);
+};
+
 PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPressed, bool bottomCollision){
 
     //on parcourt tous les états dans l'ordre
@@ -168,7 +172,8 @@ PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPress
                 if(isFoundInArray(keyPressed,itStates->first)) itStates->second = 1;
             }
             if(constPlayerStates[itStates->first].isTimed==0
-               && constPlayerStates[itStates->first].onUserInput==0){
+               && constPlayerStates[itStates->first].onUserInput==0
+               &&itStates->first == momentum){
                 itStates->second=0;
                }
 
@@ -202,20 +207,25 @@ PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPress
         }
 
     }
-
     //si pas de movementState ET vitesse horizontale et verticale != 0
-    /// ou bien qu'il n'y a pas de collision en dessous du player
-    if(( movmentStateActivated!=1 && (movement.getSpeed().getX()!=0||movement.getSpeed().getY()!=0))||bottomCollision==false){
+    /// ou bien qu'il n'y a pas de collision en dessous du player et pas de mouvement
+    if(( movmentStateActivated!=1 && (movement.getSpeed().getX()!=0||movement.getSpeed().getY()!=0))||(bottomCollision==false && movmentStateActivated!=1)){
         state[momentum]->second=1;
     }
 
-    //si activated=0 => idle
-    if(activated)state[idle]->second=0;
-    else state[idle]->second=1;
-
-    for(auto i: state){
-        cout<<i->first<<" "<<i->second<<endl;
+    //si aucun état activated, on set le state a idle
+    activated = 0;
+    for (auto i : state){
+        if(i->second==1)activated=1;
     }
+
+    if(!activated)state[idle]->second=1;
+
+    for(auto i : state){
+        if(i->first==receiveDamage && i -> second==1)cout<< i->first <<" " <<i->second<<endl;
+    }
+
+
     return state;
 }
 

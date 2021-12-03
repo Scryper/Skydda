@@ -53,6 +53,10 @@ void Movement::stopY(){
     this->speed.setY(0);
 }
 
+void Movement::recul(int value){
+    speed.setX(value);
+}
+
 Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
     // get the info about X movement
     float speedX = speed.getX();
