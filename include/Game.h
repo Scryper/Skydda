@@ -1,7 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
+
 #include <SFML/Graphics.hpp>
+
 #include "Player.h"
+#include "SoundManager.h"
 
 class Game {
     protected:

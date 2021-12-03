@@ -12,8 +12,8 @@ float GlobalVariables::VOLUME_MUSIC = 50.0f;
 
 int main() {
 
-    MusicManager* musicManager = MusicManager::getInstance();
-    musicManager->play();
+//    MusicManager* musicManager = MusicManager::getInstance();
+//    musicManager->play();
 
     // Create the main window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
