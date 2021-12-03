@@ -2,18 +2,15 @@
 #include <vector>
 
 #include "ScreenIncluder.h"
+#include "MusicManager.h"
+
 #include <iostream>
 
 int main() {
-
     int FPS = 60;
 
-//    sf::Music music;
-//    if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
-//        std::cout << "Music was not found" << std::endl;
-//    }
-//    music.setVolume(10.f);
-//    music.play();
+    MusicManager* musicManager = MusicManager::getInstance();
+    musicManager->play();
 
     // Create the main window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
