@@ -15,9 +15,6 @@ int main() {
     MusicManager* musicManager = MusicManager::getInstance();
     musicManager->play();
 
-    SoundManager* soundManager = SoundManager::getInstance();
-    soundManager->playRandomSound();
-
     // Create the main window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
     sf::RenderWindow app(
