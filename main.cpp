@@ -7,19 +7,12 @@
 #include <iostream>
 
 int GlobalVariables::FPS = 60;
-float GlobalVariables::VOLUME_MUSIC = 0.f;
+float GlobalVariables::VOLUME_MUSIC = 0.0f;
 
 int main() {
 
     MusicManager* musicManager = MusicManager::getInstance();
     musicManager->play();
-
-    sf::Music music;
-    if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
-        std::cout << "Music was not found" << std::endl;
-    }
-    music.setVolume(GlobalVariables::VOLUME_MUSIC);
-    music.play();
 
     // Create the main window
     sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();

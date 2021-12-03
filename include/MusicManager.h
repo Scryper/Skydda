@@ -1,6 +1,7 @@
 #ifndef MUSICMANAGER_H
 #define MUSICMANAGER_H
 
+#include "GlobalVariables.h"
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <mutex>

@@ -1154,7 +1154,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1638532476 source:/home/damien/Documents/GitHub/Skydda/main.cpp
+1638532805 source:/home/damien/Documents/GitHub/Skydda/main.cpp
 	<SFML/Audio.hpp>
 	<vector>
 	"GlobalVariables.h"
@@ -4247,14 +4247,15 @@
 1638455865 source:/home/damien/Documents/GitHub/Skydda/src/SoundLoader.cpp
 	"SoundLoader.h"
 
-1638532090 /home/damien/Documents/GitHub/Skydda/include/GlobalVariables.h
+1638532647 /home/damien/Documents/GitHub/Skydda/include/GlobalVariables.h
 
-1638532079 /home/damien/Documents/GitHub/Skydda/include/MusicManager.h
+1638532815 /home/damien/Documents/GitHub/Skydda/include/MusicManager.h
+	"GlobalVariables.h"
 	<SFML/Audio.hpp>
 	<iostream>
 	<mutex>
 
-1638532079 source:/home/damien/Documents/GitHub/Skydda/src/MusicManager.cpp
+1638532845 source:/home/damien/Documents/GitHub/Skydda/src/MusicManager.cpp
 	"MusicManager.h"
 
 1638530247 source:/home/damien/Documents/GitHub/Skydda/src/SoundManager.cpp

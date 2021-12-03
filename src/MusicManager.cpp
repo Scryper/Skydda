@@ -6,7 +6,7 @@ MusicManager::MusicManager() {
     if(!music.openFromFile("resources/audio/fight_theme.ogg")) {
         std::cout << "Music was not found" << std::endl;
     }
-    music.setVolume(10.f);
+    music.setVolume(GlobalVariables::VOLUME_MUSIC);
 }
 
 MusicManager* MusicManager::getInstance() {
