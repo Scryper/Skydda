@@ -45,8 +45,8 @@ class PlayerView {
 
         Position computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
         void movePlayer(std::vector<std::vector<std::vector<int>>> collisions, PlayerStateEnum state);
-        //void updateState(PlayerView &playerView);
         std::vector<PlayerStateEnum> getStatesFromInput();
+        bool isBottomCollision(std::vector<std::vector<std::vector<int>>> coll);
 
         void animate(bool first,PlayerStateEnum state, bool boucle);
         void flipSprite();

@@ -154,113 +154,72 @@ bool Player::getState(PlayerStateEnum s)const{
      return 0;
 }
 
-PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPressed){
-    //si pas en train de défendre -> change state
-    bool def = 0;
-    for(auto i : keyPressed){
-        if(i== defending)def = 1;
-    }
-    if(!def){
-        for (auto itStates : state){
-            if (itStates->first == defending)
-                itStates->second = 0;
-        }
-    }
+PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPressed, bool bottomCollision){
 
-
-
-    //on parcourt tous les états dans l'ordre croissant d'importance
+    //on parcourt tous les états dans l'ordre
     for(auto itStates : state){
         //vérif si l'état est activé
         if(itStates->second==1){
-            //verif si l'état n'est pas timed
-            for(auto itConstPlayerStates : constPlayerStates){
-                if(itConstPlayerStates.state == itStates->first && itConstPlayerStates.isTimed == 0){
-                    //vérif si based on user input
-                    if(itConstPlayerStates.onUserInput == 1){
-                        //vérif si la key n'est pas pressed down
-                        bool pressed = 0;
-                        for(auto statePressed : keyPressed){
-                            if(statePressed == itStates->first){
-                                pressed = 1;
-                            }
-                        }
-                        if (pressed == 0){
-                            itStates->second = 0;
-                        }
-                    }
-                }
+            //verif si l'état n'est pas timed et qu'il dépend d'un user input
+            if(constPlayerStates[itStates->first].isTimed==0
+               && constPlayerStates[itStates->first].onUserInput==1){
+                //vérif si la key n'est pas pressed down, si elle l'est on passe l'état a 1
+                itStates->second = 0;
+                if(isFoundInArray(keyPressed,itStates->first)) itStates->second = 1;
             }
+            if(constPlayerStates[itStates->first].isTimed==0
+               && constPlayerStates[itStates->first].onUserInput==0){
+                itStates->second=0;
+               }
 
         }
         //l'état n'est pas activé
         else{
-            //vérif si based on user input
-            for(auto itConstPlayerStates : constPlayerStates){
-                if(itConstPlayerStates.onUserInput == 1){
-                    //verif si la key is pressed
-                    for(auto statePressed : keyPressed){
-                        if(statePressed == itStates->first){
-                            //change state to true
-                            itStates->second = 1;
-                        }
-                    }
-                }
+             //verif si l'état dépend d'un user input
+            if(constPlayerStates[itStates->first].onUserInput==1){
+                //vérif si la key n'est pas pressed down, si elle l'est on passe l'état a 1
+                itStates->second = 0;
+                if(isFoundInArray(keyPressed,itStates->first)) itStates->second = 1;
             }
         }
     }
 
-    //on parcourt tous les états dans l'ordre croissant d'importance
-    bool notStackable = 0;
     bool activated = 0;
     bool movmentStateActivated = 0;
+
+    //permet de savoir si c'est un état de mouvement ou pas
+    //on parcourt tous les états dans l'ordre croissant d'importance
     for(auto itStates : state){
-        //si noStackable = 0
-        if(notStackable == 0){
-            //si état activé
-            if(itStates->second==1){
-                 if(itStates->first!=idle){
-                    activated = 1;
-                    for(auto itConstPlayerStates : constPlayerStates){
-                        if(itConstPlayerStates.state==itStates->first && itConstPlayerStates.isMovement == 1){
-                            movmentStateActivated = 1;
-                        }
-                    }
-                 }
-                 for(auto itConstPlayerStates : constPlayerStates){
-                    //si not stackable
-                    if(itConstPlayerStates.state==itStates->first && itConstPlayerStates.isStateStackable == 0){
-                        notStackable = 1;
-                    }
-                 }
-            }
+        if(activated==1){
+            itStates->second=0;
         }
-        else{
-            //desactivate state
-            itStates->second = 0;
+        //si état activé et que l'état n'est pas idle
+        if(activated==0&&itStates->second==1&& itStates->first!=idle){
+            //état est activé
+            activated = 1;
+            //si c'est un état de movement, movmentState -> true
+            if(constPlayerStates[itStates->first].isMovement==1) movmentStateActivated = true;
         }
+
     }
 
-    //si pas de movementState ET vitesse horizontale et verticale != 0 ou bien qu'il n'y a pas de collision en dessous du player
-    if(movmentStateActivated!=1 && (movement.getSpeed().getX()!=0||movement.getSpeed().getY()!=0)){
-        for(auto itStates : state){
-            if(itStates->first==momentum){
-                itStates->second=1;
-            }
-        }
+    //si pas de movementState ET vitesse horizontale et verticale != 0
+    /// ou bien qu'il n'y a pas de collision en dessous du player
+    if(( movmentStateActivated!=1 && (movement.getSpeed().getX()!=0||movement.getSpeed().getY()!=0))||bottomCollision==false){
+        state[momentum]->second=1;
     }
 
-    for(auto itStates : state){
-        if(itStates->first==idle){
-            if(activated==0){
-                itStates->second=1;
-            }
-            else{
-                itStates->second=0;
-            }
-        }
+    //si activated=0 => idle
+    if(activated)state[idle]->second=0;
+    else state[idle]->second=1;
+
+    for(auto i: state){
+        cout<<i->first<<" "<<i->second<<endl;
     }
     return state;
 }
 
-
+template <typename T>
+bool Player::isFoundInArray(std::vector<T> vect, T element){
+    return std::find(vect.begin(), vect.end(), element) != vect.end();
+}

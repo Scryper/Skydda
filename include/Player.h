@@ -21,6 +21,7 @@ class Player {
         Position position;
         Movement movement;
 
+
     public:
         Player();
         Player(std::string name, float attack, float health, Position position, Movement movement);
@@ -42,10 +43,13 @@ class Player {
         void setState(PlayerStateEnum s, bool value);
         bool getState(PlayerStateEnum s)const;
 
+        template <typename T>
+        bool isFoundInArray(std::vector<T> vect, T element);
+
 
         void attackPlayer(Player& p, float clock);
         Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
-        PlayerStateBoolArray computeStates(std::vector<PlayerStateEnum> keyPressed);
+        PlayerStateBoolArray computeStates(std::vector<PlayerStateEnum> keyPressed, bool bottomCollision);
 
 };
 

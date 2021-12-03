@@ -109,12 +109,10 @@ CoupleFloat PlayerView::computeCoupleMovement(){
     for (auto key : keysPressed) {
         //up
         if(key.second == keys[0].second) {
-           // state = 5;
             couple.setY(couple.getY() - deltaTime);
         }
         //left
         if(key.second == keys[1].second) {
-            //state = 6;
             couple.setX(couple.getX() - deltaTime);
         }
         //rigth
@@ -127,15 +125,14 @@ CoupleFloat PlayerView::computeCoupleMovement(){
 }
 
 void PlayerView::attack(PlayerView &playerAttacked){
-    cout<<"ici"<<endl;
     player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
 
     //si attaqué changer state
     if(playerAttacked.getPlayer().getHealth() != 0.f){
-
+        playerAttacked.getPlayer().setState(receiveDamage,true);
     }
     else{
-
+        playerAttacked.getPlayer().setState(dead,true);
     }
 }
 
@@ -148,13 +145,25 @@ void PlayerView::animate(bool first,PlayerStateEnum state, bool boucle){
     animation.startAnimation(&this->sprite, state, boucle);
 }
 
+bool PlayerView::isBottomCollision(std::vector<std::vector<std::vector<int>>> coll){
+    for(auto collisions : coll){
+        for(auto coteCollision : collisions){
+            if(coteCollision[0]==2){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
 void PlayerView::computeFrame(std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView){
 
     //compute collisions?
 
     //compute states
     std::vector<PlayerStateEnum> statesFromInput = getStatesFromInput();
-    PlayerStateBoolArray playerStates =player.computeStates(statesFromInput);
+    PlayerStateBoolArray playerStates =player.computeStates(statesFromInput, isBottomCollision(collisions));
 
     //for (auto i : )
 
@@ -244,20 +253,20 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<std::vector<std::ve
     std::vector<std::vector<int>> collision;
     switch(state){
     case dead:
-        std::cout<<" dead "<<std::endl;
+        //std::cout<<" dead "<<std::endl;
         break;
     case standby:
-        std::cout<<" standby "<<std::endl;
+        //std::cout<<" standby "<<std::endl;
         break;
     case defending:
-        std::cout<<" Defending "<<std::endl;
+        //std::cout<<" Defending "<<std::endl;
         player.setState(defending,true);
         break;
     case receiveDamage:
-        std::cout<<" receiveDamage "<<std::endl;
+        //std::cout<<" receiveDamage "<<std::endl;
         break;
     case attacking:
-        std::cout<<" Attacking "<<std::endl;
+        //std::cout<<" Attacking "<<std::endl;
         collision = directionCollisionPlayers(*this, playerView);
         if(collision.size() > 0 && collision[0][0] > 0){
             for(auto i : collision){
@@ -268,23 +277,23 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<std::vector<std::ve
         }
         break;
     case jumping :
-        std::cout<<" Jumping"<<std::endl;
+        //std::cout<<" Jumping"<<std::endl;
         movePlayer(collisions, state);
         break;
     case movingLeft:
-        std::cout<<" Left"<<std::endl;
+        //std::cout<<" Left"<<std::endl;
         movePlayer(collisions,state);
         break;
     case movingRight:
-        std::cout<<" Rigth"<<std::endl;
+        //std::cout<<" Rigth"<<std::endl;
         movePlayer(collisions,state);
         break;
     case momentum :
-        std::cout<<" Momentum"<<std::endl;
+        //std::cout<<" Momentum"<<std::endl;
         movePlayer(collisions,state);
         break;
     case idle:
-        std::cout<<" idle "<<std::endl;
+        //std::cout<<" idle "<<std::endl;
         break;
     }
 }

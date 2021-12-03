@@ -62,7 +62,6 @@ void Animation::startAnimation(PlayerSprite* sprite, PlayerStateEnum state, bool
         break;
     case defending:
         row = 2;
-        maxFrame=12-1;
         break;
     case receiveDamage:
         row = 2;
@@ -71,8 +70,9 @@ void Animation::startAnimation(PlayerSprite* sprite, PlayerStateEnum state, bool
         row = 0;
         break;
     case jumping :
-        maxFrame=6-1;
-        row = 4;
+        //maxFrame=6-1;
+        //row = 4;
+        row = 2;
         break;
     case movingLeft:
         row = 5;
@@ -113,7 +113,7 @@ void Animation::startAnimation(PlayerSprite* sprite, PlayerStateEnum state, bool
 
         if(isTimed){
             //si le timer a été dépassé, on n'update plus l'image
-            std::cout<<time<<" " <<animDuration<<std::endl;
+            //std::cout<<time<<" " <<animDuration<<std::endl;
             if(time<=animDuration&& tour<maxFrame){
                 tour++;
             }
@@ -124,5 +124,5 @@ void Animation::startAnimation(PlayerSprite* sprite, PlayerStateEnum state, bool
             else tour++;
         }
     }
-        sprite->setTextureRect(sf::IntRect(tour*x, row * y, x, y));
+    sprite->setTextureRect(sf::IntRect(tour*x, row * y, x, y));
 }

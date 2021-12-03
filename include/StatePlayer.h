@@ -27,7 +27,6 @@ typedef std::vector<PlayerStateClock*> PlayerStateClockArray;
 
 struct playerState{
     PlayerStateEnum state;
-    bool isStateStackable;
     bool isTimed;
     bool onUserInput;
     bool isMovement;
@@ -36,17 +35,17 @@ struct playerState{
 };
 
 const std::vector<playerState> constPlayerStates
-{   //STATE      STCK Tm   UI   MO  AD     TA
-    {dead,          0,  0,  0,  0,  0,      0},
-    {standby,       0,  0,  0,  0,  0,      0},
-    {defending,     0,  1,  1,  0,  500,    0},
-    {receiveDamage, 0,  1,  0,  0,  500,    0},
-    {attacking,     0,  1,  1,  0,  1000,   700},
-    {jumping,       0,  1,  1,  1,  1000,   0},
-    {movingLeft,    0,  0,  1,  1,  0,      0},
-    {movingRight,   0,  0,  1,  1,  0,      0},
-    {momentum,      0,  0,  0,  0,  0,      0},
-    {idle,          0,  0,  0,  0,  0,      0}
+{   //STATE      Tm   UI   MO  AD     TA
+    {dead,          0,  0,  0,  0,      0},
+    {standby,       0,  0,  0,  0,      0},
+    {defending,     1,  1,  0,  500,    0},
+    {receiveDamage, 1,  0,  0,  500,    0},
+    {attacking,     1,  1,  0,  1000,   700},
+    {jumping,       1,  1,  1,  1000,    0},
+    {movingLeft,    0,  1,  1,  0,      0},
+    {movingRight,   0,  1,  1,  0,      0},
+    {momentum,      0,  0,  0,  0,      0},
+    {idle,          0,  0,  0,  0,      0}
 };
 
 #endif // STATEPLAYER_H

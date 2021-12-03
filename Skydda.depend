@@ -2150,7 +2150,7 @@
 1636275571 source:/home/florian/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
-1638463956 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
+1638466058 source:/home/houdartf/Documents/GitHub/Skydda/main.cpp
 	<SFML/Audio.hpp>
 	<vector>
 	"ScreenIncluder.h"
@@ -2584,7 +2584,7 @@
 	<SFML/Graphics.hpp>
 	"CoupleFloat.h"
 
-1638453464 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
+1638489385 /home/houdartf/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
@@ -2607,7 +2607,7 @@
 	<vector>
 	<iostream>
 
-1638456486 /home/houdartf/Documents/GitHub/Skydda/include/PlayerView.h
+1638489567 /home/houdartf/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
 	"CoupleVectorTransformer.h"
 	<SFML/Graphics.hpp>
@@ -2644,10 +2644,10 @@
 1638186855 source:/home/houdartf/Documents/GitHub/Skydda/src/PlatformView.cpp
 	"PlatformView.h"
 
-1638465528 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
+1638489826 source:/home/houdartf/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1638465889 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
+1638490859 source:/home/houdartf/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 	"Collision.h"
 	"Animation.h"
@@ -3222,7 +3222,7 @@
 1636136756 source:/home/florian/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
-1638464617 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreen.cpp
+1638490708 source:/home/houdartf/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
 1638456680 /home/houdartf/Documents/GitHub/Skydda/include/GameScreen.h
@@ -4180,7 +4180,7 @@
 	"PlayerSprite.h"
 	"StatePlayer.h"
 
-1638465731 source:/home/houdartf/Documents/GitHub/Skydda/src/Animation.cpp
+1638519452 source:/home/houdartf/Documents/GitHub/Skydda/src/Animation.cpp
 	"Animation.h"
 	<iostream>
 
@@ -4206,7 +4206,7 @@
 1638309209 /home/houdartf/Documents/GitHub/Skydda/include/EPlayerAnimationTimeAction.h
 	"EPlayerStatePriority.h"
 
-1638465299 /home/houdartf/Documents/GitHub/Skydda/include/StatePlayer.h
+1638490392 /home/houdartf/Documents/GitHub/Skydda/include/StatePlayer.h
 	<map>
 	<SFML/Graphics.hpp>
 
