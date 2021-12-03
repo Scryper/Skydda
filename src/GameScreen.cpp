@@ -124,9 +124,14 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
     // Lance une animation x seconde après le lancement de la partie
 
     switch(time) {
-        case timeAnimRound: return displayTextAnimation(app, "Round 1 !");
-        case timeAnimReady: return displayTextAnimation(app, "Ready ?");
-        case timeAnimFight: return displayTextAnimation(app, "Fight !");
+        case timeAnimRound:
+            return displayTextAnimation(app, "Round 1 !");
+        case timeAnimReady:
+            return displayTextAnimation(app, "Ready ?");
+        case timeAnimFight:
+            modeJeu->getPlayer1().setState(standby,false);
+            modeJeu->getPlayer2().setState(standby,false);
+            return displayTextAnimation(app, "Fight !");
     }
 
     if(isPlayerWin) startAnimationWin = true;

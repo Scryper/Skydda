@@ -40,6 +40,10 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     sf::Clock clockTest;
     clockTest.restart().asMilliseconds();
 
+    playerViewP1.getPlayer().setState(standby,true);
+    playerViewP2.getPlayer().setState(standby,true);
+
+
     while(app.isOpen()) {
 
         sf::Time timer = clockTimer.getElapsedTime();

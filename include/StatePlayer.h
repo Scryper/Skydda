@@ -49,7 +49,7 @@ typedef std::vector<animStateTour*> AnimStateTours;
 const std::vector<playerState> constPlayerStates
 {   //STATE      Tm   UI   MO   otp AD     TA
     {dead,          0,  0,  0,  1,  0,      0},
-    {standby,       0,  0,  0,  1,  0,      0},
+    {standby,       0,  0,  0,  0,  0,      0},
     {defending,     0,  1,  0,  1,  0,      0},
     {receiveDamage, 1,  0,  0,  1,  500,    0},
     {attacking,     1,  1,  0,  1,  700,    500},

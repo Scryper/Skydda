@@ -35,6 +35,9 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     initHealthBars();
 
     gameTimer = GameTimer(playerViewP1.getPlayer(), playerViewP2.getPlayer());
+    playerViewP1.getPlayer().setState(standby,true);
+    playerViewP2.getPlayer().setState(standby,true);
+
 
     while(app.isOpen()) {
         const int SCRWIDTH = app.getSize().x; //const int SCRHEIGHT = app.getSize().y -200;
