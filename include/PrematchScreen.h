@@ -33,6 +33,7 @@ class PrematchScreen : public Screen {
         sf::Texture textureCharacter1;
         sf::Texture textureCharacter2;
         sf::Texture textureMap;
+        sf::Texture textureGameMode;
 
         sf::Sprite backgroundSprite;
         sf::Sprite spriteCharacter1;
@@ -49,6 +50,7 @@ class PrematchScreen : public Screen {
         sf::Sprite buttonBack;
         sf::Sprite buttonModeRounds;
         sf::Sprite buttonModeTime;
+        sf::Sprite spriteMode;
 
         Position position;
         Position positionPlayerElements;
@@ -64,6 +66,7 @@ class PrematchScreen : public Screen {
         std::vector<std::string> characters;
         std::vector<std::string> names;
         std::vector<std::string> spriteSheets;
+        std::vector<std::string> gameModes;
         std::vector<sf::Text*> texts;
 
         void initVectors();

@@ -21,3 +21,6 @@ void MusicManager::play() {
     music.play();
 }
 
+void MusicManager::changeVolume(float newValue) {
+    music.setVolume(newValue);
+}

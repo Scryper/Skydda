@@ -2,6 +2,7 @@
 #define MUSICMANAGER_H
 
 #include "GlobalVariables.h"
+
 #include <SFML/Audio.hpp>
 #include <iostream>
 #include <mutex>
@@ -20,7 +21,9 @@ class MusicManager {
         MusicManager& operator=(const MusicManager& other) = delete;
 
         static MusicManager* getInstance();
+
         void play();
+        void changeVolume(float newValue);
 };
 
 #endif // MUSICMANAGER_H

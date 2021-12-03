@@ -87,6 +87,10 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     positionModeChoosing.setX(positionModeChoosing.getX() - 35);
     textModeTime = TextInitializer::createText("Time", positionModeChoosing);
 
+    Position positionGameMode(position.getX(), 350);
+
+    spriteMode = initSprite(.5f, .5f, gameModes[gameMode - 2], positionGameMode, &textureGameMode);
+
     /// Map elements
     Position positionMap(position.getX() - 125, 400);
 
@@ -243,7 +247,8 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             textModeRounds.setFillColor(sf::Color::Green);
             if(event.type == sf::Event::MouseButtonPressed) {
                 gameMode = 2;
-                // TODO : add image which represents the game mode
+                textureGameMode.loadFromFile(gameModes[gameMode - 2]);
+                spriteMode.setTexture(textureGameMode, true);
             }
         }
         else {
@@ -255,7 +260,8 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             textModeTime.setFillColor(sf::Color::Green);
             if(event.type == sf::Event::MouseButtonPressed) {
                 gameMode = 3;
-                // TODO : add image which represents the game mode
+                textureGameMode.loadFromFile(gameModes[gameMode - 2]);
+                spriteMode.setTexture(textureGameMode, true);
             }
         }
         else {
@@ -308,6 +314,8 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
         app.draw(buttonModeTime);
         app.draw(textModeTime);
+
+        app.draw(spriteMode);
 
         // Map element
         app.draw(textMap);
@@ -376,6 +384,9 @@ void PrematchScreen::initVectors() {
     spriteSheets.push_back("resources/images/characters/golem_light.png");
     spriteSheets.push_back("resources/images/characters/groot_light.png");
     spriteSheets.push_back("resources/images/characters/minotaur_light.png");
+
+    gameModes.push_back("resources/images/gamemode/rounds.png");
+    gameModes.push_back("resources/images/gamemode/timer.png");
 }
 
 void PrematchScreen::initBackground() {
