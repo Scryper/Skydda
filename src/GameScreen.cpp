@@ -132,10 +132,11 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
     std::stringstream textWin;
 
     // Lance une animation x seconde après le lancement de la partie
+
     switch(time) {
-        case 3: return displayTextAnimation(app, "Round 1 !");
-        case 5: return displayTextAnimation(app, "Ready ?");
-        case 7: return displayTextAnimation(app, "Fight !");
+        case timeAnimRound: return displayTextAnimation(app, "Round 1 !");
+        case timeAnimReady: return displayTextAnimation(app, "Ready ?");
+        case timeAnimFight: return displayTextAnimation(app, "Fight !");
     }
 
     if(isPlayerWin) startAnimationWin = true;

@@ -43,11 +43,6 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         setTextTime(SCRWIDTH);
         setTextRoundWin();
 
-        std::cout << "getRoundWinP1 : " << gameTimer.getRoundWinP1() << std::endl;
-        std::cout << "getRoundWinP2 : " << gameTimer.getRoundWinP2() << std::endl;
-        // --- TextRoundWin ---
-
-
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();
 
@@ -77,7 +72,11 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
         drawAll(&app);
 
-        gameTimer.decrementCountDown();
+        std::cout << timer.asSeconds() << std::endl;
+        // Ajouter constante tempsAnimFight pour remplacer le 7
+        if(timer.asSeconds() > timeAnimFight+1) {
+            gameTimer.decrementCountDown();
+        }
 
     }
 

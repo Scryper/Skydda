@@ -3316,7 +3316,7 @@
 1638387021 /home/damien/Documents/GitHub/Skydda/include/MenuScreen.h
 	"Screen.h"
 
-1638532090 /home/damien/Documents/GitHub/Skydda/include/GameScreen.h
+1638536564 /home/damien/Documents/GitHub/Skydda/include/GameScreen.h
 	"Screen.h"
 	"PlayerView.h"
 	"PlatformView.h"
@@ -3376,7 +3376,7 @@
 1638387022 source:/home/damien/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
-1638532090 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
+1638536544 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
 1636069133 source:/home/florian/Documents/GitHub/Skydda/src/Match.cpp
@@ -4176,10 +4176,10 @@
 	"GameRound.h"
 	<string>
 
-1638533833 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
+1638536113 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
 	"GameScreenTimer.h"
 
-1638534626 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
+1638534803 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
 	"GameScreen.h"
 	"GameTimer.h"
 
