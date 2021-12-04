@@ -63,6 +63,5 @@ int main() {
             screen = screens[screen]->run(app, data, 0);
 		}
 	}
-
     return EXIT_SUCCESS;
 }
