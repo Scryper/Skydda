@@ -105,7 +105,7 @@ CollisionVector directionCollisionPlayers(PlayerView playerview1, PlayerView pla
     sf::FloatRect player1Bounds = playerview1.getSprite().getGlobalBounds();
     sf::FloatRect player2Bounds = playerview2.getSprite().getGlobalHitbox();
 
-    int marge = 30;
+    int marge = 20;
 
     CollisionVector collisions;
 

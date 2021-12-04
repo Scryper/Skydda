@@ -149,12 +149,12 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
             return displayTextAnimation(app, "Fight !");
     }
 
-//    switch(time) {
-//        case 0:
-//            modeJeu->getPlayer1().setState(standby,false);
-//            modeJeu->getPlayer2().setState(standby,false);
-//            return displayTextAnimation(app, "Fight !");
-//    }
+    /*switch(time) {
+        case 0:
+            modeJeu->getPlayer1().setState(standby,false);
+            modeJeu->getPlayer2().setState(standby,false);
+            return displayTextAnimation(app, "Fight !");
+    }*/
 
     if(isPlayerWin) startAnimationWin = true;
     else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;

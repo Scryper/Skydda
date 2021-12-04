@@ -55,7 +55,7 @@ class PlayerView {
         void animate(bool first,PlayerStateEnum state, bool boucle);
         void flipSprite();
         void computeFrame(std::vector<CollisionVector> collisions, PlayerView &playerView);
-        void doAction(PlayerStateEnum state,std::vector<CollisionVector> collisions, PlayerView &playerView);
+        void doAction(PlayerStateEnum state,std::vector<CollisionVector> collisions, PlayerView &playerView, bool doActionNow);
 };
 
 #endif // PLAYERVIEW_H
