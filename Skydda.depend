@@ -1154,12 +1154,13 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1638532860 source:/home/damien/Documents/GitHub/Skydda/main.cpp
+1638547356 source:/home/damien/Documents/GitHub/Skydda/main.cpp
 	<SFML/Audio.hpp>
 	<vector>
 	"GlobalVariables.h"
 	"ScreenIncluder.h"
 	"MusicManager.h"
+	"SoundManager.h"
 	<iostream>
 
 1636297835 /home/damien/Documents/GitHub/Skydda/lib/SFML-2.5.1/include/SFML/Graphics.hpp
@@ -1577,24 +1578,25 @@
 1638387021 /home/damien/Documents/GitHub/Skydda/include/Position.h
 	<iostream>
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/Movement.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/Movement.cpp
 	"Movement.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/Movement.h
+1638617974 /home/damien/Documents/GitHub/Skydda/include/Movement.h
 	"Position.h"
 	"CoupleFloat.h"
 	<stdlib.h>
 	<vector>
 	<iostream>
 
-1638530247 source:/home/damien/Documents/GitHub/Skydda/src/Player.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/Player.cpp
 	"Player.h"
 
-1638530247 /home/damien/Documents/GitHub/Skydda/include/Player.h
+1638617974 /home/damien/Documents/GitHub/Skydda/include/Player.h
 	<string>
 	"Position.h"
 	"Movement.h"
 	"SoundLoader.h"
+	"StatePlayer.h"
 
 1638387022 source:/home/damien/Documents/GitHub/Skydda/src/CoupleFloat.cpp
 	"CoupleFloat.h"
@@ -1602,14 +1604,18 @@
 1638387021 /home/damien/Documents/GitHub/Skydda/include/CoupleFloat.h
 	<iostream>
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/PlayerView.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/PlayerView.cpp
 	"PlayerView.h"
 	"Collision.h"
+	"Animation.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/PlayerView.h
+1638617974 /home/damien/Documents/GitHub/Skydda/include/PlayerView.h
 	"Player.h"
-	"CoupleVectorTransformer.h"
 	<SFML/Graphics.hpp>
+	"PlayerSprite.h"
+	"Animation.h"
+	"StatePlayer.h"
+	"SoundManager.h"
 
 1636537995 source:/home/damien/Documents/GitHub/Skydda/src/CoupleVectorTransformer.cpp
 	"CoupleVectorTransformer.h"
@@ -2130,10 +2136,11 @@
 1638538745 source:/home/florian/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/TextureLoader.h
+1638539029 /home/damien/Documents/GitHub/Skydda/include/TextureLoader.h
 	<SFML/Graphics.hpp>
 	<string>
 	<iostream>
+	"PlayerSprite.h"
 
 1638387022 source:/home/damien/Documents/GitHub/Skydda/src/PlatformView.cpp
 	"PlatformView.h"
@@ -2142,13 +2149,13 @@
 	<SFML/Graphics.hpp>
 	"Platform.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/TextureLoader.cpp
+1638539029 source:/home/damien/Documents/GitHub/Skydda/src/TextureLoader.cpp
 	"TextureLoader.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/Collision.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/Collision.cpp
 	"Collision.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/Collision.h
+1638617974 /home/damien/Documents/GitHub/Skydda/include/Collision.h
 	<vector>
 	<math.h>
 	"PlayerView.h"
@@ -2744,7 +2751,7 @@
 1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
 	"SpriteInitializer.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/ObjectInitializer.h
+1638617974 /home/damien/Documents/GitHub/Skydda/include/ObjectInitializer.h
 	<vector>
 	"SpriteInitializer.h"
 	"PlatformView.h"
@@ -2753,16 +2760,17 @@
 	"PlayerView.h"
 	"HealthBarView.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/SpriteInitializer.h
+1638539029 /home/damien/Documents/GitHub/Skydda/include/SpriteInitializer.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 	"CoupleFloat.h"
 	"TextureLoader.h"
+	"PlayerSprite.h"
 
-1638530247 source:/home/damien/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/ObjectInitializer.cpp
 	"ObjectInitializer.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
+1638539029 source:/home/damien/Documents/GitHub/Skydda/src/SpriteInitializer.cpp
 	"SpriteInitializer.h"
 
 1638387022 source:/home/damien/Documents/GitHub/Skydda/src/HealthBarView.cpp
@@ -2795,7 +2803,7 @@
 	<ObjectInitializer.h>
 	"Map.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/MapView.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/MapView.cpp
 	"MapView.h"
 
 1638186855 /home/houdartf/Documents/GitHub/Skydda/include/HealthBar.h
@@ -3326,7 +3334,7 @@
 1636136785 /home/florian/Documents/GitHub/Skydda/include/ChooseCharacterScreen.h
 	"Screen.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/ScreenIncluder.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/ScreenIncluder.h
 	"Screen.h"
 	"MenuScreen.h"
 	"GameScreen.h"
@@ -3341,14 +3349,14 @@
 	"SpriteInitializer.h"
 	"TextInitializer.h"
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/TextInitializer.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/TextInitializer.h
 	<SFML/Graphics.hpp>
 	"Position.h"
 
 1638387021 /home/damien/Documents/GitHub/Skydda/include/MenuScreen.h
 	"Screen.h"
 
-1638536564 /home/damien/Documents/GitHub/Skydda/include/GameScreen.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/GameScreen.h
 	"Screen.h"
 	"PlayerView.h"
 	"PlatformView.h"
@@ -3363,8 +3371,10 @@
 	<sstream>
 	<string>
 
-1638387021 /home/damien/Documents/GitHub/Skydda/include/OptionScreen.h
+1638562379 /home/damien/Documents/GitHub/Skydda/include/OptionScreen.h
 	"Screen.h"
+	"GlobalVariables.h"
+	"MusicManager.h"
 
 1636121070 source:/home/damien/Documents/GitHub/Skydda/src/ChooseCharacterScreen.cpp
 	"ChooseCharacterScreen.h"
@@ -3393,10 +3403,10 @@
 	<vector>
 	"Match.h"
 
-1638455865 source:/home/damien/Documents/GitHub/Skydda/src/MenuScreen.cpp
+1638540547 source:/home/damien/Documents/GitHub/Skydda/src/MenuScreen.cpp
 	"MenuScreen.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/OptionScreen.cpp
+1638562379 source:/home/damien/Documents/GitHub/Skydda/src/OptionScreen.cpp
 	"OptionScreen.h"
 
 1638387022 source:/home/damien/Documents/GitHub/Skydda/src/Screen.cpp
@@ -3405,10 +3415,10 @@
 1638387022 source:/home/damien/Documents/GitHub/Skydda/src/ScreenIncluder.cpp
 	"ScreenIncluder.h"
 
-1638387022 source:/home/damien/Documents/GitHub/Skydda/src/TextInitializer.cpp
+1638540547 source:/home/damien/Documents/GitHub/Skydda/src/TextInitializer.cpp
 	"TextInitializer.h"
 
-1638536544 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/GameScreen.cpp
 	"GameScreen.h"
 
 1636069133 source:/home/florian/Documents/GitHub/Skydda/src/Match.cpp
@@ -3470,17 +3480,17 @@
 1638534436 source:/home/houdartf/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
-1638532090 /home/damien/Documents/GitHub/Skydda/include/Game.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/Game.h
 	<SFML/Graphics.hpp>
 	"Player.h"
 
-1638455865 /home/damien/Documents/GitHub/Skydda/include/PrematchScreen.h
+1638562379 /home/damien/Documents/GitHub/Skydda/include/PrematchScreen.h
 	"Screen.h"
 
-1638532090 source:/home/damien/Documents/GitHub/Skydda/src/Game.cpp
+1638540547 source:/home/damien/Documents/GitHub/Skydda/src/Game.cpp
 	"Game.h"
 
-1638532090 source:/home/damien/Documents/GitHub/Skydda/src/PrematchScreen.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
 1636371277 source:/home/martin/Documents/GitHub/Skydda/main.cpp
@@ -4201,31 +4211,31 @@
 1636371277 source:/home/martin/Documents/GitHub/Skydda/src/PrematchScreen.cpp
 	"PrematchScreen.h"
 
-1638532090 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenRound.cpp
+1638617974 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenRound.cpp
 	"GameScreenRound.h"
 
-1638532090 /home/damien/Documents/GitHub/Skydda/include/GameScreenRound.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/GameScreenRound.h
 	"GameScreen.h"
 	"GameRound.h"
 	<string>
 
-1638536113 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
+1638540547 source:/home/damien/Documents/GitHub/Skydda/src/GameScreenTimer.cpp
 	"GameScreenTimer.h"
 
-1638534803 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/GameScreenTimer.h
 	"GameScreen.h"
 	"GameTimer.h"
 
-1638532090 source:/home/damien/Documents/GitHub/Skydda/src/GameRound.cpp
+1638540547 source:/home/damien/Documents/GitHub/Skydda/src/GameRound.cpp
 	"GameRound.h"
 
-1638532090 /home/damien/Documents/GitHub/Skydda/include/GameRound.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/GameRound.h
 	"Game.h"
 
-1638532090 source:/home/damien/Documents/GitHub/Skydda/src/GameTimer.cpp
+1638540547 source:/home/damien/Documents/GitHub/Skydda/src/GameTimer.cpp
 	"GameTimer.h"
 
-1638532090 /home/damien/Documents/GitHub/Skydda/include/GameTimer.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/GameTimer.h
 	"Game.h"
 	"GlobalVariables.h"
 
@@ -4275,7 +4285,7 @@
 1638542931 source:/home/florian/Documents/GitHub/Skydda/src/SoundManager.cpp
 	"SoundManager.h"
 
-1638455865 /home/damien/Documents/GitHub/Skydda/include/SoundLoader.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/SoundLoader.h
 	<SFML/Audio.hpp>
 	<random>
 	<iostream>
@@ -4283,24 +4293,26 @@
 1638455865 source:/home/damien/Documents/GitHub/Skydda/src/SoundLoader.cpp
 	"SoundLoader.h"
 
-1638532647 /home/damien/Documents/GitHub/Skydda/include/GlobalVariables.h
+1638540547 /home/damien/Documents/GitHub/Skydda/include/GlobalVariables.h
 
-1638532815 /home/damien/Documents/GitHub/Skydda/include/MusicManager.h
+1638562379 /home/damien/Documents/GitHub/Skydda/include/MusicManager.h
 	"GlobalVariables.h"
 	<SFML/Audio.hpp>
 	<iostream>
 	<mutex>
 
-1638532845 source:/home/damien/Documents/GitHub/Skydda/src/MusicManager.cpp
+1638562379 source:/home/damien/Documents/GitHub/Skydda/src/MusicManager.cpp
 	"MusicManager.h"
 
-1638530247 source:/home/damien/Documents/GitHub/Skydda/src/SoundManager.cpp
+1638547356 source:/home/damien/Documents/GitHub/Skydda/src/SoundManager.cpp
 	"SoundManager.h"
 
-1638530247 /home/damien/Documents/GitHub/Skydda/include/SoundManager.h
+1638547356 /home/damien/Documents/GitHub/Skydda/include/SoundManager.h
 	<SFML/Audio.hpp>
 	<random>
 	<iostream>
+	<map>
+	<mutex>
 
 1638534455 source:/home/houdartf/Documents/GitHub/Skydda/src/Animation.cpp
 	"Animation.h"
@@ -4395,5 +4407,24 @@
 	<iostream>
 
 1638538745 source:/home/florian/Documents/GitHub/Skydda/src/PlayerSprite.cpp
+	"PlayerSprite.h"
+
+1638539029 /home/damien/Documents/GitHub/Skydda/include/PlayerSprite.h
+	<SFML/Graphics.hpp>
+
+1638617974 /home/damien/Documents/GitHub/Skydda/include/StatePlayer.h
+	<map>
+	<SFML/Graphics.hpp>
+
+1638540547 /home/damien/Documents/GitHub/Skydda/include/Animation.h
+	<SFML/Graphics.hpp>
+	"PlayerSprite.h"
+	"StatePlayer.h"
+
+1638540547 source:/home/damien/Documents/GitHub/Skydda/src/Animation.cpp
+	"Animation.h"
+	<iostream>
+
+1638539029 source:/home/damien/Documents/GitHub/Skydda/src/PlayerSprite.cpp
 	"PlayerSprite.h"
 
