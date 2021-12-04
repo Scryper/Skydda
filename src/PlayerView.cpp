@@ -46,15 +46,20 @@ bool PlayerView::isLooksRigth()const{
 }
 
 void PlayerView::flipSprite() {
+
+    //on récupère la gauche de la hitbox actuelle;
     float previousLeft = sprite.getGlobalHitbox().left;
 
+    //on retourne le sprite
     sprite.scale(-1.f, 1.f);
 
+    //on récupère la gauche de la hitbox retournée
     float presentLeft = sprite.getGlobalHitbox().left;
+
+    //on cacule la différence entre les deux
     float diff = previousLeft-presentLeft;
 
-    std::cout<<diff<<std::endl;
-
+    //on déplace le perso de la différence
     Position p(player.getPosition().getX()+diff, player.getPosition().getY());
     sprite.setPosition(p.getX(), p.getY());
     player.setPosition(p);

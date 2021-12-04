@@ -5,6 +5,8 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
     sf::FloatRect platformBounds = platform.getSprite().getGlobalBounds();
 
     CollisionVector collisions;
+    bool looksRight = player.isLooksRigth();
+
 
     //0 : Bottom, 1 : Top, 2 : Right, 3 : Left
     if(playerBounds.intersects(platformBounds)) {
@@ -38,7 +40,8 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
            ) {
             DisplacementPerCollision tmp;
             tmp.first=rigthCol;
-            float value = platformRigth + 1;
+            float value = platformRigth;
+            if(looksRight)value += playerHSize;
             tmp.second=value;
             collisions.push_back(tmp);
         }
@@ -53,7 +56,8 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
            ){
             DisplacementPerCollision tmp;
             tmp.first = leftCol;
-            float value = platformLeft- 1;
+            float value = platformLeft;
+            if(!looksRight)value -= playerHSize;
             tmp.second=value;
             collisions.push_back(tmp);
         }

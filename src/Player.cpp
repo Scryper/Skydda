@@ -223,9 +223,9 @@ PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPress
     if(!activated)state[idle]->second=1;
 
 
-    for(auto i : state){
-        cout<<i->first<<" "<<i->second<<endl;
-    }
+    //for(auto i : state){
+        //cout<<i->first<<" "<<i->second<<endl;
+    //}
 
     return state;
 }
