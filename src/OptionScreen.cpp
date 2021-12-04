@@ -44,11 +44,17 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
             if(event.type == sf::Event::Closed) return -1;
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                buttonPlus.setColor(sf::Color::Green);
                 changeVolume(1.f);
+            } else {
+                buttonPlus.setColor(TextInitializer::BetterWhite);
             }
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                buttonMinus.setColor(sf::Color::Green);
                 changeVolume(-1.f);
+            } else {
+                buttonMinus.setColor(TextInitializer::BetterWhite);
             }
 
             /// Button plus
@@ -61,7 +67,9 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
                 }
             }
             else {
-                buttonPlus.setColor(TextInitializer::BetterWhite);
+                if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                    buttonPlus.setColor(TextInitializer::BetterWhite);
+                }
             }
 
             /// Button minus
@@ -70,11 +78,14 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
                     changeVolume(-1.f);
                 }
                 else {
+
                     buttonMinus.setColor(sf::Color::Green);
                 }
             }
             else {
-                buttonMinus.setColor(TextInitializer::BetterWhite);
+                if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                    buttonMinus.setColor(TextInitializer::BetterWhite);
+                }
             }
         }
 
