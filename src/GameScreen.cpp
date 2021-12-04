@@ -123,23 +123,23 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
 
     // Lance une animation x seconde après le lancement de la partie
 
-//    switch(time) {
-//        case timeAnimRound:
-//            return displayTextAnimation(app, "Round 1 !");
-//        case timeAnimReady:
-//            return displayTextAnimation(app, "Ready ?");
-//        case timeAnimFight:
-//            modeJeu->getPlayer1().setState(standby,false);
-//            modeJeu->getPlayer2().setState(standby,false);
-//            return displayTextAnimation(app, "Fight !");
-//    }
-
     switch(time) {
-        case 0:
+        case timeAnimRound:
+            return displayTextAnimation(app, "Round 1 !");
+        case timeAnimReady:
+            return displayTextAnimation(app, "Ready ?");
+        case timeAnimFight:
             modeJeu->getPlayer1().setState(standby,false);
             modeJeu->getPlayer2().setState(standby,false);
             return displayTextAnimation(app, "Fight !");
     }
+
+//    switch(time) {
+//        case 0:
+//            modeJeu->getPlayer1().setState(standby,false);
+//            modeJeu->getPlayer2().setState(standby,false);
+//            return displayTextAnimation(app, "Fight !");
+//    }
 
     if(isPlayerWin) startAnimationWin = true;
     else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
@@ -151,7 +151,19 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
             return displayTextAnimation(app, textWin.str());
     }
     // Lance l'animation de K.O.
-    else if(startAnimationKO && timeAnimation < 3) return displayTextAnimation(app, "K.O. !");
+    else if(startAnimationKO && timeAnimation < 3) {
+        modeJeu->getPlayer1().setState(standby,true);
+        modeJeu->getPlayer2().setState(standby,true);
+        return displayTextAnimation(app, "K.O. !");
+    }
+
+    else if(startAnimationKO && timeAnimation == 3) {
+            modeJeu->getPlayer1().setState(standby,false);
+            modeJeu->getPlayer2().setState(standby,false);
+
+            modeJeu->getPlayer1().setState(dead,false);
+            modeJeu->getPlayer2().setState(dead,false);
+    }
 
     resetAnimationAndClock();
     return displayTextAnimation(app, "");
@@ -176,6 +188,7 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu) {
             modeJeu->incrementRoundWinP2();
             modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
             modeJeu->getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
+
             if(modeJeu->getPlayerWin() == 0) {
                 modeJeu->getPlayer1().setHealth(100.f);
                 modeJeu->getPlayer2().setHealth(100.f);
@@ -185,6 +198,7 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu) {
             modeJeu->incrementRoundWinP1();
             modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
             modeJeu->getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
+
             if(modeJeu->getPlayerWin() == 0) {
                 modeJeu->getPlayer1().setHealth(100.f);
                 modeJeu->getPlayer2().setHealth(100.f);
