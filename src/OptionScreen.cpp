@@ -36,6 +36,7 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
 
     initFonts();
 
+    sf::Event event;
     while(app.isOpen()) {
         // Get the mouse position to verify if the user is over a sprite and/or click a sprite
         mousePosition = getMousePosition(&app);
@@ -43,14 +44,14 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
         while(app.pollEvent(event)) {
             if(event.type == sf::Event::Closed) return -1;
 
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            if((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Up)) {
                 buttonPlus.setColor(sf::Color::Green);
                 changeVolume(1.f);
             } else {
                 buttonPlus.setColor(TextInitializer::BetterWhite);
             }
 
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            if((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Down)) {
                 buttonMinus.setColor(sf::Color::Green);
                 changeVolume(-1.f);
             } else {
