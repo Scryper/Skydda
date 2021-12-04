@@ -79,7 +79,6 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
                     changeVolume(-1.f);
                 }
                 else {
-
                     buttonMinus.setColor(sf::Color::Green);
                 }
             }
