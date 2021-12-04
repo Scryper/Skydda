@@ -242,9 +242,20 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
         mousePosition = getMousePosition(&app);
 
+        if(gameMode==2) {
+            textModeTime.setFillColor(TextInitializer::BetterWhite);
+            textModeRounds.setFillColor(sf::Color::Green);
+        } else if(gameMode==3) {
+            textModeRounds.setFillColor(TextInitializer::BetterWhite);
+            textModeTime.setFillColor(sf::Color::Green);
+        }
+
         /// Button rounds mode
         if(buttonModeRounds.getGlobalBounds().contains(mousePosition)) {
-            textModeRounds.setFillColor(sf::Color::Green);
+            if(gameMode!=2) {
+                textModeRounds.setFillColor(sf::Color::Green);
+            }
+
             if(event.type == sf::Event::MouseButtonPressed) {
                 gameMode = 2;
                 textureGameMode.loadFromFile(gameModes[gameMode - 2]);
@@ -252,12 +263,17 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             }
         }
         else {
-            textModeRounds.setFillColor(TextInitializer::BetterWhite);
+            if(gameMode!=2) {
+                textModeRounds.setFillColor(TextInitializer::BetterWhite);
+            }
         }
 
         /// Button time mode
         if(buttonModeTime.getGlobalBounds().contains(mousePosition)) {
-            textModeTime.setFillColor(sf::Color::Green);
+            if(gameMode!=3) {
+                textModeTime.setFillColor(sf::Color::Green);
+            }
+
             if(event.type == sf::Event::MouseButtonPressed) {
                 gameMode = 3;
                 textureGameMode.loadFromFile(gameModes[gameMode - 2]);
@@ -265,7 +281,9 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             }
         }
         else {
-            textModeTime.setFillColor(TextInitializer::BetterWhite);
+            if(gameMode!=3) {
+                textModeTime.setFillColor(TextInitializer::BetterWhite);
+            }
         }
 
         /// Button play
