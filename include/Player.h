@@ -7,6 +7,7 @@
 #include "Movement.h"
 #include "SoundLoader.h"
 #include "StatePlayer.h"
+#include "EnumCollision.h"
 
 using namespace std;
 
@@ -49,8 +50,8 @@ class Player {
         bool isFoundInArray(std::vector<T> vect, T element);
 
 
-        void attackPlayer(Player& p, float clock);
-        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
+        void attackPlayer(Player& p, float clock, int factor);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<CollisionVector> collisions);
         PlayerStateBoolArray computeStates(std::vector<PlayerStateEnum> keyPressed, bool bottomCollision);
 
 };

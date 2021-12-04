@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <vector>
+#include "EnumCollision.h"
 #include <iostream> // to delete when debug ok
 
 /*This class is used to recalculate the player's position when he is moving.*/
@@ -31,7 +32,7 @@ class Movement {
         void stopY();
         void recul(int value);
 
-        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<std::vector<std::vector<int>>> collisions);
+        Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<CollisionVector> collisions);
 };
 
 #endif // MOVEMENT_H

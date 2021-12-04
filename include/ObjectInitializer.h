@@ -29,6 +29,7 @@ PlayerView createPlayer(float sizeX,
                         sf::Keyboard::Key right,
                         sf::Keyboard::Key attack,
                         sf::Keyboard::Key protect,
+                        sf::Keyboard::Key superAttack,
                         bool looksRight,
                         std::string namePlayerStr);
 

@@ -34,6 +34,7 @@ void GameScreen::initPlayers() {
                                 sf::Keyboard::D,
                                 sf::Keyboard::S,
                                 sf::Keyboard::LShift,
+                                sf::Keyboard::C,
                                 true,
                                 playerName1);
 
@@ -49,6 +50,7 @@ void GameScreen::initPlayers() {
                                 sf::Keyboard::Right,
                                 sf::Keyboard::Down,
                                 sf::Keyboard::RShift,
+                                sf::Keyboard::M,
                                 false,
                                 playerName2);
     playerViewP2.flipSprite();

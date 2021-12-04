@@ -46,6 +46,7 @@ PlayerView createPlayer(float sizeX,
                         sf::Keyboard::Key right,
                         sf::Keyboard::Key attack,
                         sf::Keyboard::Key protect,
+                        sf::Keyboard::Key superAttack,
                         bool looksRight,
                         std::string namePlayerStr) {
 
@@ -61,6 +62,7 @@ PlayerView createPlayer(float sizeX,
     keys.push_back({movingRight,right});
     keys.push_back({attacking,attack});
     keys.push_back({defending,protect});
+    keys.push_back({specialAttacking,superAttack});
     CoupleFloat sizeCouple(sizeX, sizeY);
     CoupleFloat sizeOfSprite(sizeCouple);
 
@@ -69,7 +71,7 @@ PlayerView createPlayer(float sizeX,
     PlayerSprite playerSprite = initSpritePlayer(sizeCouple, centerOfSprite, pathToPlayer, playerPosition, playerTexture);
     playerSprite.setTextureRect(sf::IntRect(0, 0, width, height));
 
-    float atk = 50.f;
+    float atk = 10.f;
 
     Player player(namePlayerStr, atk, 100, playerPosition, movement);
     PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple);

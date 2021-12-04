@@ -6,11 +6,14 @@
 
 #include "PlayerView.h"
 #include "PlatformView.h"
+#include "EnumCollision.h"
 
-std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView platform);
+CollisionVector directionCollision(PlayerView player, PlatformView platform);
 
-std::vector<std::vector<int>> directionCollisionPlayers(PlayerView player1, PlayerView player2);
+CollisionVector directionCollisionPlayers(PlayerView player1, PlayerView player2);
 
-std::vector<std::vector<std::vector<int>>> directionCollisions(PlayerView player, std::vector<PlatformView> platforms);
+std::vector<CollisionVector> directionCollisions(PlayerView player, std::vector<PlatformView> platforms);
+
+CollisionVector initCollisionVector();
 
 #endif // COLLISION_H

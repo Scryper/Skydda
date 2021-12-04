@@ -70,7 +70,7 @@ void Player::setHealth(float health) {
     this->health = health;
 }
 
-void Player::attackPlayer(Player &player, float clock) {
+void Player::attackPlayer(Player &player, float clock, int factor) {
     //vérif que le player ne bloque pas l'attaque
     if(player.getState(defending) == true){
         timeLastAttack = clock;
@@ -87,8 +87,8 @@ void Player::attackPlayer(Player &player, float clock) {
     if(clock - timeLastAttack >= durationBetweenAttacks){
         // deal damages
         double health = player.getHealth();
-        if(health - attack > 0) {
-            player.setHealth(health - attack);
+        if(health - attack*factor > 0) {
+            player.setHealth(health - attack*factor);
         }
         else {
             player.setHealth(0.f);
@@ -114,6 +114,7 @@ void Player::stateInitializer(){
     initStatePointer(standby,0);
     initStatePointer(defending,0);
     initStatePointer(receiveDamage,0);
+    initStatePointer(specialAttacking,0);
     initStatePointer(attacking,0);
     initStatePointer(jumping,0);
     initStatePointer(movingLeft,0);
@@ -133,7 +134,7 @@ void Player::stateDestroyer(){
     //state.clear();
 }
 
-Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
+Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<CollisionVector> collisions) {
     return movement.updatePosition(position, direction, collisions);
 }
 
@@ -221,6 +222,10 @@ PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPress
 
     if(!activated)state[idle]->second=1;
 
+
+    for(auto i : state){
+        cout<<i->first<<" "<<i->second<<endl;
+    }
 
     return state;
 }

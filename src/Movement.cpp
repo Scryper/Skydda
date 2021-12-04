@@ -57,7 +57,7 @@ void Movement::recul(int value){
     speed.setX(value);
 }
 
-Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<std::vector<std::vector<int>>> collisions) {
+Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<CollisionVector> collisions) {
     // get the info about X movement
     float speedX = speed.getX();
     float directionX = direction.getX();
@@ -74,7 +74,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
 
     bool zeroY = false;
 
-    std::vector<std::vector<int>> coll;
+    CollisionVector coll;
 
 
     ///////////// DIRECTION X /////////////
@@ -151,13 +151,13 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
 
         for(auto& i : collisions){
             for(auto& j : i){
-                switch(j[0]){
-                case 1 :
+                switch(j.first){
+                case bottom :
                     if(speed.getY() < 0){
                         coll.push_back(j);
                     }
                     break;
-                case 2 :
+                case top :
                     if(directionY != 0 && speedY == 0){
                         speed.setY(-jumpHeight);
                     }
@@ -165,13 +165,13 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
                             coll.push_back(j);
                         }
                     break;
-                case 3 :
+                case rigthCol :
                     if(speed.getX() < 0){
                         coll.push_back(j);
                     }
 
                     break;
-                case 4 :
+                case leftCol :
                     if(speed.getX() > 0){
                         coll.push_back(j);
                     }
@@ -183,13 +183,13 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
 
 
         for(auto i : coll){
-            if(i[0] == 1 || i[0] == 2){
+            if(i.first == bottom || i.first == top){
                 speed.setY(0);
-                position.setY(i[1]);
+                position.setY(i.second);
             }
-            if(i[0] == 3 || i[0] == 4){
+            if(i.first == leftCol || i.first == rigthCol){
                 speed.setX(0);
-                position.setX(i[1]);
+                position.setX(i.second);
             }
         }
     }

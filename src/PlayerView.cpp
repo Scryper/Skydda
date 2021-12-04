@@ -60,11 +60,11 @@ void PlayerView::flipSprite() {
     player.setPosition(p);
 }
 
-Position PlayerView::computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions){
+Position PlayerView::computeNewPosition(CoupleFloat vectorDirection, std::vector<CollisionVector> collisions){
     return player.updatePosition(player.getPosition(), vectorDirection, collisions);
 }
 
-void PlayerView::movePlayer(std::vector<std::vector<std::vector<int>>> collisions, PlayerStateEnum state) {
+void PlayerView::movePlayer(std::vector<CollisionVector> collisions, PlayerStateEnum state) {
     CoupleFloat vectorDirection = computeCoupleMovement();
     // we swap the player's sprite if he is not looking the way he is going
     if((looksRight && vectorDirection.getX() < 0) || (!looksRight && vectorDirection.getX() > 0)) {
@@ -127,15 +127,18 @@ void PlayerView::getHit(int value){
     player.getHit(value);
 }
 
-void PlayerView::attack(PlayerView &playerAttacked, bool left){
-    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
+void PlayerView::attack(PlayerView &playerAttacked, bool left, int factor){
+    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds(), factor);
     this->soundManager->playRandomSound();
 
     //si attaqué changer state
     if(playerAttacked.getPlayer().getHealth() != 0.f){
         playerAttacked.getPlayer().setState(receiveDamage,true);
         //lui donner une vitesse dans le sens du tapage
-        playerAttacked.getHit(10.f);
+        if(left)
+        playerAttacked.getHit(10.f * factor * 0.8f);
+        else
+        playerAttacked.getHit(-10.f * factor * 0.8f);
     }
     else{
         playerAttacked.getPlayer().setState(dead,true);
@@ -151,10 +154,10 @@ void PlayerView::animate(bool first,PlayerStateEnum state, bool boucle){
     animation.startAnimation(&this->sprite, state, boucle);
 }
 
-bool PlayerView::isBottomCollision(std::vector<std::vector<std::vector<int>>> coll){
+bool PlayerView::isBottomCollision(std::vector<CollisionVector> coll){
     for(auto collisions : coll){
         for(auto coteCollision : collisions){
-            if(coteCollision[0]==2){
+            if(coteCollision.first==top){
                 return true;
             }
         }
@@ -163,7 +166,7 @@ bool PlayerView::isBottomCollision(std::vector<std::vector<std::vector<int>>> co
 }
 
 
-void PlayerView::computeFrame(std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView){
+void PlayerView::computeFrame(std::vector<CollisionVector> collisions, PlayerView &playerView){
 
     //compute states
     std::vector<PlayerStateEnum> statesFromInput = getStatesFromInput();
@@ -238,10 +241,10 @@ void PlayerView::computeFrame(std::vector<std::vector<std::vector<int>>> collisi
     }
 }
 
-void PlayerView::doAction(PlayerStateEnum state, std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView){
+void PlayerView::doAction(PlayerStateEnum state, std::vector<CollisionVector> collisions, PlayerView &playerView){
     CoupleFloat vectorDirection;
     Position newPosition;
-    std::vector<std::vector<int>> collisionPlayer;
+    CollisionVector collisionPlayer;
     switch(state){
     case dead:
         break;
@@ -252,14 +255,29 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<std::vector<std::ve
         break;
     case receiveDamage:
         break;
+    case specialAttacking:
+        //on calcule les collisions entre players
+        collisionPlayer = directionCollisionPlayers(*this, playerView);
+        //on vérifie qu'il y a collision et que
+        if(collisionPlayer.size() > 0 && collisionPlayer[0].first < 5){
+            for(auto i : collisionPlayer){
+                if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
+                    bool direction = !(i.first == rigthCol && !looksRight);
+                    attack(playerView, direction,2);
+                }
+            }
+        }
+        break;
+        break;
     case attacking:
         //on calcule les collisions entre players
         collisionPlayer = directionCollisionPlayers(*this, playerView);
         //on vérifie qu'il y a collision et que
-        if(collisionPlayer.size() > 0 && collisionPlayer[0][0] > 0){
+        if(collisionPlayer.size() > 0 && collisionPlayer[0].first < 5){
             for(auto i : collisionPlayer){
-                if((i[0] == 3 && !looksRight) || (i[0] == 4 && looksRight)) {
-                    attack(playerView, true);
+                if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
+                    bool direction = !(i.first == rigthCol && !looksRight);
+                    attack(playerView, direction,1);
                 }
             }
         }

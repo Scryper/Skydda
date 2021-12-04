@@ -8,6 +8,7 @@
 #include "Animation.h"
 #include "StatePlayer.h"
 #include "SoundManager.h"
+#include "EnumCollision.h"
 
 class PlayerView {
     private:
@@ -35,7 +36,7 @@ class PlayerView {
         Player& getPlayer();
         PlayerSprite getSprite() const;
 
-        void attack(PlayerView &playerAttacked, bool left);
+        void attack(PlayerView &playerAttacked, bool left, int factor);
         void setHealth(float health);
 
         std::vector<std::vector<float>> getOffset()const;
@@ -46,15 +47,15 @@ class PlayerView {
 
         CoupleFloat computeCoupleMovement();
 
-        Position computeNewPosition(CoupleFloat vectorDirection, std::vector<std::vector<std::vector<int>>> collisions);
-        void movePlayer(std::vector<std::vector<std::vector<int>>> collisions, PlayerStateEnum state);
+        Position computeNewPosition(CoupleFloat vectorDirection, std::vector<CollisionVector> collisions);
+        void movePlayer(std::vector<CollisionVector> collisions, PlayerStateEnum state);
         std::vector<PlayerStateEnum> getStatesFromInput();
-        bool isBottomCollision(std::vector<std::vector<std::vector<int>>> coll);
+        bool isBottomCollision(std::vector<CollisionVector> coll);
 
         void animate(bool first,PlayerStateEnum state, bool boucle);
         void flipSprite();
-        void computeFrame(std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView);
-        void doAction(PlayerStateEnum state,std::vector<std::vector<std::vector<int>>> collisions, PlayerView &playerView);
+        void computeFrame(std::vector<CollisionVector> collisions, PlayerView &playerView);
+        void doAction(PlayerStateEnum state,std::vector<CollisionVector> collisions, PlayerView &playerView);
 };
 
 #endif // PLAYERVIEW_H

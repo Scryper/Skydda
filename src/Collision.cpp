@@ -1,12 +1,12 @@
 #include "Collision.h"
 
-std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView platform) {
+CollisionVector directionCollision(PlayerView player, PlatformView platform) {
     sf::FloatRect playerBounds = player.getSprite().getGlobalHitbox();
     sf::FloatRect platformBounds = platform.getSprite().getGlobalBounds();
 
-    std::vector<std::vector<int>> collisions;
+    CollisionVector collisions;
 
-    //1 : Bottom, 2 : Top, 3 : Right, 4 : Left
+    //0 : Bottom, 1 : Top, 2 : Right, 3 : Left
     if(playerBounds.intersects(platformBounds)) {
         float playerLeft;
         float playerRigth;
@@ -36,10 +36,10 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
            &&  playerTop < platformBottom - 30
            &&  playerBottom > platformTop + 30
            ) {
-            std::vector <int> tmp;
-            tmp.push_back(3);
+            DisplacementPerCollision tmp;
+            tmp.first=rigthCol;
             float value = platformRigth + 1;
-            tmp.push_back(value);
+            tmp.second=value;
             collisions.push_back(tmp);
         }
 
@@ -51,10 +51,10 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
            &&  playerTop < platformBottom - 30
            && playerBottom > platformTop + 30
            ){
-            std::vector <int> tmp;
-            tmp.push_back(4);
+            DisplacementPerCollision tmp;
+            tmp.first = leftCol;
             float value = platformLeft- 1;
-            tmp.push_back(value);
+            tmp.second=value;
             collisions.push_back(tmp);
         }
 
@@ -66,9 +66,9 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
             && (playerLeft < platformRigth - 10)
             && (playerRigth > platformLeft + 10)
            ) {
-            std::vector <int> tmp;
-            tmp.push_back(1);
-            tmp.push_back(platformBottom + std::floor(playerVSize / 3) - 1);
+            DisplacementPerCollision tmp;
+            tmp.first=bottom;
+            tmp.second=(platformBottom + std::floor(playerVSize / 3) - 1);
             collisions.push_back(tmp);
         }
 
@@ -81,86 +81,93 @@ std::vector<std::vector<int>> directionCollision(PlayerView player, PlatformView
            && (playerLeft < platformRigth - 10)
            && (playerRigth > platformLeft + 10)
            ) {
-            std::vector <int> tmp;
-            tmp.push_back(2);
-            tmp.push_back(platformTop - std::floor(playerVSize / 2) + 1);
+            DisplacementPerCollision tmp;
+            tmp.first=top;
+            tmp.second=(platformTop - std::floor(playerVSize / 2) + 1);
             collisions.push_back(tmp);
         }
         return collisions;
 
     } else {
-        std::vector <int> tmp;
-        tmp.push_back(-1);
-        tmp.push_back(0);
+        DisplacementPerCollision tmp;
+        tmp.first=incorrectCol;
+        tmp.second=0;
         collisions.push_back(tmp);
         return collisions;
     }
-    std::vector <int> tmp;
-    tmp.push_back(-2);
-    tmp.push_back(0);
-    collisions.push_back(tmp);
-    return collisions;
 }
 
-std::vector<std::vector<int>> directionCollisionPlayers(PlayerView playerview1, PlayerView playerview2) {
+CollisionVector directionCollisionPlayers(PlayerView playerview1, PlayerView playerview2) {
     sf::FloatRect player1Bounds = playerview1.getSprite().getGlobalBounds();
-    sf::FloatRect player2Bounds = playerview2.getSprite().getGlobalBounds();
-    std::vector<std::vector<int>> collisions;
+    sf::FloatRect player2Bounds = playerview2.getSprite().getGlobalHitbox();
+
+    int marge = 30;
+
+    CollisionVector collisions;
 
     //1 : Bottom, 2 : Top, 3 : Right, 4 : Left
     if(player1Bounds.intersects(player2Bounds)) {
-        float playerVSize = player1Bounds.height;
-        float playerHSize = player1Bounds.width;
-        float playerTop = player1Bounds.top;
-        float playerBottom = playerTop + playerVSize;
-        float playerLeft = player1Bounds.left;
-        float playerRigth = playerLeft + playerHSize;
+        float player1VSize = player1Bounds.height;
+        float player1HSize = player1Bounds.width;
 
-        float platformVSize = player2Bounds.height;
-        float platformHSize = player2Bounds.width;
-        float platformTop = player2Bounds.top;
-        float platformBottom = platformTop + platformVSize;
-        float platformLeft = player2Bounds.left;
-        float platformRigth = platformLeft + platformHSize;
+        float player1Top = player1Bounds.top;
+        float player1Bottom = player1Top + player1VSize;
+        float player1Left = player1Bounds.left;
+        float player1Rigth = player1Left + player1HSize;
+
+        float player2VSize = player2Bounds.height;
+        float player2HSize = player2Bounds.width;
+
+        float player2Top = player2Bounds.top;
+        float player2Bottom = player2Top + player2VSize;
+        float player2Left = player2Bounds.left;
+        float player2Rigth = player2Left + player2HSize;
+
+
+        //player1.
+
 
         /// Right
         // player 1's left should be < than player 2's right
         // player 1's right should be > than player 2's right
         // player 1's bottom should be > than player 2's top
         // player 1's top should be < than player 2's bottom
-        if(playerLeft < platformRigth
-           &&  playerRigth > platformRigth
-           &&  playerTop < platformBottom
-           &&  playerBottom > platformTop
+        if(player1Left < player2Rigth - marge
+           &&  player1Rigth > player2Rigth + marge
+           &&  player1Top < player2Bottom
+           &&  player1Bottom > player2Top
            ) {
-            std::vector <int> tmp;
-            tmp.push_back(3);
+            DisplacementPerCollision tmp;
+            tmp.first=rigthCol;
+            tmp.second=0;
             collisions.push_back(tmp);
         }
 
         /// Left
         // player 1's right should be > than player 2's left
         // player 1's left should be < than player 2's left
-        if(playerRigth > platformLeft
-           &&  playerLeft < platformLeft
-           &&  playerTop < platformBottom
-           && playerBottom > platformTop
+        if(player1Rigth > player2Left + marge
+           &&  player1Left < player2Left - marge
+           &&  player1Top < player2Bottom
+           && player1Bottom > player2Top
            ){
-            std::vector <int> tmp;
-            tmp.push_back(4);
+            DisplacementPerCollision tmp;
+            tmp.first=leftCol;
+            tmp.second=0;
             collisions.push_back(tmp);
         }
 
         /// Bottom
         // player 1's top should be < than player 2's bottom
         // player 1's bottom should be > than player 2's bottom
-        if(playerTop < platformBottom
-            && playerBottom > platformBottom
-            && (playerLeft < platformRigth )
-            && (playerRigth > platformLeft)
+        if(player1Top < player2Bottom
+            && player1Bottom > player2Bottom
+            && (player1Left < player2Rigth )
+            && (player1Rigth > player2Left)
            ) {
-            std::vector <int> tmp;
-            tmp.push_back(1);
+            DisplacementPerCollision tmp;
+            tmp.first=bottom;
+            tmp.second=0;
             collisions.push_back(tmp);
         }
 
@@ -168,33 +175,45 @@ std::vector<std::vector<int>> directionCollisionPlayers(PlayerView playerview1, 
         // player 1's bottom shouuld be > than player 2's bottom
         // player 1's top shouuld be < than player 2's top
         // player 1's left should not touch border -> should be > than player 2's right
-        if(playerBottom > platformTop
-           &&  playerTop < platformTop
-           && (playerLeft < platformRigth)
-           && (playerRigth > platformLeft)
+        if(player1Bottom > player2Top
+           &&  player1Top < player2Top
+           && (player1Left < player2Rigth)
+           && (player1Rigth > player2Left)
            ) {
-            std::vector <int> tmp;
-            tmp.push_back(2);
+            DisplacementPerCollision tmp;
+            tmp.first=top;
+            tmp.second=0;
             collisions.push_back(tmp);
         }
         return collisions;
 
     } else {
-        std::vector <int> tmp;
-        tmp.push_back(-1);
-        collisions.push_back(tmp);
+        DisplacementPerCollision tmp;
+            tmp.first=incorrectCol;
+            tmp.second=0;
+            collisions.push_back(tmp);
         return collisions;
     }
-    std::vector <int> tmp;
-    tmp.push_back(-2);
-    collisions.push_back(tmp);
-    return collisions;
 }
 
-std::vector<std::vector<std::vector<int>>> directionCollisions(PlayerView player, std::vector<PlatformView> platforms){
-    std::vector<std::vector<std::vector<int>>> collisions;
+std::vector<CollisionVector> directionCollisions(PlayerView player, std::vector<PlatformView> platforms){
+    std::vector<CollisionVector> collisions;
     for(PlatformView platformView : platforms){
         collisions.push_back(directionCollision(player, platformView));
     }
     return collisions;
 }
+
+CollisionVector initCollisionVector(){
+    CollisionVector tmp;
+    int i;
+    for ( i = 0; i<6; i++){
+        DisplacementPerCollision tmp2;
+        tmp2.first = (CollisionEnum)i;
+        tmp2.second = 0;
+        tmp.push_back(tmp2);
+    }
+    return tmp;
+}
+
+
