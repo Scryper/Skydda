@@ -1,1 +1,1 @@
-Project carried out for the video game development course
+Projet réalisé dans le cadre d'un cours de développement de jeux vidéo
