@@ -85,8 +85,9 @@ void GameScreenRound::drawAll(sf::RenderWindow *app) {
     app->draw(backgroundSprite);
     app->draw(playerViewP1.getSprite());
     app->draw(playerViewP2.getSprite());
-
+//
     for(auto platform : map_.getPlatforms()) app->draw(platform.getSprite());
+////    for(auto platform : map_.getBorders()) app->draw(platform.getSprite());
     for(auto circle : getRoundCirclesP1()) app->draw(circle);
     for(auto circle : getRoundCirclesP2()) app->draw(circle);
 

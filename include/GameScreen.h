@@ -41,6 +41,9 @@ class GameScreen : public Screen {
 
         sf::Sprite backgroundSprite;
 
+        sf::Texture houseWall;
+        sf::Texture wood;
+        sf::Texture invisibleWall;
         sf::Texture textureBackground;
         sf::Texture textureBrick;
         sf::Texture texturePlayerP1;

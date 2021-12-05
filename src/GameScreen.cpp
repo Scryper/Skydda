@@ -4,16 +4,20 @@ void GameScreen::initPlayers() {
 
     switch(mapSeed) {
     case 1:
-        positionP1 = Position(position.getX() - 500, position.getY()+300);
-        positionP2 = Position(position.getX() + 500, position.getY()+300);
+        positionP1 = Position(position.getX() - 700, position.getY()+180);
+        positionP2 = Position(position.getX() + 700, position.getY()+180);
         break;
     case 2:
-        positionP1 = Position(position.getX() - 500, position.getY());
-        positionP2 = Position(position.getX() + 500, position.getY());
+        positionP1 = Position(position.getX() - 700, position.getY()+180);
+        positionP2 = Position(position.getX() + 700, position.getY()+180);
+        break;
+    case 3:
+        positionP1 = Position(position.getX() - 700, position.getY()+180);
+        positionP2 = Position(position.getX() + 700, position.getY()+180);
         break;
     default:
-        positionP1 = Position(position.getX() - 500, position.getY());
-        positionP2 = Position(position.getX() + 500, position.getY());
+        positionP1 = Position(position.getX() - 700, position.getY()+180);
+        positionP2 = Position(position.getX() + 700, position.getY()+180);
         break;
     }
 
@@ -89,6 +93,9 @@ void GameScreen::initTextures() {
     texturePlatformLong.loadFromFile("resources/images/platforms/platform_long.png");
     texturePlatformSmall.loadFromFile("resources/images/platforms/platform_small.png");
     texturePlatformTiny.loadFromFile("resources/images/platforms/platform_tiny.png");
+    invisibleWall.loadFromFile("resources/images/platforms/invisibleWall.jpg");
+    wood.loadFromFile("resources/images/platforms/wood.png");
+    houseWall.loadFromFile("resources/images/platforms/house_wall.png");
 }
 
 void GameScreen::initVectors() {
@@ -96,6 +103,9 @@ void GameScreen::initVectors() {
     textures.push_back(&texturePlatformLong);
     textures.push_back(&texturePlatformSmall);
     textures.push_back(&texturePlatformTiny);
+    textures.push_back(&invisibleWall);
+    textures.push_back(&wood);
+    textures.push_back(&houseWall);
 }
 
 void GameScreen::movePlayers(float deltaTime) {

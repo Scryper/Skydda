@@ -16,13 +16,13 @@ PlatformView createPlatform(float sizeX, float sizeY, Position platformPosition,
 
 //creates the border
 std::vector<PlatformView> createBorders(sf::Texture *platformTexture){
-    Position topPosition(960, -50);
+    Position topPosition(960, -80);
     PlatformView topPlatform = createPlatform(2.3f, .3f, topPosition, platformTexture);
 
-    Position leftPosition(-100, 540);
+    Position leftPosition(-40, 540);
     PlatformView leftPlatform = createPlatform(.1f, 4.5f, leftPosition, platformTexture);
 
-    Position rigthPosition(2021, 540);
+    Position rigthPosition(1960, 540);
     PlatformView rigthPlatform = createPlatform(.1f, 4.5f, rigthPosition, platformTexture);
 
     std::vector<PlatformView> platformViews;
@@ -53,7 +53,7 @@ PlayerView createPlayer(float sizeX,
     CoupleFloat velocity(.0f, .0f);
     CoupleFloat acceleration(.8f, 1.f);
     CoupleFloat maxSpeed(14.f, 20.f);
-    float jumpHeight = 27.f;
+    float jumpHeight = 24.f;
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
     std::vector<pair<PlayerStateEnum,sf::Keyboard::Key>> keys;

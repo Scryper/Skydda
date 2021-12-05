@@ -3,7 +3,7 @@
 MapView::MapView() {
 }
 
-/// !!! textures -> 0 : ground, 1 : long, 2 : small, 3 : tiny
+/// !!! textures -> 0 : ground, 1 : long, 2 : small, 3 : tiny, 4 : invisibleWall, 5 : wood
 MapView::MapView(Map mapModel, std::vector<sf::Texture*> textures) {
     this->mapModel = mapModel;
     this->textures = textures;
@@ -36,59 +36,68 @@ void MapView::drawPlatforms(sf::RenderWindow app) {
 
 void MapView::selectMap(int seed){
     if(seed == 1) {
-        borders = createBorders(textures[0]);
+        borders = createBorders(textures[4]);
 
-        Position firstPosition(950, 1050);
-        PlatformView firstPlatform = createPlatform(1.1f, .5f, firstPosition, textures[0]);
+        Position platformGroundPosition(960, 1090);
+        PlatformView platformGround = createPlatform(0.218f, 0.20f, platformGroundPosition, textures[0]);
 
-        Position secondPosition(900, 200);
-        PlatformView secondPlatform = createPlatform(1.f, 1.f, secondPosition, textures[1]);
+        Position platformWood1Position(800, 600);
+        PlatformView platformWood1 = createPlatform(0.5f, 0.5f, platformWood1Position, textures[5]);
 
-        Position thirdPosition(1400, 700);
-        PlatformView thirdPlatform = createPlatform(1.f, 1.f, thirdPosition, textures[2]);
+        Position platformWood2Position(1500, 600);
+        PlatformView platformWood2 = createPlatform(0.5f, 0.5f, platformWood2Position, textures[5]);
 
-        Position fourthPosition(1800, 500);
-        PlatformView fourthPlatform = createPlatform(1.f, 1.f, fourthPosition, textures[3]);
+        Position houseWallPosition(200, 892);
+        PlatformView houseWall = createPlatform(1.f, 1.f, houseWallPosition, textures[6]);
 
-        platforms.push_back(firstPlatform);
-        platforms.push_back(secondPlatform);
-        platforms.push_back(thirdPlatform);
-        platforms.push_back(fourthPlatform);
+        platforms.push_back(houseWall);
+        platforms.push_back(platformGround);
+        platforms.push_back(platformWood1);
+        platforms.push_back(platformWood2);
+
     }
     if(seed == 2) {
-        borders = createBorders(textures[0]);
+        borders = createBorders(textures[4]);
 
-        Position firstPosition(950, 1050);
-        PlatformView firstPlatform = createPlatform(1.1f, .5f, firstPosition, textures[0]);
+        Position platformGroundPosition(960, 1090);
+        PlatformView platformGround = createPlatform(0.218f, 0.20f, platformGroundPosition, textures[0]);
 
-        Position secondPosition(400, 700);
-        PlatformView secondPlatform = createPlatform(1.f, 1.f, secondPosition, textures[2]);
+        Position platformWood1Position(1300, 240);
+        PlatformView platformWood1 = createPlatform(0.8f, 0.5f, platformWood1Position, textures[5]);
 
-        Position thirdPosition(1400, 700);
-        PlatformView thirdPlatform = createPlatform(1.f, 1.f, thirdPosition, textures[2]);
+        Position platformWood2Position(1000, 700);
+        PlatformView platformWood2 = createPlatform(0.4f, 0.5f, platformWood2Position, textures[5]);
 
-        platforms.push_back(firstPlatform);
-        platforms.push_back(secondPlatform);
-        platforms.push_back(thirdPlatform);
+        Position platformWood3Position(400, 500);
+        PlatformView platformWood3 = createPlatform(0.4f, 0.5f, platformWood3Position, textures[5]);
+
+        Position houseWallPosition(1700, 892);
+        PlatformView houseWall = createPlatform(1.f, 1.f, houseWallPosition, textures[6]);
+
+        platforms.push_back(houseWall);
+        platforms.push_back(platformGround);
+        platforms.push_back(platformWood1);
+        platforms.push_back(platformWood2);
+        platforms.push_back(platformWood3);
     }
     if(seed == 3) {
-        borders = createBorders(textures[0]);
+        borders = createBorders(textures[4]);
 
-        Position firstPosition(950, 1050);
-        PlatformView firstPlatform = createPlatform(1.1f, .5f, firstPosition, textures[0]);
+        Position platformGroundPosition(960, 1090);
+        PlatformView platformGround = createPlatform(0.218f, 0.20f, platformGroundPosition, textures[0]);
 
-        Position secondPosition(800, 350);
-        PlatformView secondPlatform = createPlatform(1.f, 1.f, secondPosition, textures[2]);
+        Position platformWood1Position(1000, 600);
+        PlatformView platformWood1 = createPlatform(1.2f, 0.5f, platformWood1Position, textures[5]);
 
-        Position thirdPosition(1500, 700);
-        PlatformView thirdPlatform = createPlatform(1.f, 1.f, thirdPosition, textures[2]);
+        Position houseWall1Position(200, 892);
+        PlatformView houseWall1 = createPlatform(1.f, 1.f, houseWall1Position, textures[6]);
 
-        Position fourthPosition(250, 600);
-        PlatformView fourthPlatform = createPlatform(1.f, 1.f, fourthPosition, textures[3]);
+        Position houseWall2Position(1715, 892);
+        PlatformView houseWall2 = createPlatform(1.f, 1.f, houseWall2Position, textures[6]);
 
-        platforms.push_back(firstPlatform);
-        platforms.push_back(secondPlatform);
-        platforms.push_back(thirdPlatform);
-        platforms.push_back(fourthPlatform);
+        platforms.push_back(houseWall1);
+        platforms.push_back(houseWall2);
+        platforms.push_back(platformGround);
+        platforms.push_back(platformWood1);
     }
 }
