@@ -250,6 +250,11 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu, sf::Time timer, s
         }
     } else {
         modeJeu->win();
+        if(startWinningSound) {
+            SoundManager* soundManager = SoundManager::getInstance();
+            soundManager->playVictorySound();
+            startWinningSound = false;
+        }
     }
 
 }
