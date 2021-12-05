@@ -74,8 +74,16 @@ PlayerView createPlayer(float sizeX,
 
     float atk = 15.f;
 
-    Player player(namePlayerStr, atk, 100, playerPosition, movement);
-    PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple);
+    PlayerBuilder builder;
+    Player playerFromBuilder = builder.reset()
+                                    ->withName(namePlayerStr)
+                                    ->withAttack(atk)
+                                    ->withHealth(100)
+                                    ->withPosition(playerPosition)
+                                    ->withMovement(movement)
+                                    ->build();
+
+    PlayerView playerView(playerSprite, playerFromBuilder, keys, looksRight, sizeCouple);
     return playerView;
 }
 

@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "PlayerView.h"
 #include "HealthBarView.h"
+#include "PlayerBuilder.h"
 
 // creates the platform
 PlatformView createPlatform(float sizeX, float sizeY, Position platformPosition, sf::Texture *platformTexture);
