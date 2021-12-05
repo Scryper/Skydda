@@ -26,7 +26,6 @@ class Player {
 
     public:
         Player();
-        Player(std::string name, float attack, float health, Position position, Movement movement);
         Player(const Player& other);
         virtual ~Player();
 

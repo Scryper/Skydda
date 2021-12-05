@@ -23,40 +23,38 @@ class PlayerView {
         sf::IntRect rectSourceSprite;
         sf::Clock clock;
         bool looksRight;
-        CoupleFloat scalePlayer;
 
         SoundManager* soundManager = SoundManager::getInstance();
 
     public:
         PlayerView();
-        PlayerView(PlayerSprite sprite, Player player, std::vector<std::pair<PlayerStateEnum,sf::Keyboard::Key>> keys, bool looksRight, CoupleFloat scalePlayer);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
 
+        void setHealth(float health);
+        void setLooksRigth(bool right);
+        void setSprite(PlayerSprite sprite_);
+        void setPlayer(Player player_);
+        void setKeys(std::vector<pair<PlayerStateEnum,sf::Keyboard::Key>> keys_);
+
         Player& getPlayer();
         PlayerSprite getSprite() const;
-
-        void attack(PlayerView &playerAttacked, bool left, float factor);
-        void setHealth(float health);
-
         std::vector<std::vector<float>> getOffset()const;
         bool isLooksRigth()const;
-        void setLooksRigth(bool right);
+
         void getHit(int value);
-
-        void inputPlayer();
-
-        CoupleFloat computeCoupleMovement();
-
-        Position computeNewPosition(CoupleFloat vectorDirection, std::vector<CollisionVector> collisions);
-        void movePlayer(std::vector<CollisionVector> collisions, PlayerStateEnum state);
         std::vector<PlayerStateEnum> getStatesFromInput();
         bool isBottomCollision(std::vector<CollisionVector> coll);
 
+        void attack(PlayerView &playerAttacked, bool left, float factor);
+        void movePlayer(std::vector<CollisionVector> collisions, PlayerStateEnum state);
         void animate(bool first,PlayerStateEnum state, bool boucle);
         void flipSprite();
         void computeFrame(std::vector<CollisionVector> collisions, PlayerView &playerView);
         void doAction(PlayerStateEnum state,std::vector<CollisionVector> collisions, PlayerView &playerView, bool doActionNow);
+        Position computeNewPosition(CoupleFloat vectorDirection, std::vector<CollisionVector> collisions);
+        CoupleFloat computeCoupleMovement();
+        void inputPlayer();
 };
 
 #endif // PLAYERVIEW_H

@@ -25,7 +25,9 @@ class GameScreen : public Screen {
         bool startAnimationKO = false;
         bool startAnimationWin = false;
         bool startWinningSound = true;
+
         int timeAnimation = 0;
+
         static const int timeAnimRound = 0 ;
         static const int timeAnimReady = 2;
         static const int timeAnimFight = 3;

@@ -13,18 +13,6 @@ Player::Player() {
     stateInitializer();
 }
 
-Player::Player(std::string name, float attack, float health, Position position, Movement movement) {
-    this->setName(name);
-    this->setAttack(attack);
-    this->setHealth(health);
-    this->setPosition(position);
-    this->setMovement(movement);
-    timeLastAttack = 0;
-    timeLastAttack = 0;
-    durationBetweenAttacks = 1000;
-    stateInitializer();
-}
-
 Player::Player(const Player& other) {
     this->setName(other.name);
     this->setAttack(other.attack);
