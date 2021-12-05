@@ -45,6 +45,10 @@ bool PlayerView::isLooksRigth()const{
     return looksRight;
 }
 
+void PlayerView::setLooksRigth(bool right){
+    this->looksRight = right;
+}
+
 void PlayerView::flipSprite() {
 
     //on récupère la gauche de la hitbox actuelle;

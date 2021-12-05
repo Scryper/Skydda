@@ -32,28 +32,28 @@ int main() {
     std::vector<Screen*> screens;
 	int screen = 0;
 
-	/// Screens preparations
-	MenuScreen menuScreen; // 0
-	screens.push_back(&menuScreen);
+    /// Screens preparations
+    MenuScreen menuScreen; // 0
+    screens.push_back(&menuScreen);
 
-	PrematchScreen prematchScreen; // 1
-	screens.push_back(&prematchScreen);
+    PrematchScreen prematchScreen; // 1
+    screens.push_back(&prematchScreen);
+
+    OptionScreen optionScreen; // 2
+    screens.push_back(&optionScreen);
 
 
-	GameScreenRound gameScreenRound; // 2
-	screens.push_back(&gameScreenRound);
-
-	GameScreenTimer gameScreenTimer; // 3
-	screens.push_back(&gameScreenTimer);
-
-	OptionScreen optionScreen; // 4
-
-	screens.push_back(&optionScreen);
 
 	std::vector<std::string> data;
 	//Main loop
 	while (screen >= 0) {
-		if(screen == 2 || screen == 3) {
+        GameScreenRound gameScreenRound; // 3
+        screens.push_back(&gameScreenRound);
+
+        GameScreenTimer gameScreenTimer; // 4
+        screens.push_back(&gameScreenTimer);
+
+		if(screen == 3 || screen == 4) {
             data.push_back(prematchScreen.strFirstPlayerName);
             data.push_back(prematchScreen.pathSpriteFirstPlayer);
             data.push_back(prematchScreen.strSecondPlayerName);
@@ -63,6 +63,8 @@ int main() {
 		else {
             screen = screens[screen]->run(app, data, 0);
 		}
+        screens.erase(screens.end()-1);
+        screens.erase(screens.end()-1);
 	}
     return EXIT_SUCCESS;
 }

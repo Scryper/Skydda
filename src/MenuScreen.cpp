@@ -55,7 +55,7 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
 
         /// Button options
         if(buttonOptions.getGlobalBounds().contains(mousePosition)) {
-            if(event.type == sf::Event::MouseButtonPressed) return 4;
+            if(event.type == sf::Event::MouseButtonPressed) return 2;
             else {
                 textOptions.setFillColor(sf::Color::Green);
             }

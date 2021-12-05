@@ -45,7 +45,6 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
 
     while(app.isOpen()) {
-
         sf::Time timer = clockTimer.getElapsedTime();
         sf::Time timerAnimation = clockTimerAnimation.getElapsedTime();
         deltaTime = clock.restart().asMilliseconds();

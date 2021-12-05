@@ -89,7 +89,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     Position positionGameMode(position.getX(), 350);
 
-    spriteMode = initSprite(.5f, .5f, gameModes[gameMode - 2], positionGameMode, &textureGameMode);
+    spriteMode = initSprite(.5f, .5f, gameModes[gameMode - 3], positionGameMode, &textureGameMode);
 
     /// Map elements
     Position positionMap(position.getX() - 125, 400);
@@ -242,7 +242,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
         mousePosition = getMousePosition(&app);
 
-        if(gameMode==2) {
+        if(gameMode==3) {
             textModeTime.setFillColor(TextInitializer::BetterWhite);
             textModeRounds.setFillColor(sf::Color::Green);
         } else if(gameMode==3) {
@@ -252,36 +252,36 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
         /// Button rounds mode
         if(buttonModeRounds.getGlobalBounds().contains(mousePosition)) {
-            if(gameMode!=2) {
+            if(gameMode!=3) {
                 textModeRounds.setFillColor(sf::Color::Green);
             }
 
             if(event.type == sf::Event::MouseButtonPressed) {
-                gameMode = 2;
-                textureGameMode.loadFromFile(gameModes[gameMode - 2]);
+                gameMode = 3;
+                textureGameMode.loadFromFile(gameModes[gameMode - 3]);
                 spriteMode.setTexture(textureGameMode, true);
             }
         }
         else {
-            if(gameMode!=2) {
+            if(gameMode!=3) {
                 textModeRounds.setFillColor(TextInitializer::BetterWhite);
             }
         }
 
         /// Button time mode
         if(buttonModeTime.getGlobalBounds().contains(mousePosition)) {
-            if(gameMode!=3) {
+            if(gameMode!=4) {
                 textModeTime.setFillColor(sf::Color::Green);
             }
 
             if(event.type == sf::Event::MouseButtonPressed) {
-                gameMode = 3;
-                textureGameMode.loadFromFile(gameModes[gameMode - 2]);
+                gameMode = 4;
+                textureGameMode.loadFromFile(gameModes[gameMode - 3]);
                 spriteMode.setTexture(textureGameMode, true);
             }
         }
         else {
-            if(gameMode!=3) {
+            if(gameMode!=4) {
                 textModeTime.setFillColor(TextInitializer::BetterWhite);
             }
         }

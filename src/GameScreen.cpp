@@ -4,20 +4,20 @@ void GameScreen::initPlayers() {
 
     switch(mapSeed) {
     case 1:
-        positionP1 = Position(position.getX() - 700, position.getY()+180);
-        positionP2 = Position(position.getX() + 700, position.getY()+180);
+        positionP1 = Position(position.getX() - 300, position.getY()+335);
+        positionP2 = Position(position.getX() + 300, position.getY()+335);
         break;
     case 2:
-        positionP1 = Position(position.getX() - 700, position.getY()+180);
-        positionP2 = Position(position.getX() + 700, position.getY()+180);
+        positionP1 = Position(position.getX() - 300, position.getY()+335);
+        positionP2 = Position(position.getX() + 300, position.getY()+335);
         break;
     case 3:
-        positionP1 = Position(position.getX() - 700, position.getY()+180);
-        positionP2 = Position(position.getX() + 700, position.getY()+180);
+        positionP1 = Position(position.getX() - 300, position.getY()+335);
+        positionP2 = Position(position.getX() + 300, position.getY()+335);
         break;
     default:
-        positionP1 = Position(position.getX() - 700, position.getY()+180);
-        positionP2 = Position(position.getX() + 700, position.getY()+180);
+        positionP1 = Position(position.getX() - 300, position.getY()+335);
+        positionP2 = Position(position.getX() + 300, position.getY()+335);
         break;
     }
 
@@ -142,7 +142,7 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
 
     timeAnimation = timerAnimation.asSeconds();
     int time = timer.asSeconds();
-    bool isPlayerDead = modeJeu->getPlayer1().getHealth() == 0 || modeJeu->getPlayer2().getHealth() == 0;
+    bool isPlayerDead = modeJeu->getPlayer1().getState(dead) == 1 || modeJeu->getPlayer2().getState(dead) == 1 ;
     bool isPlayerStandBy = modeJeu->getPlayer1().getState(standby) == 1 || modeJeu->getPlayer2().getState(standby) == 1;
     bool isPlayerWin = modeJeu->getPlayerWin() != 0;
     std::stringstream textWin;
@@ -175,22 +175,33 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
     }
 
     else if(startAnimationKO && timeAnimation ==2){
-        modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-        modeJeu->getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
+        modeJeu->getPlayer1().setPosition(positionP1);
+        modeJeu->getPlayer2().setPosition(positionP2);
         modeJeu->getPlayer1().setSpeedX(2);
         modeJeu->getPlayer2().setSpeedX(2);
+        modeJeu->getPlayer1().setState(dead,false);
+        modeJeu->getPlayer2().setState(dead,false);
+        if(!playerViewP1.isLooksRigth()){
+           playerViewP1.flipSprite();
+           playerViewP1.setLooksRigth(true);
+        }
+        if(playerViewP2.isLooksRigth()){
+            playerViewP2.flipSprite();
+            playerViewP2.setLooksRigth(false);
+        }
+
+        return displayTextAnimation(app, "K.O. !");
     }
     // Lance l'animation de K.O.
     else if(startAnimationKO && timeAnimation < 3) {
         modeJeu->getPlayer1().setState(standby,true);
         modeJeu->getPlayer2().setState(standby,true);
+
         return displayTextAnimation(app, "K.O. !");
     }
     else if(startAnimationKO && timeAnimation == 3) {
             modeJeu->getPlayer1().setState(standby,false);
             modeJeu->getPlayer2().setState(standby,false);
-            modeJeu->getPlayer1().setState(dead,false);
-            modeJeu->getPlayer2().setState(dead,false);
             return displayTextAnimation(app, "Fight !");
     }
 
@@ -217,7 +228,6 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu, sf::Time timer, s
     if(modeJeu->getPlayerWin() == 0) {
 
         if(modeJeu->getPlayer1().getHealth() == 0) {
-
             modeJeu->incrementRoundWinP2();
             if(modeJeu->getPlayerWin() == 0) {
                 modeJeu->getPlayer1().setHealth(100.f);

@@ -60,7 +60,7 @@ class PrematchScreen : public Screen {
         int indexMap = 0;
         int indexCharacter1 = 0;
         int indexCharacter2 = 3;
-        int gameMode = 2;
+        int gameMode = 3;
 
         std::vector<std::string> maps;
         std::vector<std::string> characters;

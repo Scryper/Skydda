@@ -41,6 +41,7 @@ class PlayerView {
 
         std::vector<std::vector<float>> getOffset()const;
         bool isLooksRigth()const;
+        void setLooksRigth(bool right);
         void getHit(int value);
 
         void inputPlayer();
