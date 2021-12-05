@@ -36,7 +36,7 @@ class PlayerView {
         Player& getPlayer();
         PlayerSprite getSprite() const;
 
-        void attack(PlayerView &playerAttacked, bool left, int factor);
+        void attack(PlayerView &playerAttacked, bool left, float factor);
         void setHealth(float health);
 
         std::vector<std::vector<float>> getOffset()const;

@@ -71,7 +71,7 @@ PlayerView createPlayer(float sizeX,
     PlayerSprite playerSprite = initSpritePlayer(sizeCouple, centerOfSprite, pathToPlayer, playerPosition, playerTexture);
     playerSprite.setTextureRect(sf::IntRect(0, 0, width, height));
 
-    float atk = 10.f;
+    float atk = 15.f;
 
     Player player(namePlayerStr, atk, 100, playerPosition, movement);
     PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple);

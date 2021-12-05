@@ -32,9 +32,9 @@ void GameScreen::initPlayers() {
                                 sf::Keyboard::Z,
                                 sf::Keyboard::Q,
                                 sf::Keyboard::D,
-                                sf::Keyboard::S,
-                                sf::Keyboard::LShift,
                                 sf::Keyboard::C,
+                                sf::Keyboard::S,
+                                sf::Keyboard::V,
                                 true,
                                 playerName1);
 
@@ -48,8 +48,8 @@ void GameScreen::initPlayers() {
                                 sf::Keyboard::Up,
                                 sf::Keyboard::Left,
                                 sf::Keyboard::Right,
+                                sf::Keyboard::L,
                                 sf::Keyboard::Down,
-                                sf::Keyboard::RShift,
                                 sf::Keyboard::M,
                                 false,
                                 playerName2);
@@ -133,6 +133,7 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
     timeAnimation = timerAnimation.asSeconds();
     int time = timer.asSeconds();
     bool isPlayerDead = modeJeu->getPlayer1().getHealth() == 0 || modeJeu->getPlayer2().getHealth() == 0;
+    bool isPlayerStandBy = modeJeu->getPlayer1().getState(standby) == 1 || modeJeu->getPlayer2().getState(standby) == 1;
     bool isPlayerWin = modeJeu->getPlayerWin() != 0;
     std::stringstream textWin;
 
@@ -149,21 +150,25 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
             return displayTextAnimation(app, "Fight !");
     }
 
-    /*switch(time) {
-        case 0:
-            modeJeu->getPlayer1().setState(standby,false);
-            modeJeu->getPlayer2().setState(standby,false);
-            return displayTextAnimation(app, "Fight !");
-    }*/
-
+    //if player wins
     if(isPlayerWin) startAnimationWin = true;
+    //if one is dead and no one won yet
     else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
-    if((isPlayerWin || isPlayerDead ) && !isClockAlreadyRestarted) startClock();
+
+    //restart the clock of one animation
+    if((isPlayerWin || isPlayerDead || isPlayerStandBy ) && !isClockAlreadyRestarted) startClock();
 
     // Lance l'animation de victoire
     if(startAnimationWin) {
             textWin << ( (modeJeu->getPlayerWin() == 1) ? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
             return displayTextAnimation(app, textWin.str());
+    }
+
+    else if(startAnimationKO && timeAnimation ==2){
+        modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
+        modeJeu->getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
+        modeJeu->getPlayer1().setSpeedX(2);
+        modeJeu->getPlayer2().setSpeedX(2);
     }
     // Lance l'animation de K.O.
     else if(startAnimationKO && timeAnimation < 3) {
@@ -171,14 +176,14 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
         modeJeu->getPlayer2().setState(standby,true);
         return displayTextAnimation(app, "K.O. !");
     }
-
     else if(startAnimationKO && timeAnimation == 3) {
             modeJeu->getPlayer1().setState(standby,false);
             modeJeu->getPlayer2().setState(standby,false);
-
             modeJeu->getPlayer1().setState(dead,false);
             modeJeu->getPlayer2().setState(dead,false);
+            return displayTextAnimation(app, "Fight !");
     }
+
 
     resetAnimationAndClock();
     return displayTextAnimation(app, "");
@@ -195,25 +200,25 @@ void GameScreen::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::R
     textAnimation.setOrigin(textRect.width/2,textRect.height/2);
 }
 
-void GameScreen::managementWin(float deltaTime, Game* modeJeu) {
+void GameScreen::managementWin(float deltaTime, Game* modeJeu, sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app) {
+
+    setAnimationText(timer, timerAnimation, app, modeJeu);
 
     if(modeJeu->getPlayerWin() == 0) {
+
         if(modeJeu->getPlayer1().getHealth() == 0) {
 
             modeJeu->incrementRoundWinP2();
-            modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-            modeJeu->getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-
             if(modeJeu->getPlayerWin() == 0) {
                 modeJeu->getPlayer1().setHealth(100.f);
                 modeJeu->getPlayer2().setHealth(100.f);
             }
+
             movePlayers(deltaTime);
+
+
         }else if(modeJeu->getPlayer2().getHealth() == 0) {
             modeJeu->incrementRoundWinP1();
-            modeJeu->getPlayer1().setPosition(positionP1.getX(), positionP1.getY());
-            modeJeu->getPlayer2().setPosition(positionP2.getX(), positionP2.getY());
-
             if(modeJeu->getPlayerWin() == 0) {
                 modeJeu->getPlayer1().setHealth(100.f);
                 modeJeu->getPlayer2().setHealth(100.f);

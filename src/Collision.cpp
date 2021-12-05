@@ -62,6 +62,8 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
             collisions.push_back(tmp);
         }
 
+
+
         /// Bottom platform
         // player's top should be < than platform's bottom
         // player's bottom should be > than platform's bottom

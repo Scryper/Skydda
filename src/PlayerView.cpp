@@ -132,8 +132,9 @@ void PlayerView::getHit(int value){
     player.getHit(value);
 }
 
-void PlayerView::attack(PlayerView &playerAttacked, bool left, int factor){
-    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds(), factor);
+void PlayerView::attack(PlayerView &playerAttacked, bool left, float factor){
+
+    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds(), factor, this->looksRight,playerAttacked.looksRight);
     this->soundManager->playRandomSound();
 
     //si attaqué changer state
@@ -272,7 +273,7 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<CollisionVector> co
                 for(auto i : collisionPlayer){
                     if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
                         bool direction = !(i.first == rigthCol && !looksRight);
-                        attack(playerView, direction,3);
+                        attack(playerView, direction,2.5);
                     }
                 }
             }
