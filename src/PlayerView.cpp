@@ -33,6 +33,19 @@ PlayerView::PlayerView(const PlayerView& other) {
 
 PlayerView::~PlayerView() { }
 
+PlayerView& PlayerView::operator=(const PlayerView& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->sprite = rhs.sprite;
+    this->player = rhs.player;
+    this->keys = rhs.keys;
+    this->looksRight = rhs.looksRight;
+    this->scalePlayer = rhs.scalePlayer;
+    this->animation = rhs.animation;
+    return *this;
+}
+
 Player& PlayerView::getPlayer() {
     return player;
 }

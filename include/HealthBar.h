@@ -14,6 +14,8 @@ class HealthBar {
         HealthBar(float lifePoint, Position position);
         virtual ~HealthBar();
         HealthBar(const HealthBar& other);
+        HealthBar& operator=(const HealthBar& other);
+
 
         void setLifePoint(float lifePoint);
 

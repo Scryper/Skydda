@@ -12,6 +12,13 @@ GameScreenTimer::GameScreenTimer(const GameScreenTimer& other){
     //copy ctor
 }
 
+GameScreenTimer& GameScreenTimer::operator=(const GameScreenTimer& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    return *this;
+}
+
 int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     playerName1 = data[0];
     spriteSheet1 = data[1];

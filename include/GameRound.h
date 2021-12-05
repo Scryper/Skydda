@@ -11,6 +11,8 @@ class GameRound : public Game {
         GameRound(Player& player1, Player& player2);
         virtual ~GameRound();
         GameRound(const GameRound& other);
+        GameRound& operator=(const GameRound& other);
+
 
         virtual int getPlayerWin();
 

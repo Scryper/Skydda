@@ -10,6 +10,9 @@ class PlayerSprite : public sf::Sprite
     public:
         PlayerSprite();
         PlayerSprite(sf::Texture& texture);
+        PlayerSprite(const PlayerSprite& other);
+        PlayerSprite& operator=(const PlayerSprite& other);
+
 
         void setHitbox(const sf::FloatRect& hitbox);
         sf::FloatRect getGlobalHitbox() const;

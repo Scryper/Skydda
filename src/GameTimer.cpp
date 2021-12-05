@@ -18,6 +18,14 @@ GameTimer::GameTimer(const GameTimer& other) {
     //copy ctor
 }
 
+GameTimer& GameTimer::operator=(const GameTimer& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    Game::operator=(rhs);
+    return *this;
+}
+
 int GameTimer::getPlayerWin() {
 
 //    std::cout << "roundWinP1 : " << roundWinP1 << std::endl;

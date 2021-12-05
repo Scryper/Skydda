@@ -20,6 +20,15 @@ Platform::Platform(const Platform& other) {
     this->size_=other.size_;
 }
 
+Platform& Platform::operator=(const Platform& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->position = rhs.position;
+    this->size_ = rhs.size_;
+    return *this;
+}
+
 Position Platform::getPosition() const {
     return position;
 }

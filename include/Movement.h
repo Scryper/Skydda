@@ -22,6 +22,8 @@ class Movement {
         Movement(CoupleFloat speed, CoupleFloat acceleration, CoupleFloat maxSpeed, float jumpHeight);
         Movement(const Movement& other);
         virtual ~Movement();
+        Movement& operator=(const Movement& other);
+
 
         CoupleFloat getSpeed() const;
         CoupleFloat getAcceleration() const;

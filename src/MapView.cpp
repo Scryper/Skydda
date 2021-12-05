@@ -12,6 +12,22 @@ MapView::MapView(Map mapModel, std::vector<sf::Texture*> textures) {
 
 MapView::~MapView() { }
 
+MapView::MapView(const MapView& other) {
+    this->mapModel = other.mapModel;
+    this->textures = other.textures;
+    selectMap(mapModel.getMapSeed());
+}
+
+MapView& MapView::operator=(const MapView& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->mapModel = rhs.mapModel;
+    this->textures = rhs.textures;
+    selectMap(mapModel.getMapSeed());
+    return *this;
+}
+
 std::vector<PlatformView> MapView::getBorders() const {
     return borders;
 }

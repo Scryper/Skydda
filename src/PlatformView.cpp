@@ -14,6 +14,15 @@ PlatformView::PlatformView(const PlatformView& other) {
 
 PlatformView::~PlatformView() { }
 
+PlatformView& PlatformView::operator=(const PlatformView& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->sprite = rhs.sprite;
+    this->platform = rhs.platform;
+    return *this;
+}
+
 sf::Sprite PlatformView::getSprite() const {
     return sprite;
 }

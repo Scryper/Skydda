@@ -15,6 +15,8 @@ class CoupleFloat {
         CoupleFloat(float x, float y);
         virtual ~CoupleFloat();
         CoupleFloat(const CoupleFloat& other);
+        CoupleFloat& operator=(const CoupleFloat& other);
+
 
         float getX()const;
         float getY()const;

@@ -19,6 +19,9 @@ class MapView {
         MapView();
         MapView(Map mapModel, std::vector<sf::Texture*> textures);
         virtual ~MapView();
+        MapView(const MapView& other);
+        MapView& operator=(const MapView& other);
+
 
         std::vector<PlatformView> getBorders() const;
         std::vector<PlatformView> getPlatforms() const;

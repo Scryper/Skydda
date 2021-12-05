@@ -32,6 +32,8 @@ class PlayerView {
         PlayerView(PlayerSprite sprite, Player player, std::vector<std::pair<PlayerStateEnum,sf::Keyboard::Key>> keys, bool looksRight, CoupleFloat scalePlayer);
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
+        PlayerView& operator=(const PlayerView& other);
+
 
         Player& getPlayer();
         PlayerSprite getSprite() const;

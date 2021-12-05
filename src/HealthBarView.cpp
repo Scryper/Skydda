@@ -12,6 +12,16 @@ HealthBarView::~HealthBarView() { }
 
 HealthBarView::HealthBarView(const HealthBarView& other) { }
 
+HealthBarView& HealthBarView::operator=(const HealthBarView& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->healthBar = rhs.healthBar;
+    this->healthBarIn = rhs.healthBarIn;
+    this->healthBarOut = rhs.healthBarOut;
+    return *this;
+}
+
 HealthBar HealthBarView::getHealthBar() {
     return healthBar;
 }

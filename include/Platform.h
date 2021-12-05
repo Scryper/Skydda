@@ -14,6 +14,8 @@ class Platform {
         Platform(const Position position, const CoupleFloat size_);
         ~Platform();
         Platform(const Platform& other);
+        Platform& operator=(const Platform& other);
+
 
         Position getPosition() const;
         CoupleFloat getSize() const;

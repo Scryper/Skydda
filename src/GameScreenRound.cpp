@@ -12,6 +12,13 @@ GameScreenRound::GameScreenRound(const GameScreenRound& other) {
     //copy ctor
 }
 
+GameScreenRound& GameScreenRound::operator=(const GameScreenRound& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    return *this;
+}
+
 int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     playerName1 = data[0];
     spriteSheet1 = data[1];
