@@ -16,11 +16,14 @@ class Animation {
         Animation();
         virtual ~Animation();
         Animation(const Animation& other);
+        Animation& operator=(const Animation& other);
 
         void initClocks();
         void initClock(PlayerStateEnum state);
+        void destroyClocks();
         void initTours();
         void initTour(PlayerStateEnum state);
+        void destroyTours();
 
         PlayerStateClockArray* getStateClock();
         void resetTour(PlayerStateEnum state);

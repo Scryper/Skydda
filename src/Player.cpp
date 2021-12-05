@@ -1,7 +1,6 @@
 #include "Player.h"
 
 Player::Player() {
-    //cout<<"Constructeur player"<<endl;
     this->name = "Inconnu";
     this->attack = 0.0;
     this->health = 0.0;
@@ -22,10 +21,8 @@ Player::Player(std::string name, float attack, float health, Position position, 
     this->position = position;
     this->movement = movement;
     timeLastAttack = 0;
-    timeLastAttack = 0;
     durationBetweenAttacks = 1000;
     stateInitializer();
-    //cout<<"Constructeur player"<<endl;
 }
 
 Player::Player(const Player& other) {
@@ -34,19 +31,39 @@ Player::Player(const Player& other) {
     this->health = other.health;
     this->position = other.position;
     this->movement = other.movement;
-    timeLastAttack = 0;
-    durationBetweenAttacks = 1000;
+    timeLastAttack = other.timeLastAttack;
+    durationBetweenAttacks = other.durationBetweenAttacks;
     stateInitializer();
-    //cout<<"Constructeur player"<<endl;
 }
 
 Player::~Player() {
-    //cout<<"destructeur player"<<endl;
-    //stateDestroyer();
-    //for (PlayerStatePair* p : state ){
-        //delete p;
-    //}
-    state.clear();
+    stateDestroyer();
+}
+
+Player& Player::operator=(const Player& other)
+{
+    if (this == &other) return *this; // handle self assignment
+
+    this->name = other.name;
+    this->attack = other.attack;
+    this->health = other.health;
+    this->position = other.position;
+    this->movement = other.movement;
+    timeLastAttack = other.timeLastAttack;
+    durationBetweenAttacks = other.durationBetweenAttacks;
+
+    stateDestroyer();
+
+    PlayerStateBoolArray tmp;
+    this->state = tmp;
+    for(auto i : other.state){
+        PlayerStatePair* stateTemp = new PlayerStatePair;
+        stateTemp->first = i->first;
+        stateTemp->second = i->second;
+        this->state.push_back(stateTemp);
+    }
+
+    return *this;
 }
 
 Movement Player::getMovement() const {
@@ -69,7 +86,6 @@ void Player::setPosition(float x, float y) {
 void Player::setHealth(float health) {
     this->health = health;
 }
-
 
 void Player::setSpeedX(float x){
     CoupleFloat tmp (x,movement.getSpeed().getY());
@@ -94,8 +110,6 @@ void Player::attackPlayer(Player &player, float clock, int factor, bool directio
 
         //vérif que le player ne bloque pas l'attaque
         if(player.getState(defending) == true && directionProtection !=directionAttack) damage/=4;
-
-        std::cout<< "state : "<<player.getState(defending) << "  direction prot "<< directionProtection << "  direction att "<< directionAttack <<std::endl;
 
         if(health - damage > 0) {
             player.setHealth(health - damage);
@@ -134,14 +148,14 @@ void Player::stateInitializer(){
 }
 
 void Player::initStatePointer(PlayerStateEnum s, int val){
-    PlayerStatePair *temp;
-    temp = new PlayerStatePair{s,val};
-    state.push_back(temp);
+    state.push_back(new PlayerStatePair{s,val});
 }
 
 void Player::stateDestroyer(){
-    //for()
-    //state.clear();
+    for (auto p : this->state ){
+        delete (p);
+    }
+    state.clear();
 }
 
 Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<CollisionVector> collisions) {

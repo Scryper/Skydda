@@ -30,6 +30,7 @@ class Player {
 
         Player(const Player& other);
         virtual ~Player();
+        Player& operator=(const Player& other);
         void stateDestroyer();
         void initStatePointer(PlayerStateEnum s, int val);
 
@@ -46,6 +47,7 @@ class Player {
         void setState(PlayerStateEnum s, bool value);
         bool getState(PlayerStateEnum s)const;
         void getHit(int value);
+
 
         template <typename T>
         bool isFoundInArray(std::vector<T> vect, T element);

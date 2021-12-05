@@ -92,6 +92,8 @@ class GameScreen : public Screen {
         void startClock();
         void initHealthBars();
         void managementWin(float deltaTime, Game* modejeu, sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app);
+        template<typename Base, typename T>
+        inline bool instanceof(const T *ptr);
 
 };
 

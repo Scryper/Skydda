@@ -189,7 +189,12 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
             playerViewP2.flipSprite();
             playerViewP2.setLooksRigth(false);
         }
-
+        if(instanceof<GameRound>(modeJeu)){
+            Game* tmp = (Game*)modeJeu;
+            int total = tmp->getRoundWinP1();
+            total += tmp->getRoundWinP2() + 1;
+            return displayTextAnimation(app, "Round " + std::to_string(total));
+        }
         return displayTextAnimation(app, "K.O. !");
     }
     // Lance l'animation de K.O.
@@ -280,4 +285,9 @@ void GameScreen::initHealthBars() {
     texts.push_back(&namePlayerP2);
 
     TextInitializer::initFont(texts, &font);
+}
+
+template<typename Base, typename T>
+inline bool GameScreen::instanceof(const T *ptr) {
+    return dynamic_cast<const Base*>(ptr) != nullptr;
 }

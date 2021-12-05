@@ -74,8 +74,6 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         app.clear();
 
         drawAll(&app);
-
-        std::cout << timer.asSeconds() << std::endl;
         // Ajouter constante tempsAnimFight pour remplacer le 7
         if(timer.asSeconds() > timeAnimFight+1) {
             gameTimer.decrementCountDown();
