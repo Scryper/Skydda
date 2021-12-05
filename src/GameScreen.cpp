@@ -196,6 +196,11 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu) {
         }
     } else {
         modeJeu->win();
+        if(startWinningSound) {
+            SoundManager* soundManager = SoundManager::getInstance();
+            soundManager->playVictorySound();
+            startWinningSound = false;
+        }
     }
 
 }
