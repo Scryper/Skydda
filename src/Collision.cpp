@@ -62,6 +62,8 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
             collisions.push_back(tmp);
         }
 
+
+
         /// Bottom platform
         // player's top should be < than platform's bottom
         // player's bottom should be > than platform's bottom
@@ -105,7 +107,7 @@ CollisionVector directionCollisionPlayers(PlayerView playerview1, PlayerView pla
     sf::FloatRect player1Bounds = playerview1.getSprite().getGlobalBounds();
     sf::FloatRect player2Bounds = playerview2.getSprite().getGlobalHitbox();
 
-    int marge = 30;
+    int marge = 20;
 
     CollisionVector collisions;
 

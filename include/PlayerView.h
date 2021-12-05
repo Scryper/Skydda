@@ -36,7 +36,7 @@ class PlayerView {
         Player& getPlayer();
         PlayerSprite getSprite() const;
 
-        void attack(PlayerView &playerAttacked, bool left, int factor);
+        void attack(PlayerView &playerAttacked, bool left, float factor);
         void setHealth(float health);
 
         std::vector<std::vector<float>> getOffset()const;
@@ -55,7 +55,7 @@ class PlayerView {
         void animate(bool first,PlayerStateEnum state, bool boucle);
         void flipSprite();
         void computeFrame(std::vector<CollisionVector> collisions, PlayerView &playerView);
-        void doAction(PlayerStateEnum state,std::vector<CollisionVector> collisions, PlayerView &playerView);
+        void doAction(PlayerStateEnum state,std::vector<CollisionVector> collisions, PlayerView &playerView, bool doActionNow);
 };
 
 #endif // PLAYERVIEW_H

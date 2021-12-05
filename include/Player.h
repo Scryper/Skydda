@@ -41,6 +41,7 @@ class Player {
         float getAttack()const;
         void setPosition(Position position);
         void setPosition(float x, float y);
+        void setSpeedX(float x);
         void stateInitializer();
         void setState(PlayerStateEnum s, bool value);
         bool getState(PlayerStateEnum s)const;
@@ -50,7 +51,7 @@ class Player {
         bool isFoundInArray(std::vector<T> vect, T element);
 
 
-        void attackPlayer(Player& p, float clock, int factor);
+        void attackPlayer(Player& p, float clock, int factor, bool directionAttack, bool directionProtection);
         Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<CollisionVector> collisions);
         PlayerStateBoolArray computeStates(std::vector<PlayerStateEnum> keyPressed, bool bottomCollision);
 

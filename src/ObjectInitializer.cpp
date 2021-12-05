@@ -51,9 +51,10 @@ PlayerView createPlayer(float sizeX,
                         std::string namePlayerStr) {
 
     CoupleFloat velocity(.0f, .0f);
-    CoupleFloat acceleration(.8f, 1.f);
-    CoupleFloat maxSpeed(14.f, 20.f);
+    CoupleFloat acceleration(.7f, 1.f);
+    CoupleFloat maxSpeed(11.f, 30.f);
     float jumpHeight = 24.f;
+
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
     std::vector<pair<PlayerStateEnum,sf::Keyboard::Key>> keys;
@@ -71,7 +72,7 @@ PlayerView createPlayer(float sizeX,
     PlayerSprite playerSprite = initSpritePlayer(sizeCouple, centerOfSprite, pathToPlayer, playerPosition, playerTexture);
     playerSprite.setTextureRect(sf::IntRect(0, 0, width, height));
 
-    float atk = 10.f;
+    float atk = 15.f;
 
     Player player(namePlayerStr, atk, 100, playerPosition, movement);
     PlayerView playerView(playerSprite, player, keys, looksRight, sizeCouple);

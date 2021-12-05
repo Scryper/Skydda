@@ -25,9 +25,9 @@ class GameScreen : public Screen {
         bool startAnimationKO = false;
         bool startAnimationWin = false;
         int timeAnimation = 0;
-        static const int timeAnimRound = 3;
-        static const int timeAnimReady = 5;
-        static const int timeAnimFight = 7;
+        static const int timeAnimRound = 0 ;
+        static const int timeAnimReady = 2;
+        static const int timeAnimFight = 3;
 
         Position position;
         Position positionP1;
@@ -90,7 +90,7 @@ class GameScreen : public Screen {
         void resetAnimationAndClock();
         void startClock();
         void initHealthBars();
-        void managementWin(float deltaTime, Game* gameTimer);
+        void managementWin(float deltaTime, Game* modejeu, sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app);
 
 };
 

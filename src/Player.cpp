@@ -70,12 +70,15 @@ void Player::setHealth(float health) {
     this->health = health;
 }
 
-void Player::attackPlayer(Player &player, float clock, int factor) {
-    //vérif que le player ne bloque pas l'attaque
-    if(player.getState(defending) == true){
-        timeLastAttack = clock;
-        return;
-    }
+
+void Player::setSpeedX(float x){
+    CoupleFloat tmp (x,movement.getSpeed().getY());
+    movement.setSpeed(tmp);
+}
+
+void Player::attackPlayer(Player &player, float clock, int factor, bool directionAttack, bool directionProtection) {
+
+
 
     // verifiy that player's health > 0
     if(player.getHealth() <= 0){
@@ -87,8 +90,15 @@ void Player::attackPlayer(Player &player, float clock, int factor) {
     if(clock - timeLastAttack >= durationBetweenAttacks){
         // deal damages
         double health = player.getHealth();
-        if(health - attack*factor > 0) {
-            player.setHealth(health - attack*factor);
+        double damage = attack*factor;
+
+        //vérif que le player ne bloque pas l'attaque
+        if(player.getState(defending) == true && directionProtection !=directionAttack) damage/=4;
+
+        std::cout<< "state : "<<player.getState(defending) << "  direction prot "<< directionProtection << "  direction att "<< directionAttack <<std::endl;
+
+        if(health - damage > 0) {
+            player.setHealth(health - damage);
         }
         else {
             player.setHealth(0.f);

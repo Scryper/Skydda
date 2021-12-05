@@ -132,8 +132,9 @@ void PlayerView::getHit(int value){
     player.getHit(value);
 }
 
-void PlayerView::attack(PlayerView &playerAttacked, bool left, int factor){
-    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds(), factor);
+void PlayerView::attack(PlayerView &playerAttacked, bool left, float factor){
+
+    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds(), factor, this->looksRight,playerAttacked.looksRight);
     this->soundManager->playRandomSound();
 
     //si attaqué changer state
@@ -204,12 +205,15 @@ void PlayerView::computeFrame(std::vector<CollisionVector> collisions, PlayerVie
                 //on vérif le timming de l'action, si c'est 0 il faut l'effectuer de suite
                 bool actionImmediate = (timeAction==0);
                 if(actionImmediate == 1){
-                    doAction(state->first, collisions,playerView);
+                    doAction(state->first, collisions,playerView,true);
                 }
                 //action a t > 0
                 else{
                     if(timeElapsed>=timeAction&& timeElapsed<=timeAction+16){
-                        doAction(state->first, collisions,playerView);
+                        doAction(state->first, collisions,playerView, true);
+                    }
+                    else{
+                        doAction(state->first, collisions,playerView, false);
                     }
                 }
                 //cout<<timeElapsed<<endl;
@@ -235,7 +239,7 @@ void PlayerView::computeFrame(std::vector<CollisionVector> collisions, PlayerVie
             else{
                 //s'il est joué la première fois
                 //executer l'action
-                doAction(state->first, collisions,playerView);
+                doAction(state->first, collisions,playerView,true);
                 if(!firstStateActivated)
                     animate(!firstStateActivated,state->first,constPlayerStates[state->first].isPlayedOneTime);
             }
@@ -246,7 +250,7 @@ void PlayerView::computeFrame(std::vector<CollisionVector> collisions, PlayerVie
     }
 }
 
-void PlayerView::doAction(PlayerStateEnum state, std::vector<CollisionVector> collisions, PlayerView &playerView){
+void PlayerView::doAction(PlayerStateEnum state, std::vector<CollisionVector> collisions, PlayerView &playerView, bool doActionNow){
     CoupleFloat vectorDirection;
     Position newPosition;
     CollisionVector collisionPlayer;
@@ -261,31 +265,36 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<CollisionVector> co
     case receiveDamage:
         break;
     case specialAttacking:
-        //on calcule les collisions entre players
-        collisionPlayer = directionCollisionPlayers(*this, playerView);
-        //on vérifie qu'il y a collision et que
-        if(collisionPlayer.size() > 0 && collisionPlayer[0].first < 5){
-            for(auto i : collisionPlayer){
-                if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
-                    bool direction = !(i.first == rigthCol && !looksRight);
-                    attack(playerView, direction,2);
+        if(doActionNow){
+            //on calcule les collisions entre players
+            collisionPlayer = directionCollisionPlayers(*this, playerView);
+            //on vérifie qu'il y a collision et que
+            if(collisionPlayer.size() > 0 && collisionPlayer[0].first < 5){
+                for(auto i : collisionPlayer){
+                    if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
+                        bool direction = !(i.first == rigthCol && !looksRight);
+                        attack(playerView, direction,2.5);
+                    }
                 }
             }
         }
-        break;
+
         break;
     case attacking:
-        //on calcule les collisions entre players
-        collisionPlayer = directionCollisionPlayers(*this, playerView);
-        //on vérifie qu'il y a collision et que
-        if(collisionPlayer.size() > 0 && collisionPlayer[0].first < 5){
-            for(auto i : collisionPlayer){
-                if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
-                    bool direction = !(i.first == rigthCol && !looksRight);
-                    attack(playerView, direction,1);
+        if(doActionNow){
+            //on calcule les collisions entre players
+            collisionPlayer = directionCollisionPlayers(*this, playerView);
+            //on vérifie qu'il y a collision et que
+            if(collisionPlayer.size() > 0 && collisionPlayer[0].first < 5){
+                for(auto i : collisionPlayer){
+                    if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
+                        bool direction = !(i.first == rigthCol && !looksRight);
+                        attack(playerView, direction,1);
+                    }
                 }
             }
         }
+        movePlayer(collisions, state);
         break;
     case jumping :
         //std::cout<<" Jumping"<<std::endl;

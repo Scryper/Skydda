@@ -68,9 +68,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
-        setAnimationText(timer, timerAnimation, &app, &gameRound);
-
-        managementWin(deltaTime, &gameRound);
+        managementWin(deltaTime, &gameRound, timer, timerAnimation, &app);
 
         app.clear();
 
