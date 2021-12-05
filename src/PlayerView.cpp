@@ -136,10 +136,9 @@ void PlayerView::getHit(int value){
     player.getHit(value);
 }
 
-void PlayerView::attack(PlayerView &playerAttacked, bool left, float factor){
-
-    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds(), factor, this->looksRight,playerAttacked.looksRight);
-    this->soundManager->playRandomSound();
+void PlayerView::attack(PlayerView &playerAttacked, bool left){
+    player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds());
+    this->soundManager->playRandomHittingSound();
 
     //si attaqué changer state
     if(playerAttacked.getPlayer().getHealth() != 0.f){
@@ -151,6 +150,7 @@ void PlayerView::attack(PlayerView &playerAttacked, bool left, float factor){
         playerAttacked.getHit(-10.f * factor * 0.8f);
     }
     else{
+        this->soundManager->playDeathSound();
         playerAttacked.getPlayer().setState(dead,true);
     }
 }

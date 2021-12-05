@@ -14,15 +14,28 @@ class SoundManager {
         static inline SoundManager* instance = nullptr;
         static std::mutex mutex_;
 
-        std::map<std::string, sf::SoundBuffer> buffers;
-        std::map<std::string, sf::Sound> sounds;
+        const std::string ERROR_TEXT = "Audio resources was not found at : ";
+
+        std::map<std::string, sf::SoundBuffer> hittingBuffers;
+        std::map<std::string, sf::Sound> hittingSounds;
+        const std::string PATH_HITS = "resources/audio/fight/hits/hit";
+        const std::string EXTENSION = ".ogg";
+
+        std::map<std::string, sf::SoundBuffer> otherBuffers;
+        std::map<std::string, sf::Sound> otherSounds;
+        const std::string DEATH_SOUND_PATH = "resources/audio/fight/death/death.ogg";
+        const std::string VICTORY_SOUND_PATH = "resources/audio/victory/victory.ogg";
+
+        void playSound(std::string path, std::map<std::string, sf::SoundBuffer> &buffers, std::map<std::string, sf::Sound> &sounds);
 
     public:
         SoundManager(const SoundManager& other) = delete;
         SoundManager& operator=(const SoundManager& other) = delete;
 
         static SoundManager* getInstance();
-        void playRandomSound();
+        void playRandomHittingSound();
+        void playDeathSound();
+        void playVictorySound();
 };
 
 #endif // SOUNDMANAGER_H
