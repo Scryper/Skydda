@@ -16,10 +16,16 @@ class OptionScreen : public Screen {
         sf::Texture textureButton;
         sf::Texture textureButtonPlusMinus;
 
+        sf::Texture textureControlsP1;
+        sf::Texture textureControlsP2;
+
         sf::Sprite backgroundSprite;
         sf::Sprite buttonBack;
         sf::Sprite buttonPlus;
         sf::Sprite buttonMinus;
+
+        sf::Sprite spriteControlsP1;
+        sf::Sprite spriteControlsP2;
 
         Position position;
 

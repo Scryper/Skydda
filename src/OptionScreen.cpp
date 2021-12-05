@@ -6,33 +6,41 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
     /// Load background
     initBackground();
 
-    Position positionText(position.getX() - 75, position.getY() - 12);
-
     /// Load music infos
-    positionText.setX(positionText.getX() - 150);
+    position.setX(position.getX() - 225);
+    position.setY(position.getY() - 300);
     // value
-    textValueOfVolume = TextInitializer::createText("Volume   " + std::to_string((int) GlobalVariables::VOLUME_MUSIC), positionText);
-    textValueOfVolume.setCharacterSize(35);
+    textValueOfVolume = TextInitializer::createText("Volume   " + std::to_string((int) GlobalVariables::VOLUME_MUSIC), position);
+    textValueOfVolume.setCharacterSize(60);
 
     // Buttons
-    position.setX(position.getX() + 100);
-    position.setY(position.getY() - 10);
-    buttonPlus = initSprite(1.f, 1.f, "resources/images/arrows/arrow.png", position, &textureButtonPlusMinus);
+    position.setX(1200);
+    position.setY(242);
+    buttonPlus = initSprite(1.5f, 1.5f, "resources/images/arrows/arrow.png", position, &textureButtonPlusMinus);
 
-    position.setY(position.getY() + 50);
-    buttonMinus = initSprite(1.f, 1.f, position, &textureButtonPlusMinus);
-    buttonMinus.setScale(1.f, -1.f);
+    position.setX(1200);
+    position.setY(312);
+    buttonMinus = initSprite(1.5f, -1.5f, position, &textureButtonPlusMinus);
 
     /// Load Button
-    positionText.setX(positionText.getX() + 150);
-    position.setY(position.getY() + 260);
-    position.setX(position.getX() - 100);
+    position.setX(100);
+    position.setY(1020);
     buttonBack = initSprite(.5f, 1.f, "resources/images/buttons/button.png", position, &textureButton);
     // Text of buttonQuit
-    positionText.setX(positionText.getX() + 35);
-    positionText.setY(positionText.getY() + 300);
-    textBack = TextInitializer::createText("Back", positionText);
+    position.setX(60);
+    position.setY(1008);
+    textBack = TextInitializer::createText("Back", position);
     textBack.setFillColor(TextInitializer::BetterRed);
+
+    // ControlsP1
+    position.setX(600);
+    position.setY(700);
+    spriteControlsP1 = initSprite(0.25f, 0.25f,"resources/images/controls/ControlsP1.png", position, &textureControlsP1);
+
+    // ControlsP2
+    position.setX(1400);
+    position.setY(700);
+    spriteControlsP2 = initSprite(0.25f, 0.25f,"resources/images/controls/ControlsP2.png", position, &textureControlsP2);
 
     initFonts();
 
@@ -112,6 +120,9 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
 
         app.draw(buttonBack);
         app.draw(textBack);
+
+        app.draw(spriteControlsP1);
+        app.draw(spriteControlsP2);
 
         app.display();
     }
