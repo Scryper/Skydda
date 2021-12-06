@@ -172,7 +172,7 @@ void GameScreenTimer::setMenuText(sf::RenderWindow *app) {
     textMainMenu.setOrigin(textRect.width/2,textRect.height/2);
 
     Position positionButtonRejouer(950.f, 385.f);
-    buttonPlayAgain = initSprite(1.f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
+    buttonPlayAgain = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
 
     Position positionSelectPerso(950.f, 512.f);
     buttonSelectCharacters = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionSelectPerso, &textureButton);
