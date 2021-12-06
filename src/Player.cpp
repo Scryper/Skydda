@@ -127,6 +127,7 @@ Position Player::getPosition() const {
     return position;
 }
 
+//called to deal damage to another player
 void Player::attackPlayer(Player &player, float clock, int factor, bool directionAttack, bool directionProtection) {
     // verifiy that player's health > 0
     if(player.getHealth() <= 0){
@@ -140,9 +141,10 @@ void Player::attackPlayer(Player &player, float clock, int factor, bool directio
         double health = player.getHealth();
         double damage = attack * factor;
 
-        // evrifiy that the player isn't defendding himself
+        // verifiy that the player isn't defendding himself
         if(player.getState(defending) == true && directionProtection !=directionAttack) damage/=4;
 
+        //if the player is not dead
         if(health - damage > 0) {
             player.setHealth(health - damage);
         }
@@ -150,11 +152,15 @@ void Player::attackPlayer(Player &player, float clock, int factor, bool directio
             player.setHealth(0.f);
         }
 
+        //add the points
         points+=(int)damage;
+
+        //remember the last time the player attacked
         timeLastAttack = clock;
     }
 }
 
+//fill the vector of states
 void Player::stateInitializer(){
     initStatePointer(dead, 0);
     initStatePointer(standby, 0);
@@ -169,10 +175,12 @@ void Player::stateInitializer(){
     initStatePointer(idle, 0);
 }
 
+//add a state to the vector of states
 void Player::initStatePointer(PlayerStateEnum s, int val){
     state.push_back(new PlayerStatePair{s,val});
 }
 
+//destroy all the states
 void Player::stateDestroyer(){
     for (auto p : this->state ){
         delete (p);
@@ -180,18 +188,17 @@ void Player::stateDestroyer(){
     state.clear();
 }
 
+//update the position of the player
 Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<CollisionVector> collisions) {
     return movement.updatePosition(position, direction, collisions);
 }
 
+//change the state of the player
 void Player::setState(PlayerStateEnum s, bool value){
-     for(auto itStates : state){
-        if(itStates->first == s){
-            itStates->second = value;
-        }
-     }
+    state[s]->second = value;
 }
 
+//compute the state of a player based on input and collision with the ground
 PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPressed, bool bottomCollision){
     // browse states in their order
     for(auto itStates : state) {
@@ -259,6 +266,7 @@ PlayerStateBoolArray Player::computeStates(std::vector<PlayerStateEnum> keyPress
     return state;
 }
 
+//allows to search a value in an array
 template <typename T>
 bool Player::isFoundInArray(std::vector<T> vect, T element){
     return std::find(vect.begin(), vect.end(), element) != vect.end();

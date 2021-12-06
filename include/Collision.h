@@ -14,6 +14,4 @@ CollisionVector directionCollisionPlayers(PlayerView player1, PlayerView player2
 
 std::vector<CollisionVector> directionCollisions(PlayerView player, std::vector<PlatformView> platforms);
 
-CollisionVector initCollisionVector();
-
 #endif // COLLISION_H
