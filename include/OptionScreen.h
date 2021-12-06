@@ -7,6 +7,12 @@
 
 class OptionScreen : public Screen {
     private:
+        const static inline std::string PATH_ARROW = "resources/images/arrows/arrow.png";
+        const static inline std::string PATH_CONTROLS_P1 = "resources/images/controls/ControlsP1.png";
+        const static inline std::string PATH_CONTROLS_P2 = "resources/images/controls/ControlsP2.png";
+
+        const static inline std::string TEXT_VOLUME = "Volume   ";
+
         sf::Font font;
 
         sf::Text textBack;

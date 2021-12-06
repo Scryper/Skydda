@@ -13,17 +13,14 @@ GameScreenRound& GameScreenRound::operator=(const GameScreenRound& rhs) {
 }
 
 int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
+    // extract the data
     playerName1 = data[0];
     spriteSheet1 = data[1];
     playerName2 = data[2];
     spriteSheet2 = data[3];
     mapSeed = seed;
 
-    sf::Event event;
-
     float deltaTime;
-    sf::Clock clock;
-    sf::Clock clockTimer;
 
     position = getScreenCenter(&app);
 
@@ -40,12 +37,12 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     sf::Clock clockTest;
     clockTest.restart().asMilliseconds();
 
-    playerViewP1.getPlayer().setState(standby,true);
-    playerViewP2.getPlayer().setState(standby,true);
+    playerViewP1.getPlayer().setState(standby, true);
+    playerViewP2.getPlayer().setState(standby, true);
 
-    textRejouer = TextInitializer::createText("Play again", 950.f, 380.f);
-    textSelectPerso = TextInitializer::createText("Select characters", 950.f, 510.f);
-    textMenuPrincipal = TextInitializer::createText("Main menu", 950.f, 640.f);
+    textRejouer = TextInitializer::createText(TEXT_PLAY_AGAIN, 950.f, 380.f);
+    textSelectPerso = TextInitializer::createText(TEXT_SELECT_CHARACTERS, 950.f, 510.f);
+    textMenuPrincipal = TextInitializer::createText(TEXT_MAIN_MENU, 950.f, 640.f);
 
     while(app.isOpen()) {
         sf::Time timer = clockTimer.getElapsedTime();
@@ -76,7 +73,6 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 }
             }
             else {
-
                 textSelectPerso.setFillColor(sf::Color::White);
             }
 
@@ -92,10 +88,9 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
             }
         }
 
-            //verif l'input
-            //attaquer si poss
-            //vérif et update les manches la vie et le reste -> va update la position SI MORT
-            //update la position en fonction de cette nouvelle position
+            // verify input
+            // attack if possible
+            // verify and update rounds, health,... -> update position if dead
             healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
             healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
@@ -109,6 +104,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     return -1;
 }
 
+// create the "window" of end games
 void GameScreenRound::setMenuText(sf::RenderWindow *app) {
     sf::FloatRect textRect;
     mousePosition = getMousePosition(app);
@@ -137,13 +133,13 @@ void GameScreenRound::setMenuText(sf::RenderWindow *app) {
     textMenuPrincipal.setOrigin(textRect.width/2,textRect.height/2);
 
     Position positionButtonRejouer(950.f, 385.f);
-    buttonRejouer = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
+    buttonRejouer = initSprite(2.75f, 1.6f, PATH_BUTTON, positionButtonRejouer, &textureButton);
 
     Position positionSelectPerso(950.f, 512.f);
-    buttonSelectPerso = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionSelectPerso, &textureButton);
+    buttonSelectPerso = initSprite(2.75f, 1.6f, positionSelectPerso, &textureButton);
 
     Position positionMenuPrincipal(950.f, 643.f);
-    buttonMenuPrincipal = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionMenuPrincipal, &textureButton);
+    buttonMenuPrincipal = initSprite(2.75f, 1.6f, positionMenuPrincipal, &textureButton);
 
 }
 
@@ -153,7 +149,6 @@ void GameScreenRound::drawAll(sf::RenderWindow *app) {
     app->draw(playerViewP2.getSprite());
 
     for(auto platform : map_.getPlatforms()) app->draw(platform.getSprite());
-//    for(auto platform : map_.getBorders()) app->draw(platform.getSprite());
     for(auto circle : getRoundCirclesP1()) app->draw(circle);
     for(auto circle : getRoundCirclesP2()) app->draw(circle);
 
@@ -177,8 +172,6 @@ void GameScreenRound::drawAll(sf::RenderWindow *app) {
     app->display();
 }
 
-
-
 std::vector<sf::CircleShape> GameScreenRound::getRoundCirclesP1() {
     return roundCirclesP1;
 }
@@ -187,6 +180,7 @@ std::vector<sf::CircleShape> GameScreenRound::getRoundCirclesP2() {
     return roundCirclesP2;
 }
 
+// create the rounds which will represent the number of rounds won by a player
 void GameScreenRound::createRoundCircles() {
     Position posP1(60.f, 135.f);
     Position posP2(1360.f, 135.f);
@@ -217,6 +211,7 @@ void GameScreenRound::createRoundCircles() {
     roundCirclesP2.push_back(roundCircle);
 }
 
+// update the circles when a round is won
 void GameScreenRound::actualiseRoundCircles() {
     switch(gameRound.getRoundWinP1()) {
         case 1:
@@ -252,26 +247,10 @@ void GameScreenRound::clearRoundCircles() {
     roundCirclesP2[2].setFillColor(sf::Color::Transparent);
 }
 
-
+// creates the player, positions, view, textures,...
 void GameScreenRound::initPlayers() {
-    switch(mapSeed) {
-        case 1:
-            positionP1 = Position(position.getX() - 300, position.getY()+335);
-            positionP2 = Position(position.getX() + 300, position.getY()+335);
-            break;
-        case 2:
-            positionP1 = Position(position.getX() - 300, position.getY()+335);
-            positionP2 = Position(position.getX() + 300, position.getY()+335);
-            break;
-        case 3:
-            positionP1 = Position(position.getX() - 300, position.getY()+335);
-            positionP2 = Position(position.getX() + 300, position.getY()+335);
-            break;
-        default:
-            positionP1 = Position(position.getX() - 300, position.getY() + 335);
-            positionP2 = Position(position.getX() + 300, position.getY() + 335);
-            break;
-    }
+    positionP1 = Position(position.getX() - 300, position.getY()+335);
+    positionP2 = Position(position.getX() + 300, position.getY()+335);
 
     CoupleFloat scaleP1(.5f, .5f);
     CoupleFloat scaleP2(.5f, .5f);
@@ -291,6 +270,7 @@ void GameScreenRound::initPlayers() {
 
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
+    // create the player and their view with the builders
     PlayerBuilder builder;
     Player playerFromBuilder = builder.reset()
                                     ->withName(playerName1)

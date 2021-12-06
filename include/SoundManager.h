@@ -16,15 +16,17 @@ class SoundManager {
 
         const std::string ERROR_TEXT = "Audio resources was not found at : ";
 
+        const static int NUMBER_OF_SOUNDS = 10;
+
         std::map<std::string, sf::SoundBuffer> hittingBuffers;
         std::map<std::string, sf::Sound> hittingSounds;
-        const std::string PATH_HITS = "resources/audio/fight/hits/hit";
-        const std::string EXTENSION = ".ogg";
+        const static inline std::string PATH_HITS = "resources/audio/fight/hits/hit";
+        const static inline std::string EXTENSION = ".ogg";
 
         std::map<std::string, sf::SoundBuffer> otherBuffers;
         std::map<std::string, sf::Sound> otherSounds;
-        const std::string DEATH_SOUND_PATH = "resources/audio/fight/death/death.ogg";
-        const std::string VICTORY_SOUND_PATH = "resources/audio/victory/victory.ogg";
+        const static inline std::string DEATH_SOUND_PATH = "resources/audio/fight/death/death.ogg";
+        const static inline std::string VICTORY_SOUND_PATH = "resources/audio/victory/victory.ogg";
 
         void playSound(std::string path, std::map<std::string, sf::SoundBuffer> &buffers, std::map<std::string, sf::Sound> &sounds);
 

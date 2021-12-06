@@ -15,6 +15,7 @@ PlayerView PlayerViewBuilder::build() {
     return this->playerView;
 }
 
+// create the sprite and affects it to the player
 PlayerViewBuilder* PlayerViewBuilder::withSprite(CoupleFloat size_, CoupleFloat center, std::string pathToPlayer, Position position, sf::Texture &texture) {
     PlayerSprite sprite = initSpritePlayer(size_, center, pathToPlayer, position, &texture);
     this->playerView.setSprite(sprite);
@@ -26,6 +27,7 @@ PlayerViewBuilder* PlayerViewBuilder::withPlayer(Player player) {
     return this;
 }
 
+// link the keys of the player with the event they create
 PlayerViewBuilder* PlayerViewBuilder::withKeys(
             sf::Keyboard::Key up,
             sf::Keyboard::Key left,

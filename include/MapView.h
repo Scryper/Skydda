@@ -8,6 +8,7 @@
 
 #include "Map.h"
 
+/*This map is what the user will see while playing*/
 class MapView {
     private:
         Map mapModel;

@@ -6,6 +6,14 @@
 #include <string>
 
 class GameScreenRound : public GameScreen {
+    private:
+        const static inline std::string TEXT_PLAY_AGAIN = "Play again";
+        const static inline std::string TEXT_SELECT_CHARACTERS = "Select characters";
+        const static inline std::string TEXT_MAIN_MENU = "Main menu";
+
+        sf::Clock clock;
+        sf::Clock clockTimer;
+
     public:
         virtual int run(sf::RenderWindow &app, std::vector<std::string> data, int seed);
         GameScreenRound();

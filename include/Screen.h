@@ -15,6 +15,13 @@ class Screen {
         Position center;
 
     protected:
+        const static inline std::string PATH_BACKGROUND_OTHER = "resources/images/background/background_other.jpg";
+        const static inline std::string PATH_BUTTON = "resources/images/buttons/button.png";
+        const static inline std::string PATH_FONT = "resources/fonts/glitch.otf";
+
+        const static inline std::string TEXT_PLAY = "Play";
+        const static inline std::string TEXT_BACK = "Back";
+
         sf::Event event;
 
         sf::Vector2f mousePosition;

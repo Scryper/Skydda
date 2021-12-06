@@ -20,6 +20,8 @@ class PlayerViewBuilder {
         PlayerViewBuilder* reset();
         PlayerView build();
 
+        // return a pointeur of this instance to work on the same instance
+        // allows to chain the methods
         PlayerViewBuilder* withSprite(CoupleFloat size_, CoupleFloat center, std::string pathToPlayer, Position position, sf::Texture &texture);
         PlayerViewBuilder* withPlayer(Player player);
         PlayerViewBuilder* withKeys(sf::Keyboard::Key up,
@@ -29,7 +31,6 @@ class PlayerViewBuilder {
                                     sf::Keyboard::Key protect,
                                     sf::Keyboard::Key superAttack);
         PlayerViewBuilder* withLooksRight(bool looksRight);
-
 };
 
 #endif // PLAYERVIEWBUILDER_H

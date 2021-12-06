@@ -5,6 +5,11 @@
 
 class MenuScreen : public Screen {
     private:
+        const static inline std::string PATH_BACKGROUND = "resources/images/background/background_menu.jpg";
+
+        const static inline std::string TEXT_OPTIONS = "Options";
+        const static inline std::string TEXT_QUIT = "Quit";
+
         Position position;
 
         sf::Font font;

@@ -9,10 +9,10 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     /// Load buttons (clickable sprites)
     position.setY(position.getY() - 150);
     Position positionText(position.getX() - 75, position.getY() - 12);
-    buttonChooseCharacters = initSprite(1.f, 1.f, "resources/images/buttons/button.png", position, &textureButton);
+    buttonChooseCharacters = initSprite(1.f, 1.f, PATH_BUTTON, position, &textureButton);
     // Text of buttonChooseCharacters
     positionText.setX(positionText.getX() + 40);
-    textChooseCharacters = TextInitializer::createText("Play", positionText);
+    textChooseCharacters = TextInitializer::createText(TEXT_PLAY, positionText);
 
     /// OptionScreen button
     position.setY(position.getY() + 100);
@@ -20,7 +20,7 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     // Text of buttonOptions
     positionText.setY(positionText.getY() + 100);
     positionText.setX(positionText.getX() - 35);
-    textOptions = TextInitializer::createText("Options", positionText);
+    textOptions = TextInitializer::createText(TEXT_OPTIONS, positionText);
 
     /// Quit button
     position.setY(position.getY() + 100);
@@ -28,7 +28,7 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
     positionText.setX(positionText.getX() + 35);
     buttonQuit = initSprite(.5f, 1.f, position, &textureButton);
     // Text of buttonQuit
-    textQuit = TextInitializer::createText("Quit", positionText);
+    textQuit = TextInitializer::createText(TEXT_QUIT, positionText);
     textQuit.setFillColor(TextInitializer::BetterRed);
 
     /// Font of texts
@@ -38,7 +38,6 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
         while(app.pollEvent(event)) {
             if(event.type == sf::Event::Closed) return -1;
         }
-
         // Get the mouse position to verify if the user is over a sprite and/or click a sprite
         mousePosition = getMousePosition(&app);
 
@@ -96,11 +95,12 @@ int MenuScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int se
 }
 
 void MenuScreen::initBackground() {
-    background = initSprite(1.f, 1.f, "resources/images/background/background_menu.jpg", position, &textureBackground);
+    background = initSprite(1.f, 1.f, PATH_BACKGROUND, position, &textureBackground);
 }
 
+// load the font on the texts
 void MenuScreen::initFonts() {
-    font.loadFromFile("resources/fonts/glitch.otf");
+    font.loadFromFile(PATH_FONT);
 
     texts.push_back(&textChooseCharacters);
     texts.push_back(&textOptions);
