@@ -385,6 +385,13 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 }
 
 void PrematchScreen::initVectors() {
+
+    maps.clear();
+    names.clear();
+    characters.clear();
+    spriteSheets.clear();
+    gameModes.clear();
+
     maps.push_back(PATH_PREVIEW_MAP1);
     maps.push_back(PATH_PREVIEW_MAP2);
     maps.push_back(PATH_PREVIEW_MAP3);

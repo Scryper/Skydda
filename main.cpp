@@ -49,7 +49,6 @@ int main() {
         screens.push_back(&gameScreenTimer);
 
 		if(screen == 3 || screen == 4) {
-
             data.push_back(prematchScreen.strFirstPlayerName);
             data.push_back(prematchScreen.pathSpriteFirstPlayer);
             data.push_back(prematchScreen.strSecondPlayerName);
