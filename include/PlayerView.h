@@ -30,6 +30,8 @@ class PlayerView {
         PlayerView();
         virtual ~PlayerView();
         PlayerView(const PlayerView& other);
+        PlayerView& operator=(const PlayerView& other);
+
 
         void setHealth(float health);
         void setLooksRigth(bool right);

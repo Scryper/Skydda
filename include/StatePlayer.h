@@ -52,7 +52,7 @@ const std::vector<playerState> constPlayerStates
     {dead,              0,  0,  0,  1,  0,      0},
     {standby,           0,  0,  0,  0,  0,      0},
     {defending,         0,  1,  0,  1,  0,      0},
-    {receiveDamage,     1,  0,  0,  1,  500,    0},
+    {receiveDamage,     1,  0,  0,  1,  400,    0},
     {specialAttacking,  1,  1,  0,  1,  1000,   750},
     {attacking,         1,  1,  1,  1,  400,    250},
     {jumping,           1,  1,  1,  1,  900,   0},

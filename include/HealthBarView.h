@@ -18,6 +18,8 @@ class HealthBarView {
         HealthBarView(HealthBar *healthBar, sf::RectangleShape healthBarIn, sf::RectangleShape healthBarOut);
         virtual ~HealthBarView();
         HealthBarView(const HealthBarView& other);
+        HealthBarView& operator=(const HealthBarView& other);
+
 
         HealthBar getHealthBar();
 

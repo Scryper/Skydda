@@ -18,6 +18,7 @@ Map& Map::operator=(const Map& rhs)
 {
     if (this == &rhs) return *this; // handle self assignment
     //assignment operator
+    this->mapSeed = rhs.mapSeed;
     return *this;
 }
 

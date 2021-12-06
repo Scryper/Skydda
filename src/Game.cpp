@@ -16,6 +16,17 @@ Game::~Game() { }
 
 Game::Game(const Game& other) { }
 
+Game& Game::operator=(const Game& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->player1 = rhs.player1;
+    this->player2 = rhs.player2;
+    this->roundWinP1 = rhs.roundWinP1;
+    this->roundWinP2 = rhs.roundWinP2;
+    return *this;
+}
+
 Player& Game::getPlayer1() {
     return *player1;
 }

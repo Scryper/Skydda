@@ -13,6 +13,8 @@ class Position {
         Position(int x = 0, int y = 0);
         Position(const Position& other);
         virtual ~Position();
+        Position& operator=(const Position& other);
+
 
         int getX() const;
         int getY() const;

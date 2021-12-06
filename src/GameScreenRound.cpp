@@ -12,7 +12,15 @@ GameScreenRound::GameScreenRound(const GameScreenRound& other) {
     //copy ctor
 }
 
+GameScreenRound& GameScreenRound::operator=(const GameScreenRound& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    return *this;
+}
+
 int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
+
     playerName1 = data[0];
     spriteSheet1 = data[1];
     playerName2 = data[2];
@@ -43,6 +51,9 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     playerViewP1.getPlayer().setState(standby,true);
     playerViewP2.getPlayer().setState(standby,true);
 
+    textRejouer = TextInitializer::createText("Rejouer", 950.f, 380.f);
+    textSelectPerso = TextInitializer::createText("Selection personnages", 950.f, 510.f);
+    textMenuPrincipal = TextInitializer::createText("Menu principal", 950.f, 640.f);
 
     while(app.isOpen()) {
         sf::Time timer = clockTimer.getElapsedTime();
@@ -51,40 +62,110 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
         while(app.pollEvent(event)) {
             if(event.type == sf::Event::Closed) return -1;
-
             if(event.type == sf::Event::KeyPressed) {
                 if(event.key.code == sf::Keyboard::Escape) return 0;
             }
+            /// Button Rejouer
+            if(buttonRejouer.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    return 3;
+                } else {
+                    textRejouer.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textRejouer.setFillColor(sf::Color::White);
+            }
+
+            /// Button selectPerso
+            if(buttonSelectPerso.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    return 1;
+                } else {
+                    textSelectPerso.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+
+                textSelectPerso.setFillColor(sf::Color::White);
+            }
+
+            /// Button menuPrincipal
+            if(buttonMenuPrincipal.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed){
+                    return 0;
+                } else {
+                    textMenuPrincipal.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textMenuPrincipal.setFillColor(sf::Color::White);
+            }
         }
 
-        //verif l'input
-        //attaquer si poss
-        //vérif et update les manches la vie et le reste -> va update la position SI MORT
-        //update la position en fonction de cette nouvelle position
+            //verif l'input
+            //attaquer si poss
+            //vérif et update les manches la vie et le reste -> va update la position SI MORT
+            //update la position en fonction de cette nouvelle position
+            healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
+            healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
+            managementWin(deltaTime, &gameRound, timer, timerAnimation, &app);
+            app.clear();
 
+            setMenuText(&app);
+            drawAll(&app);
 
-        healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
-        healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
-
-        managementWin(deltaTime, &gameRound, timer, timerAnimation, &app);
-
-        app.clear();
-
-        drawAll(&app);
-    }
+        }
 
     return -1;
 }
 
-void GameScreenRound::drawAll(sf::RenderWindow *app) {
+void GameScreenRound::setMenuText(sf::RenderWindow *app) {
+    sf::FloatRect textRect;
+    mousePosition = getMousePosition(app);
 
+    rectangle.setSize(sf::Vector2f(850.f, 450.f));
+    rectangle.setPosition(525.f,290.f);
+    rectangle.setFillColor(sf::Color::Black);
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(4);
+
+    textRejouer.setFont(font);
+    textRejouer.setCharacterSize(40);
+
+    textSelectPerso.setFont(font);
+    textSelectPerso.setCharacterSize(40);
+
+    textMenuPrincipal.setFont(font);
+    textMenuPrincipal.setCharacterSize(40);
+
+    // Center texts
+    textRect = textRejouer.getLocalBounds();
+    textRejouer.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textSelectPerso.getLocalBounds();
+    textSelectPerso.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textMenuPrincipal.getLocalBounds();
+    textMenuPrincipal.setOrigin(textRect.width/2,textRect.height/2);
+
+    Position positionButtonRejouer(950.f, 385.f);
+    buttonRejouer = initSprite(1.f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
+
+    Position positionSelectPerso(950.f, 512.f);
+    buttonSelectPerso = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionSelectPerso, &textureButton);
+
+    Position positionMenuPrincipal(950.f, 643.f);
+    buttonMenuPrincipal = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionMenuPrincipal, &textureButton);
+
+}
+
+void GameScreenRound::drawAll(sf::RenderWindow *app) {
     app->draw(backgroundSprite);
     app->draw(playerViewP1.getSprite());
     app->draw(playerViewP2.getSprite());
-//
+
     for(auto platform : map_.getPlatforms()) app->draw(platform.getSprite());
-////    for(auto platform : map_.getBorders()) app->draw(platform.getSprite());
+//    for(auto platform : map_.getBorders()) app->draw(platform.getSprite());
     for(auto circle : getRoundCirclesP1()) app->draw(circle);
     for(auto circle : getRoundCirclesP2()) app->draw(circle);
 
@@ -96,9 +177,19 @@ void GameScreenRound::drawAll(sf::RenderWindow *app) {
     app->draw(namePlayerP1);
     app->draw(namePlayerP2);
     app->draw(textAnimation);
-
+    if(startMenu) {
+        app->draw(rectangle);
+        app->draw(buttonRejouer);
+        app->draw(textRejouer);
+        app->draw(buttonSelectPerso);
+        app->draw(textSelectPerso);
+        app->draw(buttonMenuPrincipal);
+        app->draw(textMenuPrincipal);
+    }
     app->display();
 }
+
+
 
 std::vector<sf::CircleShape> GameScreenRound::getRoundCirclesP1() {
     return roundCirclesP1;

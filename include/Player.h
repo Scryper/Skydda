@@ -28,7 +28,8 @@ class Player {
         Player();
         Player(const Player& other);
         virtual ~Player();
-
+        Player& operator=(const Player& other);
+        void stateDestroyer();
         void initStatePointer(PlayerStateEnum s, int val);
         void stateInitializer();
         void stateDestroyer();

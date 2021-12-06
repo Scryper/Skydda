@@ -18,6 +18,15 @@ HealthBar::~HealthBar() { }
 
 HealthBar::HealthBar(const HealthBar& other) { }
 
+HealthBar& HealthBar::operator=(const HealthBar& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->lifePoint = rhs.lifePoint;
+    this->position = rhs.position;
+    return *this;
+}
+
 float HealthBar::getLifePoint(){
     return lifePoint;
 }

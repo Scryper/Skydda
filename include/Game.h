@@ -18,6 +18,8 @@ class Game {
         Game(Player& player1, Player& player2);
         virtual ~Game();
         Game(const Game& other);
+        Game& operator=(const Game& other);
+
 
         virtual int getPlayerWin()=0;
 

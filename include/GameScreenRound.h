@@ -13,6 +13,8 @@ class GameScreenRound : public GameScreen {
         GameScreenRound();
         virtual ~GameScreenRound();
         GameScreenRound(const GameScreenRound& other);
+        GameScreenRound& operator=(const GameScreenRound& other);
+
 
         std::vector<sf::CircleShape> getRoundCirclesP1();
         std::vector<sf::CircleShape> getRoundCirclesP2();
@@ -21,7 +23,9 @@ class GameScreenRound : public GameScreen {
         void actualiseRoundCircles();
         void clearRoundCircles();
 
-        virtual void drawAll(sf::RenderWindow *app);
+        void drawAll(sf::RenderWindow *app);
+
+        void setMenuText(sf::RenderWindow *app);
 
 };
 

@@ -14,6 +14,8 @@ class PlatformView {
         PlatformView(sf::Sprite sprite, Platform platform);
         PlatformView(const PlatformView& other);
         virtual ~PlatformView();
+        PlatformView& operator=(const PlatformView& other);
+
 
         sf::Sprite getSprite() const;
         Platform getPlatform() const;

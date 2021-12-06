@@ -1,6 +1,8 @@
 #include "PrematchScreen.h"
 
 int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
+    std::cout<<std::endl;
+    std::cout<<"PrematchScreen"<<std::endl;
     position = getScreenCenter(&app);
 
     initVectors();

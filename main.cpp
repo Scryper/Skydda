@@ -61,5 +61,7 @@ int main() {
         screens.erase(screens.end()-1);
         screens.erase(screens.end()-1);
 	}
+
+	delete musicManager;
     return EXIT_SUCCESS;
 }

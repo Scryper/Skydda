@@ -29,6 +29,17 @@ Movement::Movement(const Movement& other) {
     this->jumpHeight = other.jumpHeight;
 }
 
+Movement& Movement::operator=(const Movement& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->speed = rhs.speed;
+    this->acceleration = rhs.acceleration;
+    this->maxSpeed = rhs.maxSpeed;
+    this->jumpHeight = rhs.jumpHeight;
+    return *this;
+}
+
 CoupleFloat Movement::getSpeed()const {
     return speed;
 }

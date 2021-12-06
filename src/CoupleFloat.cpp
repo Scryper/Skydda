@@ -19,6 +19,15 @@ CoupleFloat::~CoupleFloat() {
 
 }
 
+CoupleFloat& CoupleFloat::operator=(const CoupleFloat& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->x = rhs.x;
+    this->y = rhs.y;
+    return *this;
+}
+
 float CoupleFloat::getX()const {
     return x;
 }

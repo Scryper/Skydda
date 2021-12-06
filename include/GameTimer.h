@@ -13,6 +13,8 @@ class GameTimer: public Game {
         GameTimer(Player& player1, Player& player2);
         virtual ~GameTimer();
         GameTimer(const GameTimer& other);
+        GameTimer& operator=(const GameTimer& other);
+
 
         virtual int getPlayerWin();
 

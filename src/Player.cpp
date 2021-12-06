@@ -25,12 +25,31 @@ Player::Player(const Player& other) {
 }
 
 Player::~Player() {
-    //cout<<"destructeur player"<<endl;
-    //stateDestroyer();
-    //for (PlayerStatePair* p : state ){
-        //delete p;
-    //}
-    state.clear();
+    stateDestroyer();
+}
+
+Player& Player::operator=(const Player& other) {
+    if (this == &other) return *this; // handle self assignment
+
+    this->name = other.name;
+    this->attack = other.attack;
+    this->health = other.health;
+    this->position = other.position;
+    this->movement = other.movement;
+    timeLastAttack = other.timeLastAttack;
+    durationBetweenAttacks = other.durationBetweenAttacks;
+
+    stateDestroyer();
+
+    PlayerStateBoolArray tmp;
+    this->state = tmp;
+    for(auto i : other.state){
+        PlayerStatePair* stateTemp = new PlayerStatePair;
+        stateTemp->first = i->first;
+        stateTemp->second = i->second;
+        this->state.push_back(stateTemp);
+    }
+    return *this;
 }
 
 void Player::setPosition(Position position) {
@@ -65,7 +84,7 @@ void Player::setMovement(Movement movement_) {
     this->movement = movement_;
 }
 
-bool Player::getState(PlayerStateEnum s)const{
+bool Player::getState(PlayerStateEnum s) const {
     for(auto itStates : state){
         if(itStates->first==s){
             return itStates->second;
@@ -74,19 +93,19 @@ bool Player::getState(PlayerStateEnum s)const{
      return 0;
 }
 
-std::string Player::getName()const {
+std::string Player::getName() const {
     return name;
 }
 
-float Player::getHealth()const {
+float Player::getHealth() const {
     return health;
 }
 
-float Player::getAttack()const{
+float Player::getAttack() const {
     return attack;
 }
 
-void Player::getHit(int value){
+void Player::getHit(int value) {
     movement.recul(value);
 }
 
@@ -144,9 +163,15 @@ void Player::stateInitializer(){
     initStatePointer(idle, 0);
 }
 
+void Player::initStatePointer(PlayerStateEnum s, int val){
+    state.push_back(new PlayerStatePair{s,val});
+}
+
 void Player::stateDestroyer(){
-    //for()
-    //state.clear();
+    for (auto p : this->state ){
+        delete (p);
+    }
+    state.clear();
 }
 
 Position Player::updatePosition(Position position, CoupleFloat direction, std::vector<CollisionVector> collisions) {

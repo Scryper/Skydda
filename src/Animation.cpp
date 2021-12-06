@@ -13,8 +13,36 @@ Animation::Animation(const Animation& other) {
 }
 
 Animation::~Animation() {
-    stateClocks.clear();
-    tours.clear();
+    destroyClocks();
+    destroyTours();
+}
+
+Animation& Animation::operator=(const Animation& other){
+    if (this == &other) return *this;
+
+    this->lastState = other.lastState;
+
+    destroyClocks();
+
+    PlayerStateClockArray tmp;
+    this->stateClocks = tmp;
+    for(auto i : other.stateClocks){
+        PlayerStateClock* clockTemp = new PlayerStateClock;
+        clockTemp->first = i->first;
+        clockTemp -> second = new sf::Clock;
+        this->stateClocks.push_back(clockTemp);
+    }
+
+    destroyTours();
+    AnimStateTours animTmp;
+    this->tours = animTmp;
+    for(auto i : other.tours){
+        animStateTour* anim = new animStateTour;
+        *(anim) = *(i);
+        this->tours.push_back(anim);
+    }
+
+    return *this;
 }
 
 void Animation::initTours(){
@@ -30,6 +58,13 @@ void Animation::initTour(PlayerStateEnum s){
     animStateTour temp2 = {s,0};
     *temp=temp2;
     tours.push_back(temp);
+}
+
+void Animation::destroyTours(){
+    for(auto i : tours){
+        delete i;
+    }
+    tours.clear();
 }
 
 void Animation::initClocks(){
@@ -48,6 +83,14 @@ void Animation::initClock(PlayerStateEnum s){
     PlayerStateClock temp2 = {s,tempClock};
     *temp = temp2;
     stateClocks.push_back(temp);
+}
+
+void Animation::destroyClocks(){
+    for(auto i : stateClocks){
+        delete i->second;
+        delete i;
+    }
+    stateClocks.clear();
 }
 
 PlayerStateClockArray* Animation::getStateClock(){

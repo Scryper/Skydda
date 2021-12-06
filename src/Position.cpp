@@ -12,6 +12,15 @@ Position::Position(const Position& other) {
 
 Position::~Position() { }
 
+Position& Position::operator=(const Position& rhs)
+{
+    if (this == &rhs) return *this; // handle self assignment
+    //assignment operator
+    this->x = rhs.x;
+    this->y = rhs.y;
+    return *this;
+}
+
 int Position::getX() const {
     return x;
 }
