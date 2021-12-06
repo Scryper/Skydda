@@ -40,6 +40,8 @@ int main() {
 	std::vector<std::string> data;
 	//Main loop
 	while (screen >= 0) {
+        data.clear();
+
         GameScreenRound gameScreenRound; // 3
         screens.push_back(&gameScreenRound);
 
@@ -47,6 +49,7 @@ int main() {
         screens.push_back(&gameScreenTimer);
 
 		if(screen == 3 || screen == 4) {
+
             data.push_back(prematchScreen.strFirstPlayerName);
             data.push_back(prematchScreen.pathSpriteFirstPlayer);
             data.push_back(prematchScreen.strSecondPlayerName);
