@@ -22,6 +22,7 @@ Map& Map::operator=(const Map& rhs)
     return *this;
 }
 
+///Getter
 int Map::getMapSeed() {
     return mapSeed;
 }

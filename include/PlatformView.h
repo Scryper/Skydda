@@ -16,10 +16,11 @@ class PlatformView {
         virtual ~PlatformView();
         PlatformView& operator=(const PlatformView& other);
 
-
+        ///Getter
         sf::Sprite getSprite() const;
         Platform getPlatform() const;
 
+        ///Setter
         void setSprite(sf::Sprite sprite);
         void setPlatform(Platform platform);
 };

@@ -29,12 +29,14 @@ sf::Text TextInitializer::createText(std::string textContent, float x, float y) 
     return text;
 }
 
+//apply the font to a vector of text
 void TextInitializer::initFont(std::vector<sf::Text*> texts, sf::Font* font) {
     for(sf::Text* text : texts) {
         text->setFont(*font);
     }
 }
 
+//apply the font to a text
 void TextInitializer::initFont(sf::Text* text, sf::Font* font) {
     text->setFont(*font);
 }

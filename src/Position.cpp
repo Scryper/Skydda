@@ -21,6 +21,7 @@ Position& Position::operator=(const Position& rhs)
     return *this;
 }
 
+///Getter
 int Position::getX() const {
     return x;
 }
@@ -29,6 +30,7 @@ int Position::getY() const {
     return y;
 }
 
+///Setter
 void Position::setX(int x){
     this->x = x;
 }

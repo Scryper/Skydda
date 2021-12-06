@@ -29,6 +29,7 @@ Platform& Platform::operator=(const Platform& rhs)
     return *this;
 }
 
+///Getter
 Position Platform::getPosition() const {
     return position;
 }
@@ -37,6 +38,7 @@ CoupleFloat Platform::getSize() const {
     return size_;
 }
 
+///Setter
 void Platform::setPosition(Position position) {
     this->position = position;
 }

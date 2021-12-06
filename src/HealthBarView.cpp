@@ -22,6 +22,7 @@ HealthBarView& HealthBarView::operator=(const HealthBarView& rhs)
     return *this;
 }
 
+///Getter
 HealthBar HealthBarView::getHealthBar() {
     return healthBar;
 }
@@ -33,6 +34,7 @@ sf::RectangleShape HealthBarView::getHealthBarOut() {
     return healthBarOut;
 }
 
+///Setter
 void HealthBarView::setPositionHealthBarIn() {
     float x = healthBar.getPosition().getX();
     float y = healthBar.getPosition().getY();
@@ -44,24 +46,29 @@ void HealthBarView::setPositionHealthBarOut() {
     healthBarOut.setPosition(x, y);
 }
 
+//set the color of the remaining life
 void HealthBarView::actualiseColorHealthBarIn() {
     healthBarIn.setFillColor(sf::Color::Green);
 }
 
+//set the color of the life lost
 void HealthBarView::actualiseColorHealthBarOut() {
     healthBarOut.setFillColor(sf::Color::Red);
     healthBarOut.setOutlineThickness(2);
     healthBarOut.setOutlineColor(sf::Color::Black);
 }
 
+//update the size of the bar representing the health left
 void HealthBarView::actualiseSizeHealthBarIn(float hpPlayer){
     healthBarIn.setSize(sf::Vector2f(hpPlayer * 3, 20));
 }
 
+//update the size of the bar representing the health lost
 void HealthBarView::actualiseSizeHealthBarOut(){
     healthBarOut.setSize(sf::Vector2f(healthBar.getLIFE_POINT_MAX() * 3, 20));
 }
 
+//create the name of the player under the healthBar
 sf::Text HealthBarView::createNamePlayer(Player player, Position posHealthBar) {
     sf::Text namePlayer = TextInitializer::createText(player.getName(), posHealthBar);
 

@@ -23,6 +23,7 @@ PlatformView& PlatformView::operator=(const PlatformView& rhs)
     return *this;
 }
 
+///Getter
 sf::Sprite PlatformView::getSprite() const {
     return sprite;
 }
@@ -31,6 +32,7 @@ Platform PlatformView::getPlatform() const {
     return platform;
 }
 
+///Setter
 void PlatformView::setSprite(sf::Sprite sprite) {
     this->sprite = sprite;
 }

@@ -12,6 +12,7 @@ class Map {
         Map(const Map& other);
         Map& operator=(const Map& other);
 
+        ///Getter
         int getMapSeed();
 };
 

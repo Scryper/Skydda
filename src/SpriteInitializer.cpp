@@ -17,6 +17,7 @@ PlayerSprite setSpriteOptionsPlayer(PlayerSprite *sprite, CoupleFloat size_, Cou
     sprite->setOrigin(centerOfSprite.getX() / 2, centerOfSprite.getY() / 2);
     sprite->setPosition(position.getX(), position.getY());
 
+    //create the hitbox and set the hitbox of the playerSprite
     sf::FloatRect hitbox(0, 50, 170, 273);
     sprite->setHitbox(hitbox);
 
@@ -42,6 +43,7 @@ sf::Sprite initSprite(float sizeX, float sizeY, std::string pathToSprite, Positi
     return sprite;
 }
 
+// Initialize a sprite which has a texture already loaded
 sf::Sprite initSprite(CoupleFloat sizeOfSprite, Position spritePosition, sf::Texture *spriteTexture) {
     sf::Sprite sprite(*spriteTexture);
     sprite = setSpriteOptions(&sprite, sizeOfSprite, spritePosition);
@@ -49,7 +51,7 @@ sf::Sprite initSprite(CoupleFloat sizeOfSprite, Position spritePosition, sf::Tex
     return sprite;
 }
 
-// Initialize a sprite which has a texture already loaded
+// Initialize a sprite which has a texture already loaded but without CoupleFloat
 sf::Sprite initSprite(float sizeX, float sizeY, Position spritePosition, sf::Texture *spriteTexture) {
     CoupleFloat sizeOfSprite(sizeX, sizeY);
     sf::Sprite sprite = initSprite(sizeOfSprite, spritePosition, spriteTexture);

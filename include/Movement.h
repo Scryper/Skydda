@@ -24,16 +24,22 @@ class Movement {
         virtual ~Movement();
         Movement& operator=(const Movement& other);
 
-
+        ///Getter
         CoupleFloat getSpeed() const;
         CoupleFloat getAcceleration() const;
 
+        ///Setter
         void setSpeed(CoupleFloat speed);
         void setAcceleration(CoupleFloat acceleration);
-        void stopX();
-        void stopY();
-        void recul(int value);
 
+        //to set the speed in x to 0
+        void stopX();
+        //to set the speed in y to 0
+        void stopY();
+        //apply recoil to the movement
+        void recoil(int value);
+
+        //calculate the new position
         Position updatePosition(Position position, CoupleFloat coupleFloat, std::vector<CollisionVector> collisions);
 };
 

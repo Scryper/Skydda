@@ -40,6 +40,7 @@ Movement& Movement::operator=(const Movement& rhs)
     return *this;
 }
 
+///Getter
 CoupleFloat Movement::getSpeed()const {
     return speed;
 }
@@ -47,6 +48,7 @@ CoupleFloat Movement::getAcceleration()const {
     return acceleration;
 }
 
+///Setter
 void Movement::setSpeed(CoupleFloat speed) {
     this->speed = speed;
 }
@@ -56,18 +58,22 @@ void Movement::setAcceleration(CoupleFloat acceleration){
     this->acceleration = couple;
 }
 
+//put the speed in x to 0
 void Movement::stopX(){
     this->speed.setX(0);
 }
 
+//put the speed in y to 0
 void Movement::stopY(){
     this->speed.setY(0);
 }
 
-void Movement::recul(int value){
+//apply recoil to the movement
+void Movement::recoil(int value){
     speed.setX(value);
 }
 
+//update the position of an object based on the speed
 Position Movement::updatePosition(Position position, CoupleFloat direction, std::vector<CollisionVector> collisions) {
     // get the info about X movement
     float speedX = speed.getX();
@@ -160,37 +166,41 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
         }
     }
 
-        for(auto& i : collisions){
-            for(auto& j : i){
-                switch(j.first){
+    //check the collisions and the direction of the collisions
+    for(auto& i : collisions){
+        for(auto& j : i){
+            switch(j.first){
                 case bottom :
                     if(speed.getY() < 0){
                         coll.push_back(j);
                     }
                     break;
+
                 case top :
                     if(directionY != 0 && speedY == 0){
                         speed.setY(-jumpHeight);
                     }
                     else if(speed.getY() > 0){
-                            coll.push_back(j);
-                        }
+                        coll.push_back(j);
+                    }
                     break;
+
                 case rigthCol :
                     if(speed.getX() < 0){
                         coll.push_back(j);
                     }
-
                     break;
+
                 case leftCol :
                     if(speed.getX() > 0){
                         coll.push_back(j);
                     }
                     break;
+
                 default :
                     break;
-                }
             }
+        }
 
 
         for(auto i : coll){
@@ -206,6 +216,7 @@ Position Movement::updatePosition(Position position, CoupleFloat direction, std:
     }
 
 
+    //update the position
     position.setX(position.getX() + speed.getX());
     position.setY(position.getY() + speed.getY());
     return position;

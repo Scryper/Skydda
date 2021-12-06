@@ -15,10 +15,11 @@ class Position {
         virtual ~Position();
         Position& operator=(const Position& other);
 
-
+        ///Getter
         int getX() const;
         int getY() const;
 
+        ///Setter
         void setX(int x);
         void setY(int y);
 };

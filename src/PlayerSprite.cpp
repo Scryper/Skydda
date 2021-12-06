@@ -16,10 +16,12 @@ PlayerSprite& PlayerSprite::operator=(const PlayerSprite& rhs) {
     return *this;
 }
 
+//set the hitbox.
 void PlayerSprite::setHitbox(const sf::FloatRect& hitbox) {
     m_hitbox = hitbox;
 }
 
+//get the global bounds of the hitbox.
 sf::FloatRect PlayerSprite::getGlobalHitbox() const {
     return getTransform().transformRect(m_hitbox);
 }

@@ -21,22 +21,29 @@ class HealthBarView {
         HealthBarView& operator=(const HealthBarView& other);
 
 
+        ///Getter
         HealthBar getHealthBar();
 
         sf::RectangleShape getHealthBarIn();
         sf::RectangleShape getHealthBarOut();
 
+        ///Setter
         void setLifePoint(float lifePoint);
 
+        //set the color of the life left
         void setPositionHealthBarIn();
+        //set the color of the life lost
         void setPositionHealthBarOut();
 
+        //update the size of the bar representing the health left
         void actualiseColorHealthBarIn();
+        //update the size of the bar representing the health lost
         void actualiseColorHealthBarOut();
 
         void actualiseSizeHealthBarIn(float hpPlayer);
         void actualiseSizeHealthBarOut();
 
+        //create the name of the player under the healthBar
         sf::Text createNamePlayer(Player player, Position posHealthBar);
 };
 

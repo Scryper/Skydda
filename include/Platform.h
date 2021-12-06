@@ -4,6 +4,7 @@
 #include "Position.h"
 #include "CoupleFloat.h"
 
+
 class Platform {
     private:
         Position position;
@@ -16,10 +17,11 @@ class Platform {
         Platform(const Platform& other);
         Platform& operator=(const Platform& other);
 
-
+        ///Getter
         Position getPosition() const;
         CoupleFloat getSize() const;
 
+        ///Setter
         void setPosition(Position position);
         void setSize(CoupleFloat size_);
 };

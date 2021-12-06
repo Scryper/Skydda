@@ -116,7 +116,7 @@ float Player::getAttack() const {
 }
 
 void Player::getHit(int value) {
-    movement.recul(value);
+    movement.recoil(value);
 }
 
 Movement Player::getMovement() const {

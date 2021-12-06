@@ -27,6 +27,7 @@ HealthBar& HealthBar::operator=(const HealthBar& rhs)
     return *this;
 }
 
+///Getter
 float HealthBar::getLifePoint(){
     return lifePoint;
 }

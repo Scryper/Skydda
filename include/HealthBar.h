@@ -16,9 +16,7 @@ class HealthBar {
         HealthBar(const HealthBar& other);
         HealthBar& operator=(const HealthBar& other);
 
-
-        void setLifePoint(float lifePoint);
-
+        ///Getter
         float getLifePoint();
         float getLIFE_POINT_MAX();
         Position getPosition();
