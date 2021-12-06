@@ -26,6 +26,7 @@ class GameScreenTimer : public GameScreen {
         void setTextRoundWin();
 
         void setMenuText(sf::RenderWindow *app);
+        void initPlayers();
 };
 
 #endif // GAMESCREENTIMER_H

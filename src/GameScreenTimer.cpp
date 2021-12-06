@@ -116,26 +116,28 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
 void GameScreenTimer::setTextRoundWin() {
     std::stringstream ss1;
-    ss1 << gameTimer.getRoundWinP1();
-    positionRoundWinTxtP1.setX(75.f);
+    ss1 << gameTimer.getPlayer1().getPoints();
+    ss1 << " points";
+    positionRoundWinTxtP1.setX(150.f);
     positionRoundWinTxtP1.setY(140.f);
     RoundWinTxtP1 = TextInitializer::createText(ss1.str(), positionRoundWinTxtP1);
 
     RoundWinTxtP1.setFillColor(sf::Color::Red);
     RoundWinTxtP1.setFont(font);
-    RoundWinTxtP1.setCharacterSize(40);
+    RoundWinTxtP1.setCharacterSize(30);
     sf::FloatRect textRectTime1 = RoundWinTxtP1.getLocalBounds();
     RoundWinTxtP1.setOrigin(textRectTime1.width/2,textRectTime1.height/2);
 
     std::stringstream ss2;
-    ss2 << gameTimer.getRoundWinP2();
-    positionRoundWinTxtP2.setX(1580.f);
+    ss2 << gameTimer.getPlayer2().getPoints();
+    ss2 << " points";
+    positionRoundWinTxtP2.setX(1650.f);
     positionRoundWinTxtP2.setY(140.f);
     RoundWinTxtP2 = TextInitializer::createText(ss2.str(), positionRoundWinTxtP2);
 
     RoundWinTxtP2.setFillColor(sf::Color::Red);
     RoundWinTxtP2.setFont(font);
-    RoundWinTxtP2.setCharacterSize(40);
+    RoundWinTxtP2.setCharacterSize(30);
     sf::FloatRect textRectTime2 = RoundWinTxtP2.getLocalBounds();
     RoundWinTxtP2.setOrigin(textRectTime2.width/2,textRectTime2.height/2);
 
@@ -199,10 +201,10 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app) {
 
     for(auto platform : map_.getPlatforms()) app->draw(platform.getSprite());
 
-    app->draw(healthBarViewP1.getHealthBarOut());
-    app->draw(healthBarViewP1.getHealthBarIn());
-    app->draw(healthBarViewP2.getHealthBarOut());
-    app->draw(healthBarViewP2.getHealthBarIn());
+    //app->draw(healthBarViewP1.getHealthBarOut());
+    //app->draw(healthBarViewP1.getHealthBarIn());
+    //app->draw(healthBarViewP2.getHealthBarOut());
+    //app->draw(healthBarViewP2.getHealthBarIn());
     app->draw(namePlayerP1);
     app->draw(namePlayerP2);
     app->draw(textAnimation);
@@ -220,4 +222,89 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app) {
         app->draw(textMenuPrincipal);
     }
     app->display();
+}
+
+void GameScreenTimer::initPlayers() {
+    switch(mapSeed) {
+        case 1:
+            positionP1 = Position(position.getX() - 300, position.getY()+335);
+            positionP2 = Position(position.getX() + 300, position.getY()+335);
+            break;
+        case 2:
+            positionP1 = Position(position.getX() - 300, position.getY()+335);
+            positionP2 = Position(position.getX() + 300, position.getY()+335);
+            break;
+        case 3:
+            positionP1 = Position(position.getX() - 300, position.getY()+335);
+            positionP2 = Position(position.getX() + 300, position.getY()+335);
+            break;
+        default:
+            positionP1 = Position(position.getX() - 300, position.getY() + 335);
+            positionP2 = Position(position.getX() + 300, position.getY() + 335);
+            break;
+    }
+
+    CoupleFloat scaleP1(.5f, .5f);
+    CoupleFloat scaleP2(.5f, .5f);
+    CoupleFloat textureCharacter(327.f, 273.f);
+
+    // Load sprite of player
+    float atk = 4.f;
+    float health = 10000.f;
+    CoupleFloat velocity(.0f, .0f);
+    CoupleFloat acceleration(.7f, 1.f);
+    CoupleFloat maxSpeed(11.f, 30.f);
+    float jumpHeight = 24.f;
+    int initialPoints = 0;
+    CoupleFloat sizeCouple(scaleP1.getX(), scaleP1.getY());
+    CoupleFloat sizeOfSprite(sizeCouple);
+
+    CoupleFloat centerOfSprite(textureCharacter.getX(), textureCharacter.getY());
+
+    Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
+
+    PlayerBuilder builder;
+    Player playerFromBuilder = builder.reset()
+                                    ->withName(playerName1)
+                                    ->withAttack(atk)
+                                    ->withHealth(health)
+                                    ->withPosition(positionP1)
+                                    ->withMovement(movement)
+                                    ->withPoints(initialPoints)
+                                    ->build();
+
+    PlayerViewBuilder viewBuilder;
+    playerViewP1 = viewBuilder.reset()
+                        ->withSprite(sizeCouple, centerOfSprite, spriteSheet1, positionP1, texturePlayerP1)
+                        ->withPlayer(playerFromBuilder)
+                        ->withKeys(sf::Keyboard::Z,
+                                    sf::Keyboard::Q,
+                                    sf::Keyboard::D,
+                                    sf::Keyboard::C,
+                                    sf::Keyboard::S,
+                                    sf::Keyboard::V)
+                        ->withLooksRight(true)
+                        ->build();
+
+    playerFromBuilder = builder.reset()
+                ->withName(playerName2)
+                ->withAttack(atk)
+                ->withHealth(health)
+                ->withPosition(positionP2)
+                ->withMovement(movement)
+                ->withPoints(initialPoints)
+                ->build();
+
+    playerViewP2 = viewBuilder.reset()
+                    ->withSprite(sizeCouple, centerOfSprite, spriteSheet2, positionP2, texturePlayerP2)
+                    ->withPlayer(playerFromBuilder)
+                    ->withKeys(sf::Keyboard::Up,
+                                sf::Keyboard::Left,
+                                sf::Keyboard::Right,
+                                sf::Keyboard::L,
+                                sf::Keyboard::Down,
+                                sf::Keyboard::M)
+                    ->withLooksRight(false)
+                    ->build();
+    playerViewP2.flipSprite();
 }

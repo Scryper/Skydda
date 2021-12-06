@@ -98,7 +98,7 @@ class GameScreen : public Screen {
 
         sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu);
         void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu);
-        void initPlayers();
+        virtual void initPlayers()=0;
         void initSprites();
         void initTextures();
         void initVectors();

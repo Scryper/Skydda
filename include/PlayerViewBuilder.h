@@ -29,6 +29,7 @@ class PlayerViewBuilder {
                                     sf::Keyboard::Key protect,
                                     sf::Keyboard::Key superAttack);
         PlayerViewBuilder* withLooksRight(bool looksRight);
+
 };
 
 #endif // PLAYERVIEWBUILDER_H

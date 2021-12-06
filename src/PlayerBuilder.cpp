@@ -39,3 +39,8 @@ PlayerBuilder* PlayerBuilder::withMovement(Movement movement) {
     this->player.setMovement(movement);
     return this;
 }
+
+PlayerBuilder* PlayerBuilder::withPoints(int points) {
+    this->player.setPoints(points);
+    return this;
+}

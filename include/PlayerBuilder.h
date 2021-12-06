@@ -25,6 +25,7 @@ class PlayerBuilder {
         PlayerBuilder* withHealth(float health);
         PlayerBuilder* withPosition(Position position);
         PlayerBuilder* withMovement(Movement movement);
+        PlayerBuilder* withPoints(int points);
 };
 
 #endif // PLAYERBUILDER_H

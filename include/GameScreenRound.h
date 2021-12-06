@@ -23,6 +23,7 @@ class GameScreenRound : public GameScreen {
         void drawAll(sf::RenderWindow *app);
 
         void setMenuText(sf::RenderWindow *app);
+        void initPlayers();
 };
 
 #endif // GAMESCREENROUND_H

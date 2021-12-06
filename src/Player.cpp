@@ -19,6 +19,7 @@ Player::Player(const Player& other) {
     this->setHealth(other.health);
     this->setPosition(other.position);
     this->setMovement(other.movement);
+    this->points = other.points;
     timeLastAttack = 0;
     durationBetweenAttacks = 1000;
     stateInitializer();
@@ -36,6 +37,7 @@ Player& Player::operator=(const Player& other) {
     this->health = other.health;
     this->position = other.position;
     this->movement = other.movement;
+    this->points = other.points;
     timeLastAttack = other.timeLastAttack;
     durationBetweenAttacks = other.durationBetweenAttacks;
 
@@ -82,6 +84,14 @@ void Player::setName(std::string name_) {
 
 void Player::setMovement(Movement movement_) {
     this->movement = movement_;
+}
+
+void Player::setPoints(int points){
+    this->points = points;
+}
+
+int Player::getPoints()const{
+    return points;
 }
 
 bool Player::getState(PlayerStateEnum s) const {
@@ -139,6 +149,8 @@ void Player::attackPlayer(Player &player, float clock, int factor, bool directio
         else {
             player.setHealth(0.f);
         }
+
+        points+=(int)damage;
         timeLastAttack = clock;
     }
 }

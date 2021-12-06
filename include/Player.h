@@ -18,6 +18,7 @@ class Player {
         int timeLastAttack;
         int durationBetweenAttacks;
         float health;
+        int points;
         Position position;
         Movement movement;
 
@@ -41,6 +42,7 @@ class Player {
         void setAttack(float attack_);
         void setName(std::string name_);
         void setMovement(Movement movement_);
+        void setPoints(int points);
 
         bool getState(PlayerStateEnum s)const;
         void getHit(int value);
@@ -49,6 +51,7 @@ class Player {
         Movement getMovement() const;
         Position getPosition() const;
         std::string getName()const;
+        int getPoints()const;
 
         template <typename T>
         bool isFoundInArray(std::vector<T> vect, T element);

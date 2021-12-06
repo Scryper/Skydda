@@ -32,9 +32,9 @@ int GameTimer::getPlayerWin() {
 //    std::cout << "roundWinP2 : " << roundWinP2 << std::endl;
 
     if(COUNTDOWN<=0) {
-        if(roundWinP1>roundWinP2) {
+        if(player1->getPoints()>player2->getPoints()) {
             return 1;
-        } else if(roundWinP2>roundWinP1) {
+        } else if(player2->getPoints()>player1->getPoints()) {
             return 2;
         } else {
             return 0;
