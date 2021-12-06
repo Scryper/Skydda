@@ -19,12 +19,15 @@ class GameScreen : public Screen {
     protected:
         GameRound gameRound;
         GameTimer gameTimer;
+        sf::Vector2f mousePosition;
 
         sf::Clock clockTimerAnimation;
         bool isClockAlreadyRestarted = false;
         bool startAnimationKO = false;
         bool startAnimationWin = false;
         bool startWinningSound = true;
+        bool startMenu = false;
+        bool isAlreadyWin = false;
         int timeAnimation = 0;
         static const int timeAnimRound = 0 ;
         static const int timeAnimReady = 2;
@@ -53,6 +56,11 @@ class GameScreen : public Screen {
         sf::Texture texturePlatformLong;
         sf::Texture texturePlatformSmall;
         sf::Texture texturePlatformTiny;
+        sf::Texture textureButton;
+
+        sf::Sprite buttonRejouer;
+        sf::Sprite buttonSelectPerso;
+        sf::Sprite buttonMenuPrincipal;
 
         sf::Font font;
 
@@ -60,6 +68,12 @@ class GameScreen : public Screen {
         sf::Text namePlayerP2;
 
         sf::Text textAnimation;
+
+        sf::Text textRejouer;
+        sf::Text textSelectPerso;
+        sf::Text textMenuPrincipal;
+
+        sf::RectangleShape rectangle;
 
         MapView map_;
 
@@ -81,7 +95,6 @@ class GameScreen : public Screen {
 
         sf::Text displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu);
         void setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu);
-
         void initPlayers();
         void initSprites();
         void initTextures();
@@ -94,6 +107,8 @@ class GameScreen : public Screen {
         void managementWin(float deltaTime, Game* modejeu, sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app);
         template<typename Base, typename T>
         inline bool instanceof(const T *ptr);
+
+
 
 };
 

@@ -160,8 +160,12 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
             return displayTextAnimation(app, "Fight !");
     }
 
+    if(isAlreadyWin && timeAnimation >= 3) {
+            startAnimationWin = false;
+            startMenu = true;
+    }
     //if player wins
-    if(isPlayerWin) startAnimationWin = true;
+    if(isPlayerWin && !isAlreadyWin) startAnimationWin = true;
     //if one is dead and no one won yet
     else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
 
@@ -169,7 +173,8 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
     if((isPlayerWin || isPlayerDead || isPlayerStandBy ) && !isClockAlreadyRestarted) startClock();
 
     // Lance l'animation de victoire
-    if(startAnimationWin) {
+    if(startAnimationWin && timeAnimation <= 3) {
+            isAlreadyWin = true;
             textWin << ( (modeJeu->getPlayerWin() == 1) ? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
             return displayTextAnimation(app, textWin.str());
     }
@@ -189,7 +194,7 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
             playerViewP2.flipSprite();
             playerViewP2.setLooksRigth(false);
         }
-        if(instanceof<GameRound>(modeJeu)){
+        if(!isAlreadyWin && instanceof<GameRound>(modeJeu)){
             Game* tmp = (Game*)modeJeu;
             int total = tmp->getRoundWinP1();
             total += tmp->getRoundWinP2() + 1;
@@ -204,7 +209,7 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
 
         return displayTextAnimation(app, "K.O. !");
     }
-    else if(startAnimationKO && timeAnimation == 3) {
+    else if(!isAlreadyWin && startAnimationKO && timeAnimation == 3) {
             modeJeu->getPlayer1().setState(standby,false);
             modeJeu->getPlayer2().setState(standby,false);
             return displayTextAnimation(app, "Fight !");

@@ -21,9 +21,11 @@ class GameScreenTimer : public GameScreen {
         GameScreenTimer(const GameScreenTimer& other);
         GameScreenTimer& operator=(const GameScreenTimer& other);
 
-        virtual void drawAll(sf::RenderWindow *app);
+        void drawAll(sf::RenderWindow *app);
         void setTextTime(int SCRWIDTH);
         void setTextRoundWin();
+
+        void setMenuText(sf::RenderWindow *app);
 };
 
 #endif // GAMESCREENTIMER_H
