@@ -26,11 +26,8 @@ GameTimer& GameTimer::operator=(const GameTimer& rhs)
     return *this;
 }
 
+//if the player wins
 int GameTimer::getPlayerWin() {
-
-//    std::cout << "roundWinP1 : " << roundWinP1 << std::endl;
-//    std::cout << "roundWinP2 : " << roundWinP2 << std::endl;
-
     if(COUNTDOWN<=0) {
         if(player1->getPoints()>player2->getPoints()) {
             return 1;
@@ -44,6 +41,7 @@ int GameTimer::getPlayerWin() {
 
 }
 
+//decrement the countdown
 void GameTimer::decrementCountDown() {
     if(COUNTDOWN>0) {
         COUNTDOWN -= 1./GlobalVariables::FPS;

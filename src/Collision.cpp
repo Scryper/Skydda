@@ -1,5 +1,7 @@
 #include "Collision.h"
 
+//return an array of coordinate based on collision direction
+//collisions between a plateform and a player
 CollisionVector directionCollision(PlayerView player, PlatformView platform) {
     sf::FloatRect playerBounds = player.getSprite().getGlobalHitbox();
     sf::FloatRect platformBounds = platform.getSprite().getGlobalBounds();
@@ -8,8 +10,9 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
     bool looksRight = player.isLooksRigth();
 
 
-    //0 : Bottom, 1 : Top, 2 : Right, 3 : Left
     if(playerBounds.intersects(platformBounds)) {
+
+        //initialize variables
         float playerLeft;
         float playerRigth;
 
@@ -28,7 +31,7 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
         float platformLeft = platformBounds.left;
         float platformRigth = platformLeft + platformHSize;
 
-        /// Right platform
+        /// col with the Right of platform
         // player's left should be < than platform's right
         // player's right should be > than platform's right
         // player's bottom should be > than platform's top
@@ -46,7 +49,7 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
             collisions.push_back(tmp);
         }
 
-        /// Left platform
+        /// col with the Left of platform
         // player's right should be > than platform's left
         // player's left should be < than platform's left
         if(playerRigth > platformLeft
@@ -64,7 +67,7 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
 
 
 
-        /// Bottom platform
+        /// col with the Bottom of platform
         // player's top should be < than platform's bottom
         // player's bottom should be > than platform's bottom
         if(playerTop < platformBottom
@@ -78,7 +81,7 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
             collisions.push_back(tmp);
         }
 
-        /// Top platform
+        /// col with the Top of platform
         // player's bottom shouuld be > than platform's bottom
         // player's top shouuld be < than platform's top
         // player's left should not touch border -> should be > than platform's right
@@ -103,15 +106,19 @@ CollisionVector directionCollision(PlayerView player, PlatformView platform) {
     }
 }
 
+
+//return an array of coordinate based on collision direction (left and rigth)
+//collisions between two players
 CollisionVector directionCollisionPlayers(PlayerView playerview1, PlayerView playerview2) {
     sf::FloatRect player1Bounds = playerview1.getSprite().getGlobalBounds();
     sf::FloatRect player2Bounds = playerview2.getSprite().getGlobalHitbox();
 
+    //as the collision sprite of a player is too narrow to hit consistantly,
+    //this margin allows the user to hit a little further than the hitbox of the character
     int marge = 20;
 
     CollisionVector collisions;
 
-    //1 : Bottom, 2 : Top, 3 : Right, 4 : Left
     if(player1Bounds.intersects(player2Bounds)) {
         float player1VSize = player1Bounds.height;
         float player1HSize = player1Bounds.width;
@@ -130,10 +137,7 @@ CollisionVector directionCollisionPlayers(PlayerView playerview1, PlayerView pla
         float player2Rigth = player2Left + player2HSize;
 
 
-        //player1.
-
-
-        /// Right
+        /// col with the Right of the first player
         // player 1's left should be < than player 2's right
         // player 1's right should be > than player 2's right
         // player 1's bottom should be > than player 2's top
@@ -149,7 +153,7 @@ CollisionVector directionCollisionPlayers(PlayerView playerview1, PlayerView pla
             collisions.push_back(tmp);
         }
 
-        /// Left
+        /// col with the Left of the first player
         // player 1's right should be > than player 2's left
         // player 1's left should be < than player 2's left
         if(player1Rigth > player2Left + marge
@@ -159,35 +163,6 @@ CollisionVector directionCollisionPlayers(PlayerView playerview1, PlayerView pla
            ){
             DisplacementPerCollision tmp;
             tmp.first=leftCol;
-            tmp.second=0;
-            collisions.push_back(tmp);
-        }
-
-        /// Bottom
-        // player 1's top should be < than player 2's bottom
-        // player 1's bottom should be > than player 2's bottom
-        if(player1Top < player2Bottom
-            && player1Bottom > player2Bottom
-            && (player1Left < player2Rigth )
-            && (player1Rigth > player2Left)
-           ) {
-            DisplacementPerCollision tmp;
-            tmp.first=bottom;
-            tmp.second=0;
-            collisions.push_back(tmp);
-        }
-
-        /// Top
-        // player 1's bottom shouuld be > than player 2's bottom
-        // player 1's top shouuld be < than player 2's top
-        // player 1's left should not touch border -> should be > than player 2's right
-        if(player1Bottom > player2Top
-           &&  player1Top < player2Top
-           && (player1Left < player2Rigth)
-           && (player1Rigth > player2Left)
-           ) {
-            DisplacementPerCollision tmp;
-            tmp.first=top;
             tmp.second=0;
             collisions.push_back(tmp);
         }
@@ -202,6 +177,7 @@ CollisionVector directionCollisionPlayers(PlayerView playerview1, PlayerView pla
     }
 }
 
+//return an array to compute collisions of a player and an array of platforms
 std::vector<CollisionVector> directionCollisions(PlayerView player, std::vector<PlatformView> platforms){
     std::vector<CollisionVector> collisions;
     for(PlatformView platformView : platforms){
@@ -209,17 +185,3 @@ std::vector<CollisionVector> directionCollisions(PlayerView player, std::vector<
     }
     return collisions;
 }
-
-CollisionVector initCollisionVector(){
-    CollisionVector tmp;
-    int i;
-    for ( i = 0; i<6; i++){
-        DisplacementPerCollision tmp2;
-        tmp2.first = (CollisionEnum)i;
-        tmp2.second = 0;
-        tmp.push_back(tmp2);
-    }
-    return tmp;
-}
-
-
