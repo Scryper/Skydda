@@ -11,7 +11,6 @@ PlayerViewBuilder* PlayerViewBuilder::reset() {
     return this;
 }
 
-
 PlayerView PlayerViewBuilder::build() {
     return this->playerView;
 }
