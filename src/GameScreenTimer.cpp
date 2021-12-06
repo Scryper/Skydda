@@ -13,6 +13,7 @@ GameScreenTimer& GameScreenTimer::operator=(const GameScreenTimer& rhs) {
 
 // Run the game in timer mode
 int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
+    // extract the data
     playerName1 = data[0];
     spriteSheet1 = data[1];
     playerName2 = data[2];
@@ -44,7 +45,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     textMainMenu = TextInitializer::createText("Main menu", 950.f, 640.f);
 
     while(app.isOpen()) {
-        const int SCRWIDTH = app.getSize().x; //const int SCRHEIGHT = app.getSize().y -200;
+        const int SCRWIDTH = app.getSize().x;
         sf::Time timer = clockTimer.getElapsedTime();
 
         setTextTime(SCRWIDTH);
@@ -59,7 +60,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
             if(event.type == sf::Event::KeyPressed) {
                 if(event.key.code == sf::Keyboard::Escape) return 0;
             }
-            /// Button Rejouer
+            /// Button PlayAgain
             if(buttonPlayAgain.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 3;
                 else {
@@ -70,7 +71,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 textPlayAgain.setFillColor(sf::Color::White);
             }
 
-            /// Button selectPerso
+            /// Button SelectCharacters
             if(buttonSelectCharacters.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 1;
                 else {
@@ -81,7 +82,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 textSelectCharacters.setFillColor(sf::Color::White);
             }
 
-            /// Button menuPrincipal
+            /// Button MainMenu
             if(buttonMainMenu.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 0;
                 else {
@@ -94,20 +95,17 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
         }
 
         //verif l'input
-        //attaquer si poss
-        //vérif et update les manches la vie et le reste -> va update la position SI MORT
-        //update la position en fonction de cette nouvelle position
+        // attack if possible
+        // verify and update rounds, health,... -> update position if dead
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
-
-        //setAnimationText(timer, timerAnimation, &app, &gameTimer);
 
         managementWin(deltaTime, &gameTimer,timer, timerAnimation, &app);
         app.clear();
 
         setMenuText(&app);
         drawAll(&app);
-        // Ajouter constante tempsAnimFight pour remplacer le 7
+
         if(timer.asSeconds() > timeAnimFight+1) {
             gameTimer.decrementCountDown();
         }
@@ -115,6 +113,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     return -1;
 }
 
+// create the "window" of end games
 void GameScreenTimer::setTextRoundWin() {
     std::stringstream ss1;
     ss1 << gameTimer.getPlayer1().getPoints();
@@ -221,6 +220,7 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app) {
     app->display();
 }
 
+// creates the player, positions, view, textures,...
 void GameScreenTimer::initPlayers() {
     positionP1 = Position(position.getX() - 300, position.getY()+335);
     positionP2 = Position(position.getX() + 300, position.getY()+335);

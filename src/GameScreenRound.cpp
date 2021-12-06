@@ -7,8 +7,7 @@ GameScreenRound::~GameScreenRound() {}
 GameScreenRound::GameScreenRound(const GameScreenRound& other) {}
 
 GameScreenRound& GameScreenRound::operator=(const GameScreenRound& rhs) {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs) return *this;
     return *this;
 }
 
@@ -40,6 +39,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     playerViewP1.getPlayer().setState(standby, true);
     playerViewP2.getPlayer().setState(standby, true);
 
+    // Init menu texts
     textPlayAgain = TextInitializer::createText(TEXT_PLAY_AGAIN, 950.f, 380.f);
     textSelectCharacters = TextInitializer::createText(TEXT_SELECT_CHARACTERS, 950.f, 510.f);
     textMainMenu = TextInitializer::createText(TEXT_MAIN_MENU, 950.f, 640.f);
@@ -54,7 +54,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
             if(event.type == sf::Event::KeyPressed) {
                 if(event.key.code == sf::Keyboard::Escape) return 0;
             }
-            /// Button Rejouer
+            /// Button PlayAgain
             if(buttonPlayAgain.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 3;
                 else {
@@ -65,7 +65,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 textPlayAgain.setFillColor(sf::Color::White);
             }
 
-            /// Button selectPerso
+            /// Button SelectCharacters
             if(buttonSelectCharacters.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 1;
                 else {
@@ -76,7 +76,7 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 textSelectCharacters.setFillColor(sf::Color::White);
             }
 
-            /// Button menuPrincipal
+            /// Button MainMenu
             if(buttonMainMenu.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 0;
                 else {
