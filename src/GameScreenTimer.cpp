@@ -143,6 +143,7 @@ void GameScreenTimer::setTextRoundWin() {
 
 }
 
+// create the "window" of end games
 void GameScreenTimer::setMenuText(sf::RenderWindow *app) {
     sf::FloatRect textRect;
     mousePosition = getMousePosition(app);
@@ -180,6 +181,7 @@ void GameScreenTimer::setMenuText(sf::RenderWindow *app) {
     buttonMainMenu = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionMenuPrincipal, &textureButton);
 }
 
+// load timeTxt
 void GameScreenTimer::setTextTime(int SCRWIDTH) {
     std::stringstream ss;
     ss << (int)gameTimer.getCountDown();
@@ -244,6 +246,7 @@ void GameScreenTimer::initPlayers() {
 
     Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
 
+    // create the player and their view with the builders
     PlayerBuilder builder;
     Player playerFromBuilder = builder.reset()
                                     ->withName(playerName1)
