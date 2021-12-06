@@ -29,7 +29,6 @@ class GameScreen : public Screen {
         bool startMenu = false;
         bool isAlreadyWin = false;
         int timeAnimation = 0;
-
         static const int timeAnimRound = 0 ;
         static const int timeAnimReady = 2;
         static const int timeAnimFight = 3;
@@ -108,6 +107,9 @@ class GameScreen : public Screen {
         void managementWin(float deltaTime, Game* modejeu, sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app);
         template<typename Base, typename T>
         inline bool instanceof(const T *ptr);
+
+
+
 };
 
 #endif // GAMESCREEN_H

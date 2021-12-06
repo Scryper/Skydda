@@ -4,9 +4,19 @@
 
 PlayerView::PlayerView() {
     PlayerSprite defaultSprite;
-    this->setSprite(defaultSprite);
+    this->sprite = defaultSprite;
     Player defaultPlayer;
-    this->setPlayer(defaultPlayer);
+    this->player = defaultPlayer;
+    Animation anim;
+    this->animation = anim;
+}
+
+PlayerView::PlayerView(PlayerSprite sprite, Player player,std::vector<std::pair<PlayerStateEnum,sf::Keyboard::Key>> keys,bool looksRight, CoupleFloat scalePlayer) {
+    this->sprite = sprite;
+    this->player = player;
+    this->keys = keys;
+    this->looksRight = looksRight;
+    this->scalePlayer = scalePlayer;
     Animation anim;
     this->animation = anim;
 }
@@ -16,6 +26,7 @@ PlayerView::PlayerView(const PlayerView& other) {
     this->player = other.player;
     this->keys = other.keys;
     this->looksRight = other.looksRight;
+    this->scalePlayer = other.scalePlayer;
     Animation anim;
     this->animation = anim;
 }
@@ -43,22 +54,7 @@ PlayerSprite PlayerView::getSprite() const {
     return sprite;
 }
 
-// send state depending on the key
-std::vector<PlayerStateEnum> PlayerView::getStatesFromInput(){
-    inputPlayer();
-    std::vector<PlayerStateEnum> tmp;
-    // browse paler's keys
-    for(auto i : keysPressed){
-        tmp.push_back(i.first);
-    }
-    return tmp;
-}
-
-void PlayerView::getHit(int value) {
-    player.getHit(value);
-}
-
-bool PlayerView::isLooksRigth() const {
+bool PlayerView::isLooksRigth()const{
     return looksRight;
 }
 
@@ -66,36 +62,22 @@ void PlayerView::setLooksRigth(bool right){
     this->looksRight = right;
 }
 
-void PlayerView::setHealth(float health) {
-    player.setHealth(health);
-}
-
-void PlayerView::setSprite(PlayerSprite sprite_) {
-    this->sprite = sprite_;
-}
-
-void PlayerView::setPlayer(Player player_) {
-    this->player = player_;
-}
-
-void PlayerView::setKeys(std::vector<pair<PlayerStateEnum,sf::Keyboard::Key>> keys_) {
-    this->keys = keys_;
-}
-
 void PlayerView::flipSprite() {
-    // We get the left of the hitbox
+
+    //on récupère la gauche de la hitbox actuelle;
     float previousLeft = sprite.getGlobalHitbox().left;
 
-    sprite.scale(-1.f, 1.f); // flip the sprite
+    //on retourne le sprite
+    sprite.scale(-1.f, 1.f);
 
-    // we get the left of the flipped hitbox
+    //on récupère la gauche de la hitbox retournée
     float presentLeft = sprite.getGlobalHitbox().left;
 
-    // compute difference
+    //on cacule la différence entre les deux
     float diff = previousLeft-presentLeft;
 
-    // move the player by the difference
-    Position p(player.getPosition().getX() + diff, player.getPosition().getY());
+    //on déplace le perso de la différence
+    Position p(player.getPosition().getX()+diff, player.getPosition().getY());
     sprite.setPosition(p.getX(), p.getY());
     player.setPosition(p);
 }
@@ -107,12 +89,11 @@ Position PlayerView::computeNewPosition(CoupleFloat vectorDirection, std::vector
 void PlayerView::movePlayer(std::vector<CollisionVector> collisions, PlayerStateEnum state) {
     CoupleFloat vectorDirection = computeCoupleMovement();
     // we swap the player's sprite if he is not looking the way he is going
-    if((looksRight && vectorDirection.getX() < 0)
-       || (!looksRight && vectorDirection.getX() > 0)) {
+    if((looksRight && vectorDirection.getX() < 0) || (!looksRight && vectorDirection.getX() > 0)) {
         flipSprite();
         looksRight = !looksRight; // to know where he is looking
     }
-    if(state == momentum){
+    if(state==momentum){
         CoupleFloat tmp(0.f, 0.f);
         vectorDirection = tmp;
     }
@@ -130,6 +111,18 @@ void PlayerView::inputPlayer(){
     }
     keysPressed = tmp;
 }
+
+//envoie l'état en fonction de la touche
+std::vector<PlayerStateEnum> PlayerView::getStatesFromInput(){
+    inputPlayer();
+    std::vector<PlayerStateEnum> tmp;
+    //on parcourt les touches du perso
+    for(auto i : keysPressed){
+        tmp.push_back(i.first);
+    }
+    return tmp;
+}
+
 
 CoupleFloat PlayerView::computeCoupleMovement(){
     CoupleFloat couple(0.f, 0.f);
@@ -152,23 +145,31 @@ CoupleFloat PlayerView::computeCoupleMovement(){
     return couple;
 }
 
+void PlayerView::getHit(int value){
+    player.getHit(value);
+}
+
 void PlayerView::attack(PlayerView &playerAttacked, bool left, float factor){
     player.attackPlayer(playerAttacked.getPlayer(),this->clock.getElapsedTime().asMilliseconds(), factor, this->looksRight,playerAttacked.looksRight);
     this->soundManager->playRandomHittingSound();
 
-    // if attacked -> change state
-    if(playerAttacked.getPlayer().getHealth() != 0.f) {
+    //si attaqué changer state
+    if(playerAttacked.getPlayer().getHealth() != 0.f){
         playerAttacked.getPlayer().setState(receiveDamage,true);
-        // give a spedd with the hit's direction
+        //lui donner une vitesse dans le sens du tapage
         if(left)
         playerAttacked.getHit(10.f * factor * 0.8f);
         else
         playerAttacked.getHit(-10.f * factor * 0.8f);
     }
-    else {
+    else{
         this->soundManager->playDeathSound();
         playerAttacked.getPlayer().setState(dead,true);
     }
+}
+
+void PlayerView::setHealth(float health) {
+    player.setHealth(health);
 }
 
 void PlayerView::animate(bool first,PlayerStateEnum state, bool boucle){
@@ -187,72 +188,81 @@ bool PlayerView::isBottomCollision(std::vector<CollisionVector> coll){
     return false;
 }
 
+
 void PlayerView::computeFrame(std::vector<CollisionVector> collisions, PlayerView &playerView){
+
     //compute states
     std::vector<PlayerStateEnum> statesFromInput = getStatesFromInput();
     PlayerStateBoolArray playerStates =player.computeStates(statesFromInput, isBottomCollision(collisions));
 
-    // if it was the first state -> if we have to do animation
+    //pour se souvenir de si c'est le premier état => si on doit faire l'animation
     bool firstStateActivated = 0 ;
 
-    // all non activated states' clocks to 0
+    //On passe la clock de tous les états non activés a 0
     for (auto state : playerStates){
-        if(state->second == 0){
+        if(state->second==0){
             (*animation.getStateClock())[state->first]->second->restart();
         }
     }
-    // browse states
+    //parcourir les états
     for (auto state : playerStates){
-        // if state is activated
-        if(state->second == 1) {
-            //state timed?
+        //regarder si l'état est activé
+        if(state->second==1){
+
+            //état timed?
             bool isTimed = constPlayerStates[state->first].isTimed;
-            //state timed
-            if(isTimed == 1 ) {
-                // get state's clock
+            //si l'état est timed
+            if(isTimed == 1 ){
+
+                //on récup la clock de létat
                 sf::Clock* stateClock = (*animation.getStateClock())[state->first]->second;
                 int timeElapsed = stateClock->getElapsedTime().asMilliseconds();
                 int timeAction = constPlayerStates[state->first].timeAction;
 
-                // verifiy the action's timing, if 0 -> do now
-                bool actionImmediate = (timeAction == 0);
-                if(actionImmediate == 1) {
-                    doAction(state->first, collisions, playerView, true);
+                //on vérif le timming de l'action, si c'est 0 il faut l'effectuer de suite
+                bool actionImmediate = (timeAction==0);
+                if(actionImmediate == 1){
+                    doAction(state->first, collisions,playerView,true);
                 }
-                // action a t > 0
-                else {
-                    if(timeElapsed >= timeAction && timeElapsed <= timeAction + 16) {
+                //action a t > 0
+                else{
+                    if(timeElapsed>=timeAction&& timeElapsed<=timeAction+16){
                         doAction(state->first, collisions,playerView, true);
                     }
-                    else {
+                    else{
                         doAction(state->first, collisions,playerView, false);
                     }
                 }
-
-                if(timeElapsed < 15){
+                //cout<<timeElapsed<<endl;
+                if(timeElapsed<15){
+                    //cout<<"resetTour"<<endl;
                     animation.resetTour(state->first);
                 }
 
-                // if elapsed time is too big
-                if(timeElapsed >= constPlayerStates[state->first].animationDuration) {
+                //si le temps écoulé est trop grand
+                if(timeElapsed>=constPlayerStates[state->first].animationDuration){
                     state->second = 0;
                     stateClock->restart();
                     animation.resetTour(state->first);
                 }
-                else {
+                else{
                     if(!firstStateActivated)
                         animate(!firstStateActivated,state->first,constPlayerStates[state->first].isPlayedOneTime);
                 }
+
+
             }
-            // state not timed
+            //state not timed
             else{
-                // if executed for the first time -> do action
+                //s'il est joué la première fois
+                //executer l'action
                 doAction(state->first, collisions,playerView,true);
                 if(!firstStateActivated)
                     animate(!firstStateActivated,state->first,constPlayerStates[state->first].isPlayedOneTime);
             }
-            // went through a state
-            firstStateActivated = 1;
+
+            //on est passé dans un état
+            firstStateActivated=1;
         }
     }
 }
@@ -273,9 +283,9 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<CollisionVector> co
         break;
     case specialAttacking:
         if(doActionNow){
-            // compute collisions between players
+            //on calcule les collisions entre players
             collisionPlayer = directionCollisionPlayers(*this, playerView);
-            // verify there is collision
+            //on vérifie qu'il y a collision et que
             if(collisionPlayer.size() > 0 && collisionPlayer[0].first < 5){
                 for(auto i : collisionPlayer){
                     if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
@@ -285,12 +295,13 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<CollisionVector> co
                 }
             }
         }
+
         break;
     case attacking:
         if(doActionNow){
-            // compute collisions between players
+            //on calcule les collisions entre players
             collisionPlayer = directionCollisionPlayers(*this, playerView);
-            // verify there is collision
+            //on vérifie qu'il y a collision et que
             if(collisionPlayer.size() > 0 && collisionPlayer[0].first < 5){
                 for(auto i : collisionPlayer){
                     if((i.first == rigthCol && !looksRight) || (i.first == leftCol && looksRight)) {
@@ -303,18 +314,24 @@ void PlayerView::doAction(PlayerStateEnum state, std::vector<CollisionVector> co
         movePlayer(collisions, state);
         break;
     case jumping :
+        //std::cout<<" Jumping"<<std::endl;
         movePlayer(collisions, state);
         break;
     case movingLeft:
+        //std::cout<<" Left"<<std::endl;
         movePlayer(collisions,state);
         break;
     case movingRight:
+        //std::cout<<" Rigth"<<std::endl;
         movePlayer(collisions,state);
         break;
     case momentum :
+        //std::cout<<" Momentum"<<std::endl;
         movePlayer(collisions,state);
         break;
     case idle:
+        //std::cout<<" idle "<<std::endl;
         break;
     }
 }
+

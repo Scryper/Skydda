@@ -1,10 +1,12 @@
 #ifndef GLOBALVARIABLES_H
 #define GLOBALVARIABLES_H
 
-class GlobalVariables {
+
+class GlobalVariables
+{
     public:
-        static inline float VOLUME_MUSIC = 5.0f;
-        static inline int FPS = 60;
+        static float VOLUME_MUSIC;
+        static int FPS;
 };
 
 #endif // GLOBALVARIABLES_H

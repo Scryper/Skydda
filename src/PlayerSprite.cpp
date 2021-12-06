@@ -1,11 +1,17 @@
 #include "PlayerSprite.h"
 
-PlayerSprite::PlayerSprite():sf::Sprite() { }
 
-PlayerSprite::PlayerSprite(sf::Texture& texture):sf::Sprite(texture) { }
+PlayerSprite::PlayerSprite():sf::Sprite() {
 
-void PlayerSprite::setHitbox(const sf::FloatRect& hitbox_) {
-    this->hitbox = hitbox_;
+}
+PlayerSprite::PlayerSprite(sf::Texture& texture):sf::Sprite(texture) {
+
+}
+
+PlayerSprite::PlayerSprite(const PlayerSprite& other):sf::Sprite(other) {
+
+        this->m_hitbox = other.m_hitbox;
+
 }
 
 PlayerSprite& PlayerSprite::operator=(const PlayerSprite& rhs)
@@ -13,14 +19,13 @@ PlayerSprite& PlayerSprite::operator=(const PlayerSprite& rhs)
     if (this == &rhs) return *this; // handle self assignment
     //assignment operator
     sf::Sprite::operator=(rhs);
-    this->hitbox = rhs.hitbox;
+    this->m_hitbox = rhs.m_hitbox;
     return *this;
 }
 
-void PlayerSprite::setHitbox(const sf::FloatRect& hitbox_) {
-    this->hitbox = hitbox_;
+void PlayerSprite::setHitbox(const sf::FloatRect& hitbox) {
+    m_hitbox = hitbox;
 }
-
 sf::FloatRect PlayerSprite::getGlobalHitbox() const {
-    return getTransform().transformRect(this->hitbox);
+    return getTransform().transformRect(m_hitbox);
 }
