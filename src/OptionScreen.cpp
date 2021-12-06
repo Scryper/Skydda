@@ -10,13 +10,13 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
     position.setX(position.getX() - 225);
     position.setY(position.getY() - 300);
     // value
-    textValueOfVolume = TextInitializer::createText("Volume   " + std::to_string((int) GlobalVariables::VOLUME_MUSIC), position);
+    textValueOfVolume = TextInitializer::createText(TEXT_VOLUME + std::to_string((int) GlobalVariables::VOLUME_MUSIC), position);
     textValueOfVolume.setCharacterSize(60);
 
     // Buttons
     position.setX(1220);
     position.setY(242);
-    buttonPlus = initSprite(1.5f, 1.5f, "resources/images/arrows/arrow.png", position, &textureButtonPlusMinus);
+    buttonPlus = initSprite(1.5f, 1.5f, PATH_ARROW, position, &textureButtonPlusMinus);
 
     position.setX(1220);
     position.setY(312);
@@ -25,22 +25,22 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
     /// Load Button
     position.setX(100);
     position.setY(1020);
-    buttonBack = initSprite(.5f, 1.f, "resources/images/buttons/button.png", position, &textureButton);
+    buttonBack = initSprite(.5f, 1.f, PATH_BUTTON, position, &textureButton);
     // Text of buttonQuit
     position.setX(60);
     position.setY(1008);
-    textBack = TextInitializer::createText("Back", position);
+    textBack = TextInitializer::createText(TEXT_BACK, position);
     textBack.setFillColor(TextInitializer::BetterRed);
 
     // ControlsP1
     position.setX(600);
     position.setY(700);
-    spriteControlsP1 = initSprite(0.25f, 0.25f,"resources/images/controls/ControlsP1.png", position, &textureControlsP1);
+    spriteControlsP1 = initSprite(0.25f, 0.25f, PATH_CONTROLS_P1, position, &textureControlsP1);
 
     // ControlsP2
     position.setX(1400);
     position.setY(700);
-    spriteControlsP2 = initSprite(0.25f, 0.25f,"resources/images/controls/ControlsP2.png", position, &textureControlsP2);
+    spriteControlsP2 = initSprite(0.25f, 0.25f, PATH_CONTROLS_P2, position, &textureControlsP2);
 
     initFonts();
 
@@ -69,7 +69,7 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
             /// Button plus
             if(buttonPlus.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) {
-                    changeVolume(1.f);
+                    changeVolume(1.f); // volume up
                 }
                 else {
                     buttonPlus.setColor(sf::Color::Green);
@@ -84,7 +84,7 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
             /// Button minus
             if(buttonMinus.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) {
-                    changeVolume(-1.f);
+                    changeVolume(-1.f); // volume down
                 }
                 else {
                     buttonMinus.setColor(sf::Color::Green);
@@ -130,11 +130,11 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
 }
 
 void OptionScreen::initBackground() {
-    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_other.jpg", position, &textureBackground);
+    backgroundSprite = initSprite(1.f, 1.f, PATH_BACKGROUND_OTHER, position, &textureBackground);
 }
 
 void OptionScreen::initFonts() {
-    font.loadFromFile("resources/fonts/glitch.otf");
+    font.loadFromFile(PATH_FONT);
 
     texts.push_back(&textBack);
     texts.push_back(&textValueOfVolume);
@@ -145,7 +145,7 @@ void OptionScreen::initFonts() {
 void OptionScreen::changeVolume(float value) {
     if(GlobalVariables::VOLUME_MUSIC + value >= 0 && GlobalVariables::VOLUME_MUSIC + value <= 100) {
         GlobalVariables::VOLUME_MUSIC += value;
-        textValueOfVolume.setString("Volume   " + std::to_string((int) GlobalVariables::VOLUME_MUSIC));
+        textValueOfVolume.setString(TEXT_VOLUME + std::to_string((int) GlobalVariables::VOLUME_MUSIC));
         musicManager->changeVolume(GlobalVariables::VOLUME_MUSIC);
     }
 }

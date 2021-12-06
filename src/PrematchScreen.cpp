@@ -1,8 +1,6 @@
 #include "PrematchScreen.h"
 
 int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
-    std::cout<<std::endl;
-    std::cout<<"PrematchScreen"<<std::endl;
     position = getScreenCenter(&app);
 
     initVectors();
@@ -11,7 +9,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     /// First player elements
     // Name
-    firstPlayerName = TextInitializer::createText("Dark Golem", positionPlayerElements);
+    firstPlayerName = TextInitializer::createText(NAME_DARK_GOLEM, positionPlayerElements);
 
     // Show selected character
     positionPlayerElements.setX(positionPlayerElements.getX() + 100);
@@ -22,11 +20,11 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     // Previous
     positionPlayerElements.setX(positionPlayerElements.getX() - 150);
     positionPlayerElements.setY(positionPlayerElements.getY() + 200);
-    buttonFirstPlayerPrevious = initSprite(.7f, 1.f, "resources/images/buttons/button.png", positionPlayerElements, &textureButton);
+    buttonFirstPlayerPrevious = initSprite(.7f, 1.f, PATH_BUTTON, positionPlayerElements, &textureButton);
 
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
     positionPlayerElements.setX(positionPlayerElements.getX() - 70);
-    textFirstPlayerPrevious = TextInitializer::createText("Previous", positionPlayerElements);
+    textFirstPlayerPrevious = TextInitializer::createText(TEXT_PREVIOUS, positionPlayerElements);
 
     // Next
     positionPlayerElements.setY(positionPlayerElements.getY() + 12);
@@ -34,7 +32,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     buttonFirstPlayerNext = initSprite(.7f, 1.f, positionPlayerElements, &textureButton);
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
     positionPlayerElements.setX(positionPlayerElements.getX() - 40);
-    textFirstPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
+    textFirstPlayerNext = TextInitializer::createText(TEXT_NEXT, positionPlayerElements);
 
     /// Second player elements
     //Reset
@@ -43,7 +41,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     // Name
     positionPlayerElements.setX(positionPlayerElements.getX() + 50);
-    secondPlayerName = TextInitializer::createText("Light Golem", positionPlayerElements);
+    secondPlayerName = TextInitializer::createText(NAME_LIGHT_GOLEM, positionPlayerElements);
 
     // Show selected character
     positionPlayerElements.setX(positionPlayerElements.getX() + 100);
@@ -58,7 +56,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
     positionPlayerElements.setX(positionPlayerElements.getX() - 70);
-    textSecondPlayerPrevious = TextInitializer::createText("Previous", positionPlayerElements);
+    textSecondPlayerPrevious = TextInitializer::createText(TEXT_PREVIOUS, positionPlayerElements);
     textSecondPlayerPrevious.setFillColor(TextInitializer::BetterGrey);
 
     // Next
@@ -68,26 +66,26 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
     positionPlayerElements.setY(positionPlayerElements.getY() - 12);
     positionPlayerElements.setX(positionPlayerElements.getX() - 40);
-    textSecondPlayerNext = TextInitializer::createText("Next", positionPlayerElements);
+    textSecondPlayerNext = TextInitializer::createText(TEXT_NEXT, positionPlayerElements);
     textSecondPlayerNext.setFillColor(TextInitializer::BetterGrey);
 
     /// Mode choosing elements
     Position positionModeChoosing(position.getX() - 150, 200);
-    textMode = TextInitializer::createText("Choose game mode", positionModeChoosing);
+    textMode = TextInitializer::createText(TEXT_CHOOSE_GAME_MODE, positionModeChoosing);
 
     positionModeChoosing.setY(positionModeChoosing.getY() + 80);
     positionModeChoosing.setX(positionModeChoosing.getX() + 50);
     buttonModeRounds = initSprite(.7f, 1.f, positionModeChoosing, &textureButton);
     positionModeChoosing.setY(positionModeChoosing.getY() - 12);
     positionModeChoosing.setX(positionModeChoosing.getX() - 65);
-    textModeRounds = TextInitializer::createText("Rounds", positionModeChoosing);
+    textModeRounds = TextInitializer::createText(TEXT_ROUNDS, positionModeChoosing);
 
     positionModeChoosing.setX(positionModeChoosing.getX() + 265);
     positionModeChoosing.setY(positionModeChoosing.getY() + 12);
     buttonModeTime = initSprite(.7f, 1.f, positionModeChoosing, &textureButton);
     positionModeChoosing.setY(positionModeChoosing.getY() - 12);
     positionModeChoosing.setX(positionModeChoosing.getX() - 35);
-    textModeTime = TextInitializer::createText("Time", positionModeChoosing);
+    textModeTime = TextInitializer::createText(TEXT_TIME, positionModeChoosing);
 
     Position positionGameMode(position.getX(), 350);
 
@@ -96,7 +94,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     /// Map elements
     Position positionMap(position.getX() - 125, 400);
 
-    textMap = TextInitializer::createText("Choose the map", positionMap);
+    textMap = TextInitializer::createText(TEXT_CHOOSE_MAP, positionMap);
 
     positionMap.setY(positionMap.getY() + 150);
     positionMap.setX(positionMap.getX() + 125);
@@ -109,12 +107,12 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     outlineMap.setPosition(positionMap.getX() - (scaledWidth / 2) - 5, positionMap.getY() - (scaledHeight / 2) - 5);
 
     buttonPreviousMap = initSprite(.7f, 1.f, positionButtonsMap, &textureButton);
-    textPreviousMap = TextInitializer::createText("Previous", positionTextMap);
+    textPreviousMap = TextInitializer::createText(TEXT_PREVIOUS, positionTextMap);
 
     positionButtonsMap.setX(positionButtonsMap.getX() + 200);
     positionTextMap.setX(positionTextMap.getX() + 240);
     buttonNextMap = initSprite(.7f, 1.f, positionButtonsMap, &textureButton);
-    textNextMap = TextInitializer::createText("Next", positionTextMap);
+    textNextMap = TextInitializer::createText(TEXT_NEXT, positionTextMap);
 
     /// Load buttons (clickable sprites)
     position.setY(position.getY() + 300);
@@ -123,7 +121,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     buttonPlay = initSprite(1.f, 1.f, position, &textureButton);
     // Text of buttonChooseCharacters
     positionButtonText.setX(positionButtonText.getX() + 40);
-    textPlay = TextInitializer::createText("Play", positionButtonText);
+    textPlay = TextInitializer::createText(TEXT_PLAY, positionButtonText);
     textPlay.setFillColor(TextInitializer::BetterGrey);
 
     /// Back button
@@ -131,7 +129,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
     buttonBack = initSprite(.5f, 1.f, position, &textureButton);
     // Text of buttonQuit
     positionButtonText.setY(positionButtonText.getY() + 100);
-    textBack = TextInitializer::createText("Back", positionButtonText);
+    textBack = TextInitializer::createText(TEXT_BACK, positionButtonText);
     textBack.setFillColor(TextInitializer::BetterRed);
 
     /// Font of texts
@@ -152,6 +150,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 textNextMap.setFillColor(sf::Color::Green);
                 if(event.type == sf::Event::MouseButtonPressed) {
                     if(indexMap < (int)(maps.size() - 1)) {
+                        // actualise the preview shown on screen
                         indexMap++;
                         textureMap.loadFromFile(maps[indexMap]);
                         spriteMap.setTexture(textureMap, true);
@@ -167,6 +166,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 textPreviousMap.setFillColor(sf::Color::Green);
                 if(event.type == sf::Event::MouseButtonPressed) {
                     if(indexMap > 0) {
+                        // actualise the preview shown on screen
                         indexMap--;
                         textureMap.loadFromFile(maps[indexMap]);
                         spriteMap.setTexture(textureMap, true);
@@ -182,6 +182,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 textFirstPlayerPrevious.setFillColor(sf::Color::Green);
                 if(event.type == sf::Event::MouseButtonPressed) {
                     if(indexCharacter1 > 0) {
+                        // actualise the preview of the character
                         indexCharacter1--;
                         textureCharacter1.loadFromFile(characters[indexCharacter1]);
                         spriteCharacter1.setTexture(textureCharacter1, true);
@@ -197,7 +198,9 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
             if(buttonFirstPlayerNext.getGlobalBounds().contains(mousePosition)) {
                 textFirstPlayerNext.setFillColor(sf::Color::Green);
                 if(event.type == sf::Event::MouseButtonPressed) {
+                    // -4 because we only need to read the light character paths
                     if(indexCharacter1 < (int)(characters.size() - 4)) {
+                        // actualise the preview of the character
                         indexCharacter1++;
                         textureCharacter1.loadFromFile(characters[indexCharacter1]);
                         spriteCharacter1.setTexture(textureCharacter1, true);
@@ -214,6 +217,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 textSecondPlayerPrevious.setFillColor(sf::Color::Green);
                 if(event.type == sf::Event::MouseButtonPressed) {
                     if(indexCharacter2 > 3) {
+                        // actualise the preview of the character
                         indexCharacter2--;
                         textureCharacter2.loadFromFile(characters[indexCharacter2]);
                         spriteCharacter2.setTexture(textureCharacter2, true);
@@ -230,6 +234,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
                 textSecondPlayerNext.setFillColor(sf::Color::Green);
                 if(event.type == sf::Event::MouseButtonPressed) {
                     if(indexCharacter2 < (int)(characters.size() - 1)) {
+                            // actualise the preview of the character
                         indexCharacter2++;
                         textureCharacter2.loadFromFile(characters[indexCharacter2]);
                         spriteCharacter2.setTexture(textureCharacter2, true);
@@ -244,46 +249,48 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 
         mousePosition = getMousePosition(&app);
 
-        if(gameMode==3) {
+        if(gameMode == 3) {
             textModeTime.setFillColor(TextInitializer::BetterWhite);
             textModeRounds.setFillColor(sf::Color::Green);
-        } else if(gameMode==3) {
+        } else if(gameMode == 3) {
             textModeRounds.setFillColor(TextInitializer::BetterWhite);
             textModeTime.setFillColor(sf::Color::Green);
         }
 
         /// Button rounds mode
         if(buttonModeRounds.getGlobalBounds().contains(mousePosition)) {
-            if(gameMode!=3) {
+            if(gameMode != 3) {
                 textModeRounds.setFillColor(sf::Color::Green);
             }
 
             if(event.type == sf::Event::MouseButtonPressed) {
+                // change the gamemode and actualise the sprite representing the mode
                 gameMode = 3;
                 textureGameMode.loadFromFile(gameModes[gameMode - 3]);
                 spriteMode.setTexture(textureGameMode, true);
             }
         }
         else {
-            if(gameMode!=3) {
+            if(gameMode != 3) {
                 textModeRounds.setFillColor(TextInitializer::BetterWhite);
             }
         }
 
         /// Button time mode
         if(buttonModeTime.getGlobalBounds().contains(mousePosition)) {
-            if(gameMode!=4) {
+            if(gameMode != 4) {
                 textModeTime.setFillColor(sf::Color::Green);
             }
 
             if(event.type == sf::Event::MouseButtonPressed) {
+                // change the gamemode and actualise the sprite representing the mode
                 gameMode = 4;
                 textureGameMode.loadFromFile(gameModes[gameMode - 3]);
                 spriteMode.setTexture(textureGameMode, true);
             }
         }
         else {
-            if(gameMode!=4) {
+            if(gameMode != 4) {
                 textModeTime.setFillColor(TextInitializer::BetterWhite);
             }
         }
@@ -292,7 +299,7 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
         if(buttonPlay.getGlobalBounds().contains(mousePosition)) {
             textPlay.setFillColor(sf::Color::Green);
             if(event.type == sf::Event::MouseButtonPressed) {
-                map_ = indexMap + 1;
+                map_ = indexMap + 1; // seed of the map is its index in vector + 1
 
                 strFirstPlayerName = firstPlayerName.getString().toAnsiString();
                 pathSpriteFirstPlayer = spriteSheets[indexCharacter1];
@@ -378,40 +385,40 @@ int PrematchScreen::run(sf::RenderWindow &app, std::vector<std::string> data, in
 }
 
 void PrematchScreen::initVectors() {
-    maps.push_back("resources/images/previews/maps/map1_preview.jpg");
-    maps.push_back("resources/images/previews/maps/map2_preview.jpg");
-    maps.push_back("resources/images/previews/maps/map3_preview.jpg");
+    maps.push_back(PATH_PREVIEW_MAP1);
+    maps.push_back(PATH_PREVIEW_MAP2);
+    maps.push_back(PATH_PREVIEW_MAP3);
 
-    names.push_back("Dark Golem");
-    names.push_back("Dark Groot");
-    names.push_back("Dark Minotaur");
+    names.push_back(NAME_DARK_GOLEM);
+    names.push_back(NAME_DARK_GROOT);
+    names.push_back(NAME_DARK_MINAUTOR);
 
-    names.push_back("Light Golem");
-    names.push_back("Light Groot");
-    names.push_back("Light Minotaur");
+    names.push_back(NAME_LIGHT_GOLEM);
+    names.push_back(NAME_LIGHT_GROOT);
+    names.push_back(NAME_LIGHT_MINAUTOR);
 
-    characters.push_back("resources/images/previews/characters/golem_dark.png");
-    characters.push_back("resources/images/previews/characters/groot_dark.png");
-    characters.push_back("resources/images/previews/characters/minotaur_dark.png");
+    characters.push_back(PATH_PREVIEW_GOLEM_DARK);
+    characters.push_back(PATH_PREVIEW_GROOT_DARK);
+    characters.push_back(PATH_PREVIEW_MINAUTOR_DARK);
 
-    characters.push_back("resources/images/previews/characters/golem_light.png");
-    characters.push_back("resources/images/previews/characters/groot_light.png");
-    characters.push_back("resources/images/previews/characters/minotaur_light.png");
+    characters.push_back(PATH_PREVIEW_GOLEM_LIGHT);
+    characters.push_back(PATH_PREVIEW_GROOT_LIGHT);
+    characters.push_back(PATH_PREVIEW_MINAUTOR_LIGHT);
 
-    spriteSheets.push_back("resources/images/characters/golem_dark.png");
-    spriteSheets.push_back("resources/images/characters/groot_dark.png");
-    spriteSheets.push_back("resources/images/characters/minotaur_dark.png");
+    spriteSheets.push_back(PATH_GOLEM_DARK);
+    spriteSheets.push_back(PATH_GROOT_DARK);
+    spriteSheets.push_back(PATH_MINAUTOR_DARK);
 
-    spriteSheets.push_back("resources/images/characters/golem_light.png");
-    spriteSheets.push_back("resources/images/characters/groot_light.png");
-    spriteSheets.push_back("resources/images/characters/minotaur_light.png");
+    spriteSheets.push_back(PATH_GOLEM_LIGHT);
+    spriteSheets.push_back(PATH_GROOT_LIGHT);
+    spriteSheets.push_back(PATH_MINAUTOR_LIGHT);
 
-    gameModes.push_back("resources/images/gamemode/rounds.png");
-    gameModes.push_back("resources/images/gamemode/timer.png");
+    gameModes.push_back(PATH_ROUNDS);
+    gameModes.push_back(PATH_TIMER);
 }
 
 void PrematchScreen::initBackground() {
-    backgroundSprite = initSprite(1.f, 1.f, "resources/images/background/background_other.jpg", position, &textureBackground);
+    backgroundSprite = initSprite(1.f, 1.f, PATH_BACKGROUND_OTHER, position, &textureBackground);
 }
 
 void PrematchScreen::initPositions() {
@@ -421,7 +428,7 @@ void PrematchScreen::initPositions() {
 }
 
 void PrematchScreen::initFonts() {
-    font.loadFromFile("resources/fonts/glitch.otf");
+    font.loadFromFile(PATH_FONT);
 
     texts.push_back(&textPlay);
     texts.push_back(&textBack);

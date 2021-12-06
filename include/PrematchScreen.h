@@ -5,6 +5,53 @@
 
 class PrematchScreen : public Screen {
     private:
+        const static inline std::string PATH_IMAGES = "resources/images/";
+
+        const static inline std::string PATH_CHARACTERS = PATH_IMAGES + "characters/";
+        const static inline std::string PATH_PREVIEWS = PATH_IMAGES + "previews/";
+        const static inline std::string PATH_GAMEMODE = PATH_IMAGES + "gamemode/";
+
+        const static inline std::string PATH_PREVIEW_MAPS = PATH_PREVIEWS + "maps/";
+        const static inline std::string PATH_PREVIEW_CHARACTERS = PATH_PREVIEWS + "characters/";
+
+        const static inline std::string PATH_PREVIEW_MAP1 = PATH_PREVIEW_MAPS + "map1_preview.jpg";
+        const static inline std::string PATH_PREVIEW_MAP2 = PATH_PREVIEW_MAPS + "map2_preview.jpg";
+        const static inline std::string PATH_PREVIEW_MAP3 = PATH_PREVIEW_MAPS + "map3_preview.jpg";
+
+        const static inline std::string PATH_PREVIEW_GOLEM_DARK = PATH_PREVIEW_CHARACTERS + "golem_dark.png";
+        const static inline std::string PATH_PREVIEW_GROOT_DARK = PATH_PREVIEW_CHARACTERS + "groot_dark.png";
+        const static inline std::string PATH_PREVIEW_MINAUTOR_DARK = PATH_PREVIEW_CHARACTERS + "minotaur_dark.png";
+
+        const static inline std::string PATH_PREVIEW_GOLEM_LIGHT = PATH_PREVIEW_CHARACTERS + "golem_light.png";
+        const static inline std::string PATH_PREVIEW_GROOT_LIGHT = PATH_PREVIEW_CHARACTERS + "groot_light.png";
+        const static inline std::string PATH_PREVIEW_MINAUTOR_LIGHT = PATH_PREVIEW_CHARACTERS + "minotaur_light.png";
+
+        const static inline std::string PATH_GOLEM_DARK = PATH_CHARACTERS + "golem_dark.png";
+        const static inline std::string PATH_GROOT_DARK = PATH_CHARACTERS + "groot_dark.png";
+        const static inline std::string PATH_MINAUTOR_DARK = PATH_CHARACTERS + "minotaur_dark.png";
+
+        const static inline std::string PATH_GOLEM_LIGHT = PATH_CHARACTERS + "golem_light.png";
+        const static inline std::string PATH_GROOT_LIGHT = PATH_CHARACTERS + "groot_light.png";
+        const static inline std::string PATH_MINAUTOR_LIGHT = PATH_CHARACTERS + "minotaur_light.png";
+
+        const static inline std::string PATH_ROUNDS = PATH_GAMEMODE + "rounds.png";
+        const static inline std::string PATH_TIMER = PATH_GAMEMODE + "timer.png";
+
+        const static inline std::string NAME_DARK_GOLEM = "Dark Golem";
+        const static inline std::string NAME_DARK_GROOT = "Dark Groot";
+        const static inline std::string NAME_DARK_MINAUTOR = "Dark Minotaur";
+
+        const static inline std::string NAME_LIGHT_GOLEM = "Light Golem";
+        const static inline std::string NAME_LIGHT_GROOT = "Light Groot";
+        const static inline std::string NAME_LIGHT_MINAUTOR = "Light Minotaur";
+
+        const static inline std::string TEXT_PREVIOUS = "Previous";
+        const static inline std::string TEXT_NEXT = "Next";
+        const static inline std::string TEXT_CHOOSE_GAME_MODE = "Choose game mode";
+        const static inline std::string TEXT_CHOOSE_MAP = "Choose the map";
+        const static inline std::string TEXT_ROUNDS = "Rounds";
+        const static inline std::string TEXT_TIME = "Time";
+
         sf::Event event;
 
         sf::Font font;
