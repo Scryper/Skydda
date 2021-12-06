@@ -21,7 +21,9 @@ class GameScreenRound : public GameScreen {
         void actualiseRoundCircles();
         void clearRoundCircles();
 
-        virtual void drawAll(sf::RenderWindow *app);
+        void drawAll(sf::RenderWindow *app);
+
+        void setMenuText(sf::RenderWindow *app);
 
 };
 

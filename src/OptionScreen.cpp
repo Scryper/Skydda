@@ -14,11 +14,11 @@ int OptionScreen::run(sf::RenderWindow &app, std::vector<std::string> data, int 
     textValueOfVolume.setCharacterSize(60);
 
     // Buttons
-    position.setX(1200);
+    position.setX(1220);
     position.setY(242);
     buttonPlus = initSprite(1.5f, 1.5f, "resources/images/arrows/arrow.png", position, &textureButtonPlusMinus);
 
-    position.setX(1200);
+    position.setX(1220);
     position.setY(312);
     buttonMinus = initSprite(1.5f, -1.5f, position, &textureButtonPlusMinus);
 

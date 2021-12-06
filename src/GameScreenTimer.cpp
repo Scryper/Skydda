@@ -38,6 +38,9 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     playerViewP1.getPlayer().setState(standby,true);
     playerViewP2.getPlayer().setState(standby,true);
 
+    textRejouer = TextInitializer::createText("Rejouer", 950.f, 380.f);
+    textSelectPerso = TextInitializer::createText("Selection personnages", 950.f, 510.f);
+    textMenuPrincipal = TextInitializer::createText("Menu principal", 950.f, 640.f);
 
     while(app.isOpen()) {
         const int SCRWIDTH = app.getSize().x; //const int SCRHEIGHT = app.getSize().y -200;
@@ -55,30 +58,63 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
             if(event.type == sf::Event::KeyPressed) {
                 if(event.key.code == sf::Keyboard::Escape) return 0;
             }
+            /// Button Rejouer
+            if(buttonRejouer.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    return 3;
+                } else {
+                    textRejouer.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textRejouer.setFillColor(sf::Color::White);
+            }
+
+            /// Button selectPerso
+            if(buttonSelectPerso.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed) {
+                    return 1;
+                } else {
+                    textSelectPerso.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+
+                textSelectPerso.setFillColor(sf::Color::White);
+            }
+
+            /// Button menuPrincipal
+            if(buttonMenuPrincipal.getGlobalBounds().contains(mousePosition)) {
+                if(event.type == sf::Event::MouseButtonPressed){
+                    return 0;
+                } else {
+                    textMenuPrincipal.setFillColor(sf::Color::Green);
+                }
+            }
+            else {
+                textMenuPrincipal.setFillColor(sf::Color::White);
+            }
+
         }
 
         //verif l'input
         //attaquer si poss
         //vérif et update les manches la vie et le reste -> va update la position SI MORT
         //update la position en fonction de cette nouvelle position
-
-
-
         healthBarViewP1.actualiseSizeHealthBarIn(playerViewP1.getPlayer().getHealth());
         healthBarViewP2.actualiseSizeHealthBarIn(playerViewP2.getPlayer().getHealth());
 
         //setAnimationText(timer, timerAnimation, &app, &gameTimer);
 
         managementWin(deltaTime, &gameTimer,timer, timerAnimation, &app);
-
         app.clear();
 
+        setMenuText(&app);
         drawAll(&app);
         // Ajouter constante tempsAnimFight pour remplacer le 7
         if(timer.asSeconds() > timeAnimFight+1) {
             gameTimer.decrementCountDown();
         }
-
     }
 
     return -1;
@@ -109,6 +145,44 @@ void GameScreenTimer::setTextRoundWin() {
     sf::FloatRect textRectTime2 = RoundWinTxtP2.getLocalBounds();
     RoundWinTxtP2.setOrigin(textRectTime2.width/2,textRectTime2.height/2);
 
+}
+
+void GameScreenTimer::setMenuText(sf::RenderWindow *app) {
+
+    sf::FloatRect textRect;
+    mousePosition = getMousePosition(app);
+
+    rectangle.setSize(sf::Vector2f(850.f, 450.f));
+    rectangle.setPosition(525.f,290.f);
+    rectangle.setFillColor(sf::Color::Black);
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(4);
+
+    textRejouer.setFont(font);
+    textRejouer.setCharacterSize(40);
+
+    textSelectPerso.setFont(font);
+    textSelectPerso.setCharacterSize(40);
+
+    textMenuPrincipal.setFont(font);
+    textMenuPrincipal.setCharacterSize(40);
+
+    // Center texts
+    textRect = textRejouer.getLocalBounds();
+    textRejouer.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textSelectPerso.getLocalBounds();
+    textSelectPerso.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textMenuPrincipal.getLocalBounds();
+    textMenuPrincipal.setOrigin(textRect.width/2,textRect.height/2);
+
+    Position positionButtonRejouer(950.f, 385.f);
+    buttonRejouer = initSprite(1.f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
+
+    Position positionSelectPerso(950.f, 512.f);
+    buttonSelectPerso = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionSelectPerso, &textureButton);
+
+    Position positionMenuPrincipal(950.f, 643.f);
+    buttonMenuPrincipal = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionMenuPrincipal, &textureButton);
 
 }
 
@@ -143,6 +217,15 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app) {
     app->draw(timeTxt);
     app->draw(RoundWinTxtP1);
     app->draw(RoundWinTxtP2);
-
+    if(startMenu) {
+        app->draw(rectangle);
+        app->draw(buttonRejouer);
+        app->draw(textRejouer);
+        app->draw(buttonSelectPerso);
+        app->draw(textSelectPerso);
+        app->draw(buttonMenuPrincipal);
+        app->draw(textMenuPrincipal);
+    }
     app->display();
+
 }
