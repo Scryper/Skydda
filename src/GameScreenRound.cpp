@@ -59,9 +59,8 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
             }
             /// Button Rejouer
             if(buttonRejouer.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) {
-                    return 3;
-                } else {
+                if(event.type == sf::Event::MouseButtonPressed) return 3;
+                else {
                     textRejouer.setFillColor(sf::Color::Green);
                 }
             }
@@ -71,9 +70,8 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
             /// Button selectPerso
             if(buttonSelectPerso.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) {
-                    return 1;
-                } else {
+                if(event.type == sf::Event::MouseButtonPressed) return 1;
+                else {
                     textSelectPerso.setFillColor(sf::Color::Green);
                 }
             }
@@ -84,9 +82,8 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
             /// Button menuPrincipal
             if(buttonMenuPrincipal.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed){
-                    return 0;
-                } else {
+                if(event.type == sf::Event::MouseButtonPressed) return 0;
+                else {
                     textMenuPrincipal.setFillColor(sf::Color::Green);
                 }
             }
@@ -107,7 +104,6 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
             setMenuText(&app);
             drawAll(&app);
-
         }
 
     return -1;
@@ -141,7 +137,7 @@ void GameScreenRound::setMenuText(sf::RenderWindow *app) {
     textMenuPrincipal.setOrigin(textRect.width/2,textRect.height/2);
 
     Position positionButtonRejouer(950.f, 385.f);
-    buttonRejouer = initSprite(1.f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
+    buttonRejouer = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
 
     Position positionSelectPerso(950.f, 512.f);
     buttonSelectPerso = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionSelectPerso, &textureButton);
