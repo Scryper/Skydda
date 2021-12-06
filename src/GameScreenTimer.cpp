@@ -7,11 +7,11 @@ GameScreenTimer::~GameScreenTimer() {}
 GameScreenTimer::GameScreenTimer(const GameScreenTimer& other){}
 
 GameScreenTimer& GameScreenTimer::operator=(const GameScreenTimer& rhs) {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs) return *this;
     return *this;
 }
 
+// Run the game in timer mode
 int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
     playerName1 = data[0];
     spriteSheet1 = data[1];
@@ -38,9 +38,10 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     playerViewP1.getPlayer().setState(standby,true);
     playerViewP2.getPlayer().setState(standby,true);
 
-    textRejouer = TextInitializer::createText("Play again", 950.f, 380.f);
-    textSelectPerso = TextInitializer::createText("Select characters", 950.f, 510.f);
-    textMenuPrincipal = TextInitializer::createText("Main menu", 950.f, 640.f);
+    // Init menu texts
+    textPlayAgain = TextInitializer::createText("Play again", 950.f, 380.f);
+    textSelectCharacters = TextInitializer::createText("Select characters", 950.f, 510.f);
+    textMainMenu = TextInitializer::createText("Main menu", 950.f, 640.f);
 
     while(app.isOpen()) {
         const int SCRWIDTH = app.getSize().x; //const int SCRHEIGHT = app.getSize().y -200;
@@ -59,36 +60,36 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 if(event.key.code == sf::Keyboard::Escape) return 0;
             }
             /// Button Rejouer
-            if(buttonRejouer.getGlobalBounds().contains(mousePosition)) {
+            if(buttonPlayAgain.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 3;
                 else {
-                    textRejouer.setFillColor(sf::Color::Green);
+                    textPlayAgain.setFillColor(sf::Color::Green);
                 }
             }
             else {
-                textRejouer.setFillColor(sf::Color::White);
+                textPlayAgain.setFillColor(sf::Color::White);
             }
 
             /// Button selectPerso
-            if(buttonSelectPerso.getGlobalBounds().contains(mousePosition)) {
+            if(buttonSelectCharacters.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 1;
                 else {
-                    textSelectPerso.setFillColor(sf::Color::Green);
+                    textSelectCharacters.setFillColor(sf::Color::Green);
                 }
             }
             else {
-                textSelectPerso.setFillColor(sf::Color::White);
+                textSelectCharacters.setFillColor(sf::Color::White);
             }
 
             /// Button menuPrincipal
-            if(buttonMenuPrincipal.getGlobalBounds().contains(mousePosition)) {
+            if(buttonMainMenu.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 0;
                 else {
-                    textMenuPrincipal.setFillColor(sf::Color::Green);
+                    textMainMenu.setFillColor(sf::Color::Green);
                 }
             }
             else {
-                textMenuPrincipal.setFillColor(sf::Color::White);
+                textMainMenu.setFillColor(sf::Color::White);
             }
         }
 
@@ -153,31 +154,31 @@ void GameScreenTimer::setMenuText(sf::RenderWindow *app) {
     rectangle.setOutlineColor(sf::Color::White);
     rectangle.setOutlineThickness(4);
 
-    textRejouer.setFont(font);
-    textRejouer.setCharacterSize(40);
+    textPlayAgain.setFont(font);
+    textPlayAgain.setCharacterSize(40);
 
-    textSelectPerso.setFont(font);
-    textSelectPerso.setCharacterSize(40);
+    textSelectCharacters.setFont(font);
+    textSelectCharacters.setCharacterSize(40);
 
-    textMenuPrincipal.setFont(font);
-    textMenuPrincipal.setCharacterSize(40);
+    textMainMenu.setFont(font);
+    textMainMenu.setCharacterSize(40);
 
     // Center texts
-    textRect = textRejouer.getLocalBounds();
-    textRejouer.setOrigin(textRect.width/2,textRect.height/2);
-    textRect = textSelectPerso.getLocalBounds();
-    textSelectPerso.setOrigin(textRect.width/2,textRect.height/2);
-    textRect = textMenuPrincipal.getLocalBounds();
-    textMenuPrincipal.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textPlayAgain.getLocalBounds();
+    textPlayAgain.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textSelectCharacters.getLocalBounds();
+    textSelectCharacters.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textMainMenu.getLocalBounds();
+    textMainMenu.setOrigin(textRect.width/2,textRect.height/2);
 
     Position positionButtonRejouer(950.f, 385.f);
-    buttonRejouer = initSprite(1.f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
+    buttonPlayAgain = initSprite(1.f, 1.6f, "resources/images/buttons/button.png", positionButtonRejouer, &textureButton);
 
     Position positionSelectPerso(950.f, 512.f);
-    buttonSelectPerso = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionSelectPerso, &textureButton);
+    buttonSelectCharacters = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionSelectPerso, &textureButton);
 
     Position positionMenuPrincipal(950.f, 643.f);
-    buttonMenuPrincipal = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionMenuPrincipal, &textureButton);
+    buttonMainMenu = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionMenuPrincipal, &textureButton);
 }
 
 void GameScreenTimer::setTextTime(int SCRWIDTH) {
@@ -201,10 +202,6 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app) {
 
     for(auto platform : map_.getPlatforms()) app->draw(platform.getSprite());
 
-    //app->draw(healthBarViewP1.getHealthBarOut());
-    //app->draw(healthBarViewP1.getHealthBarIn());
-    //app->draw(healthBarViewP2.getHealthBarOut());
-    //app->draw(healthBarViewP2.getHealthBarIn());
     app->draw(namePlayerP1);
     app->draw(namePlayerP2);
     app->draw(textAnimation);
@@ -214,35 +211,19 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app) {
 
     if(startMenu) {
         app->draw(rectangle);
-        app->draw(buttonRejouer);
-        app->draw(textRejouer);
-        app->draw(buttonSelectPerso);
-        app->draw(textSelectPerso);
-        app->draw(buttonMenuPrincipal);
-        app->draw(textMenuPrincipal);
+        app->draw(buttonPlayAgain);
+        app->draw(textPlayAgain);
+        app->draw(buttonSelectCharacters);
+        app->draw(textSelectCharacters);
+        app->draw(buttonMainMenu);
+        app->draw(textMainMenu);
     }
     app->display();
 }
 
 void GameScreenTimer::initPlayers() {
-    switch(mapSeed) {
-        case 1:
-            positionP1 = Position(position.getX() - 300, position.getY()+335);
-            positionP2 = Position(position.getX() + 300, position.getY()+335);
-            break;
-        case 2:
-            positionP1 = Position(position.getX() - 300, position.getY()+335);
-            positionP2 = Position(position.getX() + 300, position.getY()+335);
-            break;
-        case 3:
-            positionP1 = Position(position.getX() - 300, position.getY()+335);
-            positionP2 = Position(position.getX() + 300, position.getY()+335);
-            break;
-        default:
-            positionP1 = Position(position.getX() - 300, position.getY() + 335);
-            positionP2 = Position(position.getX() + 300, position.getY() + 335);
-            break;
-    }
+    positionP1 = Position(position.getX() - 300, position.getY()+335);
+    positionP2 = Position(position.getX() + 300, position.getY()+335);
 
     CoupleFloat scaleP1(.5f, .5f);
     CoupleFloat scaleP2(.5f, .5f);

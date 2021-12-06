@@ -40,9 +40,9 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     playerViewP1.getPlayer().setState(standby, true);
     playerViewP2.getPlayer().setState(standby, true);
 
-    textRejouer = TextInitializer::createText(TEXT_PLAY_AGAIN, 950.f, 380.f);
-    textSelectPerso = TextInitializer::createText(TEXT_SELECT_CHARACTERS, 950.f, 510.f);
-    textMenuPrincipal = TextInitializer::createText(TEXT_MAIN_MENU, 950.f, 640.f);
+    textPlayAgain = TextInitializer::createText(TEXT_PLAY_AGAIN, 950.f, 380.f);
+    textSelectCharacters = TextInitializer::createText(TEXT_SELECT_CHARACTERS, 950.f, 510.f);
+    textMainMenu = TextInitializer::createText(TEXT_MAIN_MENU, 950.f, 640.f);
 
     while(app.isOpen()) {
         sf::Time timer = clockTimer.getElapsedTime();
@@ -55,36 +55,36 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
                 if(event.key.code == sf::Keyboard::Escape) return 0;
             }
             /// Button Rejouer
-            if(buttonRejouer.getGlobalBounds().contains(mousePosition)) {
+            if(buttonPlayAgain.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 3;
                 else {
-                    textRejouer.setFillColor(sf::Color::Green);
+                    textPlayAgain.setFillColor(sf::Color::Green);
                 }
             }
             else {
-                textRejouer.setFillColor(sf::Color::White);
+                textPlayAgain.setFillColor(sf::Color::White);
             }
 
             /// Button selectPerso
-            if(buttonSelectPerso.getGlobalBounds().contains(mousePosition)) {
+            if(buttonSelectCharacters.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 1;
                 else {
-                    textSelectPerso.setFillColor(sf::Color::Green);
+                    textSelectCharacters.setFillColor(sf::Color::Green);
                 }
             }
             else {
-                textSelectPerso.setFillColor(sf::Color::White);
+                textSelectCharacters.setFillColor(sf::Color::White);
             }
 
             /// Button menuPrincipal
-            if(buttonMenuPrincipal.getGlobalBounds().contains(mousePosition)) {
+            if(buttonMainMenu.getGlobalBounds().contains(mousePosition)) {
                 if(event.type == sf::Event::MouseButtonPressed) return 0;
                 else {
-                    textMenuPrincipal.setFillColor(sf::Color::Green);
+                    textMainMenu.setFillColor(sf::Color::Green);
                 }
             }
             else {
-                textMenuPrincipal.setFillColor(sf::Color::White);
+                textMainMenu.setFillColor(sf::Color::White);
             }
         }
 
@@ -115,31 +115,32 @@ void GameScreenRound::setMenuText(sf::RenderWindow *app) {
     rectangle.setOutlineColor(sf::Color::White);
     rectangle.setOutlineThickness(4);
 
-    textRejouer.setFont(font);
-    textRejouer.setCharacterSize(40);
+    textPlayAgain.setFont(font);
+    textPlayAgain.setCharacterSize(40);
 
-    textSelectPerso.setFont(font);
-    textSelectPerso.setCharacterSize(40);
+    textSelectCharacters.setFont(font);
+    textSelectCharacters.setCharacterSize(40);
 
-    textMenuPrincipal.setFont(font);
-    textMenuPrincipal.setCharacterSize(40);
+    textMainMenu.setFont(font);
+    textMainMenu.setCharacterSize(40);
 
     // Center texts
-    textRect = textRejouer.getLocalBounds();
-    textRejouer.setOrigin(textRect.width/2,textRect.height/2);
-    textRect = textSelectPerso.getLocalBounds();
-    textSelectPerso.setOrigin(textRect.width/2,textRect.height/2);
-    textRect = textMenuPrincipal.getLocalBounds();
-    textMenuPrincipal.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textPlayAgain.getLocalBounds();
+    textPlayAgain.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textSelectCharacters.getLocalBounds();
+    textSelectCharacters.setOrigin(textRect.width/2,textRect.height/2);
+    textRect = textMainMenu.getLocalBounds();
+    textMainMenu.setOrigin(textRect.width/2,textRect.height/2);
 
     Position positionButtonRejouer(950.f, 385.f);
-    buttonRejouer = initSprite(2.75f, 1.6f, PATH_BUTTON, positionButtonRejouer, &textureButton);
+
+    buttonPlayAgain = initSprite(2.75f, 1.6f, PATH_BUTTON, positionButtonRejouer, &textureButton);
 
     Position positionSelectPerso(950.f, 512.f);
-    buttonSelectPerso = initSprite(2.75f, 1.6f, positionSelectPerso, &textureButton);
+    buttonSelectCharacters = initSprite(2.75f, 1.6f, positionSelectPerso, &textureButton);
 
     Position positionMenuPrincipal(950.f, 643.f);
-    buttonMenuPrincipal = initSprite(2.75f, 1.6f, positionMenuPrincipal, &textureButton);
+    buttonMainMenu = initSprite(2.75f, 1.6f, positionMenuPrincipal, &textureButton);
 
 }
 
@@ -162,12 +163,12 @@ void GameScreenRound::drawAll(sf::RenderWindow *app) {
     app->draw(textAnimation);
     if(startMenu) {
         app->draw(rectangle);
-        app->draw(buttonRejouer);
-        app->draw(textRejouer);
-        app->draw(buttonSelectPerso);
-        app->draw(textSelectPerso);
-        app->draw(buttonMenuPrincipal);
-        app->draw(textMenuPrincipal);
+        app->draw(buttonPlayAgain);
+        app->draw(textPlayAgain);
+        app->draw(buttonSelectCharacters);
+        app->draw(textSelectCharacters);
+        app->draw(buttonMainMenu);
+        app->draw(textMainMenu);
     }
     app->display();
 }

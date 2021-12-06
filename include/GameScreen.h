@@ -61,9 +61,9 @@ class GameScreen : public Screen {
         sf::Texture texturePlatformTiny;
         sf::Texture textureButton;
 
-        sf::Sprite buttonRejouer;
-        sf::Sprite buttonSelectPerso;
-        sf::Sprite buttonMenuPrincipal;
+        sf::Sprite buttonPlayAgain;
+        sf::Sprite buttonSelectCharacters;
+        sf::Sprite buttonMainMenu;
 
         sf::Font font;
 
@@ -72,9 +72,9 @@ class GameScreen : public Screen {
 
         sf::Text textAnimation;
 
-        sf::Text textRejouer;
-        sf::Text textSelectPerso;
-        sf::Text textMenuPrincipal;
+        sf::Text textPlayAgain;
+        sf::Text textSelectCharacters;
+        sf::Text textMainMenu;
 
         sf::RectangleShape rectangle;
 

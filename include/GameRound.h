@@ -13,9 +13,7 @@ class GameRound : public Game {
         GameRound(const GameRound& other);
         GameRound& operator=(const GameRound& other);
 
-
         virtual int getPlayerWin();
-
 };
 
 #endif // GAMEROUND_H

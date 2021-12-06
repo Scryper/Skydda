@@ -1,14 +1,15 @@
 #include "GameScreen.h"
 
+// Load mapView (map and texture) in GameScreen
+// Load all platforms in GameScreen
 void GameScreen::initMap() {
-    //loading the map
     Map mapModel(mapSeed);
     map_ = MapView(mapModel, textures);
 
-    //get all the platforms from the map
     platforms = map_.getAllCollisions();
 }
 
+// Initialize all backgrounds(size, position, texture)
 void GameScreen::initSprites() {
     std::string path = "";
     switch(mapSeed) {
@@ -28,6 +29,7 @@ void GameScreen::initSprites() {
     backgroundSprite = initSprite(1.f, 1.f, path, position, &textureBackground);
 }
 
+// Load platform textures
 void GameScreen::initTextures() {
     texturePlatformGround.loadFromFile("resources/images/platforms/platform_ground.png");
     texturePlatformLong.loadFromFile("resources/images/platforms/platform_long.png");
@@ -38,6 +40,7 @@ void GameScreen::initTextures() {
     houseWall.loadFromFile("resources/images/platforms/house_wall.png");
 }
 
+// Load all the textures in texture vector
 void GameScreen::initVectors() {
     textures.push_back(&texturePlatformGround);
     textures.push_back(&texturePlatformLong);
@@ -48,11 +51,13 @@ void GameScreen::initVectors() {
     textures.push_back(&houseWall);
 }
 
+// Determine the state of each player and manage actions and animations
 void GameScreen::movePlayers(float deltaTime) {
     playerViewP1.computeFrame(directionCollisions(playerViewP1, platforms),playerViewP2);
     playerViewP2.computeFrame(directionCollisions(playerViewP2, platforms),playerViewP1);
 }
 
+// Build text animation with style, position and appropriate text
 sf::Text GameScreen::displayTextAnimation(sf::RenderWindow *app, std::string textStr) {
     const int SCRWIDTH = app->getSize().x;
     const int SCRHEIGHT = app->getSize().y -200;
@@ -67,19 +72,21 @@ sf::Text GameScreen::displayTextAnimation(sf::RenderWindow *app, std::string tex
     return textAnimation;
 }
 
+// Reset the clock for next animation
 void GameScreen::resetAnimationAndClock() {
     startAnimationKO = false;
     isClockAlreadyRestarted = false;
 }
 
+// Start the clock for the new animation
 void GameScreen::startClock() {
     clockTimerAnimation.restart();
     isClockAlreadyRestarted = true;
     timeAnimation = 0;
 }
 
+// Return the Animation text at the right time
 sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu) {
-
     timeAnimation = timerAnimation.asSeconds();
     int time = timer.asSeconds();
     bool isPlayerDead = modeJeu->getPlayer1().getState(dead) == 1 || modeJeu->getPlayer2().getState(dead) == 1 ;
@@ -87,8 +94,7 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
     bool isPlayerWin = modeJeu->getPlayerWin() != 0;
     std::stringstream textWin;
 
-    // Lance une animation x seconde après le lancement de la partie
-
+    // Launch an animation x seconds after the launch of the game
     switch(time) {
         case timeAnimRound:
             return displayTextAnimation(app, "Round 1 !");
@@ -104,22 +110,25 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
             startAnimationWin = false;
             startMenu = true;
     }
-    //if player wins
+    // StartAnimationWin if one of the players has won
+    // and that the animation has not yet been played
     if(isPlayerWin && !isAlreadyWin) startAnimationWin = true;
-    //if one is dead and no one won yet
+
+    // If one is dead and no one won yet
     else if(isPlayerDead && !isPlayerWin) startAnimationKO = true;
 
-    //restart the clock of one animation
+    // Restart the clock of one of the animations
     if((isPlayerWin || isPlayerDead || isPlayerStandBy ) && !isClockAlreadyRestarted) startClock();
 
-    // Lance l'animation de victoire
+    // Start the victory animation for 3 seconds
     if(startAnimationWin && timeAnimation <= 3) {
             isAlreadyWin = true;
             textWin << ( (modeJeu->getPlayerWin() == 1) ? (GameScreen::playerName1):(GameScreen::playerName2) ) << " Win !";
             return displayTextAnimation(app, textWin.str());
     }
 
-    else if(startAnimationKO && timeAnimation ==2){
+    // Start the KO animation for 2 seconds
+    else if(startAnimationKO && timeAnimation ==2) {
         modeJeu->getPlayer1().setPosition(positionP1);
         modeJeu->getPlayer2().setPosition(positionP2);
         modeJeu->getPlayer1().setSpeedX(2);
@@ -134,6 +143,7 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
             playerViewP2.flipSprite();
             playerViewP2.setLooksRigth(false);
         }
+        // Start the Round animation for 2 seconds
         if(!isAlreadyWin && instanceof<GameRound>(modeJeu)){
             Game* tmp = (Game*)modeJeu;
             int total = tmp->getRoundWinP1();
@@ -142,13 +152,14 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
         }
         return displayTextAnimation(app, "K.O. !");
     }
-    // Lance l'animation de K.O.
+    // Start the KO animation for 2 seconds
     else if(startAnimationKO && timeAnimation < 3) {
         modeJeu->getPlayer1().setState(standby,true);
         modeJeu->getPlayer2().setState(standby,true);
 
         return displayTextAnimation(app, "K.O. !");
     }
+    // Start the Fight animation for 3 seconds
     else if(!isAlreadyWin && startAnimationKO && timeAnimation == 3) {
             modeJeu->getPlayer1().setState(standby,false);
             modeJeu->getPlayer2().setState(standby,false);
@@ -160,6 +171,7 @@ sf::Text GameScreen::displayAnimations(sf::Time timer, sf::Time timerAnimation, 
     return displayTextAnimation(app, "");
 }
 
+// Build textAnimation thanks to displayAnimations method
 void GameScreen::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app, Game* modeJeu) {
 
     textAnimation = displayAnimations(timer, timerAnimation, app, modeJeu);
@@ -171,24 +183,26 @@ void GameScreen::setAnimationText(sf::Time timer, sf::Time timerAnimation, sf::R
     textAnimation.setOrigin(textRect.width/2,textRect.height/2);
 }
 
+// Manage game victory and round victory, Reset life on next round
 void GameScreen::managementWin(float deltaTime, Game* modeJeu, sf::Time timer, sf::Time timerAnimation, sf::RenderWindow *app) {
 
     setAnimationText(timer, timerAnimation, app, modeJeu);
-
+    // If none of the players won
     if(modeJeu->getPlayerWin() == 0) {
-
+        // If player 1 is dead
         if(modeJeu->getPlayer1().getHealth() == 0) {
             modeJeu->incrementRoundWinP2();
+            // If none of the players won
             if(modeJeu->getPlayerWin() == 0) {
                 modeJeu->getPlayer1().setHealth(100.f);
                 modeJeu->getPlayer2().setHealth(100.f);
             }
-
             movePlayers(deltaTime);
-
-
-        }else if(modeJeu->getPlayer2().getHealth() == 0) {
+        }
+        // If player 2 is dead
+        else if(modeJeu->getPlayer2().getHealth() == 0) {
             modeJeu->incrementRoundWinP1();
+            // If none of the players won
             if(modeJeu->getPlayerWin() == 0) {
                 modeJeu->getPlayer1().setHealth(100.f);
                 modeJeu->getPlayer2().setHealth(100.f);
@@ -198,8 +212,9 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu, sf::Time timer, s
         else{
             movePlayers(deltaTime);
         }
-    } else {
-        modeJeu->win();
+    }
+    // If one of the players has won
+    else {
         if(startWinningSound) {
             SoundManager* soundManager = SoundManager::getInstance();
             soundManager->playVictorySound();
@@ -209,6 +224,7 @@ void GameScreen::managementWin(float deltaTime, Game* modeJeu, sf::Time timer, s
 
 }
 
+// Initializes the life bar and the name player
 void GameScreen::initHealthBars() {
     // Create HealthBar
     Position posHealthBarP1(50.f, 50.f);
@@ -232,6 +248,7 @@ void GameScreen::initHealthBars() {
     TextInitializer::initFont(texts, &font);
 }
 
+// Determines if one object is an instance of another
 template<typename Base, typename T>
 inline bool GameScreen::instanceof(const T *ptr) {
     return dynamic_cast<const Base*>(ptr) != nullptr;

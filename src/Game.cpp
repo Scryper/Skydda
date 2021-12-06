@@ -13,13 +13,10 @@ Game::Game(Player& player1, Player& player2) {
 }
 
 Game::~Game() { }
-
 Game::Game(const Game& other) { }
 
-Game& Game::operator=(const Game& rhs)
-{
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+Game& Game::operator=(const Game& rhs) {
+    if (this == &rhs) return *this;
     this->player1 = rhs.player1;
     this->player2 = rhs.player2;
     this->roundWinP1 = rhs.roundWinP1;
@@ -34,19 +31,15 @@ Player& Game::getPlayer2() {
     return *player2;
 }
 
-void Game::win() {
-    player1->setState(dead,true);
-    player2->setState(dead,true);
-}
-
+// Return the number of round won by the player
 int Game::getRoundWinP1() {
     return roundWinP1;
 }
-
 int Game::getRoundWinP2() {
     return roundWinP2;
 }
 
+// Increment by one the number of turns won by the player
 void Game::incrementRoundWinP1() {
     if(getPlayerWin() == 0) {
         roundWinP1++;

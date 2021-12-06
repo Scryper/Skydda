@@ -83,7 +83,7 @@
 		<Unit filename="include/SpriteInitializer.h" />
 		<Unit filename="include/StatePlayer.h" />
 		<Unit filename="include/TextInitializer.h" />
-		<Unit filename="include/TextureLoader.h" />
+		<Unit filename="include/TextureLoader.h" />		
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Collision.cpp" />
@@ -118,6 +118,7 @@
 		<Unit filename="src/SpriteInitializer.cpp" />
 		<Unit filename="src/TextInitializer.cpp" />
 		<Unit filename="src/TextureLoader.cpp" />
+
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

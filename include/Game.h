@@ -20,7 +20,6 @@ class Game {
         Game(const Game& other);
         Game& operator=(const Game& other);
 
-
         virtual int getPlayerWin()=0;
 
         int getRoundWinP1();
@@ -31,8 +30,6 @@ class Game {
 
         Player& getPlayer1();
         Player& getPlayer2();
-
-        void win();
 
 };
 
