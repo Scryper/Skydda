@@ -62,7 +62,7 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
             }
             /// Button PlayAgain
             if(buttonPlayAgain.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) return 3;
+                if(event.type == sf::Event::MouseButtonPressed) return 4;
                 else {
                     textPlayAgain.setFillColor(sf::Color::Green);
                 }

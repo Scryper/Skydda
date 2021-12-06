@@ -6,7 +6,7 @@
 class GameTimer: public Game {
     protected:
         int MAX_ROUND = 1000;
-        float COUNTDOWN = 25.;
+        float COUNTDOWN = 60.;
 
     public:
         GameTimer();
