@@ -1,24 +1,23 @@
 #include "GameScreen.h"
 
 void GameScreen::initPlayers() {
-
     switch(mapSeed) {
-    case 1:
-        positionP1 = Position(position.getX() - 300, position.getY()+335);
-        positionP2 = Position(position.getX() + 300, position.getY()+335);
-        break;
-    case 2:
-        positionP1 = Position(position.getX() - 300, position.getY()+335);
-        positionP2 = Position(position.getX() + 300, position.getY()+335);
-        break;
-    case 3:
-        positionP1 = Position(position.getX() - 300, position.getY()+335);
-        positionP2 = Position(position.getX() + 300, position.getY()+335);
-        break;
-    default:
-        positionP1 = Position(position.getX() - 300, position.getY()+335);
-        positionP2 = Position(position.getX() + 300, position.getY()+335);
-        break;
+        case 1:
+            positionP1 = Position(position.getX() - 300, position.getY()+335);
+            positionP2 = Position(position.getX() + 300, position.getY()+335);
+            break;
+        case 2:
+            positionP1 = Position(position.getX() - 300, position.getY()+335);
+            positionP2 = Position(position.getX() + 300, position.getY()+335);
+            break;
+        case 3:
+            positionP1 = Position(position.getX() - 300, position.getY()+335);
+            positionP2 = Position(position.getX() + 300, position.getY()+335);
+            break;
+        default:
+            positionP1 = Position(position.getX() - 300, position.getY() + 335);
+            positionP2 = Position(position.getX() + 300, position.getY() + 335);
+            break;
     }
 
     CoupleFloat scaleP1(.5f, .5f);
@@ -26,37 +25,60 @@ void GameScreen::initPlayers() {
     CoupleFloat textureCharacter(327.f, 273.f);
 
     // Load sprite of player
-    playerViewP1 = createPlayer(scaleP1.getX(),
-                                scaleP1.getY(),
-                                textureCharacter.getX(),
-                                textureCharacter.getY(),
-                                spriteSheet1,
-                                positionP1,
-                                &texturePlayerP1,
-                                sf::Keyboard::Z,
-                                sf::Keyboard::Q,
-                                sf::Keyboard::D,
-                                sf::Keyboard::C,
-                                sf::Keyboard::S,
-                                sf::Keyboard::V,
-                                true,
-                                playerName1);
+    float atk = 15.f;
+    float health = 100.f;
+    CoupleFloat velocity(.0f, .0f);
+    CoupleFloat acceleration(.7f, 1.f);
+    CoupleFloat maxSpeed(11.f, 30.f);
+    float jumpHeight = 24.f;
+    CoupleFloat sizeCouple(scaleP1.getX(), scaleP1.getY());
+    CoupleFloat sizeOfSprite(sizeCouple);
 
-    playerViewP2 = createPlayer(scaleP2.getX(),
-                                scaleP2.getY(),
-                                textureCharacter.getX(),
-                                textureCharacter.getY(),
-                                spriteSheet2,
-                                positionP2,
-                                &texturePlayerP2,
-                                sf::Keyboard::Up,
+    CoupleFloat centerOfSprite(textureCharacter.getX(), textureCharacter.getY());
+
+    Movement movement(velocity, acceleration, maxSpeed, jumpHeight);
+
+    PlayerBuilder builder;
+    Player playerFromBuilder = builder.reset()
+                                    ->withName(playerName1)
+                                    ->withAttack(atk)
+                                    ->withHealth(health)
+                                    ->withPosition(positionP1)
+                                    ->withMovement(movement)
+                                    ->build();
+
+    PlayerViewBuilder viewBuilder;
+    playerViewP1 = viewBuilder.reset()
+                        ->withSprite(sizeCouple, centerOfSprite, spriteSheet1, positionP1, texturePlayerP1)
+                        ->withPlayer(playerFromBuilder)
+                        ->withKeys(sf::Keyboard::Z,
+                                    sf::Keyboard::Q,
+                                    sf::Keyboard::D,
+                                    sf::Keyboard::C,
+                                    sf::Keyboard::S,
+                                    sf::Keyboard::V)
+                        ->withLooksRight(true)
+                        ->build();
+
+    playerFromBuilder = builder.reset()
+                ->withName(playerName2)
+                ->withAttack(atk)
+                ->withHealth(health)
+                ->withPosition(positionP2)
+                ->withMovement(movement)
+                ->build();
+
+    playerViewP2 = viewBuilder.reset()
+                    ->withSprite(sizeCouple, centerOfSprite, spriteSheet2, positionP2, texturePlayerP2)
+                    ->withPlayer(playerFromBuilder)
+                    ->withKeys(sf::Keyboard::Up,
                                 sf::Keyboard::Left,
                                 sf::Keyboard::Right,
                                 sf::Keyboard::L,
                                 sf::Keyboard::Down,
-                                sf::Keyboard::M,
-                                false,
-                                playerName2);
+                                sf::Keyboard::M)
+                    ->withLooksRight(false)
+                    ->build();
     playerViewP2.flipSprite();
 }
 

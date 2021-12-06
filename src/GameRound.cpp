@@ -1,25 +1,16 @@
 #include "GameRound.h"
 
 GameRound::GameRound()
-:Game() {
-
-}
+:Game() {}
 
 GameRound::GameRound(Player& player1, Player& player2)
-:Game(player1, player2) {
+:Game(player1, player2) {}
 
-}
+GameRound::~GameRound() {}
 
-GameRound::~GameRound() {
-    //dtor
-}
+GameRound::GameRound(const GameRound& other) {}
 
-GameRound::GameRound(const GameRound& other) {
-    //copy ctor
-}
-
-GameRound& GameRound::operator=(const GameRound& rhs)
-{
+GameRound& GameRound::operator=(const GameRound& rhs) {
     if (this == &rhs) return *this; // handle self assignment
     //assignment operator
     Game::operator=(rhs);

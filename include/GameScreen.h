@@ -1,8 +1,13 @@
 #ifndef GAMESCREEN_H
 #define GAMESCREEN_H
 
+#include <sstream>
+#include <string>
+
 #include "Screen.h"
 #include "PlayerView.h"
+#include "PlayerViewBuilder.h"
+#include "PlayerBuilder.h"
 #include "PlatformView.h"
 #include "Collision.h"
 #include "ObjectInitializer.h"
@@ -12,8 +17,6 @@
 #include "Game.h"
 #include "GameRound.h"
 #include "GameTimer.h"
-#include <sstream>
-#include <string>
 
 class GameScreen : public Screen {
     protected:

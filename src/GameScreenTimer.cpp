@@ -1,19 +1,12 @@
 #include "GameScreenTimer.h"
 
-GameScreenTimer::GameScreenTimer() {
-    //ctor
-}
+GameScreenTimer::GameScreenTimer() {}
 
-GameScreenTimer::~GameScreenTimer() {
-    //dtor
-}
+GameScreenTimer::~GameScreenTimer() {}
 
-GameScreenTimer::GameScreenTimer(const GameScreenTimer& other){
-    //copy ctor
-}
+GameScreenTimer::GameScreenTimer(const GameScreenTimer& other){}
 
-GameScreenTimer& GameScreenTimer::operator=(const GameScreenTimer& rhs)
-{
+GameScreenTimer& GameScreenTimer::operator=(const GameScreenTimer& rhs) {
     if (this == &rhs) return *this; // handle self assignment
     //assignment operator
     return *this;
@@ -45,9 +38,9 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
     playerViewP1.getPlayer().setState(standby,true);
     playerViewP2.getPlayer().setState(standby,true);
 
-    textRejouer = TextInitializer::createText("Rejouer", 950.f, 380.f);
-    textSelectPerso = TextInitializer::createText("Selection personnages", 950.f, 510.f);
-    textMenuPrincipal = TextInitializer::createText("Menu principal", 950.f, 640.f);
+    textRejouer = TextInitializer::createText("Play again", 950.f, 380.f);
+    textSelectPerso = TextInitializer::createText("Select characters", 950.f, 510.f);
+    textMenuPrincipal = TextInitializer::createText("Main menu", 950.f, 640.f);
 
     while(app.isOpen()) {
         const int SCRWIDTH = app.getSize().x; //const int SCRHEIGHT = app.getSize().y -200;
@@ -67,9 +60,8 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
             }
             /// Button Rejouer
             if(buttonRejouer.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) {
-                    return 3;
-                } else {
+                if(event.type == sf::Event::MouseButtonPressed) return 3;
+                else {
                     textRejouer.setFillColor(sf::Color::Green);
                 }
             }
@@ -79,29 +71,25 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
 
             /// Button selectPerso
             if(buttonSelectPerso.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed) {
-                    return 1;
-                } else {
+                if(event.type == sf::Event::MouseButtonPressed) return 1;
+                else {
                     textSelectPerso.setFillColor(sf::Color::Green);
                 }
             }
             else {
-
                 textSelectPerso.setFillColor(sf::Color::White);
             }
 
             /// Button menuPrincipal
             if(buttonMenuPrincipal.getGlobalBounds().contains(mousePosition)) {
-                if(event.type == sf::Event::MouseButtonPressed){
-                    return 0;
-                } else {
+                if(event.type == sf::Event::MouseButtonPressed) return 0;
+                else {
                     textMenuPrincipal.setFillColor(sf::Color::Green);
                 }
             }
             else {
                 textMenuPrincipal.setFillColor(sf::Color::White);
             }
-
         }
 
         //verif l'input
@@ -123,7 +111,6 @@ int GameScreenTimer::run(sf::RenderWindow &app, std::vector<std::string> data, i
             gameTimer.decrementCountDown();
         }
     }
-
     return -1;
 }
 
@@ -155,7 +142,6 @@ void GameScreenTimer::setTextRoundWin() {
 }
 
 void GameScreenTimer::setMenuText(sf::RenderWindow *app) {
-
     sf::FloatRect textRect;
     mousePosition = getMousePosition(app);
 
@@ -190,7 +176,6 @@ void GameScreenTimer::setMenuText(sf::RenderWindow *app) {
 
     Position positionMenuPrincipal(950.f, 643.f);
     buttonMenuPrincipal = initSprite(2.75f, 1.6f, "resources/images/buttons/button.png", positionMenuPrincipal, &textureButton);
-
 }
 
 void GameScreenTimer::setTextTime(int SCRWIDTH) {
@@ -224,6 +209,7 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app) {
     app->draw(timeTxt);
     app->draw(RoundWinTxtP1);
     app->draw(RoundWinTxtP2);
+
     if(startMenu) {
         app->draw(rectangle);
         app->draw(buttonRejouer);
@@ -234,5 +220,4 @@ void GameScreenTimer::drawAll(sf::RenderWindow *app) {
         app->draw(textMenuPrincipal);
     }
     app->display();
-
 }

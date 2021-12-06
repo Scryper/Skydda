@@ -4,19 +4,9 @@
 
 PlayerView::PlayerView() {
     PlayerSprite defaultSprite;
-    this->sprite = defaultSprite;
+    this->setSprite(defaultSprite);
     Player defaultPlayer;
-    this->player = defaultPlayer;
-    Animation anim;
-    this->animation = anim;
-}
-
-PlayerView::PlayerView(PlayerSprite sprite, Player player,std::vector<std::pair<PlayerStateEnum,sf::Keyboard::Key>> keys,bool looksRight, CoupleFloat scalePlayer) {
-    this->sprite = sprite;
-    this->player = player;
-    this->keys = keys;
-    this->looksRight = looksRight;
-    this->scalePlayer = scalePlayer;
+    this->setPlayer(defaultPlayer);
     Animation anim;
     this->animation = anim;
 }
@@ -26,22 +16,19 @@ PlayerView::PlayerView(const PlayerView& other) {
     this->player = other.player;
     this->keys = other.keys;
     this->looksRight = other.looksRight;
-    this->scalePlayer = other.scalePlayer;
     Animation anim;
     this->animation = anim;
 }
 
 PlayerView::~PlayerView() { }
 
-PlayerView& PlayerView::operator=(const PlayerView& rhs)
-{
+PlayerView& PlayerView::operator=(const PlayerView& rhs) {
     if (this == &rhs) return *this; // handle self assignment
     //assignment operator
     this->sprite = rhs.sprite;
     this->player = rhs.player;
     this->keys = rhs.keys;
     this->looksRight = rhs.looksRight;
-    this->scalePlayer = rhs.scalePlayer;
     this->animation = rhs.animation;
     return *this;
 }
@@ -60,6 +47,18 @@ bool PlayerView::isLooksRigth()const{
 
 void PlayerView::setLooksRigth(bool right){
     this->looksRight = right;
+}
+
+void PlayerView::setSprite(PlayerSprite sprite_) {
+    this->sprite = sprite_;
+}
+
+void PlayerView::setPlayer(Player player_) {
+    this->player = player_;
+}
+
+void PlayerView::setKeys(std::vector<pair<PlayerStateEnum,sf::Keyboard::Key>> keys_) {
+    this->keys = keys_;
 }
 
 void PlayerView::flipSprite() {

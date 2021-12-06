@@ -7,12 +7,7 @@
 
 #include <iostream>
 
-int GlobalVariables::FPS = 60;
-float GlobalVariables::VOLUME_MUSIC = 5.0f;
-
-
 int main() {
-
     MusicManager* musicManager = MusicManager::getInstance();
     musicManager->play();
 
@@ -41,8 +36,6 @@ int main() {
 
     OptionScreen optionScreen; // 2
     screens.push_back(&optionScreen);
-
-
 
 	std::vector<std::string> data;
 	//Main loop

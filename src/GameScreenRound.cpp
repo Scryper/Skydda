@@ -1,26 +1,18 @@
 #include "GameScreenRound.h"
 
-GameScreenRound::GameScreenRound() {
-    //ctor
-}
+GameScreenRound::GameScreenRound() {}
 
-GameScreenRound::~GameScreenRound() {
-    //dtor
-}
+GameScreenRound::~GameScreenRound() {}
 
-GameScreenRound::GameScreenRound(const GameScreenRound& other) {
-    //copy ctor
-}
+GameScreenRound::GameScreenRound(const GameScreenRound& other) {}
 
-GameScreenRound& GameScreenRound::operator=(const GameScreenRound& rhs)
-{
+GameScreenRound& GameScreenRound::operator=(const GameScreenRound& rhs) {
     if (this == &rhs) return *this; // handle self assignment
     //assignment operator
     return *this;
 }
 
 int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, int seed) {
-
     playerName1 = data[0];
     spriteSheet1 = data[1];
     playerName2 = data[2];
@@ -51,9 +43,9 @@ int GameScreenRound::run(sf::RenderWindow &app, std::vector<std::string> data, i
     playerViewP1.getPlayer().setState(standby,true);
     playerViewP2.getPlayer().setState(standby,true);
 
-    textRejouer = TextInitializer::createText("Rejouer", 950.f, 380.f);
-    textSelectPerso = TextInitializer::createText("Selection personnages", 950.f, 510.f);
-    textMenuPrincipal = TextInitializer::createText("Menu principal", 950.f, 640.f);
+    textRejouer = TextInitializer::createText("Play again", 950.f, 380.f);
+    textSelectPerso = TextInitializer::createText("Select characters", 950.f, 510.f);
+    textMenuPrincipal = TextInitializer::createText("Main menu", 950.f, 640.f);
 
     while(app.isOpen()) {
         sf::Time timer = clockTimer.getElapsedTime();

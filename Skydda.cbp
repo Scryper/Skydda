@@ -71,8 +71,10 @@
 		<Unit filename="include/Platform.h" />
 		<Unit filename="include/PlatformView.h" />
 		<Unit filename="include/Player.h" />
+		<Unit filename="include/PlayerBuilder.h" />
 		<Unit filename="include/PlayerSprite.h" />
 		<Unit filename="include/PlayerView.h" />
+		<Unit filename="include/PlayerViewBuilder.h" />
 		<Unit filename="include/Position.h" />
 		<Unit filename="include/PrematchScreen.h" />
 		<Unit filename="include/Screen.h" />
@@ -104,8 +106,10 @@
 		<Unit filename="src/Platform.cpp" />
 		<Unit filename="src/PlatformView.cpp" />
 		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/PlayerBuilder.cpp" />
 		<Unit filename="src/PlayerSprite.cpp" />
 		<Unit filename="src/PlayerView.cpp" />
+		<Unit filename="src/PlayerViewBuilder.cpp" />
 		<Unit filename="src/Position.cpp" />
 		<Unit filename="src/PrematchScreen.cpp" />
 		<Unit filename="src/Screen.cpp" />
