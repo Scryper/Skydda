@@ -1,16 +1,19 @@
 #include "PlayerViewBuilder.h"
 
+// The playerview is created automatically when we call the builder's constructor
 PlayerViewBuilder::PlayerViewBuilder() {
     this->reset();
 }
 
 PlayerViewBuilder::~PlayerViewBuilder() { }
 
+// sets or resets the playerview with the basic values (see default constructor of PlayerView.cpp)
 PlayerViewBuilder* PlayerViewBuilder::reset() {
     this->playerView = PlayerView();
-    return this;
+    return this; // allows to chain the methods
 }
 
+// This method is called at the end of the chain when the user has created the wanted playerview
 PlayerView PlayerViewBuilder::build() {
     return this->playerView;
 }
@@ -22,6 +25,7 @@ PlayerViewBuilder* PlayerViewBuilder::withSprite(CoupleFloat size_, CoupleFloat 
     return this;
 }
 
+// affects the player that the vie has to show
 PlayerViewBuilder* PlayerViewBuilder::withPlayer(Player player) {
     this->playerView.setPlayer(player);
     return this;
@@ -47,6 +51,7 @@ PlayerViewBuilder* PlayerViewBuilder::withKeys(
     return this;
 }
 
+// sets if, at the beginning of the game, the player looks at his right or left
 PlayerViewBuilder* PlayerViewBuilder::withLooksRight(bool looksRight) {
     this->playerView.setLooksRigth(looksRight);
     return this;
