@@ -19,7 +19,10 @@ class PlayerBuilder {
         Player build();
 
         /*We send a pointer of the current instance to work on the same builder
-        AND PlayerBuilder isn't copyable.*/
+        AND PlayerBuilder isn't copyable.
+        
+        There is 2 reasons to this : if we return Player -> player has no with... methods
+        if we return void : we can't call a method on void.*/
         PlayerBuilder* withName(std::string name);
         PlayerBuilder* withAttack(float attack);
         PlayerBuilder* withHealth(float health);
