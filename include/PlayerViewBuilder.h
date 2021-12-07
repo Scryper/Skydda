@@ -20,8 +20,11 @@ class PlayerViewBuilder {
         PlayerViewBuilder* reset();
         PlayerView build();
 
-        // return a pointeur of this instance to work on the same instance
-        // allows to chain the methods
+        /*We send a pointer of the current instance to work on the same builder
+        AND PlayerViewBuilder isn't copyable.
+        
+        There is 2 reasons to this : if we return PlayerView -> player has no with... methods
+        if we return void : we can't call a method on void.*/
         PlayerViewBuilder* withSprite(CoupleFloat size_, CoupleFloat center, std::string pathToPlayer, Position position, sf::Texture &texture);
         PlayerViewBuilder* withPlayer(Player player);
         PlayerViewBuilder* withKeys(sf::Keyboard::Key up,
