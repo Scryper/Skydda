@@ -1,6 +1,6 @@
 #include "PlayerBuilder.h"
 
-// The player is created automatocally when we call the builder's constructor
+// The player is created automatically when we call the builder's constructor
 PlayerBuilder::PlayerBuilder() {
     this->reset(); 
 }
